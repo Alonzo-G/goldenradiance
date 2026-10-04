@@ -34,15 +34,14 @@
     }
   ],
 
+  // 2026-10-05：4 个敏感项（TURNSTILE_SECRET_KEY / RESEND_API_KEY / ADMIN_PASSWORD /
+  // ADMIN_SECRET）从 vars 移除，改为纯 secret——wrangler secret put 注入。
+  // 原因：配置文件里的同名空串 var 会在部署时遮蔽/冲突 secret，导致密钥永远不生效。
+  // MAIL_FROM / SALES_MAILBOX 非敏感，上线前在此填真实值（发件身份 + 询盘通知收件箱）；
+  // 留空不影响询盘落库（邮件通知独立记 mail_status，见 mail.ts）。
   "vars": {
-    // dev 值见 .dev.vars（gitignore）；生产走 wrangler secret put
-    "TURNSTILE_SECRET_KEY": "",
-    "RESEND_API_KEY": "",
     "MAIL_FROM": "",
-    "SALES_MAILBOX": "",
-    // 后台登录密码（SHA-256 hex）与会话签名密钥——生产走 wrangler secret put，此处仅空占位
-    "ADMIN_PASSWORD": "",
-    "ADMIN_SECRET": ""
+    "SALES_MAILBOX": ""
   },
 
   "observability": {
