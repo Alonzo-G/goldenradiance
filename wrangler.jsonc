@@ -14,7 +14,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
 
-  "name": "jewelry-b2b-global",
+  // Worker 名与 Cloudflare Workers Builds（git 仓库 goldenradiance）对齐，
+  // 避免部署时 CI 每次强制覆盖名称产生 warning
+  "name": "goldenradiance",
 
   "compatibility_date": "2026-09-01",
 
