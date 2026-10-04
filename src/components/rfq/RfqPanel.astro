@@ -103,7 +103,12 @@ const qtyScales = ['sample', 'small', 'bulk'];
       </div>
       {/* honeypot：正常用户不可见必须为空 */}
       <input type="text" name="honeypot" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-      <div data-turnstile-slot class="min-h-[65px]"></div>
+      <div data-turnstile-slot class="min-h-[65px]">
+        <p data-turnstile-loading class="flex items-center gap-2 text-xs text-muted">
+          <Icon name="lucide:loader-circle" class="icon size-4 animate-spin" aria-hidden="true" />
+          <span>{t('rfq.form.verifying')}</span>
+        </p>
+      </div>
       <p data-rfq-summary class="text-xs text-muted">{t('rfq.summary.degraded')}</p>
       <p data-rfq-min-one hidden class="text-xs text-danger">{t('rfq.minOne')}</p>
       <div class="flex items-start gap-2 text-xs text-muted">

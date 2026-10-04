@@ -30,6 +30,7 @@ interface TurnstileApi {
       callback?: (token: string) => void;
       'expired-callback'?: () => void;
       'error-callback'?: () => void;
+      'after-interactive-callback'?: () => void;
       theme?: 'auto' | 'light' | 'dark';
     },
   ) => string;
@@ -88,6 +89,7 @@ export async function renderTurnstile(
     sitekey: TURNSTILE_SITEKEY,
     callback: (t) => {
       token = t;
+      clearLoading(container);
       onToken?.(t);
     },
     'expired-callback': () => {
@@ -97,6 +99,10 @@ export async function renderTurnstile(
     'error-callback': () => {
       token = undefined;
       onToken?.(undefined);
+    },
+    // widget 变为可交互（iframe 渲染完成）即清 loading 占位，不等挑战通过。
+    'after-interactive-callback': () => {
+      clearLoading(container);
     },
   });
 
@@ -108,4 +114,11 @@ export async function renderTurnstile(
       window.turnstile?.reset(widgetId);
     },
   };
+}
+
+/** 清除容器内「正在验证…」的 loading 占位（widget 渲染出真实挑战后不再需要）。 */
+function clearLoading(container: HTMLElement): void {
+  container.querySelectorAll<HTMLElement>('[data-turnstile-loading]').forEach((el) => {
+    el.remove();
+  });
 }

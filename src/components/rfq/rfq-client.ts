@@ -4,7 +4,7 @@ import { pruneExpired, addToRfq } from '../../stores/rfq';
 import { complianceContext, type Market } from '../../stores/compliance';
 import { t } from '../../i18n';
 import { bindDrawerEvents } from './drawer';
-import { renderItems, bindItemEvents, bindTotals } from './items';
+import { renderItems, bindItemEvents, bindTotals, bindItems } from './items';
 import { bindSubmit } from './submit';
 import { skuIndex } from './dom';
 
@@ -12,6 +12,7 @@ bindDrawerEvents();
 bindItemEvents();
 bindSubmit();
 bindTotals();
+bindItems();
 
 /* ---------- 初始化 ---------- */
 pruneExpired();

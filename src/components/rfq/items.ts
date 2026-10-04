@@ -158,3 +158,11 @@ export function bindTotals() {
     });
   });
 }
+
+/* 订阅 store：任何入篮/删除/改量都触发 renderItems 重渲染。
+ * 修复「addToRfq 后表单仍 hidden、看不到验证弹窗与提交按钮」的核心 bug——
+ * 此前 renderItems 只在 rfq-client 初始化时跑一次，store 变化后无人重绘。 */
+export function bindItems() {
+  rfqItems.subscribe(() => renderItems());
+}
+
