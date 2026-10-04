@@ -51,7 +51,14 @@ export function renderItems() {
     const form = panel.querySelector<HTMLFormElement>('[data-rfq-form]');
     if (!empty || !list || !form) return;
     const hasItems = items.length > 0;
-    empty.classList.toggle('hidden', hasItems);
+    // 三态互斥：空状态 / 表单 / 成功提示不同屏出现。
+    // 提交成功后篮被清空，成功提示接管视图，空状态不得同时显示
+    // （实测反馈「Received. + Your RFQ list is empty」同屏的 UX bug）；
+    // 重新入篮时自动收起成功态，回到表单视图。
+    const success = panel.querySelector<HTMLElement>('[data-rfq-success]');
+    if (hasItems && success) success.hidden = true;
+    const successShown = success !== null && !success.hidden;
+    empty.classList.toggle('hidden', hasItems || successShown);
     list.classList.toggle('hidden', !hasItems);
     // form 的初始隐藏是 SSR 的 hidden 属性（非 class）——必须同步属性本体，
     // 否则 class 切了 attribute 还挂着，表单永远 display:none（历史 bug）。
