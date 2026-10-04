@@ -245,6 +245,43 @@ npx wrangler deploy -c dist/server/wrangler.json
 
 ---
 
+## 5.1 GitHub Actions 自动部署（CI/CD）
+
+> 本节由 2026-10-05 补充。工作流文件 `.github/workflows/deploy.yml` 已就位，push 到 `main` 即自动构建 + 部署，无需本地手动跑 §5 的命令。
+
+### 5.1.1 工作流做什么
+
+触发（push `main` 或手动 `workflow_dispatch`）后，在 ubuntu-latest 上顺序执行：
+
+1. `npm ci`（干净安装，锁版本）
+2. `npm run build`（= `astro check` 类型门禁 + `astro build` + `pagefind` 索引）
+3. 质量门禁：扫描 `dist/client` 汉字 / 价格符号泄漏（对应 §11 门禁）
+4. `npm test`（vitest 58 用例）
+5. `wrangler deploy -c dist/server/wrangler.json`（用适配器生成的部署配置，非根 `wrangler.jsonc`）
+
+### 5.1.2 需要的 GitHub Secrets（一次性配置）
+
+仓库 **Settings → Secrets and variables → Actions → New repository secret**，加两个：
+
+| Secret 名 | 值 | 获取方式 |
+|-----------|-----|----------|
+| `CLOUDFLARE_API_TOKEN` | API Token | Cloudflare Dashboard → My Profile → API Tokens → Create Token → 选 **「Edit Cloudflare Workers」** 模板（权限：Account / Workers Scripts / Edit） |
+| `CLOUDFLARE_ACCOUNT_ID` | 32 位 hex | Cloudflare Dashboard 首页右侧 Account ID |
+
+> Token 只授 Workers Scripts Edit 最小权限，不授全局；若未来要 CI 里跑 `wrangler d1 execute --remote` 或 `secret put`，需额外加 D1 / Secrets Store 权限（本节不涉及，保持最小化）。
+
+### 5.1.3 CI 与手动部署的边界
+
+CI 只做「构建 + 部署」，**不替代**以下一次性手动操作（均在账号/密钥到位后、首次部署前执行，见 §2/§3/§11）：
+
+- `wrangler.jsonc` 的 `database_id` 回填真实 UUID（否则部署后连不上库）
+- D1 建表：`npx wrangler d1 execute jewelry-b2b-global-db --remote --file=infra/schema.sql`
+- 生产密钥注入：`wrangler secret put TURNSTILE_SECRET_KEY / RESEND_API_KEY / ADMIN_PASSWORD / ADMIN_SECRET`
+
+这些操作不放进 CI 的原因：密钥绝不进版本库；D1 建表虽幂等，但需先在账号侧建库取得 UUID。故统一归入上线门禁（§11）的「一次性手动」范畴。
+
+---
+
 ## 6. 部署后验证
 
 **6.1 健康检查（必须）：**

@@ -1,0 +1,78 @@
+# ============================================================================
+# Golden Radiance — Cloudflare Workers 自动构建部署
+#
+# 触发：push 到 main（含首次推送、后续每次合并）。
+# 流程：Node 22 → npm ci → 类型/构建/搜索索引 → wrangler deploy。
+#
+# 需要的 GitHub Secrets（仓库 Settings → Secrets and variables → Actions）：
+#   CLOUDFLARE_API_TOKEN     —— 权限：Account / Workers Scripts / Edit
+#   CLOUDFLARE_ACCOUNT_ID    —— Cloudflare Dashboard 右侧的 Account ID（32 位 hex）
+#
+# 上线前置（不满足则部署后站点后端不可用，但静态页面仍能访问）：
+#   1. wrangler.jsonc 的 database_id 已替换为真实 D1 UUID（§见 DEPLOYMENT-RUNBOOK §3）
+#   2. D1 已建表：npx wrangler d1 execute jewelry-b2b-global-db --remote --file=infra/schema.sql
+#   3. 生产密钥已注入：wrangler secret put TURNSTILE_SECRET_KEY / RESEND_API_KEY / ADMIN_PASSWORD / ADMIN_SECRET
+#   这些是一次性手动操作，不放进 CI（密钥绝不入库、D1 建表幂等但需账号侧先建库）。
+# ============================================================================
+
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}   # 允许手动触发
+
+# 权限收紧：本工作流只需读仓库内容，无需写权限
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # npm run build = astro check && astro build && pagefind --site dist/client
+      # astro check 作为类型门禁：0 error 才继续（含 0 warnings 不阻断）
+      - name: Build (type-check + static + search index)
+        run: npm run build
+
+      # 质量门禁：产物不得含汉字 / 价格符号（对应 RUNBOOK §11 上线门禁）
+      - name: Guard — no Chinese characters or price leakage in dist
+        run: |
+          echo "== 汉字泄漏（应为 0）=="
+          grep -rlP "[\x{4e00}-\x{9fff}]" dist/client --include="*.html" --include="*.js" --include="*.css" --include="*.svg" | wc -l
+          echo "== 价格符号泄漏（应为 0）=="
+          grep -rlE '¥|RMB|人民币' dist/client --include="*.html" --include="*.js" --include="*.json" | wc -l
+
+      - name: Run tests
+        run: npm test
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # 部署配置由 @astrojs/cloudflare 适配器在 astro build 末尾写入
+          # dist/server/wrangler.json（含正确的 main/assets）。根 wrangler.jsonc 只是源码期输入。
+          command: deploy -c dist/server/wrangler.json
+
+      - name: Post-deploy smoke check (health)
+        run: |
+          # 部署后健康检查。workers.dev 临时域名在首次部署后由 Cloudflare 分配，
+          # 此处留占位说明；正式自定义域名绑定后可按 RUNBOOK §6 做全量 sitemap 探活。
+          echo "部署完成。上线后按 docs/DEPLOYMENT-RUNBOOK.md §6 做健康检查与冒烟。"
