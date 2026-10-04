@@ -38,10 +38,10 @@
 
 | 变量 | 用途 | 开发态 | 生产态 |
 |------|------|--------|--------|
-| `TURNSTILE_SECRET_KEY` | 服务端校验 RFQ 表单 Turnstile 令牌 | 测试密钥 `1x0000000000000000000000000000000AA` | 客户在 Cloudflare Dashboard 申请的站点密钥对应 secret |
+| `TURNSTILE_SECRET_KEY` | 服务端校验 RFQ 表单 Turnstile 令牌 | 测试密钥 `1x0000000000000000000000000000000AA` | 生产 secret 已于 2026-10-05 `secret put` 注入（对应 widget 域名 goldenradiance.fun） |
 | `RESEND_API_KEY` | 发送 RFQ / 订阅确认邮件 | 空（开发态邮件双写落盘 `stdout [mail-outbox]`，不真正外发） | 客户 Resend 账号的 API Key |
 
-> Turnstile 站点公钥（`sitekey`）为前端常量，开发测试值 `1x00000000000000000000AA`，生产替换为客户真实 sitekey。前端常量位置见 `src/components/rfq/submit.ts`，替换时同步改 `.dev.vars` 与前端常量两处。
+> Turnstile 站点公钥（`sitekey`）为前端常量，2026-10-05 起已切换为生产 sitekey。前端常量位置：`src/lib/shared/turnstile.ts`（`TURNSTILE_SITEKEY`）。本地开发若需回归测试密钥，改此常量并同步 `.dev.vars` 的 secret 即可，生产勿动。
 
 设置命令（生产）：
 

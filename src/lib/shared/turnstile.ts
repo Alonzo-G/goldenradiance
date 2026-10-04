@@ -1,7 +1,7 @@
 // src/lib/shared/turnstile.ts — Turnstile 前端辅助（客户端模块）
-// sitekey 是公开值可进代码（IMPLEMENTATION-NOTES §3.3）：dev 测试密钥恒通过。
+// sitekey 是公开值可进代码（IMPLEMENTATION-NOTES §3.3）：2026-10-05 已切换为生产 widget（goldenradiance.fun）。
 // token 单次有效（坑 §6.10）：提交失败后调用 reset() 重新取 token。
-export const TURNSTILE_SITEKEY = '1x00000000000000000000AA';
+export const TURNSTILE_SITEKEY = '0x4AAAAAAAFNrqMuBQzU6nO8t';
 
 export interface TurnstileHandle {
   getToken(): string | undefined;
@@ -43,7 +43,7 @@ function loadApi(): Promise<TurnstileApi | null> {
 export async function renderTurnstile(container: HTMLElement): Promise<TurnstileHandle> {
   const api = await loadApi();
   if (!api) {
-    // 本地无网络降级：以测试 sitekey 作占位 token（minLength 1 满足，siteverify 会拒绝 → 走错误分支）
+    // 本地无网络降级：以 sitekey 作占位 token（minLength 1 满足，siteverify 会拒绝 → 走错误分支）
     return { getToken: () => TURNSTILE_SITEKEY, reset: () => undefined };
   }
   const widgetId = api.render(container, {
