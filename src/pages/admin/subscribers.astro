@@ -1,0 +1,90 @@
+---
+// src/pages/admin/subscribers.astro — 后台订阅者管理（列表 + 退订/恢复）
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout>
+  <h1 style="margin:0 0 4px;font-size:20px">Subscribers</h1>
+  <p style="margin:0 0 20px" class="muted">Newsletter subscribers</p>
+
+  <div class="admin-card" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <label for="status-filter" style="font-size:13px" class="muted">Status</label>
+    <select id="status-filter">
+      <option value="">All</option>
+      <option value="active">Active</option>
+      <option value="unsubscribed">Unsubscribed</option>
+    </select>
+    <span id="row-count" class="muted" style="margin-left:auto;font-size:12px"></span>
+  </div>
+
+  <div class="admin-card" style="padding:0;overflow-x:auto">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Locale</th>
+          <th>Source</th>
+          <th>Status</th>
+          <th>Subscribed</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="sub-rows">
+        <tr><td colspan="6" class="muted" style="padding:20px">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // @ts-nocheck — 后台工具页：纯 DOM vanilla JS，运行时为普通脚本，不做严格类型检查
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const statusFilter = document.getElementById('status-filter');
+    const rowsEl = document.getElementById('sub-rows');
+    const countEl = document.getElementById('row-count');
+
+    async function load() {
+      const status = statusFilter.value;
+      const url = status ? `/api/admin/subscribers?status=${status}&limit=1000` : '/api/admin/subscribers?limit=1000';
+      try {
+        const r = await fetch(url);
+        if (r.status === 401) { window.location.href = '/admin/login/'; return; }
+        const { data } = await r.json();
+        countEl.textContent = `${data.length} subscribers`;
+        if (!data.length) {
+          rowsEl.innerHTML = `<tr><td colspan="6" class="muted" style="padding:20px">No subscribers found.</td></tr>`;
+          return;
+        }
+        rowsEl.innerHTML = data.map((s) => `
+          <tr>
+            <td><a href="mailto:${esc(s.email)}" style="color:var(--admin-accent)">${esc(s.email)}</a></td>
+            <td>${esc(s.locale)}</td>
+            <td>${esc(s.source ?? '—')}</td>
+            <td><span class="badge badge-${s.status}">${s.status}</span></td>
+            <td class="mono">${esc(new Date(s.created_at).toLocaleString())}</td>
+            <td>
+              <button class="btn btn-sm" data-id="${esc(s.id)}" data-status="${s.status}" type="button">
+                ${s.status === 'active' ? 'Unsubscribe' : 'Restore'}
+              </button>
+            </td>
+          </tr>
+        `).join('');
+        rowsEl.querySelectorAll('button[data-id]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const next = btn.dataset.status === 'active' ? 'unsubscribed' : 'active';
+            await fetch(`/api/admin/subscribers/${btn.dataset.id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: next }),
+            });
+            load();
+          });
+        });
+      } catch {
+        rowsEl.innerHTML = `<tr><td colspan="6" class="muted" style="padding:20px">Failed to load.</td></tr>`;
+      }
+    }
+
+    statusFilter.addEventListener('change', load);
+    load();
+  </script>
+</AdminLayout>

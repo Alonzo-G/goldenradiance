@@ -1,0 +1,3863 @@
+[
+ {
+  "key": "01.01",
+  "no": 1,
+  "file": "01.jpg",
+  "whiteFrac": 0.01,
+  "capH": 248,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "02.01",
+  "no": 2,
+  "file": "01.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "02.02",
+  "no": 2,
+  "file": "02.jpg",
+  "whiteFrac": 0.011,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "02.03",
+  "no": 2,
+  "file": "03.jpg",
+  "whiteFrac": 0.017,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "02.04",
+  "no": 2,
+  "file": "04.jpg",
+  "whiteFrac": 0.014,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "02.05",
+  "no": 2,
+  "file": "05.jpg",
+  "whiteFrac": 0.015,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "03.01",
+  "no": 3,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "03.02",
+  "no": 3,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "03.03",
+  "no": 3,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "03.04",
+  "no": 3,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 209,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "03.05",
+  "no": 3,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 215,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.01",
+  "no": 4,
+  "file": "01.jpg",
+  "whiteFrac": 0.005,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.02",
+  "no": 4,
+  "file": "02.jpg",
+  "whiteFrac": 0.005,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.03",
+  "no": 4,
+  "file": "03.jpg",
+  "whiteFrac": 0.011,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.04",
+  "no": 4,
+  "file": "04.jpg",
+  "whiteFrac": 0.004,
+  "capH": 205,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.05",
+  "no": 4,
+  "file": "05.jpg",
+  "whiteFrac": 0.004,
+  "capH": 202,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.06",
+  "no": 4,
+  "file": "06.jpg",
+  "whiteFrac": 0.005,
+  "capH": 203,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "04.07",
+  "no": 4,
+  "file": "07.jpg",
+  "whiteFrac": 0.005,
+  "capH": 207,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "05.01",
+  "no": 5,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 226,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "05.02",
+  "no": 5,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "05.03",
+  "no": 5,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "05.04",
+  "no": 5,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 193,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "05.05",
+  "no": 5,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 209,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "06.01",
+  "no": 6,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 243,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "06.02",
+  "no": 6,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "06.03",
+  "no": 6,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 251,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "06.04",
+  "no": 6,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "06.05",
+  "no": 6,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 224,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "07.01",
+  "no": 7,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "07.02",
+  "no": 7,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "07.03",
+  "no": 7,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "07.04",
+  "no": 7,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 20,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "07.05",
+  "no": 7,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 215,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "08.01",
+  "no": 8,
+  "file": "01.jpg",
+  "whiteFrac": 0.003,
+  "capH": 245,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "08.02",
+  "no": 8,
+  "file": "02.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "08.03",
+  "no": 8,
+  "file": "03.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "08.04",
+  "no": 8,
+  "file": "04.jpg",
+  "whiteFrac": 0.003,
+  "capH": 40,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "08.05",
+  "no": 8,
+  "file": "05.jpg",
+  "whiteFrac": 0.003,
+  "capH": 227,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "08.06",
+  "no": 8,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 216,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.01",
+  "no": 9,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.02",
+  "no": 9,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.03",
+  "no": 9,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 125,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.04",
+  "no": 9,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 198,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.05",
+  "no": 9,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 226,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.06",
+  "no": 9,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 196,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "09.07",
+  "no": 9,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 201,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.01",
+  "no": 10,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 242,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.02",
+  "no": 10,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.03",
+  "no": 10,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.04",
+  "no": 10,
+  "file": "04.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.05",
+  "no": 10,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 215,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.06",
+  "no": 10,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "10.07",
+  "no": 10,
+  "file": "07.jpg",
+  "whiteFrac": 0.002,
+  "capH": 26,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "11.01",
+  "no": 11,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 223,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "11.02",
+  "no": 11,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 239,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.03",
+  "no": 11,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.04",
+  "no": 11,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.05",
+  "no": 11,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.06",
+  "no": 11,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 203,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.07",
+  "no": 11,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 211,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.08",
+  "no": 11,
+  "file": "08.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "11.09",
+  "no": 11,
+  "file": "09.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.01",
+  "no": 12,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.02",
+  "no": 12,
+  "file": "02.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.03",
+  "no": 12,
+  "file": "03.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.04",
+  "no": 12,
+  "file": "04.jpg",
+  "whiteFrac": 0.007,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.05",
+  "no": 12,
+  "file": "05.jpg",
+  "whiteFrac": 0.005,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "12.06",
+  "no": 12,
+  "file": "06.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "13.01",
+  "no": 13,
+  "file": "01.jpg",
+  "whiteFrac": 0.008,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "13.02",
+  "no": 13,
+  "file": "02.jpg",
+  "whiteFrac": 0.008,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "13.03",
+  "no": 13,
+  "file": "03.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "13.04",
+  "no": 13,
+  "file": "04.jpg",
+  "whiteFrac": 0.006,
+  "capH": 216,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "13.05",
+  "no": 13,
+  "file": "05.jpg",
+  "whiteFrac": 0.005,
+  "capH": 208,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.01",
+  "no": 14,
+  "file": "01.jpg",
+  "whiteFrac": 0.003,
+  "capH": 1,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "14.02",
+  "no": 14,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.03",
+  "no": 14,
+  "file": "03.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.04",
+  "no": 14,
+  "file": "04.jpg",
+  "whiteFrac": 0.005,
+  "capH": 206,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.05",
+  "no": 14,
+  "file": "05.jpg",
+  "whiteFrac": 0.006,
+  "capH": 145,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.06",
+  "no": 14,
+  "file": "06.jpg",
+  "whiteFrac": 0.004,
+  "capH": 213,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "14.07",
+  "no": 14,
+  "file": "07.jpg",
+  "whiteFrac": 0.004,
+  "capH": 211,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "15.01",
+  "no": 15,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "15.02",
+  "no": 15,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "15.03",
+  "no": 15,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "15.04",
+  "no": 15,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "15.05",
+  "no": 15,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 214,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "15.06",
+  "no": 15,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "16.01",
+  "no": 16,
+  "file": "01.jpg",
+  "whiteFrac": 0.006,
+  "capH": 249,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "16.02",
+  "no": 16,
+  "file": "02.jpg",
+  "whiteFrac": 0.009,
+  "capH": 215,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "16.03",
+  "no": 16,
+  "file": "03.jpg",
+  "whiteFrac": 0.009,
+  "capH": 1,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "16.04",
+  "no": 16,
+  "file": "04.jpg",
+  "whiteFrac": 0.009,
+  "capH": 1,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "16.05",
+  "no": 16,
+  "file": "05.jpg",
+  "whiteFrac": 0.005,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "17.01",
+  "no": 17,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "17.02",
+  "no": 17,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 4,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "17.03",
+  "no": 17,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "17.04",
+  "no": 17,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "18.01",
+  "no": 18,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 234,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "18.02",
+  "no": 18,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 219,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "18.03",
+  "no": 18,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "19.01",
+  "no": 19,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 221,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "19.02",
+  "no": 19,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 224,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "19.03",
+  "no": 19,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 234,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "20.01",
+  "no": 20,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 196,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "20.02",
+  "no": 20,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 1,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "20.03",
+  "no": 20,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "20.04",
+  "no": 20,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 16,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "21.01",
+  "no": 21,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "21.02",
+  "no": 21,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "21.03",
+  "no": 21,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 197,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "21.04",
+  "no": 21,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 173,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "21.05",
+  "no": 21,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 204,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "22.01",
+  "no": 22,
+  "file": "01.jpg",
+  "whiteFrac": 0.004,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "22.02",
+  "no": 22,
+  "file": "02.jpg",
+  "whiteFrac": 0.007,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "22.03",
+  "no": 22,
+  "file": "03.jpg",
+  "whiteFrac": 0.005,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "22.04",
+  "no": 22,
+  "file": "04.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "23.01",
+  "no": 23,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 234,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "23.02",
+  "no": 23,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "23.03",
+  "no": 23,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "23.04",
+  "no": 23,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "23.05",
+  "no": 23,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 3,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "23.06",
+  "no": 23,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 3,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "24.01",
+  "no": 24,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 218,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "24.02",
+  "no": 24,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "24.03",
+  "no": 24,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "24.04",
+  "no": 24,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 3,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "24.05",
+  "no": 24,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "25.01",
+  "no": 25,
+  "file": "01.jpg",
+  "whiteFrac": 0.003,
+  "capH": 116,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "25.02",
+  "no": 25,
+  "file": "02.jpg",
+  "whiteFrac": 0.047,
+  "capH": 249,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "25.03",
+  "no": 25,
+  "file": "03.jpg",
+  "whiteFrac": 0.003,
+  "capH": 115,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "25.04",
+  "no": 25,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "25.05",
+  "no": 25,
+  "file": "05.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "25.06",
+  "no": 25,
+  "file": "06.jpg",
+  "whiteFrac": 0.003,
+  "capH": 7,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "25.07",
+  "no": 25,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "25.08",
+  "no": 25,
+  "file": "08.jpg",
+  "whiteFrac": 0.479,
+  "capH": 7,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "25.09",
+  "no": 25,
+  "file": "09.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.01",
+  "no": 26,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 224,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.02",
+  "no": 26,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.03",
+  "no": 26,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 21,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "26.04",
+  "no": 26,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 223,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.05",
+  "no": 26,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 211,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.06",
+  "no": 26,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 146,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.07",
+  "no": 26,
+  "file": "07.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.08",
+  "no": 26,
+  "file": "08.jpg",
+  "whiteFrac": 0.003,
+  "capH": 229,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "26.09",
+  "no": 26,
+  "file": "09.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.01",
+  "no": 27,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 244,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.02",
+  "no": 27,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 236,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "27.03",
+  "no": 27,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 247,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.04",
+  "no": 27,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.05",
+  "no": 27,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 213,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.06",
+  "no": 27,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 212,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.07",
+  "no": 27,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 239,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.08",
+  "no": 27,
+  "file": "08.jpg",
+  "whiteFrac": 0,
+  "capH": 243,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "27.09",
+  "no": 27,
+  "file": "09.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.01",
+  "no": 28,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 241,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.02",
+  "no": 28,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 237,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.03",
+  "no": 28,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 249,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.04",
+  "no": 28,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 244,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.05",
+  "no": 28,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 242,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.06",
+  "no": 28,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.07",
+  "no": 28,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "28.08",
+  "no": 28,
+  "file": "08.jpg",
+  "whiteFrac": 0.001,
+  "capH": 4,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "28.09",
+  "no": 28,
+  "file": "09.jpg",
+  "whiteFrac": 0.001,
+  "capH": 32,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "29.01",
+  "no": 29,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 210,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "29.02",
+  "no": 29,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "29.03",
+  "no": 29,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 200,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "29.04",
+  "no": 29,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "29.05",
+  "no": 29,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 17,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "29.06",
+  "no": 29,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 129,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "30.01",
+  "no": 30,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "30.02",
+  "no": 30,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "30.03",
+  "no": 30,
+  "file": "03.jpg",
+  "whiteFrac": 0.003,
+  "capH": 1,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "30.04",
+  "no": 30,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "30.05",
+  "no": 30,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 71,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "31.01",
+  "no": 31,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 177,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "31.02",
+  "no": 31,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 85,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "31.03",
+  "no": 31,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "31.04",
+  "no": 31,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "31.05",
+  "no": 31,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 31,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "31.06",
+  "no": 31,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "31.07",
+  "no": 31,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "32.01",
+  "no": 32,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "32.02",
+  "no": 32,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "32.03",
+  "no": 32,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "32.04",
+  "no": 32,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 207,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "32.05",
+  "no": 32,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 205,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "33.01",
+  "no": 33,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "33.02",
+  "no": 33,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "33.03",
+  "no": 33,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "33.04",
+  "no": 33,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "33.05",
+  "no": 33,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "33.06",
+  "no": 33,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "34.01",
+  "no": 34,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "34.02",
+  "no": 34,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "34.03",
+  "no": 34,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "34.04",
+  "no": 34,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 2,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "34.05",
+  "no": 34,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 204,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.01",
+  "no": 35,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.02",
+  "no": 35,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.03",
+  "no": 35,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.04",
+  "no": 35,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.05",
+  "no": 35,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.06",
+  "no": 35,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.07",
+  "no": 35,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "35.08",
+  "no": 35,
+  "file": "08.jpg",
+  "whiteFrac": 0.037,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.01",
+  "no": 36,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.02",
+  "no": 36,
+  "file": "02.jpg",
+  "whiteFrac": 0.023,
+  "capH": 254,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "36.03",
+  "no": 36,
+  "file": "03.jpg",
+  "whiteFrac": 0.032,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.04",
+  "no": 36,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.05",
+  "no": 36,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.06",
+  "no": 36,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.07",
+  "no": 36,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "36.08",
+  "no": 36,
+  "file": "08.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "37.01",
+  "no": 37,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 12,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "37.02",
+  "no": 37,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 5,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "37.03",
+  "no": 37,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "37.04",
+  "no": 37,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "37.05",
+  "no": 37,
+  "file": "05.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.01",
+  "no": 38,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 4,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "38.02",
+  "no": 38,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 199,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.03",
+  "no": 38,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 207,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.04",
+  "no": 38,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 12,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "38.05",
+  "no": 38,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 199,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.06",
+  "no": 38,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 237,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.07",
+  "no": 38,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 86,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "38.08",
+  "no": 38,
+  "file": "08.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "38.09",
+  "no": 38,
+  "file": "09.jpg",
+  "whiteFrac": 0,
+  "capH": 249,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "39.01",
+  "no": 39,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 223,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "39.02",
+  "no": 39,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "40.01",
+  "no": 40,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "40.02",
+  "no": 40,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "41.01",
+  "no": 41,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "42.01",
+  "no": 42,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "42.02",
+  "no": 42,
+  "file": "02.jpg",
+  "whiteFrac": 0.006,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "43.01",
+  "no": 43,
+  "file": "01.jpg",
+  "whiteFrac": 0.002,
+  "capH": 5,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "43.02",
+  "no": 43,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.01",
+  "no": 44,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 31,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "44.02",
+  "no": 44,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.03",
+  "no": 44,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.04",
+  "no": 44,
+  "file": "04.jpg",
+  "whiteFrac": 0.045,
+  "capH": 251,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "44.05",
+  "no": 44,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.06",
+  "no": 44,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.07",
+  "no": 44,
+  "file": "07.jpg",
+  "whiteFrac": 0.002,
+  "capH": 5,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "44.08",
+  "no": 44,
+  "file": "08.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "44.09",
+  "no": 44,
+  "file": "09.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "45.01",
+  "no": 45,
+  "file": "01.jpg",
+  "whiteFrac": 0.004,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "45.02",
+  "no": 45,
+  "file": "02.jpg",
+  "whiteFrac": 0.004,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "45.03",
+  "no": 45,
+  "file": "03.jpg",
+  "whiteFrac": 0.01,
+  "capH": 3,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "45.04",
+  "no": 45,
+  "file": "04.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "45.05",
+  "no": 45,
+  "file": "05.jpg",
+  "whiteFrac": 0.042,
+  "capH": 237,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "46.01",
+  "no": 46,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "46.02",
+  "no": 46,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "46.03",
+  "no": 46,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "46.04",
+  "no": 46,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 128,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "46.05",
+  "no": 46,
+  "file": "05.jpg",
+  "whiteFrac": 0.019,
+  "capH": 244,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "47.01",
+  "no": 47,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "47.02",
+  "no": 47,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "47.03",
+  "no": 47,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "47.04",
+  "no": 47,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "47.05",
+  "no": 47,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 89,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "47.06",
+  "no": 47,
+  "file": "06.jpg",
+  "whiteFrac": 0.003,
+  "capH": 245,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "48.01",
+  "no": 48,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "48.02",
+  "no": 48,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "48.03",
+  "no": 48,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "48.04",
+  "no": 48,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "48.05",
+  "no": 48,
+  "file": "05.jpg",
+  "whiteFrac": 0.059,
+  "capH": 237,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "49.01",
+  "no": 49,
+  "file": "01.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "49.02",
+  "no": 49,
+  "file": "02.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "49.03",
+  "no": 49,
+  "file": "03.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "49.04",
+  "no": 49,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "49.05",
+  "no": 49,
+  "file": "05.jpg",
+  "whiteFrac": 0.003,
+  "capH": 65,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "49.06",
+  "no": 49,
+  "file": "06.jpg",
+  "whiteFrac": 0.002,
+  "capH": 58,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "49.07",
+  "no": 49,
+  "file": "07.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "49.08",
+  "no": 49,
+  "file": "08.jpg",
+  "whiteFrac": 0.068,
+  "capH": 216,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "49.09",
+  "no": 49,
+  "file": "09.jpg",
+  "whiteFrac": 0.057,
+  "capH": 231,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "50.01",
+  "no": 50,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "50.02",
+  "no": 50,
+  "file": "02.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "50.03",
+  "no": 50,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "50.04",
+  "no": 50,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "50.05",
+  "no": 50,
+  "file": "05.jpg",
+  "whiteFrac": 0.06,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.01",
+  "no": 51,
+  "file": "01.jpg",
+  "whiteFrac": 0.006,
+  "capH": 244,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.02",
+  "no": 51,
+  "file": "02.jpg",
+  "whiteFrac": 0.003,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.03",
+  "no": 51,
+  "file": "03.jpg",
+  "whiteFrac": 0.006,
+  "capH": 254,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.04",
+  "no": 51,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.05",
+  "no": 51,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.06",
+  "no": 51,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.07",
+  "no": 51,
+  "file": "07.jpg",
+  "whiteFrac": 0.009,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "51.08",
+  "no": 51,
+  "file": "08.jpg",
+  "whiteFrac": 0.004,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "52.01",
+  "no": 52,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 1,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "52.02",
+  "no": 52,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "52.03",
+  "no": 52,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 21,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "52.04",
+  "no": 52,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 235,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "52.05",
+  "no": 52,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 222,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "52.06",
+  "no": 52,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "53.01",
+  "no": 53,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 254,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "53.02",
+  "no": 53,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 220,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "53.03",
+  "no": 53,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 251,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "53.04",
+  "no": 53,
+  "file": "04.jpg",
+  "whiteFrac": 0.002,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "53.05",
+  "no": 53,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "53.06",
+  "no": 53,
+  "file": "06.jpg",
+  "whiteFrac": 0.01,
+  "capH": 251,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "53.07",
+  "no": 53,
+  "file": "07.jpg",
+  "whiteFrac": 0.837,
+  "capH": 7,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "53.08",
+  "no": 53,
+  "file": "08.jpg",
+  "whiteFrac": 0.077,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "53.09",
+  "no": 53,
+  "file": "09.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.01",
+  "no": 54,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.02",
+  "no": 54,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 252,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.03",
+  "no": 54,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 250,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.04",
+  "no": 54,
+  "file": "04.jpg",
+  "whiteFrac": 0.003,
+  "capH": 230,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.05",
+  "no": 54,
+  "file": "05.jpg",
+  "whiteFrac": 0.003,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "54.06",
+  "no": 54,
+  "file": "06.jpg",
+  "whiteFrac": 0.763,
+  "capH": 7,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "55.01",
+  "no": 55,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.02",
+  "no": 55,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 254,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.03",
+  "no": 55,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.04",
+  "no": 55,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.05",
+  "no": 55,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 217,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.06",
+  "no": 55,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 211,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "55.07",
+  "no": 55,
+  "file": "07.jpg",
+  "whiteFrac": 0.753,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "56.01",
+  "no": 56,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 252,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "56.02",
+  "no": 56,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 246,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "56.03",
+  "no": 56,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "56.04",
+  "no": 56,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "56.05",
+  "no": 56,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 2,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "56.06",
+  "no": 56,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 233,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "56.07",
+  "no": 56,
+  "file": "07.jpg",
+  "whiteFrac": 0.833,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "57.01",
+  "no": 57,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 246,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "57.02",
+  "no": 57,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 254,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "57.03",
+  "no": 57,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 3,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "57.04",
+  "no": 57,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 246,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "57.05",
+  "no": 57,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 200,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "57.06",
+  "no": 57,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 221,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "57.07",
+  "no": 57,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 190,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "57.08",
+  "no": 57,
+  "file": "08.jpg",
+  "whiteFrac": 0.767,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "58.01",
+  "no": 58,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 234,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.02",
+  "no": 58,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 204,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "58.03",
+  "no": 58,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 237,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.04",
+  "no": 58,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 219,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.05",
+  "no": 58,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.06",
+  "no": 58,
+  "file": "06.jpg",
+  "whiteFrac": 0.751,
+  "capH": 10,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "58.07",
+  "no": 58,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 238,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.08",
+  "no": 58,
+  "file": "08.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "58.09",
+  "no": 58,
+  "file": "09.jpg",
+  "whiteFrac": 0.331,
+  "capH": 2,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "59.01",
+  "no": 59,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 30,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "59.02",
+  "no": 59,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "59.03",
+  "no": 59,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 254,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "59.04",
+  "no": 59,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 194,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "59.05",
+  "no": 59,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 206,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "59.06",
+  "no": 59,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 199,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.01",
+  "no": 60,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 243,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.02",
+  "no": 60,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.03",
+  "no": 60,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.04",
+  "no": 60,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 243,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.05",
+  "no": 60,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 167,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.06",
+  "no": 60,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 185,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "60.07",
+  "no": 60,
+  "file": "07.jpg",
+  "whiteFrac": 0.834,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "61.01",
+  "no": 61,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 147,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "61.02",
+  "no": 61,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "61.03",
+  "no": 61,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "61.04",
+  "no": 61,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "61.05",
+  "no": 61,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 164,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "61.06",
+  "no": 61,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 162,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "61.07",
+  "no": 61,
+  "file": "07.jpg",
+  "whiteFrac": 0.864,
+  "capH": 10,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "62.01",
+  "no": 62,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 238,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "62.02",
+  "no": 62,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "62.03",
+  "no": 62,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "62.04",
+  "no": 62,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 228,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "62.05",
+  "no": 62,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 235,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "62.06",
+  "no": 62,
+  "file": "06.jpg",
+  "whiteFrac": 0.837,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "63.01",
+  "no": 63,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 246,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "63.02",
+  "no": 63,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 254,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "63.03",
+  "no": 63,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 250,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "63.04",
+  "no": 63,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "63.05",
+  "no": 63,
+  "file": "05.jpg",
+  "whiteFrac": 0.81,
+  "capH": 10,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "63.06",
+  "no": 63,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 209,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "63.07",
+  "no": 63,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 217,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "64.01",
+  "no": 64,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "64.02",
+  "no": 64,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 212,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "64.03",
+  "no": 64,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 253,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "64.04",
+  "no": 64,
+  "file": "04.jpg",
+  "whiteFrac": 0.789,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "64.05",
+  "no": 64,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 206,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "64.06",
+  "no": 64,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "65.01",
+  "no": 65,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "65.02",
+  "no": 65,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 253,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "65.03",
+  "no": 65,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 233,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "65.04",
+  "no": 65,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 8,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "65.05",
+  "no": 65,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 235,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "65.06",
+  "no": 65,
+  "file": "06.jpg",
+  "whiteFrac": 0.878,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "66.01",
+  "no": 66,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 239,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "66.02",
+  "no": 66,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 255,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "66.03",
+  "no": 66,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "66.04",
+  "no": 66,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 1,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "66.05",
+  "no": 66,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 255,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "66.06",
+  "no": 66,
+  "file": "06.jpg",
+  "whiteFrac": 0.779,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "66.07",
+  "no": 66,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 1,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "67.01",
+  "no": 67,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "67.02",
+  "no": 67,
+  "file": "02.jpg",
+  "whiteFrac": 0.001,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "67.03",
+  "no": 67,
+  "file": "03.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "67.04",
+  "no": 67,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "67.05",
+  "no": 67,
+  "file": "05.jpg",
+  "whiteFrac": 0.844,
+  "capH": 7,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "67.06",
+  "no": 67,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 16,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "67.07",
+  "no": 67,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 182,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "68.01",
+  "no": 68,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 245,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "68.02",
+  "no": 68,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "68.03",
+  "no": 68,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 222,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "68.04",
+  "no": 68,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 236,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "68.05",
+  "no": 68,
+  "file": "05.jpg",
+  "whiteFrac": 0.714,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "68.06",
+  "no": 68,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 228,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "68.07",
+  "no": 68,
+  "file": "07.jpg",
+  "whiteFrac": 0.001,
+  "capH": 231,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.01",
+  "no": 69,
+  "file": "01.jpg",
+  "whiteFrac": 0.001,
+  "capH": 227,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.02",
+  "no": 69,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 1,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "69.03",
+  "no": 69,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 247,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.04",
+  "no": 69,
+  "file": "04.jpg",
+  "whiteFrac": 0.001,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.05",
+  "no": 69,
+  "file": "05.jpg",
+  "whiteFrac": 0.001,
+  "capH": 211,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.06",
+  "no": 69,
+  "file": "06.jpg",
+  "whiteFrac": 0.001,
+  "capH": 212,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "69.07",
+  "no": 69,
+  "file": "07.jpg",
+  "whiteFrac": 0.847,
+  "capH": 11,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "70.01",
+  "no": 70,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.02",
+  "no": 70,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 231,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "70.03",
+  "no": 70,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 256,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.04",
+  "no": 70,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 223,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.05",
+  "no": 70,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 210,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.06",
+  "no": 70,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 212,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.07",
+  "no": 70,
+  "file": "07.jpg",
+  "whiteFrac": 0,
+  "capH": 220,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.08",
+  "no": 70,
+  "file": "08.jpg",
+  "whiteFrac": 0,
+  "capH": 209,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "70.09",
+  "no": 70,
+  "file": "09.jpg",
+  "whiteFrac": 0.847,
+  "capH": 8,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "71.01",
+  "no": 71,
+  "file": "01.jpg",
+  "whiteFrac": 0,
+  "capH": 218,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.02",
+  "no": 71,
+  "file": "02.jpg",
+  "whiteFrac": 0,
+  "capH": 240,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.03",
+  "no": 71,
+  "file": "03.jpg",
+  "whiteFrac": 0,
+  "capH": 4,
+  "gapAbove": false,
+  "isCaption": false
+ },
+ {
+  "key": "71.04",
+  "no": 71,
+  "file": "04.jpg",
+  "whiteFrac": 0,
+  "capH": 237,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.05",
+  "no": 71,
+  "file": "05.jpg",
+  "whiteFrac": 0,
+  "capH": 219,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.06",
+  "no": 71,
+  "file": "06.jpg",
+  "whiteFrac": 0,
+  "capH": 250,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.07",
+  "no": 71,
+  "file": "07.jpg",
+  "whiteFrac": 0.792,
+  "capH": 9,
+  "gapAbove": true,
+  "isCaption": true
+ },
+ {
+  "key": "71.08",
+  "no": 71,
+  "file": "08.jpg",
+  "whiteFrac": 0,
+  "capH": 233,
+  "gapAbove": true,
+  "isCaption": false
+ },
+ {
+  "key": "71.09",
+  "no": 71,
+  "file": "09.jpg",
+  "whiteFrac": 0,
+  "capH": 228,
+  "gapAbove": true,
+  "isCaption": false
+ }
+]

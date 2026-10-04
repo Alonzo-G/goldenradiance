@@ -1,0 +1,2638 @@
+{
+ "sub": "主图",
+ "count": 329,
+ "images": [
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.835,
+   "chromaFrac": 0.008
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.465,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.032,
+   "chromaFrac": 0.0008
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.814,
+   "chromaFrac": 0.0023
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.012,
+   "chromaFrac": 0.0041
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.465,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.814,
+   "chromaFrac": 0.0023
+  },
+  {
+   "productIndex": 0,
+   "offerId": "830145165413",
+   "slugKey": "_830145165413_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.032,
+   "chromaFrac": 0.0008
+  },
+  {
+   "productIndex": 1,
+   "offerId": "723798964817",
+   "slugKey": "_723798964817_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.956,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0171
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.215,
+   "chromaFrac": 0.0007
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.194,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0171
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.031,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 2,
+   "offerId": "831029923232",
+   "slugKey": "_831029923232_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0171
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.802,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.021,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.016,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.008,
+   "chromaFrac": 0.0002
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 3,
+   "offerId": "1010121080773",
+   "slugKey": "1010121080773_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.008,
+   "chromaFrac": 0.0002
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.927,
+   "chromaFrac": 0.001
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.915,
+   "chromaFrac": 0.001
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.871,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.927,
+   "chromaFrac": 0.0013
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.949,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.927,
+   "chromaFrac": 0.001
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.915,
+   "chromaFrac": 0.001
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.871,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.927,
+   "chromaFrac": 0.0013
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.096,
+   "chromaFrac": 0.0199
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.005,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.116,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 4,
+   "offerId": "1014151915792",
+   "slugKey": "1014151915792_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.09,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.532,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.704,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.766,
+   "chromaFrac": 0.1586
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.037,
+   "chromaFrac": 0.0023
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.027,
+   "chromaFrac": 0.0113
+  },
+  {
+   "productIndex": 5,
+   "offerId": "829910594261",
+   "slugKey": "_829910594261_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.532,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.042,
+   "chromaFrac": 0.0144
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.051,
+   "chromaFrac": 0.0267
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.052,
+   "chromaFrac": 0.027
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.042,
+   "chromaFrac": 0.0426
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.038,
+   "chromaFrac": 0.0171
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.042,
+   "chromaFrac": 0.0144
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.051,
+   "chromaFrac": 0.0267
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.052,
+   "chromaFrac": 0.027
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.042,
+   "chromaFrac": 0.0426
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.038,
+   "chromaFrac": 0.0171
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.037,
+   "chromaFrac": 0.0674
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.051,
+   "chromaFrac": 0.0256
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.048,
+   "chromaFrac": 0.0259
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.043,
+   "chromaFrac": 0.0245
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.039,
+   "chromaFrac": 0.0847
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.038,
+   "chromaFrac": 0.0794
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.053,
+   "chromaFrac": 0.1227
+  },
+  {
+   "productIndex": 6,
+   "offerId": "771710194959",
+   "slugKey": "_771710194959_images",
+   "img": "主图_18.jpg",
+   "skinFrac": 0.485,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.767,
+   "chromaFrac": 0.0038
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.466,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.926,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.804,
+   "chromaFrac": 0.0047
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.645,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.804,
+   "chromaFrac": 0.0047
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.767,
+   "chromaFrac": 0.0038
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.466,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.695,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.926,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.859,
+   "chromaFrac": 0.0152
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.364,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.713,
+   "chromaFrac": 0.0007
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.606,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.488,
+   "chromaFrac": 0.0099
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.44,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.791,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_18.jpg",
+   "skinFrac": 0.885,
+   "chromaFrac": 0.0021
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_19.jpg",
+   "skinFrac": 0.411,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_20.jpg",
+   "skinFrac": 0.373,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_21.jpg",
+   "skinFrac": 0.944,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_22.jpg",
+   "skinFrac": 0.605,
+   "chromaFrac": 0.0012
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_23.jpg",
+   "skinFrac": 0.547,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_24.jpg",
+   "skinFrac": 0.939,
+   "chromaFrac": 0.0026
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_25.jpg",
+   "skinFrac": 0.923,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_26.jpg",
+   "skinFrac": 0.547,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 7,
+   "offerId": "788429514389",
+   "slugKey": "_788429514389_images",
+   "img": "主图_27.jpg",
+   "skinFrac": 0.519,
+   "chromaFrac": 0.0002
+  },
+  {
+   "productIndex": 8,
+   "offerId": "769981637262",
+   "slugKey": "_769981637262_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.249,
+   "chromaFrac": 0.3191
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.395,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.849,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.235,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.025,
+   "chromaFrac": 0.0028
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.849,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.103,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.025,
+   "chromaFrac": 0.0028
+  },
+  {
+   "productIndex": 9,
+   "offerId": "831675167269",
+   "slugKey": "_831675167269_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.057,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.972,
+   "chromaFrac": 0.0161
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.975,
+   "chromaFrac": 0.0174
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.972,
+   "chromaFrac": 0.0191
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.977,
+   "chromaFrac": 0.0241
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.971,
+   "chromaFrac": 0.0204
+  },
+  {
+   "productIndex": 10,
+   "offerId": "892255789573",
+   "slugKey": "_892255789573_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.972,
+   "chromaFrac": 0.0191
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.351,
+   "chromaFrac": 0.0095
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.312,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.4,
+   "chromaFrac": 0.01
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.375,
+   "chromaFrac": 0.0061
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.386,
+   "chromaFrac": 0.0058
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.312,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.375,
+   "chromaFrac": 0.0061
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.351,
+   "chromaFrac": 0.0095
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.4,
+   "chromaFrac": 0.01
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.386,
+   "chromaFrac": 0.0058
+  },
+  {
+   "productIndex": 12,
+   "offerId": "830349092504",
+   "slugKey": "_830349092504_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.959,
+   "chromaFrac": 0.0156
+  },
+  {
+   "productIndex": 13,
+   "offerId": "1057118037330",
+   "slugKey": "1057118037330_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.066,
+   "chromaFrac": 0.0178
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.79,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.059,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.097,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.047,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.047,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.097,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 14,
+   "offerId": "613958313968",
+   "slugKey": "_613958313968_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.204,
+   "chromaFrac": 0.0049
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.064,
+   "chromaFrac": 0.0154
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.077,
+   "chromaFrac": 0.0193
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.062,
+   "chromaFrac": 0.022
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.089,
+   "chromaFrac": 0.0073
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.082,
+   "chromaFrac": 0.012
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.062,
+   "chromaFrac": 0.0202
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.049,
+   "chromaFrac": 0.0152
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.089,
+   "chromaFrac": 0.0073
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.068,
+   "chromaFrac": 0.0182
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.052,
+   "chromaFrac": 0.0129
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.067,
+   "chromaFrac": 0.0126
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.059,
+   "chromaFrac": 0.0161
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.057,
+   "chromaFrac": 0.0095
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.069,
+   "chromaFrac": 0.0154
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.067,
+   "chromaFrac": 0.025
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.062,
+   "chromaFrac": 0.022
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_18.jpg",
+   "skinFrac": 0.077,
+   "chromaFrac": 0.0193
+  },
+  {
+   "productIndex": 15,
+   "offerId": "1069640007246",
+   "slugKey": "1069640007246_images",
+   "img": "主图_19.jpg",
+   "skinFrac": 0.064,
+   "chromaFrac": 0.0154
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.021,
+   "chromaFrac": 0.0083
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.076,
+   "chromaFrac": 0.0333
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.068,
+   "chromaFrac": 0.0267
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.035,
+   "chromaFrac": 0.0233
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.054,
+   "chromaFrac": 0.0062
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.021,
+   "chromaFrac": 0.0083
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.076,
+   "chromaFrac": 0.0333
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.068,
+   "chromaFrac": 0.0267
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.051,
+   "chromaFrac": 0.0117
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.035,
+   "chromaFrac": 0.0233
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.065,
+   "chromaFrac": 0.0154
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.047,
+   "chromaFrac": 0.014
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.038,
+   "chromaFrac": 0.0097
+  },
+  {
+   "productIndex": 16,
+   "offerId": "1056732738890",
+   "slugKey": "1056732738890_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.054,
+   "chromaFrac": 0.0062
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.323,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.972,
+   "chromaFrac": 0.0026
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.849,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.847,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.972,
+   "chromaFrac": 0.0026
+  },
+  {
+   "productIndex": 17,
+   "offerId": "793981197471",
+   "slugKey": "_793981197471_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.849,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.912,
+   "chromaFrac": 0.016
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.484,
+   "chromaFrac": 0.0075
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.038,
+   "chromaFrac": 0.0164
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.157,
+   "chromaFrac": 0.008
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.014,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 18,
+   "offerId": "833705936284",
+   "slugKey": "_833705936284_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.912,
+   "chromaFrac": 0.016
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.132,
+   "chromaFrac": 0.0154
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.093,
+   "chromaFrac": 0.0047
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.082,
+   "chromaFrac": 0.0115
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.09,
+   "chromaFrac": 0.0074
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.083,
+   "chromaFrac": 0.0173
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.09,
+   "chromaFrac": 0.0074
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0166
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.082,
+   "chromaFrac": 0.0097
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.089,
+   "chromaFrac": 0.0175
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.089,
+   "chromaFrac": 0.0175
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.085,
+   "chromaFrac": 0.0098
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.083,
+   "chromaFrac": 0.0173
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.084,
+   "chromaFrac": 0.006
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.092,
+   "chromaFrac": 0.004
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.082,
+   "chromaFrac": 0.0115
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.081,
+   "chromaFrac": 0.0169
+  },
+  {
+   "productIndex": 19,
+   "offerId": "1054455274240",
+   "slugKey": "1054455274240_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.093,
+   "chromaFrac": 0.0047
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.065,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.343,
+   "chromaFrac": 0.0036
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.534,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.043,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.065,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.343,
+   "chromaFrac": 0.0036
+  },
+  {
+   "productIndex": 20,
+   "offerId": "975288015907",
+   "slugKey": "_975288015907_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.902,
+   "chromaFrac": 0.0042
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.102,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.465,
+   "chromaFrac": 0.0416
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.51,
+   "chromaFrac": 0.0393
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.535,
+   "chromaFrac": 0.0275
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.902,
+   "chromaFrac": 0.0042
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.102,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.535,
+   "chromaFrac": 0.0275
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.51,
+   "chromaFrac": 0.0393
+  },
+  {
+   "productIndex": 21,
+   "offerId": "902554071439",
+   "slugKey": "_902554071439_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.465,
+   "chromaFrac": 0.0416
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.102,
+   "chromaFrac": 0.0103
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.034,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.039,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.033,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.025,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.028,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.025,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.022,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.021,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.022,
+   "chromaFrac": 0.0008
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.022,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.035,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.034,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.033,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.039,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 22,
+   "offerId": "1055528081583",
+   "slugKey": "1055528081583_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.034,
+   "chromaFrac": 0.0004
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.07,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.048,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.059,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.054,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.048,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.019,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.016,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 24,
+   "offerId": "601257629759",
+   "slugKey": "_601257629759_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.054,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.243,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.099,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.313,
+   "chromaFrac": 0.0053
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.154,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.243,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.099,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.313,
+   "chromaFrac": 0.0053
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.154,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.019,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 25,
+   "offerId": "975939071429",
+   "slugKey": "_975939071429_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.132,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.098,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.1,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.091,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.097,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0089
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.091,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.098,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.1,
+   "chromaFrac": 0.0011
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.097,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.095,
+   "chromaFrac": 0.0089
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.061,
+   "chromaFrac": 0.0016
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.073,
+   "chromaFrac": 0.0014
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.072,
+   "chromaFrac": 0.0017
+  },
+  {
+   "productIndex": 26,
+   "offerId": "891916076358",
+   "slugKey": "_891916076358_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.063,
+   "chromaFrac": 0.0018
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.17,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.772,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.38,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.41,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.02,
+   "chromaFrac": 0.0126
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.41,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 29,
+   "offerId": "724392151093",
+   "slugKey": "_724392151093_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.17,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.67,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.28,
+   "chromaFrac": 0.0455
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.14,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.021,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.14,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.28,
+   "chromaFrac": 0.0455
+  },
+  {
+   "productIndex": 30,
+   "offerId": "975878746905",
+   "slugKey": "_975878746905_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.276,
+   "chromaFrac": 0.0222
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.277,
+   "chromaFrac": 0.0266
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.311,
+   "chromaFrac": 0.0377
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.308,
+   "chromaFrac": 0.0183
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.34,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.276,
+   "chromaFrac": 0.0222
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.277,
+   "chromaFrac": 0.0266
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.311,
+   "chromaFrac": 0.0377
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.308,
+   "chromaFrac": 0.0183
+  },
+  {
+   "productIndex": 31,
+   "offerId": "899236945991",
+   "slugKey": "_899236945991_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.34,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.414,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.381,
+   "chromaFrac": 0.0028
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.584,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.584,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.362,
+   "chromaFrac": 0.0009
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.381,
+   "chromaFrac": 0.0028
+  },
+  {
+   "productIndex": 32,
+   "offerId": "724869452426",
+   "slugKey": "_724869452426_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.414,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.858,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.802,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.83,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.826,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.781,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.858,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.802,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.861,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.781,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_10.jpg",
+   "skinFrac": 0.82,
+   "chromaFrac": 0.0002
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_11.jpg",
+   "skinFrac": 0.822,
+   "chromaFrac": 0.0002
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_12.jpg",
+   "skinFrac": 0.83,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_13.jpg",
+   "skinFrac": 0.817,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_14.jpg",
+   "skinFrac": 0.849,
+   "chromaFrac": 0.0005
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_15.jpg",
+   "skinFrac": 0.831,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_16.jpg",
+   "skinFrac": 0.826,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_17.jpg",
+   "skinFrac": 0.836,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_18.jpg",
+   "skinFrac": 0.843,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_19.jpg",
+   "skinFrac": 0.787,
+   "chromaFrac": 0.0003
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_20.jpg",
+   "skinFrac": 0.789,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_21.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_22.jpg",
+   "skinFrac": 0,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_23.jpg",
+   "skinFrac": 0.045,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_24.jpg",
+   "skinFrac": 0.356,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_25.jpg",
+   "skinFrac": 0.049,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 34,
+   "offerId": "1012708332205",
+   "slugKey": "1012708332205_images",
+   "img": "主图_26.jpg",
+   "skinFrac": 0.091,
+   "chromaFrac": 0.0006
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.207,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.055,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.081,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.77,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.01,
+   "chromaFrac": 0.0001
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.356,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 35,
+   "offerId": "672681508520",
+   "slugKey": "_672681508520_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.347,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_01.jpg",
+   "skinFrac": 0.736,
+   "chromaFrac": 0.0053
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_02.jpg",
+   "skinFrac": 0.339,
+   "chromaFrac": 0.0054
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_03.jpg",
+   "skinFrac": 0.613,
+   "chromaFrac": 0.0012
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_04.jpg",
+   "skinFrac": 0.762,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_05.jpg",
+   "skinFrac": 0.029,
+   "chromaFrac": 0.0251
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_06.jpg",
+   "skinFrac": 0.736,
+   "chromaFrac": 0.0053
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_07.jpg",
+   "skinFrac": 0.017,
+   "chromaFrac": 0
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_08.jpg",
+   "skinFrac": 0.073,
+   "chromaFrac": 0.0335
+  },
+  {
+   "productIndex": 36,
+   "offerId": "729631868541",
+   "slugKey": "_729631868541_images",
+   "img": "主图_09.jpg",
+   "skinFrac": 0.082,
+   "chromaFrac": 0
+  }
+ ]
+}

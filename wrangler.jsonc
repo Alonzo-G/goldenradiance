@@ -1,0 +1,52 @@
+// ============================================================================
+// jewelry-b2b-global Wrangler 配置（唯一真源，位于项目根）
+// 2026-10-02 裁决 A（Phase 3 实测 + vite-plugin 源码证据）：
+//  - 本文件【不写 main 与 assets】——vite-plugin 把 main 当 worker 源码输入（存在性校验），
+//    而 dist/_worker.js/index.js 是构建输出，冷构建必然不存在，死锁；
+//  - 部署用配置（含正确 main/assets）由 @astrojs/cloudflare 适配器在 astro build 末尾
+//    写入 dist/（dist/wrangler.json），部署命令以它为准；
+//  - 本文件仅供：astro dev 的 D1 绑定注入（vite-plugin 根目录自动发现）、
+//    wrangler d1 execute、vars/observability 管理。
+// 历史沿革：原 infra/wrangler.jsonc 已删除（防双源漂移）。
+// 安全红线: 本文件永久禁止出现任何真实密钥。生产密钥一律走 npx wrangler secret put <NAME>。
+// ============================================================================
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  "name": "jewelry-b2b-global",
+
+  "compatibility_date": "2026-09-01",
+
+  // resend 等 npm 包依赖 Node API 垫片
+  "compatibility_flags": ["nodejs_compat"],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "jewelry-b2b-global-db",
+      // 占位：创建 D1 后执行 npx wrangler d1 list 取真实 ID 回填（仅远端部署需要，本地 dev 不依赖）。
+      // 本地用全零 UUID 合法占位，防止插件对格式做校验时拒绝 TODO 字符串
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "./infra/migrations"
+    }
+  ],
+
+  "vars": {
+    // dev 值见 .dev.vars（gitignore）；生产走 wrangler secret put
+    "TURNSTILE_SECRET_KEY": "",
+    "RESEND_API_KEY": "",
+    "MAIL_FROM": "",
+    "SALES_MAILBOX": "",
+    // 后台登录密码（SHA-256 hex）与会话签名密钥——生产走 wrangler secret put，此处仅空占位
+    "ADMIN_PASSWORD": "",
+    "ADMIN_SECRET": ""
+  },
+
+  "observability": {
+    "enabled": true
+  }
+
+  // 明确不需要的配置块，Phase 3 不得顺手添加：
+  //   durable_objects / kv_namespaces / r2_buckets / queues / crons
+}

@@ -1,0 +1,2358 @@
+{
+  "_meta": {
+    "sourceDir": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)",
+    "granularity": "sku",
+    "generatedAt": "2026-10-02T15:38:00.582Z",
+    "note": "产品粒度 = SKU（颜色变体）。款式族以 styleFamily 记录 offerId，不再作为产品层。",
+    "policy": [
+      "每个通过审核的颜色变体独立成一条产品；SKU 编码 = RA-{品类}-{链接号}{变体号}，可回溯到 1688 offerId。",
+      "颜色名为依据图片判读的结果，**不是供应商官方 SKU 属性名**（目录导出未含 SKU 属性表），须客户核对。",
+      "所有面向站点的文案必须经 baseEn() 转成英文——中文基材直接入文案会把汉字带进英文站产物。",
+      "尺寸/重量标注图只作数据源；图上 0.xx 为盎司不是美元，但仍不作为商品图发布。",
+      "产品线归属必须有标题明示基材；S925 银不在现有三条线内，记 LINE_TAXONOMY_GAP。",
+      "价格/MOQ/材质牌号/镀层厚度一律留空。"
+    ],
+    "totals": {
+      "listings": 52,
+      "products": 41,
+      "skuLevel": 34,
+      "styleLevel": 7,
+      "images": 44,
+      "held": 65,
+      "diagramData": 3
+    },
+    "byCategory": {
+      "bracelet": 16,
+      "earrings": 1,
+      "necklace": 24
+    },
+    "byLine": {
+      "stainless-titanium-steel": 41
+    },
+    "diagramData": [
+      {
+        "pos": "空屿:P03",
+        "listing": 39,
+        "offerId": "1076493585997",
+        "img": "SKU 属性图_07.jpg",
+        "category": "earrings",
+        "weight_g": 5.46,
+        "weightOz": null,
+        "dimensions_raw": "9.7cm x 4.3cm",
+        "dataRaw": "weight=5.46/pair;dims=9.7cm x 4.3cm",
+        "sourceConflict": null,
+        "note": null
+      },
+      {
+        "pos": "空屿:P04",
+        "listing": 39,
+        "offerId": "1076493585997",
+        "img": "SKU 属性图_09.jpg",
+        "category": "earrings",
+        "weight_g": 3.75,
+        "weightOz": null,
+        "dimensions_raw": "0.9cm x 4.2cm",
+        "dataRaw": "weight=3.75/pair;dims=0.9cm x 4.2cm",
+        "sourceConflict": null,
+        "note": null
+      },
+      {
+        "pos": "空屿:P05",
+        "listing": 39,
+        "offerId": "1076493585997",
+        "img": "SKU 属性图_10.jpg",
+        "category": "earrings",
+        "weight_g": 7.7,
+        "weightOz": null,
+        "dimensions_raw": "1.2cm x 4.2cm",
+        "dataRaw": "weight=7.7/pair;dims=1.2cm x 4.2cm",
+        "sourceConflict": null,
+        "note": null
+      }
+    ]
+  },
+  "products": [
+    {
+      "granularity": "sku",
+      "sku": "RA-B-0506",
+      "slug": "silver-tone-heart-zircon-link-bracelet",
+      "title": "Silver-Tone Heart Zircon Link Bracelet",
+      "titleCn": "超闪几何爱心锆石拼接手链女欧美跨境气质不锈钢饰品现货批发",
+      "colorRaw": "silver-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1014151915792",
+        "styleCn": "超闪几何爱心锆石拼接手链女欧美跨境气质不锈钢饰品现货批发",
+        "styleEn": "Heart Zircon Link Bracelet"
+      },
+      "shortDescription": "Silver-Tone colourway of the heart zircon link. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "silver-tone",
+        "heart"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_06.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\超闪几何爱心锆石拼接手链女欧美跨境气质不锈钢饰品现货批发_1014151915792_images\\SKU 属性图\\SKU 属性图_06.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1014151915792",
+      "sourceUrl": "https://detail.1688.com/offer/1014151915792.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-B-112",
+      "slug": "five-clover-bracelet",
+      "title": "Five-Clover Bracelet",
+      "titleCn": "日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环",
+      "colorRaw": null,
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "601257629759",
+        "styleCn": "日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环",
+        "styleEn": "Five Clover Bracelet"
+      },
+      "styleTags": [
+        "bracelet"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_07.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环_601257629759_images\\主图\\主图_07.jpg",
+          "seq": 1
+        },
+        {
+          "sub": "主图",
+          "file": "主图_08.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环_601257629759_images\\主图\\主图_08.jpg",
+          "seq": 2
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "601257629759",
+      "sourceUrl": "https://detail.1688.com/offer/601257629759.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1403",
+      "slug": "emerald-six-flower-paved-bracelet-v03",
+      "title": "Emerald Six Flower Paved Bracelet (Variant 03)",
+      "titleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+      "colorRaw": "emerald",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1057118037330",
+        "styleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+        "styleEn": "Six Flower Paved Bracelet"
+      },
+      "shortDescription": "Emerald colourway of the six flower paved. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "emerald",
+        "six"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_03.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品_1057118037330_images\\SKU 属性图\\SKU 属性图_03.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1057118037330",
+      "sourceUrl": "https://detail.1688.com/offer/1057118037330.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1404",
+      "slug": "emerald-six-flower-paved-bracelet",
+      "title": "Emerald Six Flower Paved Bracelet",
+      "titleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+      "colorRaw": "emerald",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1057118037330",
+        "styleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+        "styleEn": "Six Flower Paved Bracelet"
+      },
+      "shortDescription": "Emerald colourway of the six flower paved. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "emerald",
+        "six"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_04.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品_1057118037330_images\\SKU 属性图\\SKU 属性图_04.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1057118037330",
+      "sourceUrl": "https://detail.1688.com/offer/1057118037330.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1406",
+      "slug": "emerald-six-flower-paved-bracelet-v06",
+      "title": "Emerald Six Flower Paved Bracelet (Variant 06)",
+      "titleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+      "colorRaw": "emerald",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1057118037330",
+        "styleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+        "styleEn": "Six Flower Paved Bracelet"
+      },
+      "shortDescription": "Emerald colourway of the six flower paved. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "emerald",
+        "six"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_06.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品_1057118037330_images\\SKU 属性图\\SKU 属性图_06.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1057118037330",
+      "sourceUrl": "https://detail.1688.com/offer/1057118037330.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1701",
+      "slug": "wine-chunky-chain-bracelet",
+      "title": "Wine Chunky Chain Bracelet",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "wine",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Wine colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "wine",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_01.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_01.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1704",
+      "slug": "gold-tone-chunky-chain-bracelet-v04",
+      "title": "Gold-Tone Chunky Chain Bracelet (Variant 04)",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "gold-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Gold-Tone colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "gold-tone",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_04.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_04.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1705",
+      "slug": "silver-tone-chunky-chain-bracelet",
+      "title": "Silver-Tone Chunky Chain Bracelet",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "silver-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Silver-Tone colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "silver-tone",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1706",
+      "slug": "multi-colour-chunky-chain-bracelet",
+      "title": "Multi-Colour Chunky Chain Bracelet",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "multi-colour",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Multi-Colour colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "multi-colour",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_06.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_06.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1708",
+      "slug": "gold-tone-chunky-chain-bracelet-v08",
+      "title": "Gold-Tone Chunky Chain Bracelet (Variant 08)",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "gold-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Gold-Tone colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "gold-tone",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_08.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_08.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1709",
+      "slug": "gold-tone-chunky-chain-bracelet",
+      "title": "Gold-Tone Chunky Chain Bracelet",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "gold-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Gold-Tone colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "gold-tone",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_09.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_09.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-1710",
+      "slug": "gold-tone-chunky-chain-bracelet-v10",
+      "title": "Gold-Tone Chunky Chain Bracelet (Variant 10)",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "colorRaw": "gold-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "1056732738890",
+        "styleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+        "styleEn": "Chunky Chain Bracelet"
+      },
+      "shortDescription": "Gold-Tone colourway of the chunky chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "gold-tone",
+        "chunky"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_10.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\SKU 属性图\\SKU 属性图_10.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1056732738890",
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-3516",
+      "slug": "silver-tone-heart-zircon-tennis-bracelet",
+      "title": "Silver-Tone Heart Zircon Tennis Bracelet",
+      "titleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+      "colorRaw": "silver-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1012708332205",
+        "styleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+        "styleEn": "Heart Zircon Tennis Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the heart zircon tennis. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "silver-tone",
+        "heart"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_16.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\SKU 属性图\\SKU 属性图_16.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1012708332205",
+      "sourceUrl": "https://detail.1688.com/offer/1012708332205.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-3517",
+      "slug": "silver-tone-heart-zircon-tennis-bracelet-v17",
+      "title": "Silver-Tone Heart Zircon Tennis Bracelet (Variant 17)",
+      "titleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+      "colorRaw": "silver-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1012708332205",
+        "styleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+        "styleEn": "Heart Zircon Tennis Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the heart zircon tennis. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "silver-tone",
+        "heart"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_17.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\SKU 属性图\\SKU 属性图_17.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1012708332205",
+      "sourceUrl": "https://detail.1688.com/offer/1012708332205.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-3518",
+      "slug": "silver-tone-heart-zircon-tennis-bracelet-v18",
+      "title": "Silver-Tone Heart Zircon Tennis Bracelet (Variant 18)",
+      "titleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+      "colorRaw": "silver-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1012708332205",
+        "styleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+        "styleEn": "Heart Zircon Tennis Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the heart zircon tennis. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "silver-tone",
+        "heart"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_18.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\SKU 属性图\\SKU 属性图_18.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1012708332205",
+      "sourceUrl": "https://detail.1688.com/offer/1012708332205.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-B-3520",
+      "slug": "gold-tone-heart-zircon-tennis-bracelet",
+      "title": "Gold-Tone Heart Zircon Tennis Bracelet",
+      "titleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+      "colorRaw": "gold-tone",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1012708332205",
+        "styleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+        "styleEn": "Heart Zircon Tennis Necklace"
+      },
+      "shortDescription": "Gold-Tone colourway of the heart zircon tennis. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "bracelet",
+        "gold-tone",
+        "heart"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_20.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\SKU 属性图\\SKU 属性图_20.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1012708332205",
+      "sourceUrl": "https://detail.1688.com/offer/1012708332205.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-E-2605",
+      "slug": "gold-tone-textured-clover-stud-earrings",
+      "title": "Gold-Tone Textured Clover Stud Earrings",
+      "titleCn": "时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉",
+      "colorRaw": "gold-tone",
+      "category": "earrings",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "975939071429",
+        "styleCn": "时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉",
+        "styleEn": "Textured Clover Stud Earrings"
+      },
+      "shortDescription": "Gold-Tone colourway of the textured clover stud. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "earrings",
+        "gold-tone",
+        "textured"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉_975939071429_images\\SKU 属性图\\SKU 属性图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "975939071429",
+      "sourceUrl": "https://detail.1688.com/offer/975939071429.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-0401",
+      "slug": "gold-tone-zircon-leaf-pendant-necklace-v01",
+      "title": "Gold-Tone Zircon Leaf Pendant Necklace (Variant 01)",
+      "titleCn": "不锈钢欧美锆石树叶项链多肥胺波西",
+      "colorRaw": "gold-tone",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1010121080773",
+        "styleCn": "不锈钢欧美锆石树叶项链多肥胺波西",
+        "styleEn": "Zircon Leaf Pendant Necklace"
+      },
+      "shortDescription": "Gold-Tone colourway of the zircon leaf pendant. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "gold-tone",
+        "zircon"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_01.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢欧美锆石树叶项链多肥胺波西_1010121080773_images\\SKU 属性图\\SKU 属性图_01.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1010121080773",
+      "sourceUrl": "https://detail.1688.com/offer/1010121080773.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-0402",
+      "slug": "gold-tone-zircon-leaf-pendant-necklace",
+      "title": "Gold-Tone Zircon Leaf Pendant Necklace",
+      "titleCn": "不锈钢欧美锆石树叶项链多肥胺波西",
+      "colorRaw": "gold-tone",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1010121080773",
+        "styleCn": "不锈钢欧美锆石树叶项链多肥胺波西",
+        "styleEn": "Zircon Leaf Pendant Necklace"
+      },
+      "shortDescription": "Gold-Tone colourway of the zircon leaf pendant. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "gold-tone",
+        "zircon"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_02.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢欧美锆石树叶项链多肥胺波西_1010121080773_images\\SKU 属性图\\SKU 属性图_02.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1010121080773",
+      "sourceUrl": "https://detail.1688.com/offer/1010121080773.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-101",
+      "slug": "white-zircon-square-pendant-necklace",
+      "title": "White Zircon Square Pendant Necklace",
+      "titleCn": "不锈钢白色方糖项链小众设计师款项链可滑动锆石吊坠 厂家直批",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "831029923232",
+        "styleCn": "不锈钢白色方糖项链小众设计师款项链可滑动锆石吊坠 厂家直批",
+        "styleEn": "White Zircon Square Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢白色方糖项链小众设计师款项链可滑动锆石吊坠_厂家直批_831029923232_images\\主图\\主图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "831029923232",
+      "sourceUrl": "https://detail.1688.com/offer/831029923232.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-104",
+      "slug": "butterfly-tassel-pendant-necklace",
+      "title": "Butterfly Tassel Pendant Necklace",
+      "titleCn": "法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链 厂家直批",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "829910594261",
+        "styleCn": "法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链 厂家直批",
+        "styleEn": "Butterfly Tassel Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链_厂家直批_829910594261_images\\主图\\主图_05.jpg",
+          "seq": 1
+        },
+        {
+          "sub": "主图",
+          "file": "主图_04.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链_厂家直批_829910594261_images\\主图\\主图_04.jpg",
+          "seq": 2
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "829910594261",
+      "sourceUrl": "https://detail.1688.com/offer/829910594261.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-108",
+      "slug": "two-face-clover-pendant-necklace",
+      "title": "Two-Face Clover Pendant Necklace",
+      "titleCn": "欧美跨境热销钛钢双面四叶草项链女时尚轻奢一款两戴幸运草锁骨链",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "793981197471",
+        "styleCn": "欧美跨境热销钛钢双面四叶草项链女时尚轻奢一款两戴幸运草锁骨链",
+        "styleEn": "Two Face Clover Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境热销钛钢双面四叶草项链女时尚轻奢一款两戴幸运草锁骨链_793981197471_images\\主图\\主图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "793981197471",
+      "sourceUrl": "https://detail.1688.com/offer/793981197471.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-109",
+      "slug": "shell-butterfly-pendant-necklace",
+      "title": "Shell Butterfly Pendant Necklace",
+      "titleCn": "欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "833705936284",
+        "styleCn": "欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品",
+        "styleEn": "Shell Butterfly Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品_833705936284_images\\主图\\主图_05.jpg",
+          "seq": 1
+        },
+        {
+          "sub": "主图",
+          "file": "主图_03.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品_833705936284_images\\主图\\主图_03.jpg",
+          "seq": 2
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "833705936284",
+      "sourceUrl": "https://detail.1688.com/offer/833705936284.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-114",
+      "slug": "black-round-pendant-necklace",
+      "title": "Black Round Pendant Necklace",
+      "titleCn": "钛钢项链别针罗马数字黑白卫衣新款小众轻奢高级感18K锁骨毛衣链",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "724392151093",
+        "styleCn": "钛钢项链别针罗马数字黑白卫衣新款小众轻奢高级感18K锁骨毛衣链",
+        "styleEn": "Black Round Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\钛钢项链别针罗马数字黑白卫衣新款小众轻奢高级感18K锁骨毛衣链_724392151093_images\\主图\\主图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "724392151093",
+      "sourceUrl": "https://detail.1688.com/offer/724392151093.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "style-level",
+      "sku": "RA-N-117",
+      "slug": "pave-clover-pendant-necklace",
+      "title": "Pavé Clover Pendant Necklace",
+      "titleCn": "新款钛钢项链女满钻心形一款多戴磁铁爱心四叶花项链 厂家直批",
+      "colorRaw": null,
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "672681508520",
+        "styleCn": "新款钛钢项链女满钻心形一款多戴磁铁爱心四叶花项链 厂家直批",
+        "styleEn": "Pave Clover Pendant Necklace"
+      },
+      "styleTags": [
+        "necklace"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_02.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款钛钢项链女满钻心形一款多戴磁铁爱心四叶花项链_厂家直批_672681508520_images\\主图\\主图_02.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "672681508520",
+      "sourceUrl": "https://detail.1688.com/offer/672681508520.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "该链接本轮无可用 SKU 图（SKU 图为真人照或带中文水印），暂以干净主图保留款式级条目；颜色变体待客户确认。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-1502",
+      "slug": "silver-tone-open-ring-and-bar-letter-pendant-necklace",
+      "title": "Silver-Tone Open Ring and Bar Letter Pendant Necklace",
+      "titleCn": "罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链 厂家直批",
+      "colorRaw": "silver-tone",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "613958313968",
+        "styleCn": "罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链 厂家直批",
+        "styleEn": "Open Ring and Bar Letter Pendant Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the open ring and bar letter pendant. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "silver-tone",
+        "open"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_02.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链_厂家直批_613958313968_images\\SKU 属性图\\SKU 属性图_02.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "613958313968",
+      "sourceUrl": "https://detail.1688.com/offer/613958313968.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2103",
+      "slug": "silver-tone-six-stone-disc-pendant-necklace",
+      "title": "Silver-Tone Six Stone Disc Pendant Necklace",
+      "titleCn": "欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品",
+      "colorRaw": "silver-tone",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "975288015907",
+        "styleCn": "欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品",
+        "styleEn": "Six Stone Disc Pendant Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the six stone disc pendant. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "silver-tone",
+        "six"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_03.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品_975288015907_images\\SKU 属性图\\SKU 属性图_03.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "975288015907",
+      "sourceUrl": "https://detail.1688.com/offer/975288015907.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2301",
+      "slug": "burgundy-beaded-y-necklace",
+      "title": "Burgundy Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "burgundy",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Burgundy colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "burgundy",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_01.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_01.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2302",
+      "slug": "coffee-brown-beaded-y-necklace",
+      "title": "Coffee-Brown Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "coffee-brown",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Coffee-Brown colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "coffee-brown",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_02.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_02.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2303",
+      "slug": "jet-black-beaded-y-necklace",
+      "title": "Jet-Black Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "jet-black",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Jet-Black colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "jet-black",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_03.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_03.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2304",
+      "slug": "emerald-beaded-y-necklace",
+      "title": "Emerald Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "emerald",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Emerald colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "emerald",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_04.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_04.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2305",
+      "slug": "steel-blue-beaded-y-necklace",
+      "title": "Steel-Blue Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "steel-blue",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Steel-Blue colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "steel-blue",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_05.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_05.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2306",
+      "slug": "purple-beaded-y-necklace",
+      "title": "Purple Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "purple",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Purple colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "purple",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_06.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_06.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2307",
+      "slug": "olive-beaded-y-necklace",
+      "title": "Olive Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "olive",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Olive colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "olive",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_07.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_07.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2308",
+      "slug": "tan-beaded-y-necklace",
+      "title": "Tan Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "tan",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Tan colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "tan",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_08.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_08.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2309",
+      "slug": "rose-red-beaded-y-necklace",
+      "title": "Rose-Red Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "rose-red",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Rose-Red colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "rose-red",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_09.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_09.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2310",
+      "slug": "orange-beaded-y-necklace",
+      "title": "Orange Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "orange",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Orange colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "orange",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_10.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_10.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2311",
+      "slug": "tan-beaded-y-necklace-v11",
+      "title": "Tan Beaded Y Necklace (Variant 11)",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "tan",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Tan colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "tan",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_11.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_11.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": "与同款式同色其它 SKU 的差异（长度/尺寸维度）待客户确认；目录导出未含 SKU 属性表。"
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-2312",
+      "slug": "champagne-beaded-y-necklace",
+      "title": "Champagne Beaded Y Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "colorRaw": "champagne",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states stainless steel",
+      "styleFamily": {
+        "offerId": "1055528081583",
+        "styleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+        "styleEn": "Beaded Y Necklace"
+      },
+      "shortDescription": "Champagne colourway of the beaded y. Base material is stated by the supplier as stainless steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "champagne",
+        "beaded"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_12.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\SKU 属性图\\SKU 属性图_12.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "1055528081583",
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-3103",
+      "slug": "silver-tone-black-ceramic-bead-necklace",
+      "title": "Silver-Tone Black Ceramic Bead Necklace",
+      "titleCn": "钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链",
+      "colorRaw": "silver-tone",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "975878746905",
+        "styleCn": "钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链",
+        "styleEn": "Black Ceramic Bead Necklace"
+      },
+      "shortDescription": "Silver-Tone colourway of the black ceramic bead. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "silver-tone",
+        "black"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_03.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链_975878746905_images\\SKU 属性图\\SKU 属性图_03.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "975878746905",
+      "sourceUrl": "https://detail.1688.com/offer/975878746905.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    },
+    {
+      "granularity": "sku",
+      "sku": "RA-N-3702",
+      "slug": "rose-gold-square-plate-snake-chain-necklace",
+      "title": "Rose-Gold Square Plate Snake Chain Necklace",
+      "titleCn": "LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢 厂家直批",
+      "colorRaw": "rose-gold",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "supplier title states titanium steel",
+      "styleFamily": {
+        "offerId": "729631868541",
+        "styleCn": "LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢 厂家直批",
+        "styleEn": "Square Plate Snake Chain Necklace"
+      },
+      "shortDescription": "Rose-Gold colourway of the square plate snake chain. Base material is stated by the supplier as titanium steel; grade, plating specification, MOQ and tiered pricing are confirmed with your quotation.",
+      "styleTags": [
+        "necklace",
+        "rose-gold",
+        "square"
+      ],
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_02.jpg",
+          "abs": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢_厂家直批_729631868541_images\\SKU 属性图\\SKU 属性图_02.jpg",
+          "seq": 1
+        }
+      ],
+      "dimensions_mm": null,
+      "weight_g": null,
+      "weight_basis": null,
+      "dimensionsFrom": null,
+      "offerId": "729631868541",
+      "sourceUrl": "https://detail.1688.com/offer/729631868541.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null,
+      "note": null
+    }
+  ],
+  "held": [
+    {
+      "listing": 7,
+      "pos": "骏娅:P03",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_06.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P04",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_05.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P05",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_11.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P06",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_10.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P07",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_01.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P08",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_04.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P09",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_09.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P10",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_08.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P11",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_02.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P12",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_07.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P13",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_03.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 7,
+      "pos": "骏娅:P14",
+      "offerId": "771710194959",
+      "img": "SKU 属性图_12.jpg",
+      "reasonCode": "TEXT",
+      "reason": "供应商中文水印「东莞市骏娅饰品有限公司」半透明压在图上"
+    },
+    {
+      "listing": 10,
+      "pos": "骏娅:P15",
+      "offerId": "831675167269",
+      "img": "SKU 属性图_03.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 10,
+      "pos": "骏娅:P16",
+      "offerId": "831675167269",
+      "img": "SKU 属性图_04.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 16,
+      "pos": "骏娅:P21",
+      "offerId": "1069640007246",
+      "img": "SKU 属性图_03.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 16,
+      "pos": "骏娅:P22",
+      "offerId": "1069640007246",
+      "img": "SKU 属性图_06.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 16,
+      "pos": "骏娅:P23",
+      "offerId": "1069640007246",
+      "img": "SKU 属性图_09.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 16,
+      "pos": "骏娅:P24",
+      "offerId": "1069640007246",
+      "img": "SKU 属性图_08.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 39,
+      "pos": "空屿:P00",
+      "offerId": "1076493585997",
+      "img": "SKU 属性图_01.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 39,
+      "pos": "空屿:P01",
+      "offerId": "1076493585997",
+      "img": "SKU 属性图_03.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 39,
+      "pos": "空屿:P02",
+      "offerId": "1076493585997",
+      "img": "SKU 属性图_21.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P06",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_01.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P07",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_05.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P08",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_09.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P09",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_12.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P10",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_20.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P11",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_21.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P12",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_22.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P13",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_33.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P14",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_36.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P15",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_41.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P16",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_52.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P17",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_55.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P18",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_03.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P19",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_04.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P20",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_08.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P21",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_53.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P22",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_10.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P23",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_15.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P24",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_32.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P25",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_38.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P26",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_13.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P27",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_31.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P28",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_02.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P29",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_16.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P30",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_48.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P31",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_07.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P32",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_40.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P33",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_35.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P34",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_50.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P35",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_54.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P36",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_06.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P37",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_49.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P38",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_14.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P39",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_42.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P40",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_37.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P41",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_28.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P42",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_19.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P43",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_25.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P44",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_27.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P45",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_46.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P46",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_26.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 41,
+      "pos": "空屿:P47",
+      "offerId": "890256254975",
+      "img": "SKU 属性图_11.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 46,
+      "pos": "空屿:P123",
+      "offerId": "822882810086",
+      "img": "SKU 属性图_16.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    },
+    {
+      "listing": 46,
+      "pos": "空屿:P129",
+      "offerId": "822882810086",
+      "img": "SKU 属性图_81.jpg",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材，无法判定产品线归属"
+    }
+  ]
+}

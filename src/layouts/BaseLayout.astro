@@ -1,0 +1,99 @@
+---
+// src/layouts/BaseLayout.astro — <html lang="en">、SEO head、全局 chrome（坑 §6.8：data-pagefind-body 恰好 1 个）
+import '../styles/global.css';
+import { t, SITE_NAME } from '../i18n';
+import { organizationJsonld } from '../lib/seo/jsonld';
+import { getSiteUrl } from '../lib/seo/site';
+import SeoHead from '../components/layout/SeoHead.astro';
+import UtilityBar from '../components/layout/UtilityBar.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import MobileContactBar from '../components/layout/MobileContactBar.astro';
+import RfqDrawer from '../components/rfq/RfqDrawer.astro';
+import SearchDialog from '../components/search/SearchDialog.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+  ogType?: 'website' | 'article';
+  image?: string;
+  /** og:image / twitter:image 的替代文本；缺省用站名。产品页应传产品名。 */
+  imageAlt?: string;
+  noindex?: boolean;
+  /** false 时 <main> 不标 data-pagefind-body（404 等不入索引） */
+  pagefind?: boolean;
+  jsonld?: Record<string, unknown>[];
+  hideMobileContact?: boolean;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description = t('meta.description'),
+  path,
+  ogType = 'website',
+  image,
+  imageAlt,
+  noindex = false,
+  pagefind = true,
+  jsonld = [organizationJsonld(getSiteUrl(Astro.site))],
+  hideMobileContact = false,
+  wide = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#123a38" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {/*
+      字体异步加载：media="print" 让浏览器把这段 CSS 降为非阻塞（首屏不被字体 CSS 卡住），
+      onload 后再切回 all 使字体生效。display=swap 兜底：字体未就绪前先用系统字体渲染，避免 FOIT 白屏。
+      这是对海外买家 LCP 的确定性优化——字体不阻塞首帧渲染，正文先用 fallback 立即呈现。
+    */}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      />
+    </noscript>
+    <SeoHead title={title === SITE_NAME ? title : `${title}`} description={description} path={path} ogType={ogType} image={image} imageAlt={imageAlt} noindex={noindex} jsonld={jsonld} />
+    {/* 页面级 head 注入位：仅用于 LCP 资源预加载等确有必要的资源提示。
+        预加载必须与正文 <img> 的 srcset/sizes 完全一致，否则会重复下载。 */}
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-[100dvh] flex-col bg-bg text-fg">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[600] focus:rounded-sm focus:bg-surface focus:px-3 focus:py-2 focus:text-sm focus:shadow-raised">
+      {t('nav.skipToContent')}
+    </a>
+    <UtilityBar />
+    <Header />
+    <main id="main" data-pagefind-body={pagefind ? true : undefined} class:list={['flex-1', wide ? 'container-wide' : 'container-page']}>
+      <slot />
+    </main>
+    <Footer />
+    {!hideMobileContact && <MobileContactBar />}
+    <RfqDrawer />
+    <SearchDialog />
+  </body>
+</html>
+
+<script>
+  // 全站 RFQ/市场选择器/加篮交互（vanilla TS，无 React 运行时）
+  import '../components/rfq/rfq-client';
+</script>

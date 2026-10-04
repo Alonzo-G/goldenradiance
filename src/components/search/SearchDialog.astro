@@ -1,0 +1,126 @@
+---
+// src/components/search/SearchDialog.astro — Pagefind 全文检索 + SKU 双层索引（L1 精确 / L2 did-you-mean）
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { getSkuIndex } from '../../lib/products/queries';
+
+const index = await getSkuIndex();
+---
+
+<div data-search-overlay hidden class="fixed inset-0 z-[500] bg-overlay p-4 pt-16">
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label={t('search.title')}
+    class="mx-auto max-w-xl rounded-lg border border-border bg-surface shadow-drawer"
+  >
+    <div class="flex items-center gap-3 border-b border-border px-4">
+      <Icon name="lucide:search" class="icon size-5 text-muted" aria-hidden="true" />
+      <input
+        data-search-input
+        type="search"
+        placeholder={t('nav.searchPlaceholder')}
+        class="h-14 w-full bg-transparent text-base text-fg outline-none placeholder:text-meta"
+        aria-label={t('search.title')}
+      />
+      <button type="button" data-search-close class="flex size-11 items-center justify-center text-muted hover:text-fg">
+        <Icon name="lucide:x" class="icon size-5" aria-hidden="true" />
+        <span class="sr-only">{t('search.close')}</span>
+      </button>
+    </div>
+    <div data-search-results class="max-h-[60vh] overflow-y-auto p-2"></div>
+  </div>
+</div>
+
+{/* 构建期内联 SKU 索引（L1/L2 无需网络） */}
+<script type="application/json" data-sku-index set:html={JSON.stringify(index)} />
+<script>
+  import { exactMatch, suggestSku } from '../../lib/products/sku-index';
+  import { t } from '../../i18n';
+  import type { SkuIndexItem } from '../../lib/products/queries';
+
+  const index: SkuIndexItem[] = JSON.parse(
+    document.querySelector<HTMLScriptElement>('[data-sku-index]')?.textContent ?? '[]',
+  );
+  window.__SKU_INDEX__ = index;
+
+  const overlay = document.querySelector<HTMLElement>('[data-search-overlay]');
+  const input = document.querySelector<HTMLInputElement>('[data-search-input]');
+  const results = document.querySelector<HTMLElement>('[data-search-results]');
+  let lastTrigger: HTMLElement | null = null;
+  let pagefind: any = null;
+
+  function open() {
+    if (!overlay) return;
+    lastTrigger = document.activeElement as HTMLElement;
+    overlay.hidden = false;
+    input?.focus();
+  }
+  function close() {
+    if (overlay) overlay.hidden = true;
+    lastTrigger?.focus();
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('[data-search-open]')) open();
+    if (target.closest('[data-search-close]')) close();
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay && !overlay.hidden) close();
+  });
+
+  function hit(item: SkuIndexItem, extra?: string) {
+    const row = document.createElement('a');
+    row.href = `/products/${item.slug}/`;
+    row.className = 'block rounded-sm px-3 py-2.5 hover:bg-surface-sunken';
+    row.innerHTML = `
+      <p class="font-mono text-xs text-meta">${item.sku}</p>
+      <p class="text-sm text-fg">${item.title}</p>
+      ${extra ? `<p class="text-xs text-info">${extra}</p>` : ''}
+    `;
+    results?.appendChild(row);
+  }
+
+  async function run(query: string) {
+    if (!results) return;
+    results.innerHTML = '';
+    if (!query.trim()) return;
+    const exact = exactMatch(index, query);
+    if (exact) {
+      hit(exact);
+      return;
+    }
+    const suggestion = suggestSku(index, query);
+    if (suggestion) {
+      hit(suggestion, t('empty.didYouMean', { suggestion: suggestion.sku }));
+    }
+    // L3：Pagefind 全文检索（懒加载，仅索引 data-pagefind-body 正文）
+    try {
+      pagefind = pagefind ?? (await import(/* @vite-ignore */ String('/pagefind/pagefind.js')));
+      const search = await pagefind.search(query);
+      const pages = (await Promise.all(search.results.slice(0, 8).map((r: any) => r.data()))) as any[];
+      if (!pages.length && !suggestion) {
+        const none = document.createElement('p');
+        none.className = 'px-3 py-4 text-sm text-muted';
+        none.textContent = t('search.noResults');
+        results.appendChild(none);
+        return;
+      }
+      for (const p of pages) {
+        const row = document.createElement('a');
+        row.href = p.url;
+        row.className = 'block rounded-sm px-3 py-2.5 hover:bg-surface-sunken';
+        row.innerHTML = `<p class="text-sm text-fg">${p.meta?.title ?? p.url}</p>`;
+        results.appendChild(row);
+      }
+    } catch {
+      /* Pagefind 未构建（dev 场景）：静默，L1/L2 已覆盖 SKU 搜索 */
+    }
+  }
+
+  input?.addEventListener('input', () => {
+    void run(input.value);
+  });
+</script>

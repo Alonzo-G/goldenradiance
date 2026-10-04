@@ -1,0 +1,979 @@
+{
+  "_meta": {
+    "sourceDir": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)",
+    "sourceKind": "1688 批发平台商品目录（含 _URL.txt 元数据与 主图 / SKU 属性图 / 描述图 三类图）",
+    "suppliers": [
+      "骏娅",
+      "义乌市空屿饰品有限公司"
+    ],
+    "scannedAt": "2026-10-02T15:02:21.600Z",
+    "totals": {
+      "listings": 52,
+      "imagesScanned": 1690,
+      "published": 18,
+      "held": 34
+    },
+    "policy": [
+      "只发布经逐张目视核验为「无真人、无中文文字、无第三方品牌水印、无价格标注」的图片。",
+      "产品线归属必须有标题明示的基材依据；无依据者扣住，不猜。",
+      "品类以已核验图片的实际内容判定；与标题不符者按图片判定并记录待确认。",
+      "价格、MOQ、材质等级、镀层规格一律留空 —— 1688 目录未提供可信数据，站点走「Price on request」降级。"
+    ],
+    "method": [
+      "scripts/inventory-1688.mjs —— 解析 _URL.txt 与中文标题，抽取品类/材质/风格/主题/色系关键词。",
+      "scripts/skin-filter.mjs —— 肤色占比预筛，批量剔除真人佩戴照（骏娅主图 329 张中仅 97 张无真人）。",
+      "scripts/candidates-1688.mjs —— 按确定顺序输出候选拼版，人工逐张判定干不干净；产品归属由文件路径保证，不靠肉眼辨认标签。"
+    ],
+    "caveats": [
+      "拼版缩略图上的标签读数不可靠：曾据此把一款实为模特照的主图误判为白底影棚图。归属一律以文件路径为准。",
+      "骏娅有 3 款主图被中文水印覆盖，去字后不可用，故该款整体扣住。"
+    ]
+  },
+  "reasonCodes": {
+    "ALL_MODEL": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图",
+    "NO_IMAGE": "该链接未下载任何图片，无图不可上架",
+    "ALL_WATERMARK": "可得影棚图均叠加供应商中文水印（东莞市骏娅饰品有限公司），去字后不可用",
+    "NO_BASE_MATERIAL": "标题未声明基材（不锈钢/钛钢/合金），无法判定产品线归属，按不编造原则扣住",
+    "THIRD_PARTY_BRAND": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+  },
+  "products": [
+    {
+      "no": 3,
+      "offerId": "831029923232",
+      "sku": "RA-N-101",
+      "slug": "white-zircon-square-pendant-necklace",
+      "title": "White Zircon Square Pendant Necklace",
+      "titleCn": "不锈钢白色方糖项链小众设计师款项链可滑动锆石吊坠 厂家直批",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "minimal",
+        "geometric",
+        "zircon"
+      ],
+      "shortDescription": "A square white zircon pendant on a slim stainless chain. Minimal geometric styling that pairs as easily with plain bands as it does on its own.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢白色方糖项链小众设计师款项链可滑动锆石吊坠_厂家直批_831029923232_images\\主图\\主图_05.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/831029923232.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 4,
+      "offerId": "1010121080773",
+      "sku": "RA-N-102",
+      "slug": "green-leaf-zircon-pendant-necklace",
+      "title": "Green Leaf Zircon Pendant Necklace",
+      "titleCn": "不锈钢欧美锆石树叶项链多肥胺波西",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "botanical",
+        "leaf",
+        "zircon"
+      ],
+      "shortDescription": "Two small green leaves on a fine chain, shown at two drop lengths so the shorter version can sit at the collarbone and the longer one over a neckline.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_04.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢欧美锆石树叶项链多肥胺波西_1010121080773_images\\主图\\主图_04.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_07.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\不锈钢欧美锆石树叶项链多肥胺波西_1010121080773_images\\主图\\主图_07.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1010121080773.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 5,
+      "offerId": "1014151915792",
+      "sku": "RA-B-103",
+      "slug": "heart-zircon-link-bracelet",
+      "title": "Heart Zircon Link Bracelet",
+      "titleCn": "超闪几何爱心锆石拼接手链女欧美跨境气质不锈钢饰品现货批发",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "heart",
+        "zircon",
+        "everyday"
+      ],
+      "shortDescription": "Heart-shaped white zircon links alternating with plain metal links, so the motif reads clearly without making the whole bracelet busy.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_11.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\超闪几何爱心锆石拼接手链女欧美跨境气质不锈钢饰品现货批发_1014151915792_images\\主图\\主图_11.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1014151915792.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 6,
+      "offerId": "829910594261",
+      "sku": "RA-N-104",
+      "slug": "butterfly-tassel-pendant-necklace",
+      "title": "Butterfly Tassel Pendant Necklace",
+      "titleCn": "法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链 厂家直批",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "butterfly",
+        "tassel",
+        "light-luxury"
+      ],
+      "shortDescription": "A slim butterfly pendant with a fine tassel drop on a long chain. Lightweight, with the movement built into the drop rather than the motif.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链_厂家直批_829910594261_images\\主图\\主图_05.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_04.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\法式轻奢蝴蝶流苏钛钢项链女百搭高级感18K金锁骨链_厂家直批_829910594261_images\\主图\\主图_04.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/829910594261.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 14,
+      "offerId": "1057118037330",
+      "sku": "RA-B-105",
+      "slug": "six-flower-zircon-bracelet",
+      "title": "Six-Flower Zircon Bracelet",
+      "titleCn": "跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "four-leaf-clover",
+        "zircon",
+        "trending"
+      ],
+      "shortDescription": "Six open four-leaf clover links, each centred with a small zircon, shown in two colourways. An airy take on the motif that still reads across a counter.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_04.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品_1057118037330_images\\SKU 属性图\\SKU 属性图_04.jpg"
+        },
+        {
+          "sub": "SKU 属性图",
+          "file": "SKU 属性图_06.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\跨境新款欧美热销不锈钢手链镀18K金六花立体满钻手链女钛钢饰品_1057118037330_images\\SKU 属性图\\SKU 属性图_06.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1057118037330.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 15,
+      "offerId": "613958313968",
+      "sku": "RA-N-106",
+      "slug": "open-ring-letter-pendant-necklace",
+      "title": "Open Ring and Bar Letter Pendant Necklace",
+      "titleCn": "罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链 厂家直批",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "geometric",
+        "lettering",
+        "minimal"
+      ],
+      "shortDescription": "An open ring paired with a slim letter bar on a fine chain. The ring keeps the direction without the weight of a full pendant.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_03.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链_厂家直批_613958313968_images\\主图\\主图_03.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_08.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\罗马双环项链轻奢小众锁骨链设计数字吊坠颈链钛钢项链_厂家直批_613958313968_images\\主图\\主图_08.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/613958313968.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 17,
+      "offerId": "1056732738890",
+      "sku": "RA-B-107",
+      "slug": "chunky-chain-bracelet",
+      "title": "Chunky Chain Bracelet",
+      "titleCn": "欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰 厂家直批",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "everyday",
+        "minimal"
+      ],
+      "shortDescription": "A chunky chain bracelet with pearl drops, shown in a silver-tone and a red-beaded colourway.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_10.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\主图\\主图_10.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_01.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境粗链钛钢手轻奢小众高级感手饰18K金情侣首饰_厂家直批_1056732738890_images\\主图\\主图_01.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1056732738890.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": "两张已核验图风格差异较大（珍珠链 vs 红珠链），是否同款不同配色需客户确认。",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 18,
+      "offerId": "793981197471",
+      "sku": "RA-N-108",
+      "slug": "two-face-clover-pendant-necklace",
+      "title": "Two-Face Clover Pendant Necklace",
+      "titleCn": "欧美跨境热销钛钢双面四叶草项链女时尚轻奢一款两戴幸运草锁骨链",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "four-leaf-clover",
+        "light-luxury"
+      ],
+      "shortDescription": "A four-leaf clover pendant with a dark face and a pavé gold-tone rim, built to be read from both sides.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境热销钛钢双面四叶草项链女时尚轻奢一款两戴幸运草锁骨链_793981197471_images\\主图\\主图_05.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/793981197471.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 19,
+      "offerId": "833705936284",
+      "sku": "RA-N-109",
+      "slug": "shell-butterfly-pendant-necklace",
+      "title": "Shell Butterfly Pendant Necklace",
+      "titleCn": "欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "butterfly",
+        "shell",
+        "vintage"
+      ],
+      "shortDescription": "A slim butterfly pendant on a fine gold-tone chain, with pale shell inlay across the wings.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品_833705936284_images\\主图\\主图_05.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_03.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美跨境时尚新款白贝蝴蝶吊坠项链个性百搭锁骨链不锈钢设计饰品_833705936284_images\\主图\\主图_03.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/833705936284.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 21,
+      "offerId": "975288015907",
+      "sku": "RA-N-110",
+      "slug": "six-stone-disc-pendant-necklace",
+      "title": "Six-Stone Disc Pendant Necklace",
+      "titleCn": "欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "minimal",
+        "zircon",
+        "everyday"
+      ],
+      "shortDescription": "A flat round pendant with six evenly spaced stones on a fine chain. Coin-pendant sizing that layers without competing.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_04.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品_975288015907_images\\主图\\主图_04.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_08.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美轻奢六钻大饼项链女小众高级感时尚百搭钛钢不掉色锁骨链饰品_975288015907_images\\主图\\主图_08.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/975288015907.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 23,
+      "offerId": "1055528081583",
+      "sku": "RA-N-111",
+      "slug": "green-bead-y-necklace",
+      "title": "Green Bead Y-Necklace",
+      "titleCn": "欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "geometric",
+        "everyday"
+      ],
+      "shortDescription": "A Y-shaped necklace pairing a fine chain with a green-beaded drop, in stainless steel with an 18K gold-tone finish.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_12.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\主图\\主图_12.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_09.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\欧美时尚花朵不锈钢项链轻奢高级感Y型项链镀18K金百搭饰品批发_1055528081583_images\\主图\\主图_09.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1055528081583.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": "标题写「花朵 Y 型项链」，但已核验图为绿珠链，无花朵元素，品类按图片判定，需客户确认。",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 25,
+      "offerId": "601257629759",
+      "sku": "RA-B-112",
+      "slug": "five-clover-bracelet",
+      "title": "Five-Clover Bracelet",
+      "titleCn": "日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "four-leaf-clover",
+        "vintage"
+      ],
+      "shortDescription": "Five open clover links with a raised rim, in rose-gold and deep red tones. A statement bracelet that keeps an open, airy profile.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_07.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环_601257629759_images\\主图\\主图_07.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_08.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\日韩时尚钛钢四叶草五花手链女幸运草亚克力18K玫瑰金手链手环_601257629759_images\\主图\\主图_08.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/601257629759.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 26,
+      "offerId": "975939071429",
+      "sku": "RA-E-113",
+      "slug": "textured-clover-stud-earrings",
+      "title": "Textured Clover Stud Earrings",
+      "titleCn": "时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉",
+      "category": "earrings",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "four-leaf-clover",
+        "minimal"
+      ],
+      "shortDescription": "Textured four-leaf clover studs in silver-tone and gold-tone. A flat profile, so they sit close to the lobe.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉_975939071429_images\\主图\\主图_05.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_10.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\时尚百搭镭射四叶花套装钛钢项链女网红气质高级感锁骨链手链耳钉_975939071429_images\\主图\\主图_10.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/975939071429.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": "该链接为「套装」（标题含项链/手链/耳钉），但本批次可用干净图仅耳钉，品类按图片判定，套装构成待客户确认。",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 30,
+      "offerId": "724392151093",
+      "sku": "RA-N-114",
+      "slug": "black-round-pendant-necklace",
+      "title": "Black Round Pendant Necklace",
+      "titleCn": "钛钢项链别针罗马数字黑白卫衣新款小众轻奢高级感18K锁骨毛衣链",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "minimal",
+        "everyday"
+      ],
+      "shortDescription": "A small black round pendant on a gold-tone chain with two elongated stations.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\钛钢项链别针罗马数字黑白卫衣新款小众轻奢高级感18K锁骨毛衣链_724392151093_images\\主图\\主图_05.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/724392151093.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": "标题提到「别针 / 罗马数字」，已核验图中不可见，未写入描述。",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 31,
+      "offerId": "975878746905",
+      "sku": "RA-N-115",
+      "slug": "black-ceramic-bead-necklace",
+      "title": "Black Ceramic Bead Necklace",
+      "titleCn": "钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "minimal",
+        "everyday"
+      ],
+      "shortDescription": "A ribbed black-and-silver focal bead on a fine chain, with small crystal stations either side.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_01.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链_975878746905_images\\主图\\主图_01.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_08.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\钛钢项链女小蛮腰黑陶瓷项链毛衣链高级感长款配饰吊坠女锁骨链_975878746905_images\\主图\\主图_08.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/975878746905.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 35,
+      "offerId": "1012708332205",
+      "sku": "RA-B-116",
+      "slug": "zircon-tennis-bracelet",
+      "title": "Zircon Tennis Bracelet",
+      "titleCn": "新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链 厂家直批",
+      "category": "bracelet",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "zircon",
+        "heart",
+        "trending"
+      ],
+      "shortDescription": "A line of round white zircon set flush in a bracelet, shown plain and with heart-shaped stations.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_21.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\主图\\主图_21.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_22.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款欧美方形几何爱心锆石不锈钢时尚潮人满钻项链_厂家直批_1012708332205_images\\主图\\主图_22.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/1012708332205.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": "标题为「项链」，但本批次可用干净图为手链，品类按图片判定，需客户确认该链接是否含项链。",
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 36,
+      "offerId": "672681508520",
+      "sku": "RA-N-117",
+      "slug": "pave-clover-pendant-necklace",
+      "title": "Pavé Clover Pendant Necklace",
+      "titleCn": "新款钛钢项链女满钻心形一款多戴磁铁爱心四叶花项链 厂家直批",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "four-leaf-clover",
+        "light-luxury"
+      ],
+      "shortDescription": "A pavé-set clover pendant on a fine gold-tone chain, with a soft matte ground against the stones.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_02.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\新款钛钢项链女满钻心形一款多戴磁铁爱心四叶花项链_厂家直批_672681508520_images\\主图\\主图_02.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/672681508520.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    },
+    {
+      "no": 37,
+      "offerId": "729631868541",
+      "sku": "RA-N-118",
+      "slug": "square-plate-snake-chain-necklace",
+      "title": "Square-Plate Snake Chain Necklace",
+      "titleCn": "LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢 厂家直批",
+      "category": "necklace",
+      "line": "stainless-titanium-steel",
+      "lineBasis": "标题明示 316L 不锈钢 / 钛钢",
+      "styleTags": [
+        "snake-chain",
+        "geometric",
+        "minimal"
+      ],
+      "shortDescription": "A snake chain broken up with flat square plates, in silver-tone and gold-tone. A plain base that picks up its texture from the plates.",
+      "vendor": "骏娅",
+      "images": [
+        {
+          "sub": "主图",
+          "file": "主图_07.jpg",
+          "seq": 1,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢_厂家直批_729631868541_images\\主图\\主图_07.jpg"
+        },
+        {
+          "sub": "主图",
+          "file": "主图_05.jpg",
+          "seq": 2,
+          "path": "D:\\AAAAAAA外贸资料\\饰品\\产品(1)\\骏娅\\LOVE方块蛇骨项链2023年新款复古小众设计高级手饰钛钢_厂家直批_729631868541_images\\主图\\主图_05.jpg"
+        }
+      ],
+      "sourceUrl": "https://detail.1688.com/offer/729631868541.html?kj_agent_plugin=aliprice&fromkv=xytTrace%3A0",
+      "note": null,
+      "priceUsd": null,
+      "moqMin": null,
+      "moqMax": null,
+      "materialGrade": null,
+      "platingSpec": null
+    }
+  ],
+  "held": [
+    {
+      "no": 1,
+      "offerId": "830145165413",
+      "titleCn": "2024年新款法式复古方块锆石项链女简约时尚轻奢高级感百搭锁骨链",
+      "vendor": "骏娅",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材（不锈钢/钛钢/合金），无法判定产品线归属，按不编造原则扣住"
+    },
+    {
+      "no": 2,
+      "offerId": "723798964817",
+      "titleCn": "暴富小金条项链轻奢小众钛钢18K金招财金砖吊坠锁骨链2023年新款",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 7,
+      "offerId": "771710194959",
+      "titleCn": "高品质18K幸运四叶草五花手链 钛钢双面手链 简约精致手饰",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_WATERMARK",
+      "reason": "可得影棚图均叠加供应商中文水印（东莞市骏娅饰品有限公司），去字后不可用"
+    },
+    {
+      "no": 8,
+      "offerId": "788429514389",
+      "titleCn": "韩版简约小众钛钢沙滩脚链女百搭脚裸链2023高级感足链 厂家直销",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 9,
+      "offerId": "769981637262",
+      "titleCn": "韩版时尚个性H字母吊坠ins潮轻奢滴胶钛钢项链女高级感锁骨链颈链",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 10,
+      "offerId": "831675167269",
+      "titleCn": "极简约相思豆豆吊坠项链女潮网红小众设计感冷淡风锁骨链短款颈链",
+      "vendor": "骏娅",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材（不锈钢/钛钢/合金），无法判定产品线归属，按不编造原则扣住"
+    },
+    {
+      "no": 11,
+      "offerId": "892255789573",
+      "titleCn": "跨境欧美小众气质蝴蝶流苏圆珠耳钉轻奢镀金18K两戴钛钢耳环耳饰",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 12,
+      "offerId": "900974521861",
+      "titleCn": "跨境热销精致小巧锁骨链钛钢镂空爱心实心爱心吊坠不锈钢项链",
+      "vendor": "骏娅",
+      "reasonCode": "NO_IMAGE",
+      "reason": "该链接未下载任何图片，无图不可上架"
+    },
+    {
+      "no": 13,
+      "offerId": "830349092504",
+      "titleCn": "跨境新款不锈钢四叶草开口戒指女时尚轻奢设计感指环 厂家直批",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 16,
+      "offerId": "1069640007246",
+      "titleCn": "欧美爆款彩钻锆石手链女轻奢高级感手环跨境彩钻水滴椭圆几何饰品",
+      "vendor": "骏娅",
+      "reasonCode": "NO_BASE_MATERIAL",
+      "reason": "标题未声明基材（不锈钢/钛钢/合金），无法判定产品线归属，按不编造原则扣住"
+    },
+    {
+      "no": 20,
+      "offerId": "1054455274240",
+      "titleCn": "欧美轻奢锆石手链女款彩色镶嵌彩宝手饰批发高级感跨境饰品",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 22,
+      "offerId": "902554071439",
+      "titleCn": "欧美时尚高级感四叶草黑白贝钛钢手镯女微镶钻不掉色手饰个性配饰",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 24,
+      "offerId": "895822756840",
+      "titleCn": "秋冬轻奢百搭几何18大罗马数字圆牌吊坠项链女长款钛钢毛衣链",
+      "vendor": "骏娅",
+      "reasonCode": "NO_IMAGE",
+      "reason": "该链接未下载任何图片，无图不可上架"
+    },
+    {
+      "no": 27,
+      "offerId": "891916076358",
+      "titleCn": "时尚钛钢13mm四叶花套装简约百搭网红爆款锁骨链耳饰 厂家直批",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 28,
+      "offerId": "892540069061",
+      "titleCn": "钛钢松石方块刀片链项链欧美小众设计感时尚波西米亚气质锁骨链",
+      "vendor": "骏娅",
+      "reasonCode": "NO_IMAGE",
+      "reason": "该链接未下载任何图片，无图不可上架"
+    },
+    {
+      "no": 29,
+      "offerId": "779893081489",
+      "titleCn": "钛钢锁骨链轻奢小众高级感配饰百搭灵动款微镶网红气质颈链饰品",
+      "vendor": "骏娅",
+      "reasonCode": "NO_IMAGE",
+      "reason": "该链接未下载任何图片，无图不可上架"
+    },
+    {
+      "no": 32,
+      "offerId": "899236945991",
+      "titleCn": "外贸饰品跨境液态不规则几何耳钉甜酷个性设计感简约金色水滴耳环",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 33,
+      "offerId": "724869452426",
+      "titleCn": "小蛮腰手链锆石简约钛钢手饰小众设计感手链闺蜜礼物 厂家直批",
+      "vendor": "骏娅",
+      "reasonCode": "ALL_MODEL",
+      "reason": "全部可得图片均为真人佩戴照（部分含可辨识面部），不适合作为 B2B 目录图"
+    },
+    {
+      "no": 34,
+      "offerId": "1057248933072",
+      "titleCn": "新款跨境不锈钢满钻四叶草耳环个性耳钉设计感优雅耳饰 厂家直批",
+      "vendor": "骏娅",
+      "reasonCode": "NO_IMAGE",
+      "reason": "该链接未下载任何图片，无图不可上架"
+    },
+    {
+      "no": 38,
+      "offerId": "1067768834098",
+      "titleCn": "2026新款蓝色鱼尾流苏耳环女民族风复古长款耳饰波西米亚气质耳坠",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 39,
+      "offerId": "1076493585997",
+      "titleCn": "复古流苏水滴状长链耳钉波西米亚女士情侣百搭耳环女饰品跨境批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 40,
+      "offerId": "928427854853",
+      "titleCn": "高级感轻奢珍珠耳环女新款潮流爆款网红耳钉小众设计气质耳饰批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 41,
+      "offerId": "890256254975",
+      "titleCn": "跨境万圣节耳环恐怖搞怪骷髅头蜘蛛南瓜幽灵黑猫万圣耳钉饰品耳饰",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 42,
+      "offerId": "784815020311",
+      "titleCn": "民族风仿苗银耳环复古长款流苏耳坠景点古风耳钉苗族耳饰品女批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 43,
+      "offerId": "1044136092433",
+      "titleCn": "欧美风浪花项链套装创意新款轻奢海浪造造型戒指耳环百搭跨境批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 44,
+      "offerId": "809424287068",
+      "titleCn": "欧美跨境个性夸张朋克万圣节骷颅骨架合金节日氛围创意单品耳钉女",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 45,
+      "offerId": "914146083845",
+      "titleCn": "欧美跨境热卖竹节新款高级感耳环耳圈小众金属纹理耳饰批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 46,
+      "offerId": "822882810086",
+      "titleCn": "欧美跨境圣诞老人雪花耳环拐杖糖铃铛耳钉麋鹿耳坠圣诞帽耳饰批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 47,
+      "offerId": "948924546728",
+      "titleCn": "欧美跨境时尚夸张彩色豹纹布艺耳环几何圆形耳坠仿宝石镶嵌耳钉女",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 48,
+      "offerId": "852407281249",
+      "titleCn": "秋冬新款美拉德系列复古咖啡色轻奢耳钉ins风小众百搭耳饰女批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 49,
+      "offerId": "909284160819",
+      "titleCn": "时尚优雅合金花朵吊坠项链耳环套装女大气高级感时尚百搭跨境批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 50,
+      "offerId": "896181478668",
+      "titleCn": "珍珠耳环韩系高级感耳饰气质个性港风复古耳钉轻奢港风大气质感",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 51,
+      "offerId": "765357586765",
+      "titleCn": "s925银针耳环女款气质网红耳钉耳坠小众高级感港风饰品女跨境批发",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    },
+    {
+      "no": 52,
+      "offerId": "784331525755",
+      "titleCn": "S925银针紫色蝴蝶流苏耳环女轻奢高级感闪钻长款耳坠复古气质耳饰",
+      "vendor": "义乌市空屿饰品有限公司",
+      "reasonCode": "THIRD_PARTY_BRAND",
+      "reason": "图片带第三方品牌水印（MILanTing / LALIAN components）并叠加 USD 单价文字，挂到 Rayan Accessories 名下涉商标与价格风险"
+    }
+  ]
+}

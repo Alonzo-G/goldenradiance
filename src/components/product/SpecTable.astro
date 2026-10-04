@@ -1,0 +1,102 @@
+---
+// src/components/product/SpecTable.astro — 七项规格 <dl>（AC-05/06：八行恒在，缺失走降级）
+// 限值只进教育页（UIUX §13.1）；Nickel/Lead/Report 恒渲染降级文案（AC-38）。
+// 真实素材款规格未确认 → 该行走「Ask for this spec」主动邀约（不填未核实数值），
+// 表格底部给「Request full spec sheet」入口，带 SKU 预填 RFQ 备注（转化钩子）。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { specComplianceValue } from '../../lib/products/compliance-tag';
+import { mmToIn, gToOz } from '../../lib/shared/format';
+import type { ProductData } from '../../lib/products/queries';
+
+interface Props {
+  data: ProductData;
+  class?: string;
+}
+const { data, class: cls } = Astro.props;
+
+const onRequest = t('pdp.spec.onRequest');
+const pending = t('pdp.spec.pending');
+const complianceValue = t(specComplianceValue());
+
+/** 尺寸双单位：主值 mm，附 in（如 "20 mm · 0.79 in"）。尺寸串可能含多个 mm 值，仅首值换算。 */
+const sizeValue = (() => {
+  if (!data.dimensions_mm) return { value: onRequest, degraded: true };
+  const mm = data.dimensions_mm.match(/([\d.]+)\s*mm/i);
+  const dual = mm && Number.isFinite(Number(mm[1])) ? ` · ${mmToIn(Number(mm[1]))} in` : '';
+  return { value: `${data.dimensions_mm}${dual}`, degraded: false };
+})();
+
+/** 重量双单位：g 主值 + oz（如 "5.5 g per pair · 0.19 oz"） */
+const weightValue = (() => {
+  if (typeof data.weight_g !== 'number') return { value: onRequest, degraded: true };
+  const basis = data.weight_basis === 'pair' ? ` ${t('pdp.spec.perPair')}` : '';
+  return { value: `${data.weight_g} g${basis} · ${gToOz(data.weight_g)} oz`, degraded: false };
+})();
+
+/** 该表是否存在降级行（决定是否渲染「Request full spec sheet」入口） */
+const hasDegraded = true; // Nickel/Lead/Report 恒降级，入口恒在
+const sheetNote = encodeURIComponent(t('pdp.spec.requestSheetNote', { sku: data.sku_code }));
+
+/** 镀层：方法与厚度可能分别缺失 */
+const platingValue = (() => {
+  const method = data.plating_method?.trim();
+  const um = data.plating_thickness_um;
+  if (method && typeof um === 'number') return `${method}, ${um.toFixed(2)} µm`;
+  if (method) return method;
+  if (typeof um === 'number') return `${um.toFixed(2)} µm`;
+  return pending;
+})();
+
+const moqValue =
+  data.moq_min != null && data.moq_max != null
+    ? `${data.moq_min}–${data.moq_max} ${t('price.pcs')}`
+    : t('pdp.moq.onRequest');
+
+const rows: { label: string; value: string; degraded: boolean }[] = [
+  {
+    label: t('pdp.spec.material'),
+    value: data.base_material_grade?.trim() || pending,
+    degraded: !data.base_material_grade?.trim(),
+  },
+  {
+    label: t('pdp.spec.plating'),
+    value: platingValue,
+    degraded: !data.plating_method?.trim() && typeof data.plating_thickness_um !== 'number',
+  },
+  { label: t('pdp.spec.size'), value: sizeValue.value, degraded: sizeValue.degraded },
+  { label: t('pdp.spec.weight'), value: weightValue.value, degraded: weightValue.degraded },
+  { label: t('pdp.spec.moq'), value: moqValue, degraded: data.moq_min == null },
+  { label: t('pdp.spec.nickel'), value: complianceValue, degraded: true },
+  { label: t('pdp.spec.lead'), value: complianceValue, degraded: true },
+  {
+    label: t('pdp.spec.report'),
+    value: data.test_report_reference
+      ? String(data.test_report_reference)
+      : t('pdp.compliance.degraded'),
+    degraded: !data.test_report_reference,
+  },
+];
+---
+
+<dl class={cls}>
+  {
+    rows.map((row) => (
+      <div class="flex min-h-9 items-start justify-between gap-4 border-b border-border-soft py-2 last:border-b-0">
+        <dt class="w-2/5 shrink-0 text-xs text-muted">{row.label}</dt>
+        <dd class:list={['tnum text-sm', row.degraded ? 'text-meta' : 'text-fg']}>{row.value}</dd>
+      </div>
+    ))
+  }
+  {
+    hasDegraded && (
+      <a
+        href={`/rfq/?sku=${data.sku_code}&note=${sheetNote}`}
+        class="mt-3 flex items-center justify-center gap-2 rounded-sm border border-accent px-4 py-2 text-sm font-medium text-accent transition-colors duration-150 hover:bg-surface-sunken"
+      >
+        <Icon name="lucide:file-text" class="icon size-4" aria-hidden="true" />
+        {t('pdp.spec.requestSheet')}
+      </a>
+    )
+  }
+</dl>

@@ -1,0 +1,110 @@
+---
+// src/layouts/AdminLayout.astro — 后台独立布局（不加载前台 Header/Footer/Google Fonts）
+// 后台是内部工具，保持极简 + 轻量：系统字体栈、无营销 chrome、noindex。
+// 与前台 BaseLayout 完全解耦，避免后台加载不必要的字体/交互脚本。
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin — Golden Radiance</title>
+    <meta name="theme-color" content="#123a38" />
+    <style is:global>
+      :root {
+        --admin-bg: #f6f7f6;
+        --admin-surface: #ffffff;
+        --admin-border: #e3e6e3;
+        --admin-fg: #1a1f1e;
+        --admin-muted: #5c6663;
+        --admin-accent: #123a38;
+        --admin-accent-on: #ffffff;
+        --admin-danger: #b3261e;
+        --admin-warn: #9a6700;
+        --admin-ok: #1a7f37;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--admin-bg);
+        color: var(--admin-fg);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      a { color: inherit; }
+      .admin-shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+      .admin-side {
+        background: var(--admin-accent); color: var(--admin-accent-on);
+        padding: 20px 16px; display: flex; flex-direction: column; gap: 4px;
+      }
+      .admin-side .brand { font-size: 16px; font-weight: 700; margin-bottom: 16px; padding: 0 8px; }
+      .admin-side a {
+        display: block; padding: 9px 12px; border-radius: 6px; text-decoration: none;
+        color: rgba(255,255,255,0.82); font-size: 13px;
+      }
+      .admin-side a:hover, .admin-side a.active { background: rgba(255,255,255,0.12); color: #fff; }
+      .admin-main { padding: 24px 28px; min-width: 0; }
+      .admin-card {
+        background: var(--admin-surface); border: 1px solid var(--admin-border);
+        border-radius: 8px; padding: 18px 20px; margin-bottom: 16px;
+      }
+      .admin-table { width: 100%; border-collapse: collapse; }
+      .admin-table th, .admin-table td {
+        text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--admin-border);
+        vertical-align: top;
+      }
+      .admin-table th { font-size: 12px; color: var(--admin-muted); font-weight: 600; white-space: nowrap; }
+      .admin-table tr:hover td { background: #fafbfa; }
+      .badge {
+        display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600;
+      }
+      .badge-new { background: #e8f0fe; color: #1a56db; }
+      .badge-contacted { background: #fff4e5; color: #9a6700; }
+      .badge-quoted { background: #e6f4ea; color: #1a7f37; }
+      .badge-won { background: #d3f0dc; color: #0c5d2c; }
+      .badge-lost { background: #fdecea; color: #b3261e; }
+      .badge-active { background: #e6f4ea; color: #1a7f37; }
+      .badge-unsubscribed { background: #fdecea; color: #b3261e; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 6px;
+        border: 1px solid var(--admin-border); background: #fff; cursor: pointer; font-size: 13px;
+        text-decoration: none; color: var(--admin-fg);
+      }
+      .btn:hover { background: #f3f4f3; }
+      .btn-primary { background: var(--admin-accent); border-color: var(--admin-accent); color: #fff; }
+      .btn-primary:hover { background: #0d2f2c; }
+      .btn-sm { padding: 5px 10px; font-size: 12px; }
+      select, input[type="password"], input[type="email"] {
+        padding: 8px 10px; border: 1px solid var(--admin-border); border-radius: 6px; font-size: 13px;
+      }
+      .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+      .stat { background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 8px; padding: 16px 18px; }
+      .stat .num { font-size: 26px; font-weight: 700; line-height: 1.1; }
+      .stat .label { font-size: 12px; color: var(--admin-muted); margin-top: 4px; }
+      .muted { color: var(--admin-muted); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+      @media (max-width: 760px) {
+        .admin-shell { grid-template-columns: 1fr; }
+        .admin-side { flex-direction: row; flex-wrap: wrap; align-items: center; }
+        .admin-side .brand { margin-bottom: 0; margin-right: 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <div class="brand">Golden Radiance<br /><span style="font-size:11px;font-weight:400;opacity:.7">Admin</span></div>
+        <a href="/admin/" class:list={[Astro.url.pathname === '/admin/' && 'active']}>Inquiries</a>
+        <a href="/admin/subscribers/" class:list={[Astro.url.pathname.startsWith('/admin/subscribers') && 'active']}>Subscribers</a>
+        <div style="flex:1"></div>
+        <a href="/api/admin/logout" style="opacity:.7">Sign out</a>
+      </aside>
+      <main class="admin-main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

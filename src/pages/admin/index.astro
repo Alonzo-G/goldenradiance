@@ -1,0 +1,209 @@
+---
+// src/pages/admin/index.astro — 后台询盘管理（看板统计 + 询盘列表 + 状态流转）
+// 静态壳 + 客户端 JS 拉取 /api/admin/* 渲染。数据敏感，robots noindex（AdminLayout 已含）。
+// 注意：此页是「静态 HTML + 客户端 fetch」，鉴权在 API 层强制，页面本身不含敏感数据。
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout>
+  <h1 style="margin:0 0 4px;font-size:20px">Inquiries</h1>
+  <p style="margin:0 0 20px" class="muted">RFQ inquiries from the public site</p>
+
+  <!-- 看板统计 -->
+  <div class="stat-grid" id="stats" style="margin-bottom:20px">
+    <div class="stat"><div class="num">—</div><div class="label">Total inquiries</div></div>
+    <div class="stat"><div class="num">—</div><div class="label">New (unreplied)</div></div>
+    <div class="stat"><div class="num">—</div><div class="label">Subscribers</div></div>
+    <div class="stat"><div class="num">—</div><div class="label">Inquiries (7d)</div></div>
+  </div>
+
+  <!-- 筛选 -->
+  <div class="admin-card" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <label for="status-filter" style="font-size:13px" class="muted">Status</label>
+    <select id="status-filter">
+      <option value="">All</option>
+      <option value="new">New</option>
+      <option value="contacted">Contacted</option>
+      <option value="quoted">Quoted</option>
+      <option value="won">Won</option>
+      <option value="lost">Lost</option>
+    </select>
+    <button class="btn" id="export-csv" type="button">Export CSV</button>
+    <span id="row-count" class="muted" style="margin-left:auto;font-size:12px"></span>
+  </div>
+
+  <!-- 询盘列表 -->
+  <div class="admin-card" style="padding:0;overflow-x:auto">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Status</th>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Country</th>
+          <th>Market</th>
+          <th>Items</th>
+          <th>Received</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="inquiry-rows">
+        <tr><td colspan="10" class="muted" style="padding:20px">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 详情抽屉 -->
+  <div id="detail-overlay" hidden style="position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50"></div>
+  <div id="detail-panel" hidden style="position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;z-index:60;overflow:auto;box-shadow:-4px 0 20px rgba(0,0,0,.12)">
+    <div style="position:sticky;top:0;background:#fff;border-bottom:1px solid var(--admin-border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+      <strong id="detail-ref" style="font-size:16px"></strong>
+      <button class="btn btn-sm" id="detail-close" type="button">Close</button>
+    </div>
+    <div id="detail-body" style="padding:20px"></div>
+  </div>
+
+  <script>
+    // @ts-nocheck — 后台工具页：纯 DOM vanilla JS，运行时为普通脚本，不做严格类型检查
+    const STATUSES = ['new', 'contacted', 'quoted', 'won', 'lost'];
+    const statusBadge = (s) => `<span class="badge badge-${s}">${s}</span>`;
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    const statusFilter = document.getElementById('status-filter');
+    const rowsEl = document.getElementById('inquiry-rows');
+    const countEl = document.getElementById('row-count');
+    let inquiries = [];
+
+    async function loadStats() {
+      try {
+        const r = await fetch('/api/admin/stats');
+        if (!r.ok) return;
+        const { data } = await r.json();
+        const nums = document.querySelectorAll('#stats .num');
+        nums[0].textContent = data.totalInquiries;
+        nums[1].textContent = data.newInquiries;
+        nums[2].textContent = data.activeSubscribers;
+        nums[3].textContent = data.recent7dInquiries;
+      } catch {}
+    }
+
+    async function loadInquiries() {
+      const status = statusFilter.value;
+      const url = status ? `/api/admin/inquiries?status=${status}&limit=500` : '/api/admin/inquiries?limit=500';
+      try {
+        const r = await fetch(url);
+        if (r.status === 401) { window.location.href = '/admin/login/'; return; }
+        const { data } = await r.json();
+        inquiries = data;
+        renderRows();
+        countEl.textContent = `${data.length} inquiries`;
+      } catch (err) {
+        rowsEl.innerHTML = `<tr><td colspan="10" class="muted" style="padding:20px">Failed to load.</td></tr>`;
+      }
+    }
+
+    function renderRows() {
+      if (!inquiries.length) {
+        rowsEl.innerHTML = `<tr><td colspan="10" class="muted" style="padding:20px">No inquiries found.</td></tr>`;
+        return;
+      }
+      rowsEl.innerHTML = inquiries.map((i) => `
+        <tr>
+          <td class="mono">${esc(i.reference)}</td>
+          <td>${statusBadge(i.status)}</td>
+          <td>${esc(i.company)}</td>
+          <td>${esc(i.contact_name)}</td>
+          <td><a href="mailto:${esc(i.email)}" style="color:var(--admin-accent)">${esc(i.email)}</a></td>
+          <td>${esc(i.country)}</td>
+          <td>${esc(i.destination_market)}</td>
+          <td>${i.item_count}</td>
+          <td class="mono">${esc(new Date(i.created_at).toLocaleString())}</td>
+          <td><button class="btn btn-sm" data-view="${esc(i.id)}" type="button">View</button></td>
+        </tr>
+      `).join('');
+      rowsEl.querySelectorAll('[data-view]').forEach((btn) => {
+        btn.addEventListener('click', () => openDetail(btn.dataset.view));
+      });
+    }
+
+    async function openDetail(id) {
+      const r = await fetch(`/api/admin/inquiries?id=${id}`);
+      const { data } = await r.json();
+      document.getElementById('detail-ref').textContent = data.reference;
+      const items = data.items.map((it) => `
+        <tr><td class="mono">${esc(it.sku)}</td><td>${it.qty}</td><td>${esc(it.note ?? '')}</td></tr>
+      `).join('');
+      const statusOptions = STATUSES.map((s) => `<option value="${s}" ${s === data.status ? 'selected' : ''}>${s}</option>`).join('');
+      document.getElementById('detail-body').innerHTML = `
+        <div style="margin-bottom:16px">
+          <label for="detail-status" style="font-size:13px;font-weight:600">Status</label>
+          <select id="detail-status" style="width:100%;margin-top:6px">${statusOptions}</select>
+        </div>
+        <table class="admin-table" style="margin-bottom:16px">
+          <tr><th style="width:140px">Company</th><td>${esc(data.company)}</td></tr>
+          <tr><th>Contact</th><td>${esc(data.contact_name)}</td></tr>
+          <tr><th>Email</th><td><a href="mailto:${esc(data.email)}" style="color:var(--admin-accent)">${esc(data.email)}</a></td></tr>
+          <tr><th>Country</th><td>${esc(data.country)}</td></tr>
+          <tr><th>WhatsApp</th><td>${esc(data.whatsapp ?? '—')}</td></tr>
+          <tr><th>Website</th><td>${esc(data.website ?? '—')}</td></tr>
+          <tr><th>Market</th><td>${esc(data.destination_market)}</td></tr>
+          <tr><th>Incoterm</th><td>${esc(data.incoterm)}</td></tr>
+          <tr><th>Qty scale</th><td>${esc(data.quantity_scale)}</td></tr>
+          <tr><th>Mail status</th><td>${esc(data.mail_status)}</td></tr>
+          <tr><th>Turnstile</th><td>${data.turnstile_score ?? '—'}</td></tr>
+          <tr><th>Source page</th><td class="mono">${esc(data.source_page ?? '—')}</td></tr>
+          <tr><th>UTM</th><td class="mono">${esc(data.utm_json ?? '—')}</td></tr>
+        </table>
+        <strong style="font-size:13px">Items</strong>
+        <table class="admin-table" style="margin:8px 0 16px">
+          <thead><tr><th>SKU</th><th>Qty</th><th>Note</th></tr></thead>
+          <tbody>${items || '<tr><td colspan="3" class="muted">None</td></tr>'}</tbody>
+        </table>
+        <strong style="font-size:13px">Message</strong>
+        <p style="white-space:pre-wrap;margin:8px 0 0">${esc(data.message ?? '—')}</p>
+      `;
+      document.getElementById('detail-status').addEventListener('change', async (e) => {
+        await fetch(`/api/admin/inquiries/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: e.target.value }),
+        });
+        loadStats(); loadInquiries();
+      });
+      document.getElementById('detail-overlay').hidden = false;
+      document.getElementById('detail-panel').hidden = false;
+    }
+
+    document.getElementById('detail-close').addEventListener('click', () => {
+      document.getElementById('detail-overlay').hidden = true;
+      document.getElementById('detail-panel').hidden = true;
+    });
+    document.getElementById('detail-overlay').addEventListener('click', () => {
+      document.getElementById('detail-overlay').hidden = true;
+      document.getElementById('detail-panel').hidden = true;
+    });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+      const header = ['reference','status','company','contact_name','email','country','destination_market','quantity_scale','mail_status','created_at','item_count'];
+      const lines = [header.join(',')];
+      for (const i of inquiries) {
+        lines.push(header.map((h) => {
+          const v = i[h] ?? '';
+          return /[",\n]/.test(String(v)) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v);
+        }).join(','));
+      }
+      const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'inquiries.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    statusFilter.addEventListener('change', loadInquiries);
+    loadStats();
+    loadInquiries();
+  </script>
+</AdminLayout>

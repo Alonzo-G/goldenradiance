@@ -1,0 +1,144 @@
+---
+// src/pages/product-lines/[line].astro — 产品线 Landing ×3（UIUX §11 #2-4）
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductImage from '../../components/product/ProductImage.astro';
+import ProductCard from '../../components/product/ProductCard.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { getProducts, byLine, toSkuIndexItem } from '../../lib/products/queries';
+
+export async function getStaticPaths() {
+  const lines = await getCollection('productLines');
+  return lines.map((entry) => ({ params: { line: entry.data.line }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'productLines'>;
+}
+const { entry } = Astro.props as Props;
+const { line, name, icon, lineToken } = entry.data;
+const { Content } = await render(entry);
+
+const taglineKey =
+  line === 'fashion-alloy-brass' ? 'line.alloy.tagline' : line === 'stainless-titanium-steel' ? 'line.steel.tagline' : 'line.stone.tagline';
+
+const all = await getProducts();
+const lineItems = byLine(all, line);
+// 真实素材款优先（本次入库实拍），其余按 SKU 补齐
+const realInLine = lineItems.filter((it) => it.data.dataStatus === 'real');
+const otherInLine = lineItems.filter((it) => it.data.dataStatus !== 'real');
+const rail = [...realInLine, ...otherInLine].slice(0, 6).map(toSkuIndexItem);
+const crossRail = all
+  .filter((it) => it.data.line !== line)
+  .filter((it, i, arr) => arr.findIndex((x) => x.data.line === it.data.line) === i)
+  .map(toSkuIndexItem);
+
+const categories = [...new Set(lineItems.map((it) => it.data.category))];
+/** 每个子品类取该线内首个真实素材款的主图（有则用实拍，无则回落占位图） */
+const categoryImage = (cat: string) =>
+  realInLine.find((it) => it.data.category === cat)?.data.images?.[0] ?? null;
+const heroImage = realInLine[0]?.data.images?.[0] ?? null;
+const stats = [t('line.stats.skuDepth'), t('line.stats.moq'), t('line.stats.cadence')];
+---
+
+<BaseLayout title={name} description={t(taglineKey as 'line.alloy.tagline')} path={`/product-lines/${line}/`}>
+  {/* 产品线 Hero（暗面 + 线识别色） */}
+  <section class="bg-surface-inverse text-fg-inverse">
+    <div class="container-wide grid items-center gap-8 py-16 lg:grid-cols-[3fr_2fr]">
+      <div>
+        <div class="mb-4 h-0.5 w-16" style={`background: var(--color-${lineToken})`} aria-hidden="true"></div>
+        <div class="flex items-center gap-3">
+          <Icon name={`lucide:${icon}`} class="icon size-6" aria-hidden="true" />
+          <h1 class="text-3xl font-bold">{name}</h1>
+        </div>
+        <p class="mt-4 max-w-xl text-md text-fg-inverse/85">{t(taglineKey as 'line.alloy.tagline')}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/products/" class="flex h-12 items-center rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">{t('cta.browseCatalog')}</a>
+          <a href="/rfq/" class="flex h-12 items-center rounded-sm border border-border-inverse px-5 text-sm font-medium text-fg-inverse transition-colors duration-150 hover:bg-accent-hover">{t('cta.startRfq')}</a>
+        </div>
+      </div>
+      <ProductImage
+        image={heroImage}
+        category={categories[0] ?? 'ring'}
+        line={lineToken}
+        label={name}
+        ratio="4:5"
+        alt={`${name} — representative style`}
+        class="max-h-80"
+      />
+    </div>
+  </section>
+
+  {/* 定位数据条（数字未确认走降级，§17） */}
+  <section class="border-b border-border bg-surface">
+    <div class="container-wide grid gap-6 py-8 sm:grid-cols-3">
+      {stats.map((s) => (
+        <p class="flex items-center gap-2 text-sm text-fg-2">
+          <Icon name="lucide:ruler" class="icon size-4 text-meta" aria-hidden="true" />
+          {s}
+        </p>
+      ))}
+    </div>
+  </section>
+
+  {/* 材质工艺说明（内容集合正文） */}
+  <section class="section-y">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-xl font-semibold text-fg">{t('line.materials.title')}</h2>
+      <div class="mt-6 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:mt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5">
+        <Content />
+      </div>
+      <a href="/compliance/nickel-release-en-1811/" class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline">
+        {t('cta.howWeTest')}
+        <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+
+  {/* 子品类导航 */}
+  <section class="section-y pt-0">
+    <div class="container-wide">
+      <h2 class="text-xl font-semibold text-fg">{t('line.subcategories.title')}</h2>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {categories.map((cat) => (
+          <a
+            href={`/products/?category=${cat}`}
+            class="group rounded-md border border-border bg-surface p-4 text-center shadow-raised"
+          >
+            <ProductImage
+              image={categoryImage(cat)}
+              category={cat}
+              line={lineToken}
+              label={t(`category.${cat}` as 'category.earrings')}
+              ratio="1:1"
+              alt={t(`category.${cat}` as 'category.earrings')}
+              sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
+            />
+            <p class="mt-2 text-sm font-medium text-fg group-hover:underline">{t(`category.${cat}` as 'category.earrings')}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* 本线热销 rail */}
+  <section class="section-y pt-0">
+    <div class="container-wide">
+      <h2 class="text-xl font-semibold text-fg">{t('line.bestsellers.title')}</h2>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {rail.map((item) => <ProductCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* Cross-line 推荐 */}
+  <section class="pb-10">
+    <div class="container-wide">
+      <h2 class="text-xl font-semibold text-fg">{t('line.crossLine.title')}</h2>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {crossRail.map((item) => <ProductCard item={item} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

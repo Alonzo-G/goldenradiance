@@ -1,0 +1,60 @@
+---
+// src/pages/compliance/index.astro — 合规与检测中心（AC-17/18/20：教育+承诺口径，AC-41 禁资质断言）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+const standards = [
+  'standard.nickel',
+  'standard.lead',
+  'standard.cadmium',
+  'standard.cpsia',
+  'standard.prop65',
+  'standard.astm',
+] as const;
+---
+
+<BaseLayout title={t('compliance.title')} description={t('compliance.status.body1')} path="/compliance/">
+  <div class="mx-auto max-w-3xl py-10">
+    <h1 class="text-2xl font-semibold text-fg">{t('compliance.title')}</h1>
+
+    <section class="mt-8 rounded-lg border border-border bg-surface p-6">
+      <h2 class="text-lg font-semibold text-fg">{t('compliance.status.title')}</h2>
+      <p class="mt-3 text-sm leading-relaxed text-fg-2">{t('compliance.status.body1')}</p>
+      <p class="mt-2 text-sm leading-relaxed text-fg-2">{t('compliance.status.body2')}</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-fg">{t('compliance.standards.title')}</h2>
+      <ul class="mt-5 grid gap-3">
+        {standards.map((key) => (
+          <li class="flex items-start gap-3 rounded-md border border-border bg-surface p-4">
+            <Icon name="lucide:file-text" class="icon mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+            <p class="text-sm leading-relaxed text-fg-2">{t(`compliance.${key}`)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-10 grid gap-4 md:grid-cols-2">
+      <div class="rounded-md border border-border bg-surface p-5">
+        <h2 class="text-base font-semibold text-fg">{t('compliance.verify.title')}</h2>
+        <p class="mt-2 text-sm leading-relaxed text-fg-2">{t('compliance.verify.body')}</p>
+        <a href="/compliance/nickel-release-en-1811/" class="mt-3 inline-flex text-sm font-medium text-accent hover:underline">{t('cta.howWeTest')}</a>
+      </div>
+      <div class="rounded-md border border-border bg-surface p-5">
+        <h2 class="text-base font-semibold text-fg">{t('compliance.batch.title')}</h2>
+        <p class="mt-2 text-sm leading-relaxed text-fg-2">{t('compliance.batch.body')}</p>
+        <a href="/contact/" class="mt-3 inline-flex text-sm font-medium text-accent hover:underline">{t('compliance.request.title')}</a>
+      </div>
+    </section>
+
+    <section class="mt-10 rounded-lg border border-border bg-surface p-6">
+      <h2 class="text-base font-semibold text-fg">{t('compliance.request.title')}</h2>
+      <p class="mt-2 text-sm text-fg-2">{t('compliance.request.body')}</p>
+      <a href="/rfq/" class="mt-4 flex h-12 w-full items-center justify-center rounded-sm bg-accent-metal text-sm font-medium text-metal-on hover:bg-accent-metal-hover sm:w-64">
+        {t('cta.startRfq')}
+      </a>
+    </section>
+  </div>
+</BaseLayout>

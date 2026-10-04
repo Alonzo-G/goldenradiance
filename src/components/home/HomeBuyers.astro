@@ -1,0 +1,53 @@
+---
+// src/components/home/HomeBuyers.astro — 买家类型四卡（非同尺寸，§12[7]）+ How it works（§12[8]，无编号）
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+const buyers = [
+  { key: 'amazon', icon: 'package', cat: 'earrings', line: 'fashion-alloy-brass', big: true },
+  { key: 'boutique', icon: 'store', cat: 'ring', line: 'natural-stone-gemstone-pearl', big: false },
+  { key: 'chain', icon: 'building-2', cat: 'necklace', line: 'stainless-titanium-steel', big: false },
+  { key: 'oem', icon: 'layers', cat: 'brooch', line: 'fashion-alloy-brass', big: false },
+];
+
+const steps = [
+  { icon: 'file-input', text: t('home.how.step1') },
+  { icon: 'package-search', text: t('home.how.step2') },
+  { icon: 'truck', text: t('home.how.step3') },
+];
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <h2 class="text-xl font-semibold text-fg">{t('home.buyers.title')}</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+      {buyers.map((b, i) => (
+        <div
+          class:list={[
+            'rounded-md border border-border bg-surface p-5 shadow-raised',
+            i === 0 && 'sm:col-span-2 lg:col-span-1',
+          ]}
+        >
+          <Icon name={`lucide:${b.icon}`} class="icon size-5 text-accent" aria-hidden="true" />
+          <p class="mt-3 text-sm leading-relaxed text-fg-2">{t(`home.buyers.${b.key}` as 'home.buyers.amazon')}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-y pt-0">
+  <div class="container-wide">
+    <h2 class="text-xl font-semibold text-fg">{t('home.how.title')}</h2>
+    <ol class="mt-6 grid gap-6 md:grid-cols-3">
+      {steps.map((s) => (
+        <li class="relative flex gap-4">
+          <span class="flex size-11 shrink-0 items-center justify-center rounded-pill border border-accent text-accent">
+            <Icon name={`lucide:${s.icon}`} class="icon size-5" aria-hidden="true" />
+          </span>
+          <p class="pt-2 text-sm text-fg-2">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

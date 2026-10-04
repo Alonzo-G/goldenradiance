@@ -1,0 +1,57 @@
+---
+// src/components/layout/SeoHead.astro — title/desc/canonical/OG/hreflang(x-default)/robots/JSON-LD
+import { canonicalUrl } from '../../lib/seo/canonical';
+import { getSiteUrl } from '../../lib/seo/site';
+import { SITE_NAME } from '../../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogType?: 'website' | 'article';
+  image?: string;
+  /** og:image 替代文本；缺省用站名。产品页应传产品名，便于图挂时仍可读。 */
+  imageAlt?: string;
+  noindex?: boolean;
+  jsonld?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  image,
+  imageAlt,
+  noindex = false,
+  jsonld = [],
+} = Astro.props;
+const site = getSiteUrl(Astro.site);
+const pathResolved = path ?? Astro.url.pathname;
+const canonical = canonicalUrl(site, pathResolved);
+const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+const ogImage = new URL(image ?? '/og-default.png', site).toString();
+const ogImageAlt = imageAlt ?? SITE_NAME;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+<link rel="canonical" href={canonical} />
+{/* ADR-004：V1 仅 1 条 x-default 指向自身；v2 在此位追加语种条目 */}
+<link rel="alternate" hreflang="x-default" href={canonical} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+{jsonld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}

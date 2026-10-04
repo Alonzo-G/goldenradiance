@@ -1,0 +1,459 @@
+openapi: 3.0.3
+
+info:
+  title: jewelry-b2b-global API
+  description: >-
+    饰品 B2B 外贸官网 MVP API 契约。
+    本项目为静态优先站点，Phase 1 仅暴露三个端点：RFQ 询盘提交、newsletter 订阅、健康检查。
+    产品数据由构建期预渲染为静态 HTML 并通过 Pagefind 静态索引提供检索，
+    刻意不提供产品查询 REST API（见 ARCHITECTURE.md §10.1 NO-4）。
+  version: 1.0.0
+  contact:
+    name: jewelry-b2b-global engineering
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.example.com
+    description: Production (Cloudflare Workers)
+  - url: http://localhost:8787
+    description: wrangler dev
+
+tags:
+  - name: RFQ
+    description: 询盘提交，本站点核心转化链路
+  - name: Newsletter
+    description: 采购邮件订阅
+  - name: System
+    description: 健康检查
+
+# ---------------------------------------------------------------------------
+# 统一响应包装
+# ---------------------------------------------------------------------------
+# 成功: { code: 0,     data: {...}, message: "" }
+# 失败: { code: <非0>, data: {fields?}, message: "<人类可读>" }
+#
+# 错误码表
+#   400 INVALID_TURNSTILE     Turnstile 服务端校验失败
+#   400 TOKEN_ALREADY_USED    Turnstile token 已使用（二次提交），需重新渲染组件
+#   409 SUBSCRIBED_ALREADY    邮箱已订阅（幂等，非错误）
+#   422 VALIDATION_ERROR      Zod 校验失败，data.fields 列出出错字段
+#   429 RATE_LIMITED          IP + 指纹窗口内超限（默认 5 次 / 10 分钟 / IP）
+#   500 PERSIST_FAILED        D1 写入失败，必须告警，禁止返回 201
+#   500 MAIL_FAILED           邮件发送失败（此时记录已入库，需在后台标记 mail_status）
+# ---------------------------------------------------------------------------
+
+paths:
+
+  /api/v1/rfq:
+    post:
+      tags: [RFQ]
+      operationId: createRfq
+      summary: 提交 RFQ 询盘
+      description: >-
+        服务端顺序：Turnstile siteverify → honeypot/时间阈值判定 → Zod 校验 →
+        D1 单事务写入 rfq_inquiries + rfq_items → ctx.waitUntil 异步发两封邮件。
+        写入失败必须返回 500 且触发告警，禁止在写入失败时返回 201（见 ARCHITECTURE.md §12.9 E6）。
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRfqRequest'
+            examples:
+              minimal:
+                summary: 最小可用提交
+                value:
+                  turnstileToken: "0.AbcDEF123456"
+                  honeypot: ""
+                  formLoadedAt: 1790841600000
+                  contact:
+                    company: "Maison Bleue"
+                    name: "Claire Dubois"
+                    email: "claire@maisonbleue.fr"
+                    country: "FR"
+                  shipping:
+                    destinationMarket: eu_uk
+                    incoterm: FOB
+                    quantityScale: sample
+                  items:
+                    - sku: "FB-2317"
+                      qty: 60
+                  locale: en
+      responses:
+        '201':
+          description: 询盘已创建
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRfqResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/newsletter:
+    post:
+      tags: [Newsletter]
+      operationId: subscribeNewsletter
+      summary: 订阅采购邮件
+      description: 幂等。重复订阅同一邮箱返回 409 SUBSCRIBED_ALREADY，不报错。
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscribeRequest'
+      responses:
+        '201':
+          description: 订阅成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscribeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: 邮箱已订阅（幂等）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscribeResponse'
+              example:
+                code: 0
+                data:
+                  subscribed: true
+                  alreadyExisted: true
+                message: "Already subscribed."
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/health:
+    get:
+      tags: [System]
+      operationId: health
+      summary: 健康检查
+      description: 供 CI 冒烟与监控使用。检查 D1 连通性。
+      security: []
+      responses:
+        '200':
+          description: 服务正常
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                code: 0
+                data:
+                  status: ok
+                  db: up
+                  version: "1.0.0"
+                message: ""
+        '503':
+          description: D1 不可达
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                code: 0
+                data:
+                  status: degraded
+                  db: down
+                  version: "1.0.0"
+                message: "D1 unreachable"
+
+components:
+
+  schemas:
+
+    EnvelopeError:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: integer
+          description: 非 0 为错误
+          example: 422
+        data:
+          type: object
+          properties:
+            fields:
+              type: object
+              additionalProperties:
+                type: string
+              description: "字段名 -> 错误描述，仅 VALIDATION_ERROR 时存在"
+              example:
+                email: "Invalid email format"
+        message:
+          type: string
+          example: "Validation failed"
+
+    Contact:
+      type: object
+      required: [company, name, email, country]
+      properties:
+        company:
+          type: string
+          minLength: 1
+          maxLength: 120
+        name:
+          type: string
+          minLength: 1
+          maxLength: 80
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+          description: ISO 3166-1 alpha-2
+          example: FR
+        whatsapp:
+          type: string
+          maxLength: 32
+          nullable: true
+          description: E.164 建议格式
+        website:
+          type: string
+          format: uri
+          maxLength: 2048
+          nullable: true
+
+    ShippingIntent:
+      type: object
+      required: [destinationMarket, incoterm, quantityScale]
+      properties:
+        destinationMarket:
+          type: string
+          enum: [eu_uk, us, middle_east, other]
+          description: 对齐 ComplianceContext 的目标市场枚举
+        incoterm:
+          type: string
+          enum: [EXW, FOB, CIF, DDP, UNSURE]
+        quantityScale:
+          type: string
+          enum: [sample, small, bulk]
+          description: sample / small / bulk，对应 MMQ 阶梯
+
+    RfqItem:
+      type: object
+      required: [sku, qty]
+      properties:
+        sku:
+          type: string
+          pattern: '^[A-Z0-9-]{3,32}$'
+          example: FB-2317
+        qty:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+        note:
+          type: string
+          maxLength: 500
+          nullable: true
+
+    CreateRfqRequest:
+      type: object
+      required: [turnstileToken, honeypot, formLoadedAt, contact, shipping, items, locale]
+      properties:
+        turnstileToken:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          description: Cloudflare Turnstile 单次有效 token，必须服务端 siteverify
+        honeypot:
+          type: string
+          maxLength: 0
+          description: 机器人陷阱字段，正常用户必须为空字符串
+          example: ""
+        formLoadedAt:
+          type: integer
+          format: int64
+          description: 表单渲染时间戳（毫秒）。与服务器时间差 < 2000ms 判定为疑似机器人
+        contact:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/ShippingIntent'
+        items:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/RfqItem'
+        message:
+          type: string
+          maxLength: 2000
+          nullable: true
+        sourcePage:
+          type: string
+          maxLength: 512
+          nullable: true
+          description: 来源页面路径，用于归因分析
+        locale:
+          type: string
+          enum: [en, zh]
+          default: en
+
+    CreateRfqResponse:
+      type: object
+      required: [code, data, message]
+      properties:
+        code:
+          type: integer
+          enum: [0]
+        data:
+          type: object
+          required: [id, reference, receivedAt, respondBy]
+          properties:
+            id:
+              type: string
+              description: ULID 主键
+              example: 01JCM8Y9TZ4W7V2X1ABCDEF
+            reference:
+              type: string
+              description: 给买家看的询盘编号
+              example: RFQ-2026-0047
+            receivedAt:
+              type: string
+              format: date-time
+            respondBy:
+              type: string
+              format: date-time
+              description: 按 8 工作小时承诺计算的预计响应时间（PRD §13.2 信任条）
+        message:
+          type: string
+          example: ""
+
+    SubscribeRequest:
+      type: object
+      required: [turnstileToken, honeypot, email, locale]
+      properties:
+        turnstileToken:
+          type: string
+          minLength: 1
+        honeypot:
+          type: string
+          maxLength: 0
+        formLoadedAt:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        source:
+          type: string
+          maxLength: 64
+          nullable: true
+        locale:
+          type: string
+          enum: [en, zh]
+          default: en
+
+    SubscribeResponse:
+      type: object
+      required: [code, data, message]
+      properties:
+        code:
+          type: integer
+          enum: [0]
+        data:
+          type: object
+          required: [subscribed]
+          properties:
+            subscribed:
+              type: boolean
+            alreadyExisted:
+              type: boolean
+        message:
+          type: string
+
+    HealthResponse:
+      type: object
+      required: [code, data, message]
+      properties:
+        code:
+          type: integer
+        data:
+          type: object
+          required: [status, db, version]
+          properties:
+            status:
+              type: string
+              enum: [ok, degraded]
+            db:
+              type: string
+              enum: [up, down]
+            version:
+              type: string
+        message:
+          type: string
+
+  responses:
+
+    BadRequest:
+      description: 请求错误（Turnstile 校验失败 / token 重复使用）
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopeError'
+          examples:
+            invalidTurnstile:
+              value:
+                code: 400
+                data: {}
+                message: "Turnstile verification failed."
+            tokenAlreadyUsed:
+              value:
+                code: 400
+                data: {}
+                message: "Turnstile token already used. Please retry the challenge."
+
+    ValidationError:
+      description: Zod 校验失败
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopeError'
+          example:
+            code: 422
+            data:
+              fields:
+                contact.email: "Invalid email format"
+                contact.country: "Must be ISO 3166-1 alpha-2"
+            message: "Validation failed"
+
+    RateLimited:
+      description: 速率超限
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopeError'
+          example:
+            code: 429
+            data:
+              retryAfterSeconds: 600
+            message: "Too many requests. Please try again later."
+
+    ServerError:
+      description: 服务端错误（含 D1 写入失败）
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopeError'
+          example:
+            code: 500
+            data: {}
+            message: "Failed to save your inquiry. Please email sales@example.com directly."

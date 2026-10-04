@@ -1,0 +1,49 @@
+---
+// src/components/product/PlaceholderImage.astro — 本地占位图（plan §2）
+// Token 色内联构图 + Lucide 品类图标，零运行时 JS、零外部请求、无 CLS。
+import { Icon } from 'astro-icon/components';
+import { cn } from '../../lib/shared/format';
+
+interface Props {
+  category: string;
+  line: string;
+  label: string;
+  ratio?: '1:1' | '4:5' | '16:9';
+  alt?: string;
+  class?: string;
+}
+const { category, line, label, ratio = '1:1', alt = '', class: cls } = Astro.props;
+
+const CATEGORY_ICONS: Record<string, string> = {
+  earrings: 'ear',
+  necklace: 'link',
+  bracelet: 'circle-dashed',
+  ring: 'circle-dot',
+  'hair-accessory': 'scissors',
+  brooch: 'flower',
+  anklet: 'footprints',
+};
+const LINE_FALLBACK: Record<string, string> = {
+  'fashion-alloy-brass': 'anvil',
+  'stainless-titanium-steel': 'droplets',
+  'natural-stone-gemstone-pearl': 'gem',
+};
+const iconName = CATEGORY_ICONS[category] ?? LINE_FALLBACK[line] ?? 'gem';
+const ratioClass =
+  ratio === '4:5' ? 'aspect-[4/5]' : ratio === '16:9' ? 'aspect-video' : 'aspect-square';
+---
+
+<figure
+  role="img"
+  aria-label={alt || label}
+  class={cn('relative flex items-center justify-center overflow-hidden rounded-md border border-border-soft bg-surface-warm', ratioClass, cls)}
+>
+  {/* 产品垫块（--border-soft 几何色块，不伪装成照片） */}
+  <div class="absolute bottom-[22%] left-1/2 h-[58%] w-[58%] -translate-x-1/2 rounded-lg bg-border-soft" aria-hidden="true"></div>
+  {/* 产品线识别 tick（仅识别，非状态） */}
+  <div class="absolute inset-x-0 bottom-0 h-0.5" style={`background: var(--color-${line})`} aria-hidden="true"></div>
+  <div class="relative z-[1] flex flex-col items-center gap-2 text-meta">
+    <Icon name={`lucide:${iconName}`} class="icon size-6" aria-hidden="true" />
+    <figcaption class="caps text-xs" aria-hidden="true">{label}</figcaption>
+  </div>
+</figure>

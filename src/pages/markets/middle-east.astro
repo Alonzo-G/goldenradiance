@@ -1,0 +1,96 @@
+---
+// src/pages/markets/middle-east.astro — 中东市场落地页（SEO 地区关键词 + FAQ 结构化数据）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { Icon } from 'astro-icon/components';
+import { marketPageJsonld, faqPageJsonld } from '../../lib/seo/jsonld';
+import { getSiteUrl } from '../../lib/seo/site';
+
+const site = getSiteUrl(Astro.site);
+const path = '/markets/middle-east/';
+
+const faqs = [
+  {
+    q: 'Do you offer gold-plated jewelry for the Middle East market?',
+    a: 'Gold-tone plating is available across the fashion alloy & brass line. Coating thickness is stated per style and can be specified to match Middle East market expectations — state your target thickness in the RFQ notes.',
+  },
+  {
+    q: 'What is the minimum order quantity for wholesale jewelry to the Middle East?',
+    a: 'MOQ is stated per style, typically in the 12–120 pcs band. Exact MOQ is confirmed with your quotation.',
+  },
+  {
+    q: 'Do you ship to GCC countries with documentation support?',
+    a: 'We support export documentation for GCC destinations. Incoterm (EXW, FOB, CIF, DDP) and ship-to market are selected at RFQ.',
+  },
+  {
+    q: 'Can coating thickness be customized for the Middle East?',
+    a: 'Yes. Coating thickness expectations for the Middle East differ from EU and US norms — state your target thickness and it is written into the spec sheet.',
+  },
+];
+
+const jsonld = [
+  marketPageJsonld({
+    site,
+    path,
+    marketName: 'Middle East wholesale jewelry market',
+    marketAreas: ['Middle East'],
+    description: t('markets.middleEast.body'),
+  }),
+  faqPageJsonld([{ questions: faqs }]),
+];
+---
+
+<BaseLayout
+  title={t('markets.title.middleEast')}
+  description={t('markets.middleEast.body')}
+  path={path}
+  jsonld={jsonld}
+>
+  <div class="mx-auto max-w-3xl py-14">
+    <div class="mb-4 h-0.5 w-16 bg-line-alloy" aria-hidden="true"></div>
+    <h1 class="text-2xl font-semibold text-fg">{t('markets.title.middleEast')}</h1>
+    <p class="mt-4 text-md leading-relaxed text-fg-2">{t('markets.middleEast.body')}</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-md border border-border-soft bg-surface-warm p-5">
+        <h2 class="flex items-center gap-2 text-sm font-semibold text-fg">
+          <Icon name="lucide:sparkles" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+          Gold-tone & plating
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-muted">
+          Gold-tone plating across the alloy & brass line, with coating thickness stated per style
+          and customizable to match regional expectations.
+        </p>
+      </div>
+      <div class="rounded-md border border-border-soft bg-surface-warm p-5">
+        <h2 class="flex items-center gap-2 text-sm font-semibold text-fg">
+          <Icon name="lucide:package" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+          Wholesale & export
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-muted">
+          MOQ stated per style, export documentation support, and selectable Incoterm for GCC and
+          wider Middle East destinations.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="mt-10 text-lg font-semibold text-fg">Frequently asked questions</h2>
+    <div class="mt-4">
+      {faqs.map((f) => (
+        <details class="group border-b border-border-soft py-3">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-fg [&::-webkit-details-marker]:hidden">
+            {f.q}
+            <Icon name="lucide:chevron-down" class="icon size-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/products/" class="flex h-12 items-center rounded-sm border border-accent px-5 text-sm font-medium text-accent hover:bg-surface-sunken">{t('cta.browseCatalog')}</a>
+      <a href="/contact/" class="flex h-12 items-center rounded-sm bg-accent px-5 text-sm font-medium text-accent-on hover:bg-accent-hover">{t('cta.contactUs')}</a>
+      <a href="/rfq/" class="flex h-12 items-center rounded-sm border border-border px-5 text-sm font-medium text-fg hover:bg-surface-sunken">{t('cta.startRfq')}</a>
+    </div>
+  </div>
+</BaseLayout>

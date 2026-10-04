@@ -1,0 +1,31 @@
+---
+// src/pages/index.astro — 首页（UIUX §12 区块构成，Brand register 1440 容器）
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeStats from '../components/home/HomeStats.astro';
+import HomeLines from '../components/home/HomeLines.astro';
+import HomeShowcase from '../components/home/HomeShowcase.astro';
+import HomeBuyers from '../components/home/HomeBuyers.astro';
+import HomeCompliance from '../components/home/HomeCompliance.astro';
+import { t } from '../i18n';
+import { localBusinessJsonld } from '../lib/seo/jsonld';
+import { getSiteUrl } from '../lib/seo/site';
+
+const site = getSiteUrl(Astro.site);
+const jsonld = [
+  localBusinessJsonld({
+    site,
+    // 目标出口市场（与 markets/* 落地页对齐）；精确 geo 坐标待客户提供后补入
+    areaServed: ['European Union', 'United Kingdom', 'Middle East', 'United States'],
+  }),
+];
+---
+
+<BaseLayout title={t('meta.siteName')} description={t('meta.description')} wide jsonld={jsonld}>
+  <HomeHero />
+  <HomeStats />
+  <HomeLines />
+  <HomeShowcase />
+  <HomeBuyers />
+  <HomeCompliance />
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+// src/pages/admin/login.astro — 后台登录页（静态，客户端提交到 /api/admin/auth）
+// 无前台 chrome，独立极简。登录成功后跳 /admin/。
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sign in — Golden Radiance Admin</title>
+    <style is:global>
+      :root { --fg:#1a1f1e; --muted:#5c6663; --border:#e3e6e3; --accent:#123a38; --danger:#b3261e; }
+      * { box-sizing:border-box; }
+      body {
+        margin:0; min-height:100vh; display:grid; place-items:center;
+        background:#f6f7f6; color:var(--fg);
+        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      }
+      .card { background:#fff; border:1px solid var(--border); border-radius:10px; padding:32px; width:100%; max-width:360px; }
+      h1 { font-size:18px; margin:0 0 4px; }
+      .sub { color:var(--muted); font-size:13px; margin:0 0 20px; }
+      label { display:block; font-size:13px; margin-bottom:6px; }
+      input { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:6px; font-size:14px; margin-bottom:16px; }
+      button { width:100%; padding:11px; border:none; border-radius:6px; background:var(--accent); color:#fff; font-size:14px; font-weight:600; cursor:pointer; }
+      button:hover { background:#0d2f2c; }
+      button:disabled { opacity:.6; cursor:not-allowed; }
+      .err { color:var(--danger); font-size:13px; margin-bottom:12px; min-height:18px; }
+    </style>
+  </head>
+  <body>
+    <form class="card" id="login-form">
+      <h1>Golden Radiance</h1>
+      <p class="sub">Admin sign in</p>
+      <div class="err" id="err" role="alert"></div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required autofocus />
+      <button type="submit" id="submit">Sign in</button>
+    </form>
+
+    <script>
+      // @ts-nocheck — 后台登录页：纯 DOM vanilla JS，运行时为普通脚本，不做严格类型检查
+      const form = document.getElementById('login-form');
+      const err = document.getElementById('err');
+      const submit = document.getElementById('submit');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        err.textContent = '';
+        submit.disabled = true;
+        submit.textContent = 'Signing in…';
+        try {
+          const res = await fetch('/api/admin/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: document.getElementById('password').value }),
+          });
+          if (res.ok) {
+            window.location.href = '/admin/';
+          } else {
+            err.textContent = 'Invalid credentials. Please try again.';
+            submit.disabled = false;
+            submit.textContent = 'Sign in';
+          }
+        } catch {
+          err.textContent = 'Network error. Please try again.';
+          submit.disabled = false;
+          submit.textContent = 'Sign in';
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+---
+// src/components/home/HomeCompliance.astro — 合规教育式预览（§12[9]，AC-38/39/41）+ Blog 预览 + Final CTA
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { getCollection } from 'astro:content';
+
+const cards = [
+  { icon: 'shield-check', key: 'nickel' },
+  { icon: 'file-text', key: 'lead' },
+  { icon: 'microscope', key: 'howto' },
+] as const;
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-xl font-semibold text-fg">{t('home.compliance.title')}</h2>
+      <a href="/compliance/" class="text-sm font-medium text-accent hover:underline">{t('cta.viewAll')}</a>
+    </div>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      {cards.map((c) => (
+        <div class="rounded-md border border-border bg-surface p-5">
+          <Icon name={`lucide:${c.icon}`} class="icon size-5 text-accent" aria-hidden="true" />
+          <p class="caps mt-3 text-xs font-medium text-muted">{c.key === 'nickel' ? 'Nickel release' : c.key === 'lead' ? 'Lead & cadmium' : 'How to read a report'}</p>
+          <p class="mt-2 text-sm leading-relaxed text-fg-2">{t(`home.compliance.card.${c.key}` as 'home.compliance.card.nickel')}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-4 flex items-center gap-2 text-sm text-muted">
+      <Icon name="lucide:file-check" class="icon size-4" aria-hidden="true" />
+      {t('home.compliance.footer')}
+    </p>
+  </div>
+</section>
+
+<section class="section-y pt-0">
+  <div class="container-wide">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-xl font-semibold text-fg">{t('home.blog.title')}</h2>
+      <a href="/blog/" class="text-sm font-medium text-accent hover:underline">{t('cta.viewAll')}</a>
+    </div>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      {posts.map((post) => (
+        <a href={`/blog/${post.id}/`} class="group rounded-md border border-border bg-surface p-5 shadow-raised transition-shadow duration-150 hover:shadow-none">
+          <p class="caps text-xs font-medium text-meta">{t(`blog.category.${post.data.category}` as 'blog.category.material')}</p>
+          <h3 class="mt-2 text-base font-semibold leading-snug text-fg group-hover:underline">{post.data.title}</h3>
+          <p class="mt-2 line-clamp-3 text-sm text-muted">{post.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="bg-surface-inverse py-16 text-fg-inverse">
+  <div class="container-wide max-w-3xl">
+    <h2 class="text-2xl font-semibold">{t('home.finalCta.title')}</h2>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="/rfq/" class="flex h-12 items-center rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">
+        {t('cta.startRfq')}
+      </a>
+      <a href="/samples/" class="flex h-12 items-center rounded-sm border border-border-inverse px-5 text-sm font-medium text-fg-inverse transition-colors duration-150 hover:bg-accent-hover">
+        {t('cta.requestSamples')}
+      </a>
+    </div>
+  </div>
+</section>

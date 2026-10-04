@@ -1,0 +1,95 @@
+---
+// src/components/product/ProductImage.astro — 统一图片位（SPEC §10 真实素材替换）
+// 有真实素材 → 渲染实拍图（懒加载 + 显式尺寸防 CLS）；无 → 回落程序化占位图。
+// 该组件是「零页面代码改动替换占位」的落点：页面只传数据，不关心图从哪来。
+import PlaceholderImage from './PlaceholderImage.astro';
+import { cn } from '../../lib/shared/format';
+import type { SkuIndexImage } from '../../lib/products/queries';
+
+interface Props {
+  /** 真实素材；为空则走占位图 */
+  image?: SkuIndexImage | null;
+  category: string;
+  line: string;
+  label: string;
+  ratio?: '1:1' | '4:5' | '16:9';
+  alt?: string;
+  class?: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  /** 首屏 LCP 图用 high 提优先级；其余留 auto。滥用会互相抢带宽。 */
+  fetchpriority?: 'high' | 'low' | 'auto';
+  /** 用缩略图（400px）代替主图 */
+  variant?: 'main' | 'thumb';
+}
+
+const {
+  image,
+  category,
+  line,
+  label,
+  ratio = '1:1',
+  alt = '',
+  class: cls,
+  sizes = '(min-width: 1280px) 22vw, (min-width: 640px) 33vw, 50vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  variant = 'main',
+} = Astro.props;
+
+const ratioClass =
+  ratio === '4:5' ? 'aspect-[4/5]' : ratio === '16:9' ? 'aspect-video' : 'aspect-square';
+
+const src = image ? (variant === 'thumb' ? image.thumb : image.src) : '';
+const dims =
+  image?.width && image?.height
+    ? { width: image.width, height: image.height }
+    : undefined;
+
+/** 响应式候选：缩略图恒 360px 宽，主图用实测原始宽度（1200 或 800）。
+ *  仅在拿到实测宽度时才生成——`w` 描述符一旦写错，浏览器会选错图并报 decode 警告，比不写更糟。
+ *  浏览器按 sizes × DPR 自行选档：列表卡片（22vw）落 360w 缩略图，PDP 主图（48vw）落主图。 */
+const srcset =
+  variant === 'main' && image?.thumb && image?.width
+    ? `${image.thumb} 360w, ${image.src} ${image.width}w`
+    : undefined;
+---
+
+{
+  image ? (
+    <figure
+      class={cn(
+        'relative overflow-hidden rounded-md border border-border-soft bg-surface-warm',
+        ratioClass,
+        cls,
+      )}
+    >
+      <img
+        src={src}
+        srcset={srcset}
+        alt={alt || image.alt || label}
+        {...dims}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        decoding="async"
+        sizes={sizes}
+        class="size-full object-cover"
+      />
+      {/* 产品线识别 tick（与占位图一致，保持线识别连续性） */}
+      <div
+        class="absolute inset-x-0 bottom-0 h-0.5"
+        style={`background: var(--color-${line})`}
+        aria-hidden="true"
+      />
+    </figure>
+  ) : (
+    <PlaceholderImage
+      category={category}
+      line={line}
+      label={label}
+      ratio={ratio}
+      alt={alt}
+      class={cls}
+    />
+  )
+}

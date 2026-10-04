@@ -1,0 +1,54 @@
+---
+// src/components/home/HomeShowcase.astro — New this week rail（§12[5]）+ One batch（§12[6]）
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import ProductCard from '../product/ProductCard.astro';
+import PlaceholderImage from '../product/PlaceholderImage.astro';
+import { getProducts, toSkuIndexItem } from '../../lib/products/queries';
+
+const products = await getProducts();
+// 「New this week」优先展示本次入库的工厂实拍新品（dataStatus: real），其余按 SKU 补齐
+const realProducts = products.filter((p) => p.data.dataStatus === 'real');
+const otherProducts = products.filter((p) => p.data.dataStatus !== 'real');
+const railItems = [...realProducts.slice(-12).reverse(), ...otherProducts].slice(0, 12).map(toSkuIndexItem);
+const batchLine = 'stainless-titanium-steel';
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <h2 class="text-xl font-semibold text-fg">{t('home.newThisWeek.title')}</h2>
+        <p class="mt-1 text-sm text-muted">{t('home.newThisWeek.cadence')}</p>
+      </div>
+      <a href="/products/" class="flex items-center gap-1 text-sm font-medium text-accent hover:underline">
+        {t('cta.viewAllNew')}
+        <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+      </a>
+    </div>
+    <div class="mt-6 flex snap-x gap-4 overflow-x-auto pb-2">
+      {railItems.map((item) => (
+        <div class="w-48 shrink-0 snap-start">
+          <ProductCard item={item} ratio="4:5" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-y pt-0">
+  <div class="container-wide grid items-center gap-8 lg:grid-cols-[7fr_3fr]">
+    <PlaceholderImage
+      category="bracelet"
+      line={batchLine}
+      label="Batch grid — same lot"
+      ratio="16:9"
+      alt="Batch grid placeholder: one product line's styles photographed in the same light, same day, same background"
+    />
+    <div>
+      <h2 class="text-xl font-semibold text-fg">{t('home.batch.title')}</h2>
+      <p class="mt-3 text-sm leading-relaxed text-muted">{t('home.batch.desc')}</p>
+      <a href="/products/" class="mt-4 inline-flex text-sm font-medium text-accent hover:underline">{t('cta.browseCatalog')}</a>
+    </div>
+  </div>
+</section>

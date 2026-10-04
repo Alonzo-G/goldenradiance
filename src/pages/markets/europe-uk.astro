@@ -1,0 +1,96 @@
+---
+// src/pages/markets/europe-uk.astro — 欧盟/英国市场落地页（SEO 地区关键词 + FAQ 结构化数据）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { Icon } from 'astro-icon/components';
+import { marketPageJsonld, faqPageJsonld } from '../../lib/seo/jsonld';
+import { getSiteUrl } from '../../lib/seo/site';
+
+const site = getSiteUrl(Astro.site);
+const path = '/markets/europe-uk/';
+
+const faqs = [
+  {
+    q: 'Do your jewelry products comply with EU REACH nickel release limits?',
+    a: 'Nickel release is verified against EN 1811 and EN 12472. Coating thickness and compliance limits are stated per style on the spec sheet with every quotation, so you can check conformity before ordering.',
+  },
+  {
+    q: 'What is the MOQ for wholesale jewelry shipped to the UK?',
+    a: 'MOQ is stated per style, typically in the 12–120 pcs band. Exact MOQ is confirmed with your quotation and written into the spec sheet.',
+  },
+  {
+    q: 'Do you support EU customs and CE marking requirements?',
+    a: 'We provide documentation support for EU customs clearance. Marking and test-report requirements are clarified per style in the RFQ process.',
+  },
+  {
+    q: 'What payment and Incoterms do you offer for European buyers?',
+    a: 'Incoterms (EXW, FOB, CIF, DDP) are selectable at RFQ. Payment terms are confirmed with your quotation.',
+  },
+];
+
+const jsonld = [
+  marketPageJsonld({
+    site,
+    path,
+    marketName: 'Europe & UK wholesale jewelry market',
+    marketAreas: ['European Union', 'United Kingdom'],
+    description: t('markets.europeUk.body'),
+  }),
+  faqPageJsonld([{ questions: faqs }]),
+];
+---
+
+<BaseLayout
+  title={t('markets.title.europeUk')}
+  description={t('markets.europeUk.body')}
+  path={path}
+  jsonld={jsonld}
+>
+  <div class="mx-auto max-w-3xl py-14">
+    <div class="mb-4 h-0.5 w-16 bg-line-steel" aria-hidden="true"></div>
+    <h1 class="text-2xl font-semibold text-fg">{t('markets.title.europeUk')}</h1>
+    <p class="mt-4 text-md leading-relaxed text-fg-2">{t('markets.europeUk.body')}</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-md border border-border-soft bg-surface-warm p-5">
+        <h2 class="flex items-center gap-2 text-sm font-semibold text-fg">
+          <Icon name="lucide:shield-check" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+          EU & UK compliance
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-muted">
+          Nickel release (EN 1811 / EN 12472) leads the compliance conversation for EU and UK buyers.
+          Coating thickness is stated per style and checked at incoming inspection.
+        </p>
+      </div>
+      <div class="rounded-md border border-border-soft bg-surface-warm p-5">
+        <h2 class="flex items-center gap-2 text-sm font-semibold text-fg">
+          <Icon name="lucide:package" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+          Wholesale sourcing
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-muted">
+          Fashion alloy & brass, stainless & titanium steel, and natural stone & pearl lines with
+          MOQ stated per style. Ship-to and Incoterm selectable at RFQ.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="mt-10 text-lg font-semibold text-fg">Frequently asked questions</h2>
+    <div class="mt-4">
+      {faqs.map((f) => (
+        <details class="group border-b border-border-soft py-3">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-fg [&::-webkit-details-marker]:hidden">
+            {f.q}
+            <Icon name="lucide:chevron-down" class="icon size-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/compliance/" class="flex h-12 items-center rounded-sm border border-accent px-5 text-sm font-medium text-accent hover:bg-surface-sunken">{t('nav.compliance')}</a>
+      <a href="/compliance/nickel-release-en-1811/" class="flex h-12 items-center rounded-sm bg-accent px-5 text-sm font-medium text-accent-on hover:bg-accent-hover">{t('cta.howWeTest')}</a>
+      <a href="/rfq/" class="flex h-12 items-center rounded-sm border border-border px-5 text-sm font-medium text-fg hover:bg-surface-sunken">{t('cta.startRfq')}</a>
+    </div>
+  </div>
+</BaseLayout>

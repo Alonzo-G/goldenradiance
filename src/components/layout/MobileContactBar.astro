@@ -1,0 +1,26 @@
+---
+// src/components/layout/MobileContactBar.astro — 持久联系入口（AC-27：移动端一触可达）
+// PDP 传 hideMobileContact 隐藏（该页由 sticky bottom bar 承载，内含联系入口）。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+---
+
+<div
+  class="fixed bottom-3 right-3 z-[210] flex flex-col gap-2 lg:hidden"
+  aria-label={t('contact.aria.contactEntry')}
+>
+  <a
+    href="/contact/"
+    class="flex size-11 items-center justify-center rounded-pill border border-border bg-surface text-fg shadow-raised"
+    aria-label="Email"
+  >
+    <Icon name="lucide:mail" class="icon size-5" aria-hidden="true" />
+  </a>
+  <a
+    href="/contact/#channels"
+    class="flex size-11 items-center justify-center rounded-pill border border-border bg-surface text-fg shadow-raised"
+    aria-label="WhatsApp"
+  >
+    <Icon name="lucide:message-circle" class="icon size-5" aria-hidden="true" />
+  </a>
+</div>

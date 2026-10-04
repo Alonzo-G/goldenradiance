@@ -1,0 +1,130 @@
+---
+// src/pages/blog/index.astro — Blog 内容中心（分类 filter + 6 篇种子文章）
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const cats = ['all', 'material', 'plating', 'buying', 'compliance'] as const;
+const catLabel = (c: string) =>
+  c === 'all' ? t('blog.allCategories') : t(`blog.category.${c}` as 'blog.category.material');
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
+---
+
+<BaseLayout title={t('blog.title')} description={t('blog.subscribe.desc')} path="/blog/">
+  <div class="mx-auto max-w-4xl py-10">
+    <h1 class="text-2xl font-semibold text-fg">{t('blog.title')}</h1>
+    <div class="mt-6 flex flex-wrap gap-2" role="tablist" aria-label={t('blog.title')}>
+      {cats.map((c, i) => (
+        <button
+          type="button"
+          data-blog-cat={c}
+          role="radio"
+          aria-checked={i === 0 ? 'true' : 'false'}
+          class:list={[
+            'h-9 rounded-pill border px-4 text-sm font-medium',
+            i === 0 ? 'border-accent bg-accent text-accent-on' : 'border-border bg-surface text-fg-2 hover:border-accent',
+          ]}
+        >
+          {catLabel(c)}
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2" data-blog-list>
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.id}/`}
+          data-blog-item={post.data.category}
+          class="group rounded-md border border-border bg-surface p-5 shadow-raised"
+        >
+          <p class="caps text-xs font-medium text-meta">{catLabel(post.data.category)}</p>
+          <h2 class="mt-2 text-base font-semibold leading-snug text-fg group-hover:underline">{post.data.title}</h2>
+          <p class="mt-2 line-clamp-3 text-sm text-muted">{post.data.description}</p>
+          <p class="mt-3 flex items-center gap-1 text-xs text-meta">
+            {fmt(post.data.pubDate)}
+            <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+          </p>
+        </a>
+      ))}
+    </div>
+    <p data-blog-empty hidden class="py-10 text-center text-sm text-muted">{t('blog.empty')}</p>
+
+    <section class="mt-12 rounded-lg border border-border bg-surface p-6">
+      <h2 class="text-base font-semibold text-fg">{t('blog.subscribe.title')}</h2>
+      <p class="mt-1 text-sm text-muted">{t('blog.subscribe.desc')}</p>
+      <form data-newsletter-form class="mt-4 flex max-w-md gap-2" novalidate>
+        <label class="sr-only" for="blog-newsletter">{t('blog.subscribe.placeholder')}</label>
+        <input
+          id="blog-newsletter"
+          name="email"
+          type="email"
+          required
+          placeholder={t('blog.subscribe.placeholder')}
+          class="h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg"
+        />
+        <button type="submit" class="h-11 shrink-0 rounded-sm bg-accent px-4 text-sm font-medium text-accent-on hover:bg-accent-hover">
+          {t('blog.subscribe.button')}
+        </button>
+      </form>
+      <p data-newsletter-status class="mt-2 hidden text-sm"></p>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import { t } from '../../i18n';
+  import { renderTurnstile, TURNSTILE_SITEKEY } from '../../lib/shared/turnstile';
+
+  document.querySelectorAll<HTMLButtonElement>('[data-blog-cat]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.blogCat ?? 'all';
+      let visible = 0;
+      document.querySelectorAll<HTMLElement>('[data-blog-item]').forEach((item) => {
+        const match = cat === 'all' || item.dataset.blogItem === cat;
+        item.toggleAttribute('hidden', !match);
+        if (match) visible += 1;
+      });
+      document.querySelectorAll<HTMLButtonElement>('[data-blog-cat]').forEach((b) => {
+        const active = b === btn;
+        b.setAttribute('aria-checked', String(active));
+        b.classList.toggle('border-accent', active);
+        b.classList.toggle('bg-accent', active);
+        b.classList.toggle('text-accent-on', active);
+        b.classList.toggle('border-border', !active);
+        b.classList.toggle('text-fg-2', !active);
+      });
+      document.querySelector<HTMLElement>('[data-blog-list]')?.toggleAttribute('hidden', visible === 0);
+      const empty = document.querySelector<HTMLElement>('[data-blog-empty]');
+      empty?.toggleAttribute('hidden', visible > 0);
+      if (empty && visible === 0) empty.textContent = t('blog.empty');
+    });
+  });
+
+  const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
+  const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email instanceof HTMLInputElement ? form.email.value.trim() : '';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    const ts = await renderTurnstile(document.createElement('div'));
+    try {
+      const res = await fetch('/api/v1/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ turnstileToken: ts.getToken() ?? TURNSTILE_SITEKEY, honeypot: '', email, locale: 'en' }),
+      });
+      if (!res.ok) throw new Error();
+      status && (status.textContent = t('blog.subscribe.success'));
+      status?.classList.remove('hidden');
+      form.reset();
+    } catch {
+      status && (status.textContent = t('blog.subscribe.error'));
+      status?.classList.remove('hidden');
+    }
+  });
+</script>

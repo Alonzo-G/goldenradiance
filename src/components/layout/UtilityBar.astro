@@ -1,0 +1,49 @@
+---
+// src/components/layout/UtilityBar.astro — Ship-to / Compliance-for 选择器（无语言/币种下拉，ADR-004）
+// 默认市场 eu_uk（坑 §6.9：SSR 显式默认值）；客户端由 compliance store 同步。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { MARKETS } from '../../stores/compliance';
+
+const marketKey = (m: string) =>
+  m === 'rest' ? 'utility.market.rest' : `utility.market.${m}`;
+---
+
+<div class="z-[200] bg-surface-inverse text-fg-inverse">
+  <div class="container-page flex h-9 items-center justify-between gap-4 text-xs">
+    <div class="flex items-center gap-4">
+      <label class="flex items-center gap-1.5" for="utility-ship-to">
+        <Icon name="lucide:globe" class="icon size-4" aria-hidden="true" />
+        <span>{t('utility.shipTo')}</span>
+      </label>
+      <select
+        id="utility-ship-to"
+        data-market-select
+        class="h-6 rounded-xs border border-border-inverse bg-surface-inverse text-fg-inverse"
+      >
+        {MARKETS.map((m) => (
+          <option value={m} data-i18n-market={m}>
+            {t(marketKey(m) as 'utility.market.us')}
+          </option>
+        ))}
+      </select>
+      <label class="hidden items-center gap-1.5 sm:flex" for="utility-compliance-for">
+        <Icon name="lucide:shield-check" class="icon size-4" aria-hidden="true" />
+        <span>{t('utility.complianceFor')}</span>
+      </label>
+      <select
+        id="utility-compliance-for"
+        data-market-select
+        class="hidden h-6 rounded-xs border border-border-inverse bg-surface-inverse text-fg-inverse sm:block"
+        aria-label={t('utility.complianceFor')}
+      >
+        {MARKETS.map((m) => (
+          <option value={m}>
+            {t(marketKey(m) as 'utility.market.us')}
+          </option>
+        ))}
+      </select>
+    </div>
+    <p class="hidden md:block">{t('utility.hours')}</p>
+  </div>
+</div>

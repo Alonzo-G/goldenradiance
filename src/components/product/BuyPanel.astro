@@ -1,0 +1,151 @@
+---
+// src/components/product/BuyPanel.astro — PDP sticky 购买面板（参考价区间 + MOQ + 数量 + RFQ）
+// 真实素材款价格/MOQ 未确认 → 显示「价格随报价 / MOQ 随报价确认」，数量按站点默认起订量起步。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { referenceBand, priceRange, RFQ_DEFAULT_QTY } from '../../lib/shared/format';
+import SpecTable from './SpecTable.astro';
+import type { ProductData } from '../../lib/products/queries';
+
+interface Props {
+  data: ProductData;
+  class?: string;
+}
+const { data, class: cls } = Astro.props;
+const band = referenceBand(data.tiered_price);
+
+/** 数量种子：确认 MOQ 用 MOQ，否则站点默认起订量（不冒充该款 MOQ） */
+const qtySeed = data.moq_min ?? RFQ_DEFAULT_QTY;
+const moqConfirmed = data.moq_min != null && data.moq_max != null;
+---
+
+<div class={cls}>
+  {/* Ship-to / Compliance-for 联动说明（教育口径，非资质断言） */}
+  <p class="mb-4 flex items-center gap-2 text-xs text-muted">
+    <Icon name="lucide:shield-check" class="icon size-4" aria-hidden="true" />
+    <span>{t('utility.complianceFor')}:</span>
+    <span data-compliance-market-label>EU &amp; UK</span>
+  </p>
+
+  <p class="font-mono text-sm text-meta">{data.sku_code}</p>
+  <h1 class="mt-1 text-xl font-semibold text-fg">{data.title}</h1>
+  <p class="mt-2 text-sm text-muted">{data.short_description}</p>
+
+  <section class="mt-6" aria-labelledby="spec-title">
+    <h2 id="spec-title" class="caps mb-2 text-xs text-muted">{t('pdp.spec.title')}</h2>
+    <SpecTable data={data} />
+    {
+      data.dataStatus === 'real' && (
+        <p class="mt-2 text-xs text-meta">{t('pdp.spec.pendingStrip')}</p>
+      )
+    }
+  </section>
+
+  <section class="mt-6" aria-labelledby="price-title">
+    <h2 id="price-title" class="caps mb-2 text-xs text-muted">{t('pdp.price.title')}</h2>
+    {
+      band ? (
+        <>
+          <p class="tnum font-display text-2xl font-semibold text-fg">
+            {t('price.prefix')} {priceRange(band.price_low, band.price_high)}
+            <span class="text-sm font-normal text-muted"> {t('price.unit')}</span>
+          </p>
+          <p class="tnum mt-1 text-base font-medium text-fg-2">
+            MOQ {band.min_qty} {t('price.pcs')} per style
+          </p>
+          <p class="mt-1 text-xs text-meta">{t('pdp.price.qualifier')}</p>
+        </>
+      ) : (
+        <>
+          <p class="font-display text-2xl font-semibold text-fg">{t('pdp.price.onRequest')}</p>
+          <p class="mt-1 text-sm text-fg-2">
+            {moqConfirmed
+              ? `MOQ ${data.moq_min} ${t('price.pcs')} per style`
+              : t('pdp.moq.onRequest')}
+          </p>
+          <p class="mt-1 text-xs text-meta">{t('pdp.price.onRequestBody')}</p>
+        </>
+      )
+    }
+  </section>
+
+  <section class="mt-6" aria-labelledby="qty-title">
+    <h2 id="qty-title" class="caps mb-2 text-xs text-muted">{t('pdp.qty.label')}</h2>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-qty-step="-1"
+        class="flex size-11 items-center justify-center rounded-sm border border-border text-fg hover:bg-surface-sunken"
+        aria-label="Decrease quantity"
+      >
+        <Icon name="lucide:minus" class="icon size-4" aria-hidden="true" />
+      </button>
+      <input
+        type="number"
+        inputmode="numeric"
+        value={qtySeed}
+        min={qtySeed}
+        max="999999"
+        step={qtySeed}
+        data-qty-input
+        class="tnum h-11 w-24 rounded-sm border border-border bg-surface px-3 text-center text-sm text-fg"
+        aria-label={t('pdp.qty.label')}
+      />
+      <button
+        type="button"
+        data-qty-step="1"
+        class="flex size-11 items-center justify-center rounded-sm border border-border text-fg hover:bg-surface-sunken"
+        aria-label="Increase quantity"
+      >
+        <Icon name="lucide:plus" class="icon size-4" aria-hidden="true" />
+      </button>
+    </div>
+    <p class="mt-1 text-xs text-meta">
+      {moqConfirmed ? t('pdp.qty.stepIsMoq') : t('pdp.qty.stepDefault')}
+    </p>
+    <p data-qty-adjusted class="mt-1 hidden text-xs text-warn"></p>
+  </section>
+
+  <div class="mt-6 grid gap-2">
+    <button
+      type="button"
+      data-add-to-rfq
+      data-sku={data.sku_code}
+      data-slug={data.slug}
+      data-title={data.title}
+      data-moq={qtySeed}
+      data-qty-source="pdp"
+      class="flex h-12 items-center justify-center gap-2 rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
+    >
+      <Icon name="lucide:file-input" class="icon size-5" aria-hidden="true" />
+      <span data-add-label>{t('cta.addToRfq')}</span>
+    </button>
+    <a
+      href="/samples/"
+      class="flex h-12 items-center justify-center gap-2 rounded-sm border border-accent px-5 text-sm font-medium text-accent transition-colors duration-150 hover:bg-surface-sunken"
+    >
+      {t('cta.requestSamples')}
+    </a>
+  </div>
+
+  <ul class="mt-6 grid gap-2 text-sm text-muted">
+    <li class="flex items-center gap-2">
+      <Icon name="lucide:ruler" class="icon size-4" aria-hidden="true" />
+      <span class="tnum">
+        {moqConfirmed ? t('pdp.moq.label', { min: data.moq_min as number }) : t('pdp.moq.onRequest')}
+      </span>
+    </li>
+    <li class="flex items-center gap-2">
+      <Icon name="lucide:clock" class="icon size-4" aria-hidden="true" />
+      <span>{t('pdp.leadTime')}</span>
+    </li>
+    <li class="flex items-center gap-2">
+      <Icon name="lucide:globe" class="icon size-4" aria-hidden="true" />
+      <span>{t('pdp.ships')}</span>
+    </li>
+    <li class="flex items-center gap-2">
+      <Icon name="lucide:rotate-ccw" class="icon size-4" aria-hidden="true" />
+      <span>{t('pdp.afterSales')}</span>
+    </li>
+  </ul>
+</div>

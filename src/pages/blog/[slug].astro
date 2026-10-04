@@ -1,0 +1,53 @@
+---
+// src/pages/blog/[slug].astro — 文章详情（BlogPosting JSON-LD + 正文 data-pagefind-body 继承自 main）
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { blogPostingJsonld } from '../../lib/seo/jsonld';
+import { getSiteUrl } from '../../lib/seo/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+const site = getSiteUrl(Astro.site);
+const catLabel = t(`blog.category.${post.data.category}` as 'blog.category.material');
+const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(
+  post.data.pubDate,
+);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  path={`/blog/${post.id}/`}
+  ogType="article"
+  jsonld={[
+    blogPostingJsonld({
+      site,
+      path: `/blog/${post.id}/`,
+      headline: post.data.title,
+      description: post.data.description,
+      datePublished: post.data.pubDate,
+    }),
+  ]}
+>
+  <article class="mx-auto max-w-3xl py-10">
+    <p class="caps text-xs font-medium text-meta">{catLabel} · {fmt}</p>
+    <h1 class="mt-3 text-2xl font-semibold leading-tight text-fg">{post.data.title}</h1>
+    <p class="mt-3 text-md text-muted">{post.data.description}</p>
+    <div class="mt-8 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_h3]:mt-4 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ol>li]:ml-5 [&_ol>li]:list-decimal [&_ol]:grid [&_ol]:gap-1.5 [&_ul]:grid [&_ul]:gap-1.5">
+      <Content />
+    </div>
+    <div class="mt-10 border-t border-border pt-6">
+      <a href="/blog/" class="text-sm font-medium text-accent hover:underline">{t('blog.title')}</a>
+    </div>
+  </article>
+</BaseLayout>

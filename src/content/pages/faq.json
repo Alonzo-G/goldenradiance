@@ -1,0 +1,51 @@
+{
+  "title": "Frequently asked questions",
+  "groups": [
+    {
+      "id": "moq",
+      "questions": [
+        { "q": "What is the MOQ?", "a": "MOQ is 12-120 pcs per style, stated on every product page. The band filter in the catalog lets you shop by the MOQ band that fits your order size." },
+        { "q": "Can I order below a style's MOQ?", "a": "Quantities below a style's MOQ can be quoted — flag it at submission and it will be confirmed with your quotation." },
+        { "q": "How does tiered pricing work?", "a": "Priced by tier. Product pages show the reference range for the style's MOQ band; the exact tier table is quoted per order with your RFQ." }
+      ]
+    },
+    {
+      "id": "samples",
+      "questions": [
+        { "q": "Can I order a sample before bulk?", "a": "Yes. Samples are priced at the wholesale reference tier, quoted per order. See the samples page for shipping, returns and dispatch rules." },
+        { "q": "Is the sample fee credited to my first order?", "a": "Sample fees can be credited in full to your first bulk order — the threshold is stated in your sample quotation." },
+        { "q": "Can I mix styles in one sample box?", "a": "Mixed styles within one sample box are allowed — the limit per request is confirmed with your quote." }
+      ]
+    },
+    {
+      "id": "shipping",
+      "questions": [
+        { "q": "What is the production and shipping lead time?", "a": "Lead time is quoted per order. It depends on the styles, quantities and inspection level in your order." },
+        { "q": "Which delivery terms do you support?", "a": "EXW, FOB and DDP. EXW — you collect from our warehouse. FOB — we deliver to the vessel at the named Chinese port. DDP — we handle transport and import duty to your door." },
+        { "q": "Which carriers do you use?", "a": "Carrier options and transit times are quoted per order and destination." }
+      ]
+    },
+    {
+      "id": "customization",
+      "questions": [
+        { "q": "Do you support private label and OEM?", "a": "Yes — your branding, our workshop network, quoted per order. State the requirement in the RFQ notes." },
+        { "q": "Can existing styles be customized?", "a": "Engraving, plating tone and packaging are commonly quoted customizations. Ask with your RFQ and the answer is in writing." }
+      ]
+    },
+    {
+      "id": "payment",
+      "questions": [
+        { "q": "What payment methods and terms do you accept?", "a": "Payment methods and terms are stated with your quotation." },
+        { "q": "What happens if goods arrive defective?", "a": "Defects are replaced or credited after photo review — the claim window is written into your order confirmation." }
+      ]
+    },
+    {
+      "id": "compliance",
+      "questions": [
+        { "q": "Do you provide test reports?", "a": "Test reports are issued per batch and provided with your quotation for the matching product. There is no site-wide blanket pass claim — each report is linked to the alloy, plating and batch you are buying." },
+        { "q": "What is the nickel release limit?", "a": "0.5 µg/cm²/week for coated articles after EN 12472 wear simulation; 0.2 µg/cm²/week for pierced articles such as ear posts. See the nickel release explainer for how the testing works." },
+        { "q": "How do I verify a test report?", "a": "Cross-check the report number with the issuing laboratory. A report without all four attributes — standard, laboratory, report number, date — is not evidence." }
+      ]
+    }
+  ]
+}

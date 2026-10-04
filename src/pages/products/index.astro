@@ -1,0 +1,221 @@
+---
+// src/pages/products/index.astro — 全站目录（AC-01/02/02a/03/04；筛选 sidebar + toolbar + 双视图 + chips + 空状态）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { getSkuIndex, distinctValues } from '../../lib/products/queries';
+import { MOQ_BANDS } from '../../lib/shared/format';
+
+const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
+const ALL_LINES = ['fashion-alloy-brass', 'stainless-titanium-steel', 'natural-stone-gemstone-pearl'] as const;
+
+const index = await getSkuIndex();
+
+/** facet 项只在「至少 1 款可见产品落在该值」时才渲染。
+ *  真实素材款的材质 / 镀层 / MOQ 按内容契约必须留空，因此这三组当前整体不出现——
+ *  若照原样无条件渲染，会留下「有标题没选项」的空组，以及选了必然 0 结果的死筛选。
+ *  这是数据驱动而非硬编码的隐藏：真实数据补齐后自动恢复，不需要再改这里。 */
+const present = <T extends string>(all: readonly T[], hit: (v: T, it: (typeof index)[number]) => boolean): T[] =>
+  all.filter((v) => index.some((it) => hit(v, it)));
+
+const materials = distinctValues(index, 'material');
+const platings = distinctValues(index, 'plating');
+const categories = present(ALL_CATEGORIES, (v, it) => it.category === v);
+const lines = present(ALL_LINES, (v, it) => it.line === v);
+const bands = present(MOQ_BANDS, (v, it) => it.band === v);
+/** MOQ 降级档：只要有任一真实款未确认 MOQ，就渲染「MOQ on request」档，
+ *  让买家能筛选出「起订量随报价确认」的款，而不是整组 MOQ 筛选消失。 */
+const hasUnconfirmedMoq = index.some((it) => it.moqMin == null && it.dataStatus === 'real');
+
+const lineLabel = {
+  'fashion-alloy-brass': t('nav.line.alloy'),
+  'stainless-titanium-steel': t('nav.line.steel'),
+  'natural-stone-gemstone-pearl': t('nav.line.stone'),
+};
+const categoryLabel = Object.fromEntries(ALL_CATEGORIES.map((c) => [c, t(`category.${c}` as 'category.earrings')]));
+const bandLabel = { '12-30': t('filter.moq.b1'), '31-60': t('filter.moq.b2'), '61-120': t('filter.moq.b3') };
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('nav.allProducts'),
+    numberOfItems: index.length,
+  },
+];
+---
+
+<BaseLayout title={t('nav.allProducts')} description={t('meta.description')} path="/products/" jsonld={jsonld}>
+  <div class="mt-6 pb-16">
+    <header class="flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-semibold text-fg">{t('nav.allProducts')}</h1>
+        <p class="tnum mt-1 text-sm text-muted" data-results-count>{t('filter.results', { count: index.length })}</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" data-filters-toggle class="flex h-11 items-center gap-2 rounded-sm border border-border px-4 text-sm font-medium text-fg lg:hidden">
+          <Icon name="lucide:sliders-horizontal" class="icon size-5" aria-hidden="true" />
+          <span data-filters-count-label>{t('filter.openFilters', { count: 0 })}</span>
+        </button>
+        <div class="flex h-11 items-center rounded-sm border border-border" role="radiogroup" aria-label={t('filter.view.grid')}>
+          <button type="button" data-view="grid" role="radio" aria-checked="true" class="flex size-11 items-center justify-center rounded-sm text-fg" aria-label={t('filter.view.grid')}>
+            <Icon name="lucide:layout-grid" class="icon size-5" aria-hidden="true" />
+          </button>
+          <button type="button" data-view="list" role="radio" aria-checked="false" class="flex size-11 items-center justify-center rounded-sm text-muted" aria-label={t('filter.view.list')}>
+            <Icon name="lucide:list" class="icon size-5" aria-hidden="true" />
+          </button>
+        </div>
+        <select data-sort aria-label="Sort" class="h-11 rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+          <option value="featured">{t('filter.sort.featured')}</option>
+          <option value="newest">{t('filter.sort.newest')}</option>
+          <option value="moqAsc">{t('filter.sort.moqAsc')}</option>
+          <option value="priceAsc">{t('filter.sort.priceAsc')}</option>
+        </select>
+      </div>
+    </header>
+
+    {/* Active filter chips（AC-03：单个可移除 + Clear all） */}
+    <div data-chips class="mt-4 flex min-h-9 flex-wrap items-center gap-2"></div>
+
+    <div class="mt-6 grid gap-8 lg:grid-cols-[240px_1fr]">
+      {/* 筛选 sidebar（桌面常驻 / 移动全屏 sheet） */}
+      <aside data-filters class="hidden border-border lg:block">
+        <form data-filter-form class="grid gap-6" onsubmit="return false">
+          {
+            lines.length > 0 && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.line')}</legend>
+                {lines.map((l) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="line" value={l} class="size-4 accent-[var(--color-accent)]" />
+                    {lineLabel[l]}
+                  </label>
+                ))}
+              </fieldset>
+            )
+          }
+          {
+            materials.length > 0 && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.material')}</legend>
+                {materials.map((m) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="material" value={m} class="size-4 accent-[var(--color-accent)]" />
+                    {m}
+                  </label>
+                ))}
+              </fieldset>
+            )
+          }
+          {
+            platings.length > 0 && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.plating')}</legend>
+                {platings.map((p) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="plating" value={p} class="size-4 accent-[var(--color-accent)]" />
+                    {p}
+                  </label>
+                ))}
+              </fieldset>
+            )
+          }
+          {
+            categories.length > 0 && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.category')}</legend>
+                {categories.map((c) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="category" value={c} class="size-4 accent-[var(--color-accent)]" />
+                    {categoryLabel[c]}
+                  </label>
+                ))}
+              </fieldset>
+            )
+          }
+          {
+            (bands.length > 0 || hasUnconfirmedMoq) && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.moq')}</legend>
+                {bands.map((b) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="band" value={b} class="size-4 accent-[var(--color-accent)]" />
+                    {bandLabel[b]} {t('price.pcs')}
+                  </label>
+                ))}
+                {
+                  hasUnconfirmedMoq && (
+                    <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                      <input type="checkbox" name="band" value="on_request" class="size-4 accent-[var(--color-accent)]" />
+                      {t('filter.moq.onRequest')}
+                    </label>
+                  )
+                }
+              </fieldset>
+            )
+          }
+          <fieldset>
+            <legend class="caps mb-2 text-xs text-muted">{t('filter.compliance')}</legend>
+            <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+              <input type="checkbox" name="compliance" value="on_request" checked disabled class="size-4" />
+              {t('filter.compliance.on_request')}
+            </label>
+          </fieldset>
+          <button type="button" data-clear-all class="h-11 rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">
+            {t('filter.clearAll')}
+          </button>
+        </form>
+      </aside>
+
+      <div>
+        {/* 批量加入条（AC-03） */}
+        <div data-bulk-bar hidden class="mb-4 flex items-center gap-3 rounded-sm border border-border bg-surface-sunken px-4 py-2">
+          <span data-bulk-count class="tnum text-sm text-fg-2"></span>
+          <button type="button" data-bulk-add class="h-9 rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on hover:bg-accent-metal-hover">
+            {t('filter.bulkAdd')}
+          </button>
+        </div>
+
+        {/* Grid / List 双视图画布 */}
+        <div data-catalog-grid class="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4"></div>
+        <div data-catalog-list hidden class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border text-left">
+                <th class="py-2 pr-3"><span class="sr-only">Select</span></th>
+                <th class="caps py-2 pr-3 text-xs font-medium text-muted">SKU</th>
+                <th class="caps py-2 pr-3 text-xs font-medium text-muted">{t('filter.category')}</th>
+                <th class="caps py-2 pr-3 text-xs font-medium text-muted">{t('filter.material')}</th>
+                <th class="caps py-2 pr-3 text-right text-xs font-medium text-muted">MOQ</th>
+                <th class="caps py-2 pr-3 text-right text-xs font-medium text-muted">{t('pdp.price.title')}</th>
+                <th class="py-2 text-right"><span class="sr-only">{t('cta.addToRfq')}</span></th>
+              </tr>
+              <tr>
+                <td colspan="7" class="pb-1 text-xs text-meta">{t('pdp.price.qualifier')}</td>
+              </tr>
+            </thead>
+            <tbody data-catalog-list-body class="divide-y divide-border-soft"></tbody>
+          </table>
+        </div>
+
+        {/* 空状态（AC-04） */}
+        <div data-catalog-empty hidden class="py-16 text-center">
+          <p class="text-base font-medium text-fg">{t('empty.catalog.title')}</p>
+          <p class="mt-2 text-sm text-muted">{t('empty.catalog.desc')}</p>
+          <div class="mt-5 flex flex-wrap justify-center gap-2">
+            <button type="button" data-clear-last class="h-11 rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">
+              {t('cta.clearFilters')}
+            </button>
+            <a href="/contact/" class="flex h-11 items-center rounded-sm bg-accent px-4 text-sm font-medium text-accent-on hover:bg-accent-hover">
+              {t('empty.catalog.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import '../../components/product/catalog';
+</script>

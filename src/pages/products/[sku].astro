@@ -1,0 +1,237 @@
+---
+// src/pages/products/[sku].astro — PDP（UIUX §13：Gallery + sticky 购买面板 + 七项规格 + 合规 mini-block）
+import { getProducts, sameSeries, crossLine, toSkuIndexItem } from '../../lib/products/queries';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/product/Gallery.astro';
+import BuyPanel from '../../components/product/BuyPanel.astro';
+import ProductCard from '../../components/product/ProductCard.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { overallRange } from '../../lib/shared/format';
+import { productJsonld, breadcrumbJsonld } from '../../lib/seo/jsonld';
+import { getSiteUrl } from '../../lib/seo/site';
+
+export async function getStaticPaths() {
+  const items = await getProducts();
+  return items.map((entry) => ({
+    params: { sku: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+const all = await getProducts();
+const series = sameSeries(all, entry).map(toSkuIndexItem);
+const paired = crossLine(all, entry).map(toSkuIndexItem);
+const range = overallRange(data.tiered_price);
+
+const jsonld = [
+  productJsonld({
+    site: getSiteUrl(Astro.site),
+    path: `/products/${data.slug}/`,
+    sku: data.sku_code,
+    title: data.title,
+    slug: data.slug,
+    description: data.short_description,
+    brand: 'Golden Radiance',
+    image: data.images?.[0]?.src ?? null,
+    priceLow: range?.low ?? null,
+    priceHigh: range?.high ?? null,
+    tierCount: data.tiered_price?.length ?? 0,
+    moqMin: data.moq_min ?? null,
+    material: data.base_material_grade ?? null,
+    plating: data.plating_method ?? null,
+  }),
+  breadcrumbJsonld(getSiteUrl(Astro.site), [
+    { name: 'Home', path: '/' },
+    { name: t('pdp.breadcrumb.products'), path: '/products/' },
+    { name: t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : data.line === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy'), path: `/product-lines/${data.line}/` },
+    { name: data.title, path: `/products/${data.slug}/` },
+  ]),
+];
+
+/** LCP 预加载：首帧主图是页面最大元素，尽早取回。
+ *  imagesrcset / imagesizes 必须与 Gallery 首帧 <img> 的 srcset / sizes 逐字一致——
+ *  不一致会让浏览器额外下载一份候选图、缓存不命中，等于白付一次 1200px 图片的代价。 */
+const lcp = data.images?.[0];
+const lcpSizes = '(min-width: 1024px) 48vw, 100vw';
+const lcpSrcset = lcp?.width && lcp?.thumb ? `${lcp.thumb} 360w, ${lcp.src} ${lcp.width}w` : undefined;
+
+/** 社交分享图：每款真实产品一张 1200x630 JPEG（scripts/make-og-images.mjs 生成）。
+ *  全部指向同一张 og-default.png 会让 111 个产品页在分享卡片里长得一模一样。
+ *  判定条件与生成脚本一致（`dataStatus: real` 且有实拍主图即必已生成），不用 fs 探测——
+ *  构建期 process.cwd() 不可靠，探测会静默失败。漏跑生成脚本的情况由
+ *  `scripts/verify-catalog-consistency.mjs` 的 og:image 可达性断言拦下，不在这里兜。 */
+const ogImage = data.dataStatus === 'real' && lcp ? `/og/${data.slug}.jpg` : undefined;
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.short_description}
+  path={`/products/${data.slug}/`}
+  image={ogImage}
+  imageAlt={data.title}
+  jsonld={jsonld}
+>
+  {
+    lcp && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        href={lcp.src}
+        imagesrcset={lcpSrcset}
+        imagesizes={lcpSizes}
+        fetchpriority="high"
+      />
+    )
+  }
+  <nav aria-label="Breadcrumb" class="mt-6 text-sm text-muted">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li><a href="/" class="hover:underline">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="/products/" class="hover:underline">{t('pdp.breadcrumb.products')}</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href={`/product-lines/${data.line}/`} class="hover:underline">{t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : data.line === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy')}</a></li>
+      <li aria-hidden="true">/</li>
+      <li aria-current="page" class="font-mono text-xs text-meta">{data.sku_code}</li>
+    </ol>
+  </nav>
+
+  {/* 风格标签：仅在供应商标题/图片给出明确依据时渲染，无标签则整块不出现 */}
+  {
+    (data.style_tags?.length ?? 0) > 0 && (
+      <ul class="mt-5 flex flex-wrap items-center gap-2" aria-label={t('pdp.styleTags')}>
+        <li class="caps text-xs text-muted">{t('pdp.styleTags')}</li>
+        {data.style_tags.map((tag) => (
+          <li class="rounded-sm border border-border-soft px-2 py-1 text-xs text-fg-2">{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  <div class="mt-6 grid gap-10 pb-24 lg:grid-cols-[1.2fr_1fr] lg:pb-10">
+    <Gallery data={data} />
+
+    {/* sticky 购买面板 */}
+    <div class="lg:sticky lg:top-24 lg:self-start" data-rfq-scope>
+      <BuyPanel data={data} />
+    </div>
+  </div>
+
+  {/* 合规 mini-block：仅两种合法形态（AC-38/39）；四要素缺失恒降级 + ear_post 教育口径（AC-40） */}
+  <section class="border-t border-border py-8" aria-labelledby="pdp-compliance">
+    <h2 id="pdp-compliance" class="caps text-xs text-muted">{t('pdp.compliance.title')}</h2>
+    <p class="mt-3 flex items-start gap-2 text-sm text-fg-2">
+      <Icon name="lucide:shield-check" class="icon mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+      <span>{t('pdp.compliance.degraded')}</span>
+    </p>
+    {data.ear_post && (
+      <p class="mt-2 text-sm text-fg-2">{t('pdp.compliance.earPost')}</p>
+    )}
+    <a href="/compliance/nickel-release-en-1811/" class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline">
+      {t('cta.howWeTest')}
+      <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+    </a>
+  </section>
+
+  {/* 三条 accordion（原生 details，无 JS） */}
+  <section class="border-t border-border py-8">
+    {[
+      { id: 'details', title: t('pdp.acc.details'), body: data.short_description },
+      {
+        id: 'care',
+        title: t('pdp.acc.care'),
+        body:
+          data.plating_method && data.plating_thickness_um
+            ? `${data.plating_method} at ${data.plating_thickness_um.toFixed(2)} µm over ${data.base_material_grade}. Plating thickness is stated per style and checked at incoming inspection.`
+            : t('pdp.acc.care.pending'),
+      },
+      {
+        id: 'packaging',
+        title: t('pdp.acc.packaging'),
+        body: 'Packaging and labeling options (poly bag, opp card, custom box) are stated with your quotation — ask in the RFQ notes.',
+      },
+    ].map((acc) => (
+      <details class="group border-b border-border-soft py-3">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-base font-medium text-fg [&::-webkit-details-marker]:hidden">
+          {acc.title}
+          <Icon name="lucide:chevron-down" class="icon size-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{acc.body}</p>
+      </details>
+    ))}
+  </section>
+
+  {/* Same series + Cross-line rails */}
+  <section class="border-t border-border py-8">
+    <h2 class="text-xl font-semibold text-fg">{t('pdp.sameSeries')}</h2>
+    <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {series.map((item) => <ProductCard item={item} />)}
+    </div>
+  </section>
+  <section class="pb-10 pt-4">
+    <h2 class="text-xl font-semibold text-fg">{t('pdp.paired')}</h2>
+    <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {paired.map((item) => <ProductCard item={item} />)}
+    </div>
+  </section>
+
+  {/* 移动端 sticky bottom bar（UIUX §13：64px + safe-area） */}
+  <div
+    data-rfq-scope
+    class="fixed inset-x-0 bottom-0 z-[210] flex h-16 items-center justify-between gap-3 border-t border-border bg-surface px-4 pb-[env(safe-area-inset-bottom)] lg:hidden"
+  >
+    <p class="tnum text-xs text-muted" data-mobile-bar-summary></p>
+    <div class="flex items-center gap-2">
+      <a href="/contact/" class="flex size-11 items-center justify-center rounded-sm border border-border text-fg" aria-label="Email">
+        <Icon name="lucide:mail" class="icon size-5" aria-hidden="true" />
+      </a>
+      <a href="/rfq/" class="flex h-11 items-center rounded-sm bg-accent-metal px-4 text-sm font-medium text-metal-on">
+        {t('pdp.mobileBar.submit')}
+      </a>
+    </div>
+  </div>
+
+  {/* 数量步进：MOQ 倍数自动取整（UIUX §10.2） */}
+  <script>
+    import { roundToMoq } from '../../lib/shared/format';
+    import { rfqPcs, rfqCount } from '../../stores/rfq';
+    import { t } from '../../i18n';
+    import { onSet } from 'nanostores';
+
+    const scope = document.querySelector('[data-rfq-scope]');
+    const input = scope?.querySelector<HTMLInputElement>('[data-qty-input]');
+    const moq = Number(input?.min ?? 12);
+    const hint = scope?.querySelector<HTMLElement>('[data-qty-adjusted]');
+    input?.addEventListener('change', () => {
+      const v = Number(input.value) || moq;
+      const rounded = roundToMoq(v, moq);
+      if (rounded !== v) {
+        input.value = String(rounded);
+        if (hint) {
+          hint.textContent = `Adjusted to MOQ multiple (${moq})`;
+          hint.classList.remove('hidden');
+        }
+      }
+    });
+    scope?.querySelectorAll<HTMLButtonElement>('[data-qty-step]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const dir = Number(btn.dataset.qtyStep ?? 0);
+        const cur = Number(input?.value ?? moq) || moq;
+        if (input) input.value = String(Math.max(moq, cur + dir * moq));
+        input?.dispatchEvent(new Event('change'));
+      });
+    });
+
+    const summary = document.querySelector<HTMLElement>('[data-mobile-bar-summary]');
+    const paint = () => {
+      if (summary)
+        summary.textContent = t('pdp.mobileBar.summary', { count: rfqCount.get(), pcs: rfqPcs.get() });
+    };
+    paint();
+    onSet(rfqCount, paint);
+    onSet(rfqPcs, paint);
+  </script>
+</BaseLayout>

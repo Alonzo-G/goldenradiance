@@ -1,0 +1,99 @@
+---
+// src/components/product/Gallery.astro — PDP 画廊
+// 真实素材款：逐张实拍图 + 缩略切换；无图款：沿用四帧占位图（A1 主图 / A2 批次 / A3 比例 / A4 微距）
+import { t } from '../../i18n';
+import ProductImage from './ProductImage.astro';
+import type { ProductData } from '../../lib/products/queries';
+
+interface Props {
+  data: ProductData;
+  class?: string;
+}
+const { data, class: cls } = Astro.props;
+
+const realImages = data.images ?? [];
+const alt = [data.title, data.base_material_grade, data.plating_method].filter(Boolean).join(', ');
+
+/** 统一成 { id, label, image } 帧结构 */
+const frames =
+  realImages.length > 0
+    ? realImages.map((im, i) => ({
+        id: `shot-${i + 1}`,
+        label: `${data.title} — view ${i + 1}`,
+        image: im,
+      }))
+    : [
+        { id: 'main', label: data.category, image: null },
+        { id: 'batch', label: `${data.category} — batch grid`, image: null },
+        { id: 'scale', label: `${data.category} — scale`, image: null },
+        { id: 'macro', label: `${data.category} — detail`, image: null },
+      ];
+---
+
+<div class={cls} data-gallery>
+  <div id={`gallery-main-${data.sku_code}`}>
+    {
+      frames.map((f, i) => (
+        <div data-frame={f.id} class:list={[i > 0 && 'hidden']}>
+          <ProductImage
+            image={f.image}
+            category={data.category}
+            line={data.line}
+            label={f.label}
+            ratio="1:1"
+            alt={`${alt}${i > 0 ? ` (${f.id})` : ''}`}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            sizes="(min-width: 1024px) 48vw, 100vw"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <div class="mt-3 flex flex-wrap gap-2" role="tablist" aria-label={t('pdp.spec.title')}>
+    {
+      frames.map((f, i) => (
+        <button
+          type="button"
+          data-thumb={f.id}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-label={t('pdp.gallery.thumb', { n: i + 1, total: frames.length })}
+          class:list={[
+            'size-15 overflow-hidden rounded-sm border bg-surface-warm p-0.5',
+            i === 0 ? 'border-accent' : 'border-border',
+          ]}
+        >
+          <ProductImage
+            image={f.image}
+            category={data.category}
+            line={data.line}
+            label={f.label}
+            ratio="1:1"
+            alt=""
+            variant="thumb"
+            sizes="60px"
+          />
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const thumbs = gallery.querySelectorAll<HTMLButtonElement>('[data-thumb]');
+    const frames = gallery.querySelectorAll<HTMLElement>('[data-frame]');
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const id = thumb.dataset.thumb ?? '';
+        frames.forEach((f) => f.classList.toggle('hidden', f.dataset.frame !== id));
+        thumbs.forEach((tb) => tb.setAttribute('aria-selected', String(tb === thumb)));
+        thumbs.forEach((tb) => {
+          tb.classList.toggle('border-accent', tb === thumb);
+          tb.classList.toggle('border-border', tb !== thumb);
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,566 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$meta": {
+    "name": "Jewelry B2B Global",
+    "version": "0.5.0-draft",
+    "phase": "Phase 1",
+    "owner": "颜好看 / UIUX Designer",
+    "updated": "2026-10-01",
+    "sourceDoc": "docs/UIUX.md",
+    "registry": "mixed — Brand register (home / product-line landing / about / resources), Product register (catalog / search / PDP / RFQ / compliance / policies)",
+    "axes": {
+      "DESIGN_VARIANCE": 6,
+      "MOTION_INTENSITY": 3,
+      "VISUAL_DENSITY": "3 (brand pages) / 7 (catalog pages)"
+    },
+    "locked": {
+      "icons": "Lucide — 24px canvas, strokeWidth 1.5, sizes 16/20/24 only",
+      "fonts": [
+        "Archivo (display)",
+        "Public Sans (body)",
+        "JetBrains Mono (SKU / numerals)",
+        "HarmonyOS Sans SC / Noto Sans SC (CN, admin only)"
+      ],
+      "currency": "USD only in V1 — currency embedded in the price string (USD 3.80-4.60), no switcher",
+      "locale": "storefront = en only; admin UI = zh-CN; the two are fully decoupled. URLs carry NO language prefix (ADR-004 /{lang}/ proposal rejected — see UIUX §11). i18n is v2 groundwork only: dictionary file externalised, hreflang=\"x-default\" slot reserved. V1 emits no second-language routes and renders no language switcher (not even disabled).",
+      "note": "Do NOT mix a second icon library. Do NOT hardcode colors outside tokens. Do NOT render a disabled EN / USD dropdown.",
+      "priceDisplay": {
+        "status": "P0 must-show on list cards AND PDP — not optional decoration",
+        "format": "USD 3.80-4.60 / pc  next to  MOQ 24 pcs",
+        "qualifier": "Reference range — quoted per order  (MUST be visible, not a tooltip)",
+        "rationale": "PM research: hidden MOQ / price / lead time is the #1 pain point for overseas wholesale buyers",
+        "boundary": "Precise tiered price table (per-band fixed unit price) is NOT rendered on public pages — routed to RFQ instead, preserving negotiation room for the trading-company client",
+        "alignment": "Satisfies PRD AC-07: >=3 quantity bands, each showing a unit price RANGE, never a fixed price"
+      },
+      "numerals": "All prices / MOQ / dimensions / weight use tabular-nums (Public Sans native tabular figures). Currency prefix is always the 3-letter code \"USD\" so decimal points align vertically across a 1000+ SKU column. JetBrains Mono is reserved for SKU codes and dense numeric identifiers, not measurements."
+    },
+    "confirmedClientData": {
+      "productPhotography": "Several hundred commercially-licensed real product photos, decent quality — unlocks the only P0 blocker (UIUX §17 #9). Requires a client-side usable/reshoot/discard triage pass per UIUX §6.4.",
+      "skuScale": "Hundreds of styles — write as magnitude (Hundreds of styles), NOT an exact number",
+      "moq": "12-120 pcs per style — write as a range (MOQ 12-120 pcs, stated per style), NOT a single point value",
+      "complianceReports": "None held yet; client acknowledges reports can be commissioned later — keep degraded copy (AC-38)",
+      "adminLocale": "zh-CN"
+    },
+    "pendingClientData": [
+      "tiered price brackets",
+      "per-line typical MOQ bands",
+      "real production & shipping lead times",
+      "committed RFQ response time",
+      "countries / regions covered",
+      "logistics methods (DDP / FOB / EXW) & carriers",
+      "sample policy",
+      "brand CN/EN name, logo, slogan",
+      "new-arrival cadence per line"
+    ],
+    "stack": {
+      "framework": "Astro 7.3.5 (static-first, zero JS by default)",
+      "styling": "Tailwind CSS 4.3.3 (CSS-first config, @theme token injection)",
+      "icons": "astro-icon 1.2.0 + @iconify-json/lucide 1.2.138 (build-time inline, no runtime JS)",
+      "state": "Nanostores + @nanostores/persistent 1.3.5 (rfq_v1 / compliance_v1, listen:true)",
+      "search": "Pagefind 1.5.2 (extended, CJK segmentation) + SKU dual index",
+      "perfBudget": "images long edge <=1200px, WebP/AVIF, LCP <2.5s, CLS <0.1, INP <200ms, no CJK font in EN route bundles"
+    }
+  },
+  "color": {
+    "bg": {
+      "value": "#F7F8F9",
+      "type": "color",
+      "layer": "A1",
+      "role": "page background (cool off-white)"
+    },
+    "surface": {
+      "value": "#FFFFFF",
+      "type": "color",
+      "layer": "A1",
+      "role": "card / table / drawer"
+    },
+    "surface-inverse": {
+      "value": "#123A38",
+      "type": "color",
+      "layer": "A1",
+      "role": "dark plane: hero landing / footer / trust band"
+    },
+    "fg": {
+      "value": "#14181C",
+      "type": "color",
+      "layer": "A1",
+      "role": "primary text (deep ink, never pure black)"
+    },
+    "fg-inverse": {
+      "value": "#F4F6F5",
+      "type": "color",
+      "layer": "A1",
+      "role": "text on dark plane"
+    },
+    "muted": {
+      "value": "#5B6470",
+      "type": "color",
+      "layer": "A1",
+      "role": "secondary text / spec labels (5.6:1 on bg)"
+    },
+    "border": {
+      "value": "#E3E6EA",
+      "type": "color",
+      "layer": "A1",
+      "role": "default border / divider"
+    },
+    "accent": {
+      "value": "#123A38",
+      "type": "color",
+      "layer": "A1",
+      "role": "brand identity — Teal Ink (jeweller's baize)"
+    },
+    "accent-metal": {
+      "value": "#7D6330",
+      "type": "color",
+      "layer": "A1",
+      "role": "CTA highlight — Antique Brass (conversion thread)"
+    },
+    "accent-hover": {
+      "value": "#0C2B29",
+      "type": "color",
+      "layer": "A2"
+    },
+    "accent-active": {
+      "value": "#081E1D",
+      "type": "color",
+      "layer": "A2"
+    },
+    "accent-on": {
+      "value": "#FFFFFF",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "12.5:1"
+    },
+    "accent-metal-hover": {
+      "value": "#6A5327",
+      "type": "color",
+      "layer": "A2"
+    },
+    "metal-on": {
+      "value": "#FFFFFF",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "5.7:1"
+    },
+    "success": {
+      "value": "#1A6B4F",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "5.4:1"
+    },
+    "warn": {
+      "value": "#8A5A00",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "4.9:1"
+    },
+    "danger": {
+      "value": "#B42318",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "5.9:1"
+    },
+    "info": {
+      "value": "#1D4E6B",
+      "type": "color",
+      "layer": "A2",
+      "contrast": "6.4:1"
+    },
+    "overlay": {
+      "value": "rgba(20,24,28,0.32)",
+      "type": "color",
+      "layer": "A2",
+      "note": "scrim only — never blur"
+    },
+    "fg-2": {
+      "value": "#3A4149",
+      "type": "color",
+      "layer": "B"
+    },
+    "surface-warm": {
+      "value": "#FBFCFC",
+      "type": "color",
+      "layer": "B",
+      "role": "product image mat (not pure white, so light metal edges survive)"
+    },
+    "surface-sunken": {
+      "value": "#F0F2F3",
+      "type": "color",
+      "layer": "B",
+      "role": "table zebra / secondary container"
+    },
+    "meta": {
+      "value": "#79828E",
+      "type": "color",
+      "layer": "B",
+      "role": "tertiary text / timestamps"
+    },
+    "border-soft": {
+      "value": "#EEF0F2",
+      "type": "color",
+      "layer": "B",
+      "role": "row separator inside tables"
+    },
+    "border-inverse": {
+      "value": "#1F4A47",
+      "type": "color",
+      "layer": "B",
+      "role": "border on dark plane"
+    },
+    "line-alloy": {
+      "value": "#6E6555",
+      "type": "color",
+      "layer": "C",
+      "role": "Fashion alloy & brass"
+    },
+    "line-steel": {
+      "value": "#4A5A63",
+      "type": "color",
+      "layer": "C",
+      "role": "Stainless & titanium steel"
+    },
+    "line-stone": {
+      "value": "#5D5069",
+      "type": "color",
+      "layer": "C",
+      "role": "Natural stone, lab gem & pearl"
+    }
+  },
+  "font": {
+    "family": {
+      "display": {
+        "value": "Archivo, 'HarmonyOS Sans SC', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif",
+        "type": "fontFamily"
+      },
+      "body": {
+        "value": "'Public Sans', 'HarmonyOS Sans SC', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif",
+        "type": "fontFamily"
+      },
+      "mono": {
+        "value": "'JetBrains Mono', ui-monospace, SFMono-Regular, monospace",
+        "type": "fontFamily"
+      }
+    },
+    "size": {
+      "xs": {
+        "value": "12px",
+        "type": "dimension"
+      },
+      "sm": {
+        "value": "14px",
+        "type": "dimension"
+      },
+      "base": {
+        "value": "16px",
+        "type": "dimension"
+      },
+      "md": {
+        "value": "18px",
+        "type": "dimension"
+      },
+      "lg": {
+        "value": "20px",
+        "type": "dimension"
+      },
+      "xl": {
+        "value": "24px",
+        "type": "dimension"
+      },
+      "2xl": {
+        "value": "32px",
+        "type": "dimension"
+      },
+      "3xl": {
+        "value": "40px",
+        "type": "dimension"
+      }
+    },
+    "weight": {
+      "read": {
+        "value": "400",
+        "type": "fontWeight"
+      },
+      "emphasize": {
+        "value": "500",
+        "type": "fontWeight"
+      },
+      "subhead": {
+        "value": "600",
+        "type": "fontWeight"
+      },
+      "announce": {
+        "value": "700",
+        "type": "fontWeight"
+      }
+    },
+    "leading": {
+      "hero": {
+        "value": "1.08",
+        "type": "number"
+      },
+      "tight": {
+        "value": "1.25",
+        "type": "number"
+      },
+      "snug": {
+        "value": "1.4",
+        "type": "number"
+      },
+      "body": {
+        "value": "1.6",
+        "type": "number"
+      },
+      "ui": {
+        "value": "1.45",
+        "type": "number"
+      }
+    },
+    "tracking": {
+      "caps": {
+        "value": "0.08em",
+        "type": "dimension"
+      },
+      "hero": {
+        "value": "-0.025em",
+        "type": "dimension"
+      },
+      "heading": {
+        "value": "-0.015em",
+        "type": "dimension"
+      },
+      "body": {
+        "value": "0",
+        "type": "dimension"
+      },
+      "cjk": {
+        "value": "0.02em",
+        "type": "dimension"
+      }
+    }
+  },
+  "space": {
+    "1": {
+      "value": "4px",
+      "type": "dimension"
+    },
+    "2": {
+      "value": "8px",
+      "type": "dimension"
+    },
+    "3": {
+      "value": "12px",
+      "type": "dimension"
+    },
+    "4": {
+      "value": "16px",
+      "type": "dimension"
+    },
+    "5": {
+      "value": "20px",
+      "type": "dimension"
+    },
+    "6": {
+      "value": "24px",
+      "type": "dimension"
+    },
+    "8": {
+      "value": "32px",
+      "type": "dimension"
+    },
+    "10": {
+      "value": "40px",
+      "type": "dimension"
+    },
+    "12": {
+      "value": "48px",
+      "type": "dimension"
+    },
+    "16": {
+      "value": "64px",
+      "type": "dimension"
+    },
+    "20": {
+      "value": "80px",
+      "type": "dimension"
+    }
+  },
+  "radius": {
+    "none": {
+      "value": "0",
+      "type": "dimension"
+    },
+    "xs": {
+      "value": "2px",
+      "type": "dimension"
+    },
+    "sm": {
+      "value": "4px",
+      "type": "dimension"
+    },
+    "md": {
+      "value": "6px",
+      "type": "dimension"
+    },
+    "lg": {
+      "value": "8px",
+      "type": "dimension"
+    },
+    "pill": {
+      "value": "9999px",
+      "type": "dimension"
+    }
+  },
+  "elevation": {
+    "flat": {
+      "value": "none",
+      "type": "boxShadow"
+    },
+    "ring": {
+      "value": "0 0 0 1px var(--border)",
+      "type": "boxShadow"
+    },
+    "raised": {
+      "value": "0 1px 2px rgba(20,24,28,0.04), 0 4px 10px rgba(20,24,28,0.06)",
+      "type": "boxShadow"
+    },
+    "drawer": {
+      "value": "-8px 0 32px rgba(20,24,28,0.10)",
+      "type": "boxShadow"
+    }
+  },
+  "motion": {
+    "duration": {
+      "instant": {
+        "value": "80ms",
+        "type": "duration"
+      },
+      "fast": {
+        "value": "150ms",
+        "type": "duration"
+      },
+      "base": {
+        "value": "240ms",
+        "type": "duration"
+      },
+      "slow": {
+        "value": "300ms",
+        "type": "duration"
+      },
+      "timeout": {
+        "value": "800ms",
+        "type": "duration"
+      }
+    },
+    "easing": {
+      "out": {
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "type": "cubicBezier"
+      },
+      "inOut": {
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "type": "cubicBezier"
+      }
+    },
+    "banned": [
+      "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "any spring / overshoot easing"
+    ]
+  },
+  "zIndex": {
+    "base": "0",
+    "header": "200",
+    "stickyPanel": "210",
+    "dropdown": "300",
+    "overlay": "400",
+    "drawer": "410",
+    "modal": "500",
+    "toast": "600"
+  },
+  "container": {
+    "max": {
+      "value": "1280px",
+      "type": "dimension"
+    },
+    "wide": {
+      "value": "1440px",
+      "type": "dimension"
+    },
+    "gutter-desktop": {
+      "value": "24px",
+      "type": "dimension"
+    },
+    "gutter-tablet": {
+      "value": "16px",
+      "type": "dimension"
+    },
+    "gutter-phone": {
+      "value": "12px",
+      "type": "dimension"
+    }
+  },
+  "sectionY": {
+    "desktop": {
+      "value": "80px",
+      "type": "dimension"
+    },
+    "tablet": {
+      "value": "56px",
+      "type": "dimension"
+    },
+    "phone": {
+      "value": "40px",
+      "type": "dimension"
+    }
+  },
+  "icon": {
+    "inline": {
+      "value": "16px",
+      "type": "dimension"
+    },
+    "button": {
+      "value": "20px",
+      "type": "dimension"
+    },
+    "standalone": {
+      "value": "24px",
+      "type": "dimension"
+    },
+    "strokeWidth": {
+      "value": "1.5",
+      "type": "number"
+    },
+    "library": {
+      "value": "Lucide",
+      "type": "string"
+    }
+  },
+  "touchTarget": {
+    "min": {
+      "value": "44px",
+      "type": "dimension"
+    },
+    "gap": {
+      "value": "8px",
+      "type": "dimension"
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "value": "640px",
+      "type": "dimension"
+    },
+    "md": {
+      "value": "768px",
+      "type": "dimension"
+    },
+    "lg": {
+      "value": "1024px",
+      "type": "dimension"
+    },
+    "xl": {
+      "value": "1280px",
+      "type": "dimension"
+    }
+  }
+}

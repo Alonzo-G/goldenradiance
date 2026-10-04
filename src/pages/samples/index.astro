@@ -1,0 +1,29 @@
+---
+// src/pages/samples/index.astro — 样品政策（AC-21/23）
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+
+const entries = await getCollection('pages', (e) => e.id === 'samples');
+const entry = entries[0];
+const { Content } = entry ? await render(entry) : { Content: null };
+---
+
+<BaseLayout title={t('sample.title')} description={t('sample.intro')} path="/samples/">
+  <div class="mx-auto max-w-3xl py-10">
+    <h1 class="text-2xl font-semibold text-fg">{t('sample.title')}</h1>
+    <p class="mt-2 text-md text-muted">{t('sample.intro')}</p>
+    {Content && (
+      <div class="mt-8 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5">
+        <Content />
+      </div>
+    )}
+    {/* AC-23：样品费抵扣规则双落点之一（另一处在 RFQ 确认/摘要） */}
+    <p class="mt-8 rounded-md border border-border bg-surface-sunken p-4 text-sm text-fg-2">{t('sample.credit')}</p>
+    <div class="mt-8">
+      <a href="/rfq/" class="flex h-12 w-full items-center justify-center rounded-sm bg-accent-metal text-sm font-medium text-metal-on hover:bg-accent-metal-hover sm:w-64">
+        {t('cta.requestSamples')}
+      </a>
+    </div>
+  </div>
+</BaseLayout>

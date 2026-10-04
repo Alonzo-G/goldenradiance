@@ -1,0 +1,31 @@
+---
+// src/components/home/HomeStats.astro — 首页信任数字条（4 格，紧贴 Hero 下方）
+// 数字从真实数据动态计算，禁止手写编造：styles 随入库自动涨、lines 固定、MOQ 沿用已确认区间。
+// 第 4 格（lead time）未拿到客户可对外承诺的交期前，降级为「Quoted per order」而非写死数字。
+import { t } from '../../i18n';
+import { getProducts } from '../../lib/products/queries';
+
+const products = await getProducts();
+const styleCount = products.length;
+const lineCount = 3;
+
+const stats = [
+  { value: `${styleCount}+`, label: t('stats.styles') },
+  { value: `${lineCount}`, label: t('stats.lines') },
+  { value: '12–120', label: t('stats.moq') },
+  { value: 'Quoted', label: t('stats.leadTime') },
+];
+---
+
+<section class="border-y border-border-soft bg-surface-warm">
+  <div class="container-wide grid grid-cols-2 gap-px sm:grid-cols-4">
+    {
+      stats.map((s) => (
+        <div class="flex flex-col items-center gap-1 py-6 text-center">
+          <p class="tnum font-display text-2xl font-semibold text-fg">{s.value}</p>
+          <p class="text-xs text-muted">{s.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

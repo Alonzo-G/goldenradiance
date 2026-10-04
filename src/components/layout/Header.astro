@@ -1,0 +1,113 @@
+---
+// src/components/layout/Header.astro — 三产品线导航 + 品牌 + 搜索 + RFQ 计数徽标（AC-01）
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import Wordmark from './Wordmark.astro';
+
+const lines = [
+  { id: 'fashion-alloy-brass', label: t('nav.line.alloy') },
+  { id: 'stainless-titanium-steel', label: t('nav.line.steel') },
+  { id: 'natural-stone-gemstone-pearl', label: t('nav.line.stone') },
+];
+---
+
+<header class="sticky top-0 z-[200] border-b border-border bg-surface">
+  <div class="container-page flex h-16 items-center gap-4">
+    <a href="/" aria-label="Golden Radiance — home" class="shrink-0">
+      <Wordmark variant="header" />
+    </a>
+
+    <nav class="hidden items-center gap-1 lg:flex" aria-label={t('nav.productLines')}>
+      <details class="group relative">
+        <summary class="flex h-11 cursor-pointer list-none items-center gap-1 rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken [&::-webkit-details-marker]:hidden">
+          {t('nav.productLines')}
+          <Icon name="lucide:chevron-down" class="icon size-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div class="absolute left-0 top-full z-[300] w-72 rounded-md border border-border bg-surface py-1 shadow-raised">
+          {lines.map((l) => (
+            <a href={`/product-lines/${l.id}/`} class="block px-4 py-2.5 text-sm text-fg hover:bg-surface-sunken">
+              {l.label}
+            </a>
+          ))}
+        </div>
+      </details>
+      <a href="/products/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.allProducts')}</a>
+      <a href="/compliance/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.compliance')}</a>
+      <a href="/sourcing-partners/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.sourcing')}</a>
+      <a href="/blog/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.blog')}</a>
+      <a href="/contact/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.contact')}</a>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2">
+      <button
+        type="button"
+        data-search-open
+        class="flex h-11 items-center gap-2 rounded-sm border border-border px-3 text-sm text-muted hover:border-accent hover:text-fg"
+      >
+        <Icon name="lucide:search" class="icon size-5" aria-hidden="true" />
+        <span class="hidden md:inline">{t('nav.searchPlaceholder')}</span>
+        <span class="sr-only md:hidden">{t('nav.search')}</span>
+      </button>
+      <button
+        type="button"
+        data-rfq-open
+        class="flex h-11 items-center gap-2 rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
+      >
+        <Icon name="lucide:file-input" class="icon size-5" aria-hidden="true" />
+        <span class="hidden sm:inline">{t('nav.rfq')}</span>
+        <span
+          data-rfq-badge
+          class="tnum hidden min-w-6 rounded-pill bg-surface px-1.5 text-center text-xs font-semibold text-accent-metal"
+        >0</span>
+      </button>
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="flex size-11 items-center justify-center rounded-sm text-fg hover:bg-surface-sunken lg:hidden"
+      >
+        <Icon name="lucide:menu" class="icon size-5" aria-hidden="true" />
+        <span class="sr-only">{t('nav.openMenu')}</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" hidden class="border-t border-border bg-surface px-4 py-3 lg:hidden" aria-label={t('nav.productLines')}>
+    <ul class="grid gap-1">
+      {lines.map((l) => (
+        <li><a href={`/product-lines/${l.id}/`} class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{l.label}</a></li>
+      ))}
+      <li><a href="/products/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.allProducts')}</a></li>
+      <li><a href="/compliance/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.compliance')}</a></li>
+      <li><a href="/sourcing-partners/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.sourcing')}</a></li>
+      <li><a href="/samples/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.samples')}</a></li>
+      <li><a href="/shipping-payment/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.shippingPayment')}</a></li>
+      <li><a href="/faq/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.faq')}</a></li>
+      <li><a href="/blog/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.blog')}</a></li>
+      <li><a href="/contact/" class="block rounded-sm px-3 py-2.5 text-sm text-fg hover:bg-surface-sunken">{t('nav.contact')}</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  import { rfqCount } from '../../stores/rfq';
+
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.hasAttribute('hidden');
+    if (open) nav?.removeAttribute('hidden');
+    else nav?.setAttribute('hidden', '');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+
+  // RFQ 计数徽标（SSR 恒 0；水合后由 store 驱动）
+  const paintBadge = (n: number) => {
+    document.querySelectorAll('[data-rfq-badge]').forEach((el) => {
+      el.textContent = String(n);
+      el.classList.toggle('hidden', n === 0);
+    });
+  };
+  rfqCount.subscribe(paintBadge);
+</script>

@@ -1,0 +1,21 @@
+# Cloudflare 静态资产响应头（_headers）
+# 说明：Workers Static Assets 会读取本文件为匹配路径附加响应头。
+# 不含 CSP：本站含 Astro 内联 module script 与 Google Fonts，严格 CSP 需逐条 hash/nonce，
+# 否则会破坏交互；CSP 作为上线前 follow-up 在 DEPLOYMENT-RUNBOOK §12 跟踪。
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/pagefind/*
+  Cache-Control: public, max-age=86400
+
+/*.png
+  Cache-Control: public, max-age=604800

@@ -1,0 +1,139 @@
+---
+// src/components/rfq/RfqPanel.astro — RFQ 条目列表 + 提交表单（抽屉与 /rfq/ 页共用内容）
+// 字段对齐 api-spec CreateRfqRequest；AC-13 至少 1 SKU；AC-16 失败保留篮 + 替代联系方式。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { COUNTRIES } from '../../lib/rfq/countries';
+
+interface Props {
+  panelId?: string;
+}
+const { panelId = 'default' } = Astro.props as Props;
+
+const markets = [
+  { v: 'eu_uk', label: t('utility.market.eu_uk') },
+  { v: 'us', label: t('utility.market.us') },
+  { v: 'middle_east', label: t('utility.market.middle_east') },
+  { v: 'other', label: t('utility.market.rest') },
+];
+const incoterms = ['EXW', 'FOB', 'CIF', 'DDP'];
+const qtyScales = ['sample', 'small', 'bulk'];
+---
+
+<div data-rfq-panel>
+  {/* 服务端渲染的删除图标源（客户端克隆，禁手写 SVG） */}
+  <span data-icon-trash-src hidden><Icon name="lucide:trash-2" class="icon size-4" aria-hidden="true" /></span>
+  {/* 空状态（AC-13 入口文案） */}
+  <div data-rfq-empty class="py-10 text-center">
+    <Icon name="lucide:file-input" class="icon mx-auto size-6 text-meta" aria-hidden="true" />
+    <p class="mt-3 text-sm font-medium text-fg">{t('rfq.empty.title')}</p>
+    <p class="mt-1 text-sm text-muted">{t('rfq.empty.desc')}</p>
+    <div class="mt-4 flex flex-wrap justify-center gap-2">
+      <a href="/product-lines/fashion-alloy-brass/" class="flex h-11 items-center rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">{t('rfq.empty.browse')}</a>
+      <button type="button" data-paste-toggle class="flex h-11 items-center rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">{t('rfq.empty.paste')}</button>
+    </div>
+    <div data-paste-block hidden class="mx-auto mt-4 max-w-sm text-left">
+      <label class="sr-only" for={`paste-codes-${panelId}`}>{t('rfq.empty.paste')}</label>
+      <textarea
+        id={`paste-codes-${panelId}`}
+        data-paste-input
+        rows="4"
+        placeholder={t('rfq.paste.placeholder')}
+        class="w-full rounded-sm border border-border bg-surface p-3 font-mono text-sm text-fg"
+      ></textarea>
+      <p data-paste-status class="mt-2 hidden text-xs text-muted"></p>
+      <button type="button" data-paste-submit class="mt-2 h-11 w-full rounded-sm bg-accent px-4 text-sm font-medium text-accent-on hover:bg-accent-hover">{t('rfq.paste.submit')}</button>
+    </div>
+  </div>
+
+  {/* 条目列表（客户端渲染） */}
+  <ul data-rfq-items class="hidden divide-y divide-border-soft"></ul>
+
+  {/* 提交表单 */}
+  <form data-rfq-form hidden novalidate class="mt-6">
+    <h3 class="mb-3 text-lg font-semibold text-fg">{t('rfq.form.title')}</h3>
+    <div class="grid gap-3">
+      <div>
+        <label for="rfq-company" class="block text-xs text-muted">{t('rfq.form.company')} *</label>
+        <input id="rfq-company" name="company" required maxlength="120" class="h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" />
+        <p data-err="company" class="hidden text-xs text-danger"></p>
+      </div>
+      <div>
+        <label for="rfq-name" class="block text-xs text-muted">{t('rfq.form.contact')} *</label>
+        <input id="rfq-name" name="name" required maxlength="80" class="h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" />
+        <p data-err="name" class="hidden text-xs text-danger"></p>
+      </div>
+      <div>
+        <label for="rfq-email" class="block text-xs text-muted">{t('rfq.form.email')} *</label>
+        <input id="rfq-email" name="email" type="email" required maxlength="254" class="h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" />
+        <p data-err="email" class="hidden text-xs text-danger"></p>
+      </div>
+      <div>
+        <label for="rfq-country" class="block text-xs text-muted">{t('rfq.form.country')} *</label>
+        <select id="rfq-country" name="country" required class="h-11 w-full rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+          <option value="" disabled selected>{t('rfq.form.country.placeholder')}</option>
+          {COUNTRIES.map((c) => <option value={c.code}>{c.name}</option>)}
+        </select>
+        <p data-err="country" class="hidden text-xs text-danger"></p>
+      </div>
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div>
+          <label for="rfq-market" class="block text-xs text-muted">{t('rfq.form.market')}</label>
+          <select id="rfq-market" name="destinationMarket" data-market-input class="h-11 w-full rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+            {markets.map((m) => <option value={m.v}>{m.label}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="rfq-incoterm" class="block text-xs text-muted">{t('rfq.form.incoterm')}</label>
+          <select id="rfq-incoterm" name="incoterm" class="h-11 w-full rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+            {incoterms.map((i) => <option value={i}>{i}</option>)}
+            <option value="UNSURE">{t('rfq.form.incoterm.unsure')}</option>
+          </select>
+        </div>
+        <div>
+          <label for="rfq-qtyscale" class="block text-xs text-muted">{t('rfq.form.qtyScale')}</label>
+          <select id="rfq-qtyscale" name="quantityScale" class="h-11 w-full rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+            {qtyScales.map((q) => <option value={q}>{t(`rfq.form.qtyScale.${q}` as 'rfq.form.qtyScale.sample')}</option>)}
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="rfq-notes" class="block text-xs text-muted">{t('rfq.form.notes')}</label>
+        <textarea id="rfq-notes" name="message" rows="3" maxlength="2000" placeholder={t('rfq.item.notePlaceholder')} class="w-full rounded-sm border border-border bg-surface p-3 text-sm text-fg"></textarea>
+      </div>
+      {/* honeypot：正常用户不可见必须为空 */}
+      <input type="text" name="honeypot" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+      <div data-turnstile-slot class="min-h-[65px]"></div>
+      <p data-rfq-summary class="text-xs text-muted">{t('rfq.summary.degraded')}</p>
+      <p data-rfq-min-one hidden class="text-xs text-danger">{t('rfq.minOne')}</p>
+      <div class="flex items-start gap-2 text-xs text-muted">
+        <Icon name="lucide:clock" class="icon mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <span>{t('rfq.form.trust.reply')}</span>
+      </div>
+      <div class="flex items-start gap-2 text-xs text-muted">
+        <Icon name="lucide:lock" class="icon mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <span>{t('rfq.form.trust.privacy')}</span>
+      </div>
+      <button
+        type="submit"
+        class="h-12 w-full rounded-sm bg-accent-metal text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover disabled:opacity-45"
+      >
+        <span data-submit-label>{t('rfq.form.submit')}</span>
+      </button>
+    </div>
+  </form>
+
+  {/* 成功 / 失败态 */}
+  <div data-rfq-success hidden class="py-10 text-center">
+    <Icon name="lucide:circle-check" class="icon mx-auto size-6 text-success" aria-hidden="true" />
+    <h3 class="mt-3 text-lg font-semibold text-fg">{t('rfq.success.title')}</h3>
+    <p data-rfq-success-body class="mt-2 text-sm text-muted"></p>
+  </div>
+  <div data-rfq-error hidden class="mt-4 rounded-sm border border-danger bg-surface p-4">
+    <h3 class="text-sm font-semibold text-danger">{t('rfq.error.title')}</h3>
+    <p class="mt-1 text-sm text-fg-2">{t('rfq.error.body')}</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      <a href="/contact/" class="flex h-11 items-center rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">{t('rfq.error.contactEmail')}</a>
+    </div>
+  </div>
+</div>
