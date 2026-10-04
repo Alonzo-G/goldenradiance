@@ -53,6 +53,9 @@ export function renderItems() {
     const hasItems = items.length > 0;
     empty.classList.toggle('hidden', hasItems);
     list.classList.toggle('hidden', !hasItems);
+    // form 的初始隐藏是 SSR 的 hidden 属性（非 class）——必须同步属性本体，
+    // 否则 class 切了 attribute 还挂着，表单永远 display:none（历史 bug）。
+    form.hidden = !hasItems;
     form.classList.toggle('hidden', !hasItems);
     // 表单首次可见（有 SKU 入篮）时预渲染 Turnstile widget，token 通过 callback
     // 自动收集。此时 form 已从 hidden 切到可见，容器尺寸正常，widget 能完成挑战。
