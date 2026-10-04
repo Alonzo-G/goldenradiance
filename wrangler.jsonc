@@ -10,44 +10,39 @@
 // 历史沿革：原 infra/wrangler.jsonc 已删除（防双源漂移）。
 // 安全红线: 本文件永久禁止出现任何真实密钥。生产密钥一律走 npx wrangler secret put <NAME>。
 // ============================================================================
-
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-
-  // Worker 名与 Cloudflare Workers Builds（git 仓库 goldenradiance）对齐，
-  // 避免部署时 CI 每次强制覆盖名称产生 warning
-  "name": "goldenradiance",
-
-  "compatibility_date": "2026-09-01",
-
-  // resend 等 npm 包依赖 Node API 垫片
-  "compatibility_flags": ["nodejs_compat"],
-
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "jewelry-b2b-global-db",
-      // 占位：创建 D1 后执行 npx wrangler d1 list 取真实 ID 回填（仅远端部署需要，本地 dev 不依赖）。
-      // 本地用全零 UUID 合法占位，防止插件对格式做校验时拒绝 TODO 字符串
-      "database_id": "00000000-0000-0000-0000-000000000000",
-      "migrations_dir": "./infra/migrations"
-    }
-  ],
-
-  // 2026-10-05：4 个敏感项（TURNSTILE_SECRET_KEY / RESEND_API_KEY / ADMIN_PASSWORD /
-  // ADMIN_SECRET）从 vars 移除，改为纯 secret——wrangler secret put 注入。
-  // 原因：配置文件里的同名空串 var 会在部署时遮蔽/冲突 secret，导致密钥永远不生效。
-  // MAIL_FROM / SALES_MAILBOX 非敏感，上线前在此填真实值（发件身份 + 询盘通知收件箱）；
-  // 留空不影响询盘落库（邮件通知独立记 mail_status，见 mail.ts）。
-  "vars": {
-    "MAIL_FROM": "",
-    "SALES_MAILBOX": ""
-  },
-
-  "observability": {
-    "enabled": true
-  }
-
-  // 明确不需要的配置块，Phase 3 不得顺手添加：
-  //   durable_objects / kv_namespaces / r2_buckets / queues / crons
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// Worker 名与 Cloudflare Workers Builds（git 仓库 goldenradiance）对齐，
+	// 避免部署时 CI 每次强制覆盖名称产生 warning
+	"name": "goldenradiance",
+	"compatibility_date": "2026-09-01",
+	// resend 等 npm 包依赖 Node API 垫片
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "jewelry-b2b-global-db",
+			// 2026-10-05 创建真实 D1 后回填（wrangler d1 create 输出）
+			"database_id": "f06bbd60-9156-4e5c-b1d1-e18d23fd2a7c",
+			"migrations_dir": "./infra/migrations"
+		}
+	],
+	// 2026-10-05：4 个敏感项（TURNSTILE_SECRET_KEY / RESEND_API_KEY / ADMIN_PASSWORD /
+	// ADMIN_SECRET）从 vars 移除，改为纯 secret——wrangler secret put 注入。
+	// 原因：配置文件里的同名空串 var 会在部署时遮蔽/冲突 secret，导致密钥永远不生效。
+	// MAIL_FROM / SALES_MAILBOX 非敏感，上线前在此填真实值（发件身份 + 询盘通知收件箱）；
+	// 留空不影响询盘落库（邮件通知独立记 mail_status，见 mail.ts）。
+	"vars": {
+		// Resend 发件身份——需先在 Resend 验证 goldenradiance.fun 域名，否则邮件发不出（不影响询盘落库）
+		"MAIL_FROM": "Golden Radiance <noreply@goldenradiance.fun>",
+		// 询盘通知收件箱（客户指定：hiruiyang@gmail.com）
+		"SALES_MAILBOX": "hiruiyang@gmail.com"
+	},
+	"observability": {
+		"enabled": true
+	}
+	// 明确不需要的配置块，Phase 3 不得顺手添加：
+	//   durable_objects / kv_namespaces / r2_buckets / queues / crons
 }
