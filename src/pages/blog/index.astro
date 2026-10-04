@@ -71,6 +71,7 @@ const fmt = (d: Date) =>
           {t('blog.subscribe.button')}
         </button>
       </form>
+      <div data-newsletter-turnstile class="mt-2 min-h-[65px] max-w-md"></div>
       <p data-newsletter-status class="mt-2 hidden text-sm"></p>
     </section>
   </div>
@@ -78,7 +79,7 @@ const fmt = (d: Date) =>
 
 <script>
   import { t } from '../../i18n';
-  import { renderTurnstile, TURNSTILE_SITEKEY } from '../../lib/shared/turnstile';
+  import { renderTurnstile, type TurnstileHandle } from '../../lib/shared/turnstile';
 
   document.querySelectorAll<HTMLButtonElement>('[data-blog-cat]').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -107,24 +108,43 @@ const fmt = (d: Date) =>
 
   const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
   const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
+  const slot = document.querySelector<HTMLElement>('[data-newsletter-turnstile]');
+
+  // 页面加载即预渲染 widget，token 通过 callback 缓存
+  let turnstile: TurnstileHandle | null = null;
+  if (form && slot) {
+    void renderTurnstile(slot).then((h) => {
+      turnstile = h;
+    });
+  }
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = form.email instanceof HTMLInputElement ? form.email.value.trim() : '';
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-    const ts = await renderTurnstile(document.createElement('div'));
+
+    const token = turnstile?.getToken();
+    if (!token) {
+      status && (status.textContent = t('blog.subscribe.error'));
+      status?.classList.remove('hidden');
+      return;
+    }
+
     try {
       const res = await fetch('/api/v1/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ turnstileToken: ts.getToken() ?? TURNSTILE_SITEKEY, honeypot: '', email, locale: 'en' }),
+        body: JSON.stringify({ turnstileToken: token, honeypot: '', email, locale: 'en' }),
       });
       if (!res.ok) throw new Error();
       status && (status.textContent = t('blog.subscribe.success'));
       status?.classList.remove('hidden');
       form.reset();
+      turnstile?.reset();
     } catch {
       status && (status.textContent = t('blog.subscribe.error'));
       status?.classList.remove('hidden');
+      turnstile?.reset();
     }
   });
 </script>

@@ -1,16 +1,21 @@
 // src/components/rfq/submit.ts — 表单校验与提交（对齐 api-spec CreateRfqRequest）
 // 坑 §6.10：Turnstile token 单次有效，提交失败必须 reset；AC-16：失败保留篮内容。
+// 关键修正：widget 在表单首次可见时即预渲染（renderItems 里触发），token 通过
+// callback 缓存；提交时直接读缓存，不再"点提交才 render 导致永远空 token"。
 import { rfqItems, clearRfq, type RfqEntry } from '../../stores/rfq';
 import { renderTurnstile, type TurnstileHandle } from '../../lib/shared/turnstile';
 import { t } from '../../i18n';
 
-let turnstile: TurnstileHandle | null = null;
+// 每个 panel（抽屉 / /rfq/ 页）独立挂载自己的 widget，避免跨 panel 错位取 token。
+const turnstiles = new WeakMap<HTMLElement, TurnstileHandle>();
 
-async function initTurnstile() {
-  if (turnstile) return;
-  const slot = document.querySelector<HTMLElement>('[data-rfq-panel] [data-turnstile-slot]');
+/** 表单变为可见时调用一次：预渲染该 panel 的 widget，token 自动收集。 */
+export async function ensureTurnstile(panel: HTMLElement): Promise<void> {
+  if (turnstiles.has(panel)) return;
+  const slot = panel.querySelector<HTMLElement>('[data-turnstile-slot]');
   if (!slot) return;
-  turnstile = await renderTurnstile(slot);
+  const handle = await renderTurnstile(slot);
+  turnstiles.set(panel, handle);
 }
 
 function setFieldError(form: HTMLFormElement, field: string, msg: string | null) {
@@ -63,14 +68,17 @@ export async function submitRfq(form: HTMLFormElement): Promise<void> {
     ?.querySelector<HTMLElement>('[data-rfq-success]');
   errBox?.setAttribute('hidden', '');
   if (submitBtn) submitBtn.textContent = t('rfq.form.submitting');
-  await initTurnstile();
 
-  // QA advisory-2（AC-16 路径）：token 未就绪时禁止上送伪 token（原 fallback 会把
-  // 公开 sitekey 当 token 送 siteverify）。走与提交失败相同错误路径：保留篮 + 提示重试
+  // 确保 widget 已挂载（若此前从未进入可见态）
+  const panel = form.closest<HTMLElement>('[data-rfq-panel]');
+  if (panel) await ensureTurnstile(panel);
+  const turnstile = panel ? turnstiles.get(panel) : undefined;
+
+  // token 必须真实存在才提交。未就绪（挑战未完成/网络问题）时给明确提示并保留篮，
+  // 绝不把公开 sitekey 当 token 上送（历史 bug）。
   const turnstileToken = turnstile?.getToken();
   if (!turnstileToken) {
     errBox?.removeAttribute('hidden');
-    turnstile?.reset();
     if (submitBtn) submitBtn.textContent = t('rfq.form.submit');
     return;
   }

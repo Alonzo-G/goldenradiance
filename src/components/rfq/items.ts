@@ -14,6 +14,7 @@ import { roundToMoq } from '../../lib/shared/format';
 import { t } from '../../i18n';
 import type { SkuIndexItem } from '../../lib/products/queries';
 import { esc, trashIcon, skuIndex } from './dom';
+import { ensureTurnstile } from './submit';
 
 /* ---------- Add to RFQ（卡片 hover 按钮 / PDP / 批量勾选） ---------- */
 function handleAddToRfq(btn: HTMLElement) {
@@ -53,6 +54,9 @@ export function renderItems() {
     empty.classList.toggle('hidden', hasItems);
     list.classList.toggle('hidden', !hasItems);
     form.classList.toggle('hidden', !hasItems);
+    // 表单首次可见（有 SKU 入篮）时预渲染 Turnstile widget，token 通过 callback
+    // 自动收集。此时 form 已从 hidden 切到可见，容器尺寸正常，widget 能完成挑战。
+    if (hasItems) void ensureTurnstile(panel);
     list.innerHTML = items
       .map(
         (it: RfqEntry) => `

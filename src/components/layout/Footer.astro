@@ -70,6 +70,7 @@ const cols = [
           {t('footer.newsletter.button')}
         </button>
       </form>
+      <div data-newsletter-turnstile class="mt-2 min-h-[65px]"></div>
       <p data-newsletter-status class="mt-2 hidden text-sm"></p>
     </div>
   </div>
@@ -88,32 +89,46 @@ const cols = [
 </footer>
 
 <script>
-  import { renderTurnstile, TURNSTILE_SITEKEY } from '../../lib/shared/turnstile';
+  import { renderTurnstile, type TurnstileHandle } from '../../lib/shared/turnstile';
   import { t } from '../../i18n';
 
   const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
   const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
+  const slot = document.querySelector<HTMLElement>('[data-newsletter-turnstile]');
+
+  // 页面加载即预渲染 widget，token 通过 callback 缓存（真实 token，非 sitekey）
+  let turnstile: TurnstileHandle | null = null;
+  if (form && slot) {
+    void renderTurnstile(slot).then((h) => {
+      turnstile = h;
+    });
+  }
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = form.email instanceof HTMLInputElement ? form.email.value.trim() : '';
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-    const ts = await renderTurnstile(document.createElement('div'));
+
+    const token = turnstile?.getToken();
+    if (!token) {
+      // token 未就绪：提示重试，绝不把公开 sitekey 当 token 上送
+      show(status, t('footer.newsletter.error'), 'text-fg-inverse');
+      return;
+    }
+
     try {
       const res = await fetch('/api/v1/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          turnstileToken: ts.getToken() ?? TURNSTILE_SITEKEY,
-          honeypot: '',
-          email,
-          locale: 'en',
-        }),
+        body: JSON.stringify({ turnstileToken: token, honeypot: '', email, locale: 'en' }),
       });
       if (!res.ok) throw new Error(String(res.status));
       show(status, t('footer.newsletter.success'), 'text-fg-inverse');
       form.reset();
+      turnstile?.reset();
     } catch {
       show(status, t('footer.newsletter.error'), 'text-fg-inverse');
+      turnstile?.reset();
     }
   });
 
