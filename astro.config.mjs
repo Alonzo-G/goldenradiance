@@ -37,5 +37,5 @@ export default defineConfig({
     }),
     icon(),
   ],
-  site: 'https://rayan-accessories.com',
+  site: 'https://goldenradiance.fun',
 });

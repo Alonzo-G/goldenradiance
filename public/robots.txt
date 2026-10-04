@@ -4,4 +4,4 @@ Disallow: /admin/
 Disallow: /api/
 
 # 换正式域名时，同步改 astro.config.mjs 的 `site` 与此处 Sitemap 绝对地址
-Sitemap: https://rayan-accessories.com/sitemap-index.xml
+Sitemap: https://goldenradiance.fun/sitemap-index.xml

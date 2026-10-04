@@ -21,7 +21,10 @@ const slots = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22].map((h) => ({ gmt8: h 
         { key: 'email', icon: 'mail', value: handles.email, href: `mailto:${handles.email}` },
         { key: 'whatsapp', icon: 'message-circle', value: handles.whatsapp, href: `https://wa.me/${handles.whatsapp.replace(/[^0-9]/g, '')}` },
         { key: 'wechat', icon: 'message-square', value: handles.wechat, href: null },
-      ].map((ch) => (
+      ]
+        // 空值渠道不渲染（contact.md 里留空的字段自动隐藏对应卡，防止占位假信息上线）
+        .filter((ch) => ch.value)
+        .map((ch) => (
         <div class="rounded-md border border-border bg-surface p-5 shadow-raised">
           <Icon name={`lucide:${ch.icon}`} class="icon size-5 text-accent" aria-hidden="true" />
           <h2 class="mt-2 text-sm font-semibold text-fg">{t(`contact.channel.${ch.key}.label` as 'contact.channel.email.label')}</h2>
