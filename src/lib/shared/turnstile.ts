@@ -13,7 +13,7 @@
 //   renderTurnstile(el, onToken) —— 渲染后自动挑战，拿到 token 通过回调返回，
 //   表单提交时直接读缓存的 token，无需等待。
 
-export const TURNSTILE_SITEKEY = '0x4AAAAAAAFNrqMuBQzU6nO8t';
+export const TURNSTILE_SITEKEY = '0x4AAAAAAFNrqMuBQzU6nO8t';
 
 export interface TurnstileHandle {
   /** 当前缓存的 token；尚未挑战完成时为 undefined */
