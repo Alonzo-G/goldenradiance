@@ -59,6 +59,17 @@ TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
 RESEND_API_KEY=
 ```
 
+### 2.1 Resend 发件域名验证（必须，缺此步邮件全部 failed）
+
+Resend 规则：`from` 地址的域名必须先在**同一 Resend 账号**内验证，否则 `emails.send` 一律拒绝（`mail_status='failed'`，不影响询盘落库）。2026-10-05 实测：key 已注入但域名未验证，两条 RFQ 均 failed，DNS 查询确认零验证记录。
+
+1. Resend Dashboard → **Domains** → **Add Domain** → 填 `goldenradiance.fun` → 选区域 → 提交，得到一组 DNS 记录（MX + TXT + CNAME `resend._domainkey`）。
+2. Cloudflare Dashboard → `goldenradiance.fun` → **DNS** → 逐条添加上述记录。**CNAME/TXT 必须选「DNS only」（灰云），不能代理**，否则验证失败。
+3. 回 Resend 点 **Verify**，状态变 **Verified**（一般几分钟，最长 48h）。
+4. 验证：站点提交一条测试 RFQ → `wrangler d1 execute jewelry-b2b-global-db --remote --command "SELECT reference, mail_status FROM rfq_inquiries ORDER BY created_at DESC LIMIT 1;"` → `mail_status` 应为 `sent`。
+
+> key 本身无需重注：被拒原因是域名而非 key。若 Verified 后仍 failed，查 Worker 日志（Dashboard → Workers → goldenradiance → Logs）中 `RFQ mail send failed` 的具体 error。
+
 ---
 
 ## 3. D1 数据库：创建 + 迁移
@@ -383,6 +394,7 @@ Pagefind 索引随静态产物部署。上线后：
 
 - [ ] `wrangler.jsonc` 的 `database_id` 已替换为真实 UUID
 - [ ] `TURNSTILE_SECRET_KEY` / `RESEND_API_KEY` 已 `secret put`（生产值，非空）
+- [ ] Resend 已添加并 **Verified** `goldenradiance.fun`（DNS 记录齐全且灰云，见 §2.1；未验证 = 邮件全 failed）
 - [ ] D1 已 `create` + `execute --remote` 建表成功
 - [ ] `npm run build` 全绿（astro check 0 error + pagefind 完成）
 - [ ] `node scripts/verify-catalog-consistency.mjs` 全绿（零悬空 / 零缺失 / 零标题差异 / og:image 零死链）
