@@ -9,6 +9,7 @@ import UtilityBar from '../components/layout/UtilityBar.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import MobileContactBar from '../components/layout/MobileContactBar.astro';
+import MobileRfqBar from '../components/layout/MobileRfqBar.astro';
 import RfqDrawer from '../components/rfq/RfqDrawer.astro';
 import SearchDialog from '../components/search/SearchDialog.astro';
 
@@ -25,6 +26,8 @@ interface Props {
   pagefind?: boolean;
   jsonld?: Record<string, unknown>[];
   hideMobileContact?: boolean;
+  /** PDP 已有自己的 sticky bottom bar（含 Submit RFQ），隐藏通用移动端 RFQ 快捷条 */
+  hideMobileRfqBar?: boolean;
   wide?: boolean;
 }
 
@@ -39,6 +42,7 @@ const {
   pagefind = true,
   jsonld = [organizationJsonld(getSiteUrl(Astro.site))],
   hideMobileContact = false,
+  hideMobileRfqBar = false,
   wide = false,
 } = Astro.props;
 ---
@@ -77,7 +81,7 @@ const {
         预加载必须与正文 <img> 的 srcset/sizes 完全一致，否则会重复下载。 */}
     <slot name="head" />
   </head>
-  <body class="flex min-h-[100dvh] flex-col bg-bg text-fg">
+  <body class:list={['flex min-h-[100dvh] flex-col bg-bg text-fg', !hideMobileRfqBar && 'pb-[calc(env(safe-area-inset-bottom)+3.5rem)] lg:pb-0']}>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[600] focus:rounded-sm focus:bg-surface focus:px-3 focus:py-2 focus:text-sm focus:shadow-raised">
       {t('nav.skipToContent')}
     </a>
@@ -88,6 +92,7 @@ const {
     </main>
     <Footer />
     {!hideMobileContact && <MobileContactBar />}
+    {!hideMobileRfqBar && <MobileRfqBar />}
     <RfqDrawer />
     <SearchDialog />
   </body>

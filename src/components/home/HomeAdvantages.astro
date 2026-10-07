@@ -1,0 +1,41 @@
+---
+// src/components/home/HomeAdvantages.astro — 「核心产品优势」板块（转化路径 §1.1 新增）
+// 把散落在合规页/产品线页的卖点集中提炼为 4 条可扫描优势，每条带事实支撑。
+// 诚实红线：只用已确认的事实，不编数字。尾部放 RFQ CTA 缩短转化路径。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+const advantages = [
+  { icon: 'factory', title: t('home.advantages.factory.title'), desc: t('home.advantages.factory.desc') },
+  { icon: 'file-check', title: t('home.advantages.specs.title'), desc: t('home.advantages.specs.desc') },
+  { icon: 'shield-check', title: t('home.advantages.nickel.title'), desc: t('home.advantages.nickel.desc') },
+  { icon: 'package', title: t('home.advantages.moq.title'), desc: t('home.advantages.moq.desc') },
+];
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <h2 class="text-xl font-semibold text-fg">{t('home.advantages.title')}</h2>
+    <p class="mt-1 text-sm text-muted">{t('home.advantages.subtitle')}</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {advantages.map((a) => (
+        <div class="rounded-md border border-border bg-surface p-5 shadow-raised">
+          <Icon name={`lucide:${a.icon}`} class="icon size-5 text-accent" aria-hidden="true" />
+          <h3 class="mt-3 text-base font-semibold text-fg">{a.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-fg-2">{a.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 flex flex-col items-start justify-between gap-4 rounded-md bg-surface-inverse p-6 text-fg-inverse sm:flex-row sm:items-center">
+      <p class="text-sm leading-relaxed sm:max-w-xl">{t('home.finalCta.title')}</p>
+      <button
+        type="button"
+        data-rfq-open
+        class="flex h-12 shrink-0 items-center gap-2 rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
+      >
+        <Icon name="lucide:file-input" class="icon size-5" aria-hidden="true" />
+        {t('cta.startRfq')}
+      </button>
+    </div>
+  </div>
+</section>

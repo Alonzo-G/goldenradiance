@@ -13,8 +13,12 @@ import RfqPanel from './RfqPanel.astro';
   role="dialog"
   aria-modal="true"
   aria-label={t('rfq.title')}
-  class="fixed inset-y-0 right-0 z-[410] flex w-full flex-col bg-surface shadow-drawer md:w-[420px]"
+  class="fixed inset-x-0 bottom-0 z-[410] flex max-h-[92dvh] flex-col rounded-t-2xl bg-surface shadow-[0_-8px_32px_rgb(20_24_28/0.12)] will-change-transform md:inset-y-0 md:inset-x-auto md:right-0 md:max-h-none md:w-[420px] md:rounded-none md:shadow-drawer"
 >
+  {/* 移动端拖拽 handle（下滑关闭手势锚点），桌面隐藏 */}
+  <div data-rfq-handle class="flex shrink-0 justify-center pb-1 pt-2 md:hidden" aria-hidden="true">
+    <span class="h-1.5 w-10 rounded-pill bg-border"></span>
+  </div>
   <div class="flex items-center justify-between border-b border-border px-5 py-4">
     <div>
       <h2 class="text-lg font-semibold text-fg">{t('rfq.title')}</h2>
@@ -29,7 +33,7 @@ import RfqPanel from './RfqPanel.astro';
       <span class="sr-only">{t('nav.closeMenu')}</span>
     </button>
   </div>
-  <div class="flex-1 overflow-y-auto px-5 py-4">
+  <div data-rfq-body class="flex-1 overflow-y-auto px-5 py-4">
     <RfqPanel panelId="drawer" />
   </div>
   <div class="sticky bottom-0 border-t border-border bg-surface px-5 py-4">

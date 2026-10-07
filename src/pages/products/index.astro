@@ -3,7 +3,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
-import { getSkuIndex, distinctValues } from '../../lib/products/queries';
+import { getSkuIndex, distinctValues, SCENARIOS } from '../../lib/products/queries';
 import { MOQ_BANDS } from '../../lib/shared/format';
 
 const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
@@ -22,6 +22,7 @@ const materials = distinctValues(index, 'material');
 const platings = distinctValues(index, 'plating');
 const categories = present(ALL_CATEGORIES, (v, it) => it.category === v);
 const lines = present(ALL_LINES, (v, it) => it.line === v);
+const scenarios = present(SCENARIOS, (v, it) => it.scenario === v);
 const bands = present(MOQ_BANDS, (v, it) => it.band === v);
 /** MOQ 降级档：只要有任一真实款未确认 MOQ，就渲染「MOQ on request」档，
  *  让买家能筛选出「起订量随报价确认」的款，而不是整组 MOQ 筛选消失。 */
@@ -31,6 +32,11 @@ const lineLabel = {
   'fashion-alloy-brass': t('nav.line.alloy'),
   'stainless-titanium-steel': t('nav.line.steel'),
   'natural-stone-gemstone-pearl': t('nav.line.stone'),
+};
+const scenarioLabel = {
+  daily: t('filter.scenario.daily'),
+  volume: t('filter.scenario.volume'),
+  statement: t('home.scenarios.statement.title'),
 };
 const categoryLabel = Object.fromEntries(ALL_CATEGORIES.map((c) => [c, t(`category.${c}` as 'category.earrings')]));
 const bandLabel = { '12-30': t('filter.moq.b1'), '31-60': t('filter.moq.b2'), '61-120': t('filter.moq.b3') };
@@ -89,6 +95,19 @@ const jsonld = [
                   <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
                     <input type="checkbox" name="line" value={l} class="size-4 accent-[var(--color-accent)]" />
                     {lineLabel[l]}
+                  </label>
+                ))}
+              </fieldset>
+            )
+          }
+          {
+            scenarios.length > 0 && (
+              <fieldset>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.scenario')}</legend>
+                {scenarios.map((s) => (
+                  <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                    <input type="checkbox" name="scenario" value={s} class="size-4 accent-[var(--color-accent)]" />
+                    {scenarioLabel[s]}
                   </label>
                 ))}
               </fieldset>
@@ -171,7 +190,7 @@ const jsonld = [
         {/* 批量加入条（AC-03） */}
         <div data-bulk-bar hidden class="mb-4 flex items-center gap-3 rounded-sm border border-border bg-surface-sunken px-4 py-2">
           <span data-bulk-count class="tnum text-sm text-fg-2"></span>
-          <button type="button" data-bulk-add class="h-9 rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on hover:bg-accent-metal-hover">
+          <button type="button" data-bulk-add class="flex h-11 items-center rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on hover:bg-accent-metal-hover">
             {t('filter.bulkAdd')}
           </button>
         </div>

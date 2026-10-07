@@ -7,7 +7,7 @@ import BuyPanel from '../../components/product/BuyPanel.astro';
 import ProductCard from '../../components/product/ProductCard.astro';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
-import { overallRange } from '../../lib/shared/format';
+import { overallRange, imageSrcset } from '../../lib/shared/format';
 import { productJsonld, breadcrumbJsonld } from '../../lib/seo/jsonld';
 import { getSiteUrl } from '../../lib/seo/site';
 
@@ -56,7 +56,7 @@ const jsonld = [
  *  不一致会让浏览器额外下载一份候选图、缓存不命中，等于白付一次 1200px 图片的代价。 */
 const lcp = data.images?.[0];
 const lcpSizes = '(min-width: 1024px) 48vw, 100vw';
-const lcpSrcset = lcp?.width && lcp?.thumb ? `${lcp.thumb} 360w, ${lcp.src} ${lcp.width}w` : undefined;
+const lcpSrcset = imageSrcset(lcp?.thumb, lcp?.src ?? '', lcp?.width);
 
 /** 社交分享图：每款真实产品一张 1200x630 JPEG（scripts/make-og-images.mjs 生成）。
  *  全部指向同一张 og-default.png 会让 111 个产品页在分享卡片里长得一模一样。
@@ -73,6 +73,8 @@ const ogImage = data.dataStatus === 'real' && lcp ? `/og/${data.slug}.jpg` : und
   image={ogImage}
   imageAlt={data.title}
   jsonld={jsonld}
+  hideMobileContact
+  hideMobileRfqBar
 >
   {
     lcp && (

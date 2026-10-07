@@ -3,7 +3,7 @@
 // 未确认字段不参与 facet，选中材质/镀层/MOQ 档筛选时这类款自然被排除（诚实的过滤结果）。
 import { t } from '../../i18n';
 import type { SkuIndexItem } from '../../lib/products/queries';
-import { priceRange } from '../../lib/shared/format';
+import { priceRange, imageSrcset } from '../../lib/shared/format';
 
 interface Index {
   window: { __SKU_INDEX__?: SkuIndexItem[] };
@@ -40,7 +40,11 @@ function activeFilters(): { axis: string; value: string; label: string }[] {
           ? t(`category.${cb.value}` as 'category.earrings')
           : axis === 'line'
             ? t(`nav.line.${cb.value === 'fashion-alloy-brass' ? 'alloy' : cb.value === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy')
-            : cb.value;
+            : axis === 'scenario'
+              ? cb.value === 'statement'
+                ? t('home.scenarios.statement.title')
+                : t(`filter.scenario.${cb.value === 'daily' ? 'daily' : 'volume'}` as 'filter.scenario.daily')
+              : cb.value;
     out.push({ axis, value: cb.value, label });
   });
   return out;
@@ -54,10 +58,12 @@ function apply(): SkuIndexItem[] {
   const plats = by('plating');
   const cats = by('category');
   const bands = by('band');
+  const scenarios = by('scenario');
   const sort = document.querySelector<HTMLSelectElement>('[data-sort]')?.value ?? 'featured';
   const rows = items.filter(
     (it) =>
       (!lines.size || lines.has(it.line)) &&
+      (!scenarios.size || scenarios.has(it.scenario)) &&
       (!mats.size || (it.material != null && mats.has(it.material))) &&
       (!plats.size || (it.plating != null && plats.has(it.plating))) &&
       (!cats.size || cats.has(it.category)) &&
@@ -98,8 +104,8 @@ function imageHtml(it: SkuIndexItem): string {
       it.image.width && it.image.height
         ? ` width="${it.image.width}" height="${it.image.height}"`
         : '';
-    // 响应式候选：缩略图恒 360w，主图用实测原始宽度。缺实测宽度则不生成（描述符写错比不写更糟）。
-    const srcset = it.image.width ? ` srcset="${escapeHtml(it.image.thumb)} 360w, ${escapeHtml(it.image.src)} ${it.image.width}w"` : '';
+    // 响应式候选：缩略图 360w + 中间档 640w（仅主图 >640）+ 主图实测宽度。缺实测宽度则不生成（描述符写错比不写更糟）。
+    const srcset = it.image.width ? ` srcset="${escapeHtml(imageSrcset(it.image.thumb, it.image.src, it.image.width) ?? '')}"` : '';
     return `
       <figure class="relative aspect-square overflow-hidden rounded-md border border-border-soft bg-surface-warm">
         <img src="${escapeHtml(it.image.src)}"${srcset}${dims} loading="lazy" decoding="async"
@@ -143,7 +149,7 @@ function cardHtml(it: SkuIndexItem): string {
       : '';
   return `
   <article class="group relative">
-    <label class="absolute left-2 top-2 z-[2] flex size-6 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
+    <label class="absolute left-2 top-2 z-[2] flex size-8 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
       <input type="checkbox" data-bulk-check value="${escapeHtml(it.sku)}" data-title="${escapeHtml(it.title)}" data-slug="${escapeHtml(it.slug)}" data-moq="${it.rfqQty}" class="size-4 accent-[var(--color-accent-metal)]" aria-label="${escapeHtml(t('cta.addToRfq'))}: ${escapeHtml(it.sku)}" />
     </label>
     ${badge}
@@ -178,7 +184,7 @@ function rowHtml(it: SkuIndexItem): string {
     <td class="tnum pr-3 text-right font-semibold text-fg">${escapeHtml(price)}</td>
     <td class="text-right">
       <button type="button" data-add-to-rfq data-sku="${escapeHtml(it.sku)}" data-slug="${escapeHtml(it.slug)}" data-title="${escapeHtml(it.title)}" data-moq="${it.rfqQty}"
-        class="h-9 rounded-sm border border-accent px-3 text-xs font-medium text-accent hover:bg-surface-sunken"><span data-add-label>${t('cta.addToRfq')}</span></button>
+        class="flex h-11 items-center rounded-sm border border-accent px-3 text-sm font-medium text-accent hover:bg-surface-sunken"><span data-add-label>${t('cta.addToRfq')}</span></button>
     </td>
   </tr>`;
 }
@@ -199,7 +205,7 @@ function render() {
       .map(
         (f) => `<button type="button" data-chip data-axis="${f.axis}" data-value="${escapeHtml(f.value)}"
           aria-label="${escapeHtml(t('filter.chip.remove', { label: f.label }))}"
-          class="flex h-8 items-center gap-1 rounded-pill border border-border bg-surface px-3 text-xs text-fg hover:border-danger hover:text-danger">
+          class="flex h-9 items-center gap-1 rounded-pill border border-border bg-surface px-3 text-xs text-fg hover:border-danger hover:text-danger">
           ${escapeHtml(f.label)} ×</button>`,
       )
       .join('');

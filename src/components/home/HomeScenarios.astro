@@ -1,0 +1,73 @@
+---
+// src/components/home/HomeScenarios.astro — 「使用场景」板块（转化路径 §1.1 新增）
+// 把每条产品线映射到买家真实经营场景，让买家 30 秒内定位「我的货该选哪条线」。
+// 场景卡直接链到对应产品线页，形成「场景 → 产品线 → 产品」的转化闭环。
+// 场景映射只陈述已确认的产品线事实（材质/镀层/款式广度），不编数字。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { getActiveLines } from '../../lib/products/queries';
+
+const SCENARIO: Record<string, { title: string; desc: string; tag: string; icon: string }> = {
+  'stainless-titanium-steel': {
+    title: t('home.scenarios.daily.title'),
+    desc: t('home.scenarios.daily.desc'),
+    tag: t('home.scenarios.daily.tag'),
+    icon: 'droplets',
+  },
+  'fashion-alloy-brass': {
+    title: t('home.scenarios.volume.title'),
+    desc: t('home.scenarios.volume.desc'),
+    tag: t('home.scenarios.volume.tag'),
+    icon: 'sparkles',
+  },
+  'natural-stone-gemstone-pearl': {
+    title: t('home.scenarios.statement.title'),
+    desc: t('home.scenarios.statement.desc'),
+    tag: t('home.scenarios.statement.tag'),
+    icon: 'gem',
+  },
+};
+
+const activeLines = await getActiveLines();
+const scenarios = activeLines.map((entry) => ({
+  line: entry.data.line,
+  token: entry.data.lineToken,
+  ...(SCENARIO[entry.data.line] ?? {
+    title: entry.data.name,
+    desc: '',
+    tag: entry.data.name,
+    icon: 'gem',
+  }),
+}));
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <h2 class="text-xl font-semibold text-fg">{t('home.scenarios.title')}</h2>
+    <p class="mt-1 text-sm text-muted">{t('home.scenarios.subtitle')}</p>
+    <div class:list={['mt-6 grid gap-4', scenarios.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3']}>
+      {scenarios.map((s) => (
+        <a
+          href={`/product-lines/${s.line}/`}
+          class="group flex flex-col rounded-md border border-border bg-surface p-6 shadow-raised transition-shadow duration-150 hover:shadow-none"
+        >
+          <div class="flex items-center gap-3">
+            <span class="flex size-11 items-center justify-center rounded-pill border border-accent text-accent">
+              <Icon name={`lucide:${s.icon}`} class="icon size-5" aria-hidden="true" />
+            </span>
+            <div>
+              <h3 class="text-base font-semibold text-fg">{s.title}</h3>
+              <p class="caps text-xs text-meta">{s.tag}</p>
+            </div>
+          </div>
+          <p class="mt-4 flex-1 text-sm leading-relaxed text-fg-2">{s.desc}</p>
+          <div class="mt-4 flex items-center gap-2 text-sm font-medium text-accent group-hover:underline">
+            {t('home.scenarios.cta')}
+            <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+          </div>
+          <div class="mt-4 h-0.5 w-full" style={`background: var(--color-${s.token})`} aria-hidden="true"></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

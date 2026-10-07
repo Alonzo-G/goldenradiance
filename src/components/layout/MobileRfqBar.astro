@@ -1,0 +1,25 @@
+---
+// src/components/layout/MobileRfqBar.astro — 移动端底部常驻 RFQ 快捷条（§3.2 转化核心）
+// 移动端（<768px）固定底部条：Request a Quote + RFQ 计数徽标，点击打开 RFQ 抽屉。
+// 解决「移动端 RFQ 入口只在 Header 右上角，滚动后不可见」的转化断点。
+// PDP 页已有自己的 sticky bottom bar（含 Submit RFQ），由 BaseLayout hideMobileRfqBar 隐藏本组件。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+---
+
+<div class="fixed inset-x-0 bottom-0 z-[205] border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] lg:hidden">
+  <div class="flex h-14 items-center gap-3 px-4">
+    <button
+      type="button"
+      data-rfq-open
+      class="flex h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-accent-metal px-4 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
+    >
+      <Icon name="lucide:file-input" class="icon size-5" aria-hidden="true" />
+      {t('cta.requestQuote')}
+      <span
+        data-rfq-badge
+        class="tnum hidden min-w-6 rounded-pill bg-surface px-1.5 text-center text-xs font-semibold text-accent-metal"
+      >0</span>
+    </button>
+  </div>
+</div>

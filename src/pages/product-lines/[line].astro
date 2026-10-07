@@ -42,6 +42,19 @@ const categoryImage = (cat: string) =>
   realInLine.find((it) => it.data.category === cat)?.data.images?.[0] ?? null;
 const heroImage = realInLine[0]?.data.images?.[0] ?? null;
 const stats = [t('line.stats.skuDepth'), t('line.stats.moq'), t('line.stats.cadence')];
+
+/** 差异化定位：一句话定位 + 三个事实（§2.1）。只用已确认的产品线事实，不编数字。 */
+const POSITION: Record<string, { position: string; facts: string[] }> = {
+  'stainless-titanium-steel': {
+    position: t('line.steel.position'),
+    facts: [t('line.steel.fact.1'), t('line.steel.fact.2'), t('line.steel.fact.3')],
+  },
+  'fashion-alloy-brass': {
+    position: t('line.alloy.position'),
+    facts: [t('line.alloy.fact.1'), t('line.alloy.fact.2'), t('line.alloy.fact.3')],
+  },
+};
+const position = POSITION[line];
 ---
 
 <BaseLayout title={name} description={t(taglineKey as 'line.alloy.tagline')} path={`/product-lines/${line}/`}>
@@ -83,6 +96,26 @@ const stats = [t('line.stats.skuDepth'), t('line.stats.moq'), t('line.stats.cade
       ))}
     </div>
   </section>
+
+  {/* 差异化定位：一句话 + 三个事实（§2.1 转化内容） */}
+  {
+    position && (
+      <section class="section-y">
+        <div class="container-wide">
+          <h2 class="caps text-xs text-muted">{t('line.position.title')}</h2>
+          <p class="mt-3 text-xl font-semibold text-fg">{position.position}</p>
+          <ul class="mt-6 grid gap-4 md:grid-cols-3">
+            {position.facts.map((f, i) => (
+              <li class="rounded-md border border-border bg-surface p-5 shadow-raised">
+                <span class="tnum text-xs font-medium text-meta">{String(i + 1).padStart(2, '0')}</span>
+                <p class="mt-2 text-sm leading-relaxed text-fg-2">{f}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   {/* 材质工艺说明（内容集合正文） */}
   <section class="section-y">

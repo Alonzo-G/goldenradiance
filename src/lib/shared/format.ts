@@ -93,3 +93,22 @@ export function dimensionsDual(dimensions: string): string | null {
 export function cn(...parts: (string | false | null | undefined)[]): string {
   return parts.filter(Boolean).join(' ');
 }
+
+/**
+ * 产品主图的响应式 srcset（360 缩略 + 640 中间档 + 主图原始宽度）。
+ * 640 档仅当主图实测宽度 > 640 时才写入——与 scripts/gen-mid-thumbs.mjs 的生成条件一致，
+ * 避免「描述符 640w 但实际文件更小」的选图误差（主图 ≤640 的款式由主图本身覆盖该档）。
+ * 缺 thumb 或 width 时返回 undefined（不生成 w 描述符，比写错更安全）。
+ */
+export function imageSrcset(
+  thumb: string | undefined | null,
+  src: string,
+  width?: number,
+): string | undefined {
+  if (!thumb || !width) return undefined;
+  const mid = thumb.replace(/-thumb\.webp$/, '-640.webp');
+  return width > 640
+    ? `${thumb} 360w, ${mid} 640w, ${src} ${width}w`
+    : `${thumb} 360w, ${src} ${width}w`;
+}
+
