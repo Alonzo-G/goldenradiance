@@ -38,35 +38,16 @@ const all = loadProducts();
 const placeholders = all.filter((p) => p.data.dataStatus === 'placeholder');
 const real = all.filter((p) => p.data.dataStatus === 'real');
 
-const PLACEHOLDER_REQUIRED = [
-  'base_material_grade',
-  'plating_method',
-  'plating_thickness_um',
-  'dimensions_mm',
-  'weight_g',
-  'moq_min',
-  'moq_max',
-  'tiered_price',
-];
+// 2026-10 产品库重建：placeholder 种子已全部下架。若未来重新引入，
+// 必须恢复占位规格完整性守卫（base_material_grade/plating_method/plating_thickness_um/
+// dimensions_mm/weight_g/moq_min/moq_max/tiered_price 必填 + 阶梯价 ≥3 档），
+// 并同步恢复 AC-01..AC-42 的占位基准（见 git 历史）。
 
 describe('内容契约 · placeholder 态', () => {
-  it('存在占位款式且每条规格字段齐全（放宽 schema 后不得退化）', () => {
-    expect(placeholders.length).toBeGreaterThan(0);
-    for (const p of placeholders) {
-      for (const k of PLACEHOLDER_REQUIRED) {
-        expect(p.data[k], `${p.file} 缺少 ${k}`).not.toBeUndefined();
-      }
-    }
-  });
-
-  it('占位款式阶梯价至少 3 档（AC-02a 三档口径）', () => {
-    for (const p of placeholders) {
-      const tiers = p.data.tiered_price as { min_qty: number; currency: string }[];
-      expect(tiers.length, `${p.file} 档位不足 3`).toBeGreaterThanOrEqual(3);
-      for (const t of tiers) {
-        expect(t.currency, `${p.file} 币种须为 USD`).toBe('USD');
-      }
-    }
+  it('2026-10 产品库重建后不再有占位款式（AI 演示数据已全部下架）', () => {
+    // 若未来重新引入 placeholder 种子，必须恢复 PLACEHOLDER_REQUIRED 完整性守卫，
+    // 并在引入处同步恢复 AC-01..AC-42 的占位基准（见 git 历史）。
+    expect(placeholders.length).toBe(0);
   });
 });
 

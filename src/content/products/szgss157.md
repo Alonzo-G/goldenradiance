@@ -1,0 +1,22 @@
+---
+sku_code: SZGSS157
+title: "Stainless Steel Cable Ring SZGSS157"
+slug: szgss157
+line: stainless-titanium-steel
+category: ring
+compliance_tag: on_request
+test_report_reference: null
+# 穿透类型未逐款确认 → 保守 false（耳钉针杆清晰可见者除外），PDP 据此决定是否输出 EN 1811 句
+ear_post: false
+short_description: "Ring photographed from the supplier collection; material grade, plating, dimensions, weight and MOQ are confirmed with your quotation."
+style_tags: ["cable"]
+images:
+  - src: /products/szgss157/01.webp
+    thumb: /products/szgss157/01-thumb.webp
+    alt: "Stainless Steel Cable Ring SZGSS157 — main view"
+    width: 901
+    height: 1200
+dataStatus: real
+---
+
+New arrival from the ring line. Full specification — material grade, plating, dimensions, weight and MOQ — is confirmed with your quotation.
