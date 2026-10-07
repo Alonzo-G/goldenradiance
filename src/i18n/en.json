@@ -189,6 +189,7 @@
     "moq.onRequest": "MOQ on request",
     "clearAll": "Clear all",
     "apply": "Apply filters",
+    "close": "Close filters",
     "results": "{count} SKUs",
     "view.grid": "Grid view",
     "view.list": "List view",

@@ -51,7 +51,7 @@ const {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -87,7 +87,7 @@ const {
     </a>
     <UtilityBar />
     <Header />
-    <main id="main" data-pagefind-body={pagefind ? true : undefined} class:list={['flex-1', wide ? 'container-wide' : 'container-page']}>
+    <main id="main" data-pagefind-body={pagefind ? true : undefined} class:list={['w-full min-w-0 flex-1', wide ? 'container-wide' : 'container-page']}>
       <slot />
     </main>
     <Footer />

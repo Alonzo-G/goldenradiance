@@ -106,3 +106,4 @@ desktop.ini
 # ---------- WorkBuddy 本地工作目录（不进公开仓库） ----------
 .workbuddy/
 .tmp-preview/
+shots/

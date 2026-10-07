@@ -58,7 +58,7 @@ const jsonld = [
         <h1 class="text-2xl font-semibold text-fg">{t('nav.allProducts')}</h1>
         <p class="tnum mt-1 text-sm text-muted" data-results-count>{t('filter.results', { count: index.length })}</p>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <button type="button" data-filters-toggle class="flex h-11 items-center gap-2 rounded-sm border border-border px-4 text-sm font-medium text-fg lg:hidden">
           <Icon name="lucide:sliders-horizontal" class="icon size-5" aria-hidden="true" />
           <span data-filters-count-label>{t('filter.openFilters', { count: 0 })}</span>
@@ -71,7 +71,7 @@ const jsonld = [
             <Icon name="lucide:list" class="icon size-5" aria-hidden="true" />
           </button>
         </div>
-        <select data-sort aria-label="Sort" class="h-11 rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+        <select data-sort aria-label="Sort" class="h-11 max-w-[46vw] rounded-sm border border-border bg-surface px-2 text-sm text-fg">
           <option value="featured">{t('filter.sort.featured')}</option>
           <option value="newest">{t('filter.sort.newest')}</option>
           <option value="moqAsc">{t('filter.sort.moqAsc')}</option>
@@ -86,6 +86,12 @@ const jsonld = [
     <div class="mt-6 grid gap-8 lg:grid-cols-[240px_1fr]">
       {/* 筛选 sidebar（桌面常驻 / 移动全屏 sheet） */}
       <aside data-filters class="hidden border-border lg:block">
+        <div class="mb-4 flex items-center justify-between lg:hidden">
+          <h2 class="text-lg font-semibold text-fg">{t('filter.title')}</h2>
+          <button type="button" data-filters-close class="flex size-11 items-center justify-center rounded-sm text-fg hover:bg-surface-sunken" aria-label={t('filter.close')}>
+            <Icon name="lucide:x" class="icon size-5" aria-hidden="true" />
+          </button>
+        </div>
         <form data-filter-form class="grid gap-6" onsubmit="return false">
           {
             lines.length > 0 && (
@@ -182,6 +188,9 @@ const jsonld = [
           </fieldset>
           <button type="button" data-clear-all class="h-11 rounded-sm border border-accent px-4 text-sm font-medium text-accent hover:bg-surface-sunken">
             {t('filter.clearAll')}
+          </button>
+          <button type="button" data-filters-close class="flex h-12 items-center justify-center rounded-sm bg-accent px-4 text-sm font-medium text-accent-on lg:hidden">
+            {t('filter.apply')}
           </button>
         </form>
       </aside>

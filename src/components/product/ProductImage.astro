@@ -3,7 +3,7 @@
 // 有真实素材 → 渲染实拍图（懒加载 + 显式尺寸防 CLS）；无 → 回落程序化占位图。
 // 该组件是「零页面代码改动替换占位」的落点：页面只传数据，不关心图从哪来。
 import PlaceholderImage from './PlaceholderImage.astro';
-import { cn, imageSrcset } from '../../lib/shared/format';
+import { cn, imageSrcset, lineToken } from '../../lib/shared/format';
 import type { SkuIndexImage } from '../../lib/products/queries';
 
 interface Props {
@@ -75,7 +75,7 @@ const srcset = variant === 'main' ? imageSrcset(image?.thumb, image?.src ?? '', 
       {/* 产品线识别 tick（与占位图一致，保持线识别连续性） */}
       <div
         class="absolute inset-x-0 bottom-0 h-0.5"
-        style={`background: var(--color-${line})`}
+        style={`background: var(--color-${lineToken(line)})`}
         aria-hidden="true"
       />
     </figure>

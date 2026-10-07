@@ -112,3 +112,18 @@ export function imageSrcset(
     : `${thumb} 360w, ${src} ${width}w`;
 }
 
+/**
+ * 产品线识别色 token 映射（fashion-alloy-brass → line-alloy）。
+ * content.config.ts 的 lineToken 枚举是唯一真源；产品 line 字段是全名，
+ * 而 CSS 变量是 --color-line-alloy 等短名——直接 var(--color-{line}) 会引用到不存在的变量。
+ */
+export const LINE_TOKEN: Record<string, string> = {
+  'fashion-alloy-brass': 'line-alloy',
+  'stainless-titanium-steel': 'line-steel',
+  'natural-stone-gemstone-pearl': 'line-stone',
+};
+
+export function lineToken(line: string): string {
+  return LINE_TOKEN[line] ?? 'line-alloy';
+}
+

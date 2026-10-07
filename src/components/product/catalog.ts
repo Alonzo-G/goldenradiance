@@ -3,7 +3,7 @@
 // 未确认字段不参与 facet，选中材质/镀层/MOQ 档筛选时这类款自然被排除（诚实的过滤结果）。
 import { t } from '../../i18n';
 import type { SkuIndexItem } from '../../lib/products/queries';
-import { priceRange, imageSrcset } from '../../lib/shared/format';
+import { priceRange, imageSrcset, lineToken } from '../../lib/shared/format';
 
 interface Index {
   window: { __SKU_INDEX__?: SkuIndexItem[] };
@@ -97,7 +97,7 @@ function apply(): SkuIndexItem[] {
 
 /** 图片位：真实素材优先，否则沿用程序化占位图（与 ProductImage.astro 同构） */
 function imageHtml(it: SkuIndexItem): string {
-  const lineBar = `<div class="absolute inset-x-0 bottom-0 h-0.5" style="background: var(--color-${escapeHtml(it.line)})" aria-hidden="true"></div>`;
+  const lineBar = `<div class="absolute inset-x-0 bottom-0 h-0.5" style="background: var(--color-${lineToken(it.line)})" aria-hidden="true"></div>`;
   const alt = [it.title, it.material, it.plating].filter(Boolean).join(', ');
   if (it.image) {
     const dims =
@@ -133,7 +133,7 @@ function priceBlockHtml(it: SkuIndexItem): string {
       ? `<p class="tnum text-sm font-medium text-fg-2">${t('pdp.moq.label', { min: it.moqMin })}</p>`
       : `<p class="tnum text-sm font-medium text-fg-2">${t('pdp.moq.onRequest')}</p>`;
   return `
-    <div class="mt-2 flex items-baseline gap-3 border-t border-border-soft pt-2">
+    <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border-soft pt-2">
       ${pricePart}
       <span class="h-4 w-px self-center bg-border" aria-hidden="true"></span>
       ${moqPart}
@@ -149,7 +149,7 @@ function cardHtml(it: SkuIndexItem): string {
       : '';
   return `
   <article class="group relative">
-    <label class="absolute left-2 top-2 z-[2] flex size-8 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
+    <label class="absolute left-2 top-2 z-[2] flex size-11 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
       <input type="checkbox" data-bulk-check value="${escapeHtml(it.sku)}" data-title="${escapeHtml(it.title)}" data-slug="${escapeHtml(it.slug)}" data-moq="${it.rfqQty}" class="size-4 accent-[var(--color-accent-metal)]" aria-label="${escapeHtml(t('cta.addToRfq'))}: ${escapeHtml(it.sku)}" />
     </label>
     ${badge}
@@ -232,6 +232,22 @@ function setView(next: 'grid' | 'list') {
   render();
 }
 
+// 移动端筛选 sheet 开合（全屏覆盖 + 背景滚动锁定）
+const filtersPanel = document.querySelector<HTMLElement>('[data-filters]');
+const FILTERS_SHEET_CLASSES = ['fixed', 'inset-0', 'z-[300]', 'overflow-y-auto', 'bg-bg', 'p-4'];
+function openFilters() {
+  if (!filtersPanel) return;
+  filtersPanel.classList.remove('hidden');
+  filtersPanel.classList.add(...FILTERS_SHEET_CLASSES);
+  document.body.style.overflow = 'hidden';
+}
+function closeFilters() {
+  if (!filtersPanel) return;
+  filtersPanel.classList.add('hidden');
+  filtersPanel.classList.remove(...FILTERS_SHEET_CLASSES);
+  document.body.style.overflow = '';
+}
+
 form?.addEventListener('change', render);
 document.querySelector('[data-sort]')?.addEventListener('change', render);
 document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((btn) =>
@@ -259,19 +275,8 @@ document.addEventListener('click', (e) => {
     checked[checked.length - 1]?.click();
     render();
   }
-  // 移动端筛选 sheet
-  if (target.closest('[data-filters-toggle]')) {
-    const panel = document.querySelector<HTMLElement>('[data-filters]');
-    if (panel) {
-      const open = panel.classList.toggle('hidden');
-      panel.classList.toggle('fixed', !open);
-      panel.classList.toggle('inset-0', !open);
-      panel.classList.toggle('z-[300]', !open);
-      panel.classList.toggle('overflow-y-auto', !open);
-      panel.classList.toggle('bg-bg', !open);
-      panel.classList.toggle('p-4', !open);
-    }
-  }
+  if (target.closest('[data-filters-toggle]')) openFilters();
+  if (target.closest('[data-filters-close]')) closeFilters();
   // 批量条显隐
   const checkedCount = document.querySelectorAll<HTMLInputElement>('[data-bulk-check]:checked').length;
   bulkBar?.toggleAttribute('hidden', checkedCount === 0);
@@ -279,3 +284,7 @@ document.addEventListener('click', (e) => {
 });
 
 render();
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFilters();
+});

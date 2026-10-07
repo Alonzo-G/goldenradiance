@@ -19,7 +19,7 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
 ---
 
 <article class="group relative" data-sku-card={item.sku}>
-  <label class="absolute left-2 top-2 z-[2] flex size-8 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
+  <label class="absolute left-2 top-2 z-[2] flex size-11 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
     <input
       type="checkbox"
       data-bulk-check
@@ -55,7 +55,7 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
   </h3>
   <p class="mt-1 truncate text-xs text-muted">{specLine}</p>
   {/* 价格 + MOQ 组合块（视觉 1 组；限定语必须可见，禁止 tooltip） */}
-  <div class="mt-2 flex items-baseline gap-3 border-t border-border-soft pt-2">
+  <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border-soft pt-2">
     {
       hasPrice ? (
         <p class="tnum text-base font-semibold text-fg">
@@ -82,7 +82,7 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
     data-slug={item.slug}
     data-title={item.title}
     data-moq={item.rfqQty}
-    class="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-sm border border-accent text-sm font-medium text-accent opacity-0 transition-opacity duration-150 focus-visible:opacity-100 group-hover:opacity-100"
+    class="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-sm border border-accent text-sm font-medium text-accent transition-opacity duration-150 lg:opacity-0 lg:focus-visible:opacity-100 lg:group-hover:opacity-100"
   >
     <Icon name="lucide:plus" class="icon size-4" aria-hidden="true" />
     <span data-add-label>{t('cta.addToRfq')}</span>

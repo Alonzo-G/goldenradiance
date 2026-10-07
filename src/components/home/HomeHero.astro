@@ -7,6 +7,7 @@ import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import ProductImage from '../product/ProductImage.astro';
 import { getProducts, getActiveLines } from '../../lib/products/queries';
+import { lineToken } from '../../lib/shared/format';
 
 const products = await getProducts();
 const activeLines = await getActiveLines();
@@ -47,7 +48,7 @@ const heroImageFor = (line: string) => {
 ---
 
 <section class="section-y">
-  <div class={`container-wide grid items-stretch gap-8 lg:grid-cols-[2fr_${strips.map(() => '1fr').join('_')}]`}>
+  <div class="container-wide lg:grid lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
     <div class="flex max-w-xl flex-col justify-center">
       <h1 class="text-3xl font-bold text-fg">{t('hero.h1')}</h1>
       <p class="mt-4 text-md text-muted">{t('hero.line2')}</p>
@@ -62,33 +63,35 @@ const heroImageFor = (line: string) => {
         </a>
       </div>
     </div>
-    {strips.map((s) => {
-      const hero = heroImageFor(s.line);
-      return (
-        <a href={hero ? `/products/${hero.slug}/` : `/product-lines/${s.line}/`} class="group flex flex-col gap-3">
-          <div class="grid flex-1 gap-3">
-            <ProductImage
-              image={hero ? { src: hero.src, thumb: hero.thumb, alt: hero.alt, width: hero.width, height: hero.height } : null}
-              category={s.cat}
-              line={s.line}
-              label={s.label}
-              ratio="4:5"
-              alt=""
-              loading="eager"
-              fetchpriority="high"
-              class="min-h-40"
-            />
-          </div>
-          <div class="border-l-2 border-[var(--color-line-alloy)] pl-3" style={`border-color: var(--color-${s.line})`}>
-            <h2 class="text-sm font-semibold text-fg">{s.label}</h2>
-            <p class="mt-0.5 text-xs text-muted">{s.note}</p>
-            <p class="mt-1 flex items-center gap-1 text-xs font-medium text-accent group-hover:underline">
-              {t('cta.viewAll')}
-              <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
-            </p>
-          </div>
-        </a>
-      );
-    })}
+    <div class="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mt-0 lg:grid lg:grid-cols-2 lg:gap-5 lg:overflow-visible lg:pb-0">
+      {strips.map((s) => {
+        const hero = heroImageFor(s.line);
+        return (
+          <a href={hero ? `/products/${hero.slug}/` : `/product-lines/${s.line}/`} class="group flex w-[74vw] shrink-0 snap-start flex-col gap-3 sm:w-[42vw] lg:w-auto">
+            <div class="grid flex-1 gap-3">
+              <ProductImage
+                image={hero ? { src: hero.src, thumb: hero.thumb, alt: hero.alt, width: hero.width, height: hero.height } : null}
+                category={s.cat}
+                line={s.line}
+                label={s.label}
+                ratio="4:5"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+                class="min-h-40"
+              />
+            </div>
+            <div class="border-l-2 pl-3" style={`border-color: var(--color-${lineToken(s.line)})`}>
+              <h2 class="text-sm font-semibold text-fg">{s.label}</h2>
+              <p class="mt-0.5 text-xs text-muted">{s.note}</p>
+              <p class="mt-1 flex items-center gap-1 text-xs font-medium text-accent group-hover:underline">
+                {t('cta.viewAll')}
+                <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+              </p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
   </div>
 </section>
