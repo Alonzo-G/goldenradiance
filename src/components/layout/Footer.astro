@@ -3,16 +3,26 @@
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import Wordmark from './Wordmark.astro';
+import { getActiveLines } from '../../lib/products/queries';
 
 const year = new Date().getFullYear();
+
+const LINE_LABEL: Record<string, string> = {
+  'fashion-alloy-brass': t('nav.line.alloy'),
+  'stainless-titanium-steel': t('nav.line.steel'),
+  'natural-stone-gemstone-pearl': t('nav.line.stone'),
+};
+
+const activeLines = await getActiveLines();
 
 const cols = [
   {
     title: t('footer.col.lines'),
     links: [
-      { href: '/product-lines/fashion-alloy-brass/', label: t('nav.line.alloy') },
-      { href: '/product-lines/stainless-titanium-steel/', label: t('nav.line.steel') },
-      { href: '/product-lines/natural-stone-gemstone-pearl/', label: t('nav.line.stone') },
+      ...activeLines.map((entry) => ({
+        href: `/product-lines/${entry.data.line}/`,
+        label: LINE_LABEL[entry.data.line] ?? entry.data.name,
+      })),
       { href: '/products/', label: t('nav.allProducts') },
     ],
   },

@@ -6,15 +6,21 @@
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import ProductImage from '../product/ProductImage.astro';
-import { getProducts } from '../../lib/products/queries';
+import { getProducts, getActiveLines } from '../../lib/products/queries';
 
 const products = await getProducts();
+const activeLines = await getActiveLines();
 
-const strips = [
-  { line: 'fashion-alloy-brass', label: 'Fashion Alloy & Brass', note: 'Zinc alloy & brass, plated', cat: 'earrings' },
-  { line: 'stainless-titanium-steel', label: 'Stainless & Titanium Steel', note: '316L / titanium · PVD plating', cat: 'necklace' },
-  { line: 'natural-stone-gemstone-pearl', label: 'Natural Stone, Gem & Pearl', note: 'By lot: no two stones alike', cat: 'bracelet' },
-];
+const LINE_STRIP: Record<string, { label: string; note: string; cat: string }> = {
+  'fashion-alloy-brass': { label: 'Fashion Alloy & Brass', note: 'Zinc alloy & brass, plated', cat: 'earrings' },
+  'stainless-titanium-steel': { label: 'Stainless & Titanium Steel', note: '316L / titanium · PVD plating', cat: 'necklace' },
+  'natural-stone-gemstone-pearl': { label: 'Natural Stone, Gem & Pearl', note: 'By lot: no two stones alike', cat: 'bracelet' },
+};
+
+const strips = activeLines.map((entry) => ({
+  line: entry.data.line,
+  ...(LINE_STRIP[entry.data.line] ?? { label: entry.data.name, note: '', cat: 'ring' }),
+}));
 
 /** 每条线选 1 款「视觉最强」的真实产品：优先有实拍图 + 图多 + 风格标签丰富，否则回落占位图。 */
 const heroImageFor = (line: string) => {
@@ -41,7 +47,7 @@ const heroImageFor = (line: string) => {
 ---
 
 <section class="section-y">
-  <div class="container-wide grid items-stretch gap-8 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+  <div class={`container-wide grid items-stretch gap-8 lg:grid-cols-[2fr_${strips.map(() => '1fr').join('_')}]`}>
     <div class="flex max-w-xl flex-col justify-center">
       <h1 class="text-3xl font-bold text-fg">{t('hero.h1')}</h1>
       <p class="mt-4 text-md text-muted">{t('hero.line2')}</p>

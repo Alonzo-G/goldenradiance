@@ -3,12 +3,20 @@
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import PlaceholderImage from '../product/PlaceholderImage.astro';
+import { getActiveLines } from '../../lib/products/queries';
 
-const lines = [
-  { id: 'fashion-alloy-brass', label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring', big: true },
-  { id: 'stainless-titanium-steel', label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace', big: false },
-  { id: 'natural-stone-gemstone-pearl', label: t('nav.line.stone'), desc: t('home.lines.stone.desc'), token: 'line-stone', icon: 'gem', cat: 'bracelet', big: false },
-];
+const LINE_META: Record<string, { label: string; desc: string; token: string; icon: string; cat: string; big: boolean }> = {
+  'fashion-alloy-brass': { label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring', big: true },
+  'stainless-titanium-steel': { label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace', big: false },
+  'natural-stone-gemstone-pearl': { label: t('nav.line.stone'), desc: t('home.lines.stone.desc'), token: 'line-stone', icon: 'gem', cat: 'bracelet', big: false },
+};
+
+const activeLines = await getActiveLines();
+// 第一条活跃线默认「大卡」，其余小卡；仅一条活跃线时也走大卡
+const lines = activeLines.map((entry, idx) => {
+  const meta = LINE_META[entry.data.line] ?? { label: entry.data.name, desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring', big: false };
+  return { id: entry.data.line, ...meta, big: idx === 0 };
+});
 
 const trust = [
   { icon: 'ruler', label: t('trust.1.label'), desc: t('trust.1.desc') },

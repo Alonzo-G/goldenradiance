@@ -1,15 +1,17 @@
 ---
 // src/pages/product-lines/[line].astro — 产品线 Landing ×3（UIUX §11 #2-4）
-import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductImage from '../../components/product/ProductImage.astro';
 import ProductCard from '../../components/product/ProductCard.astro';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
-import { getProducts, byLine, toSkuIndexItem } from '../../lib/products/queries';
+import { getProducts, byLine, toSkuIndexItem, getActiveLines } from '../../lib/products/queries';
 
 export async function getStaticPaths() {
-  const lines = await getCollection('productLines');
+  // 只为有公开产品的产品线生成静态页——空线（如未来补货前）不生成路由，
+  // 补货后自动恢复，无需改代码。
+  const lines = await getActiveLines();
   return lines.map((entry) => ({ params: { line: entry.data.line }, props: { entry } }));
 }
 

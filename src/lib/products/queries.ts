@@ -51,6 +51,18 @@ export function byLine(items: ProductEntry[], line: string): ProductEntry[] {
   return items.filter((it) => it.data.line === line);
 }
 
+/** 有公开产品的产品线定义（按 content.config.ts 的 LINE_IDS 顺序），
+ *  供导航/首页/页脚入口使用——空线（如未来补货前暂无货的线）自动不展示，
+ *  补货后无需改任何组件代码即自动恢复。 */
+export async function getActiveLines(): Promise<CollectionEntry<'productLines'>[]> {
+  const [products, lines] = await Promise.all([getProducts(), getCollection('productLines')]);
+  const activeIds = new Set(products.map((p) => p.data.line));
+  const order = new Map(lines.map((l, i) => [l.data.line, i]));
+  return lines
+    .filter((l) => activeIds.has(l.data.line))
+    .sort((a, b) => (order.get(a.data.line) ?? 0) - (order.get(b.data.line) ?? 0));
+}
+
 /** PDP「Same series」：同产品线其他款 */
 export function sameSeries(items: ProductEntry[], entry: ProductEntry, limit = 6): ProductEntry[] {
   return byLine(items, entry.data.line)

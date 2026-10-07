@@ -3,12 +3,18 @@
 import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { t } from '../i18n';
+import { getActiveLines } from '../lib/products/queries';
 
-const lines = [
-  { href: '/product-lines/fashion-alloy-brass/', label: t('nav.line.alloy') },
-  { href: '/product-lines/stainless-titanium-steel/', label: t('nav.line.steel') },
-  { href: '/product-lines/natural-stone-gemstone-pearl/', label: t('nav.line.stone') },
-];
+const LINE_LABEL: Record<string, string> = {
+  'fashion-alloy-brass': t('nav.line.alloy'),
+  'stainless-titanium-steel': t('nav.line.steel'),
+  'natural-stone-gemstone-pearl': t('nav.line.stone'),
+};
+
+const lines = (await getActiveLines()).map((entry) => ({
+  href: `/product-lines/${entry.data.line}/`,
+  label: LINE_LABEL[entry.data.line] ?? entry.data.name,
+}));
 ---
 
 <BaseLayout

@@ -3,12 +3,18 @@
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import Wordmark from './Wordmark.astro';
+import { getActiveLines } from '../../lib/products/queries';
 
-const lines = [
-  { id: 'fashion-alloy-brass', label: t('nav.line.alloy') },
-  { id: 'stainless-titanium-steel', label: t('nav.line.steel') },
-  { id: 'natural-stone-gemstone-pearl', label: t('nav.line.stone') },
-];
+const LINE_LABEL: Record<string, string> = {
+  'fashion-alloy-brass': t('nav.line.alloy'),
+  'stainless-titanium-steel': t('nav.line.steel'),
+  'natural-stone-gemstone-pearl': t('nav.line.stone'),
+};
+
+const lines = (await getActiveLines()).map((entry) => ({
+  id: entry.data.line,
+  label: LINE_LABEL[entry.data.line] ?? entry.data.name,
+}));
 ---
 
 <header class="sticky top-0 z-[200] border-b border-border bg-surface">
