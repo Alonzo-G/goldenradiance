@@ -13,13 +13,12 @@ const LINE_META: Record<string, { label: string; desc: string; token: string; ic
 };
 
 const [products, activeLines] = await Promise.all([getProducts(), getActiveLines()]);
-// 第一条活跃线默认「大卡」，其余小卡；仅一条活跃线时也走大卡
-const lines = activeLines.map((entry, idx) => {
+// 两条线等权重（等宽双卡，非三条线时代的一大两小 bento）
+const lines = activeLines.map((entry) => {
   const meta = LINE_META[entry.data.line] ?? { label: entry.data.name, desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring' };
   return {
     id: entry.data.line,
     ...meta,
-    big: idx === 0,
     hero: heroImageForLine(products, entry.data.line),
   };
 });
@@ -36,18 +35,19 @@ const trust = [
 <section class="section-y">
   <div class="container-wide">
     <h2 class="text-2xl font-semibold text-fg">{t('home.lines.title')}</h2>
-    <div class="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
       {lines.map((l) => (
         <a
           href={`/product-lines/${l.id}/`}
-          class:list={['group flex flex-col overflow-hidden rounded-md border border-border bg-surface shadow-raised', l.big && 'lg:row-span-1']}
+          class="group flex flex-col overflow-hidden rounded-md border border-border bg-surface shadow-raised"
         >
           <ProductImage
             image={l.hero ? { src: l.hero.src, thumb: l.hero.thumb, alt: l.hero.alt, width: l.hero.width, height: l.hero.height } : null}
             category={l.cat}
             line={l.id}
             label={l.label}
-            ratio={l.big ? '16:9' : '4:5'}
+            ratio="4:5"
+            fit="contain"
             alt=""
           />
           <div class="flex flex-1 flex-col p-5">

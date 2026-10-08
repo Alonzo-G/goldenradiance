@@ -13,6 +13,9 @@ interface Props {
   line: string;
   label: string;
   ratio?: '1:1' | '4:5' | '16:9';
+  /** 图片适配：cover 填满裁切（默认）；contain 完整显示不裁切——白底实拍图配近白容器，
+   *  留白无感。买家需要看全产品全貌/尺寸标注的区块（线卡、Hero）用 contain。 */
+  fit?: 'cover' | 'contain';
   alt?: string;
   class?: string;
   sizes?: string;
@@ -29,6 +32,7 @@ const {
   line,
   label,
   ratio = '1:1',
+  fit = 'cover',
   alt = '',
   class: cls,
   sizes = '(min-width: 1280px) 22vw, (min-width: 640px) 33vw, 50vw',
@@ -39,6 +43,7 @@ const {
 
 const ratioClass =
   ratio === '4:5' ? 'aspect-[4/5]' : ratio === '16:9' ? 'aspect-video' : 'aspect-square';
+const fitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
 
 const src = image ? (variant === 'thumb' ? image.thumb : image.src) : '';
 const dims =
@@ -70,7 +75,7 @@ const srcset = variant === 'main' ? imageSrcset(image?.thumb, image?.src ?? '', 
         fetchpriority={fetchpriority}
         decoding="async"
         sizes={sizes}
-        class="size-full object-cover"
+        class={cn('size-full', fitClass)}
       />
       {/* 产品线识别 tick（与占位图一致，保持线识别连续性） */}
       <div
