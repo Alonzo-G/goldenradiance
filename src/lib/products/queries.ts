@@ -63,6 +63,34 @@ export async function getActiveLines(): Promise<CollectionEntry<'productLines'>[
     .sort((a, b) => (order.get(a.data.line) ?? 0) - (order.get(b.data.line) ?? 0));
 }
 
+/** 产品线「视觉代表款」：该线视觉素材最丰富的 real 产品（图多 > 风格标签多）。
+ *  供首页 Hero / Lines 区块统一使用——同一屏内不允许「真实图 vs 占位图」混排，
+ *  那是「货还没上」最直观的误判信号。 */
+export function heroImageForLine(
+  products: ProductEntry[],
+  line: string,
+): { src: string; thumb: string; alt: string; width?: number; height?: number; slug: string; title: string } | null {
+  const pool = products
+    .filter((p) => p.data.line === line && p.data.dataStatus === 'real' && p.data.images?.length)
+    .sort(
+      (a, b) =>
+        (b.data.images?.length ?? 0) - (a.data.images?.length ?? 0) ||
+        (b.data.style_tags?.length ?? 0) - (a.data.style_tags?.length ?? 0),
+    );
+  const pick = pool[0];
+  if (!pick) return null;
+  const img = pick.data.images![0];
+  return {
+    src: img.src,
+    thumb: img.thumb,
+    alt: img.alt || pick.data.title,
+    width: img.width,
+    height: img.height,
+    slug: pick.data.slug,
+    title: pick.data.title,
+  };
+}
+
 /** PDP「Same series」：同产品线其他款 */
 export function sameSeries(items: ProductEntry[], entry: ProductEntry, limit = 6): ProductEntry[] {
   return byLine(items, entry.data.line)

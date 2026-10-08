@@ -1,21 +1,28 @@
 ---
-// src/components/home/HomeLines.astro — 三线 Bento（§12[3]）+ 深墨玉信任条（§12[4]，AC-42 五项）
+// src/components/home/HomeLines.astro — 产品线 Bento + 深墨玉信任条（AC-42 五项）
+// 视觉与 Hero 统一：每条线用真实实拍代表图（queries.heroImageForLine），
+// 缺图时才回落程序化占位图——同一屏不允许「真实图 vs 占位图」混排。
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
-import PlaceholderImage from '../product/PlaceholderImage.astro';
-import { getActiveLines } from '../../lib/products/queries';
+import ProductImage from '../product/ProductImage.astro';
+import { getActiveLines, getProducts, heroImageForLine } from '../../lib/products/queries';
 
-const LINE_META: Record<string, { label: string; desc: string; token: string; icon: string; cat: string; big: boolean }> = {
-  'fashion-alloy-brass': { label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring', big: true },
-  'stainless-titanium-steel': { label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace', big: false },
-  'natural-stone-gemstone-pearl': { label: t('nav.line.stone'), desc: t('home.lines.stone.desc'), token: 'line-stone', icon: 'gem', cat: 'bracelet', big: false },
+const LINE_META: Record<string, { label: string; desc: string; token: string; icon: string; cat: string }> = {
+  'fashion-alloy-brass': { label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring' },
+  'stainless-titanium-steel': { label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace' },
+  'natural-stone-gemstone-pearl': { label: t('nav.line.stone'), desc: t('home.lines.stone.desc'), token: 'line-stone', icon: 'gem', cat: 'bracelet' },
 };
 
-const activeLines = await getActiveLines();
+const [products, activeLines] = await Promise.all([getProducts(), getActiveLines()]);
 // 第一条活跃线默认「大卡」，其余小卡；仅一条活跃线时也走大卡
 const lines = activeLines.map((entry, idx) => {
-  const meta = LINE_META[entry.data.line] ?? { label: entry.data.name, desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring', big: false };
-  return { id: entry.data.line, ...meta, big: idx === 0 };
+  const meta = LINE_META[entry.data.line] ?? { label: entry.data.name, desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring' };
+  return {
+    id: entry.data.line,
+    ...meta,
+    big: idx === 0,
+    hero: heroImageForLine(products, entry.data.line),
+  };
 });
 
 const trust = [
@@ -36,7 +43,14 @@ const trust = [
           href={`/product-lines/${l.id}/`}
           class:list={['group flex flex-col overflow-hidden rounded-md border border-border bg-surface shadow-raised', l.big && 'lg:row-span-1']}
         >
-          <PlaceholderImage category={l.cat} line={l.token} label={l.label} ratio={l.big ? '16:9' : '4:5'} alt="" />
+          <ProductImage
+            image={l.hero ? { src: l.hero.src, thumb: l.hero.thumb, alt: l.hero.alt, width: l.hero.width, height: l.hero.height } : null}
+            category={l.cat}
+            line={l.id}
+            label={l.label}
+            ratio={l.big ? '16:9' : '4:5'}
+            alt=""
+          />
           <div class="flex flex-1 flex-col p-5">
             <div class="flex items-center gap-2">
               <Icon name={`lucide:${l.icon}`} class="icon size-5" aria-hidden="true" />

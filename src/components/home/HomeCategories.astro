@@ -1,0 +1,63 @@
+---
+// src/components/home/HomeCategories.astro — 品类入口（B2B 采购第一导航维度，转化路径补位）
+// 数据驱动：品类只在「至少 1 款可见产品」时渲染——当前 bracelet 894 / necklace 102 / ring 12 / earrings 6，
+// hair-accessory / brooch / anklet 无货自动隐藏，补货后无需改代码即恢复。
+// 数量明示库存结构，诚实呈现主打品类与补货中品类，不让采购人误判规模。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import ProductImage from '../product/ProductImage.astro';
+import { getSkuIndex, type SkuIndexItem } from '../../lib/products/queries';
+
+const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
+
+const index = await getSkuIndex();
+const categories = ALL_CATEGORIES.filter((c) => index.some((it) => it.category === c));
+
+// 品类代表款：该品类第一个有实拍图的产品（real 素材必有图）
+const heroFor = (c: string): SkuIndexItem | undefined => index.find((it) => it.category === c && it.image);
+const countFor = (c: string): number => index.filter((it) => it.category === c).length;
+---
+
+<section class="section-y">
+  <div class="container-wide">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-semibold text-fg">{t('home.categories.title')}</h2>
+        <p class="mt-1 text-sm text-muted">{t('home.categories.subtitle')}</p>
+      </div>
+      <a href="/products/" class="flex shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline">
+        {t('cta.viewAll')}
+        <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+      </a>
+    </div>
+
+    <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {
+        categories.map((c) => {
+          const hero = heroFor(c);
+          const label = t(`category.${c}` as 'category.earrings');
+          return (
+            <a
+              href={`/products/?category=${c}`}
+              class="group flex flex-col overflow-hidden rounded-md border border-border bg-surface shadow-raised transition-shadow duration-150 hover:shadow-none"
+            >
+              <ProductImage
+                image={hero?.image ?? null}
+                category={c}
+                line={hero?.line ?? 'fashion-alloy-brass'}
+                label={label}
+                ratio="1:1"
+                alt=""
+                variant="thumb"
+              />
+              <div class="flex items-center justify-between gap-2 px-4 py-3">
+                <h3 class="text-base font-semibold text-fg">{label}</h3>
+                <span class="tnum shrink-0 text-xs text-muted">{t('home.categories.count', { count: countFor(c) })}</span>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

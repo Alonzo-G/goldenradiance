@@ -283,6 +283,21 @@ document.addEventListener('click', (e) => {
   if (bulkCount) bulkCount.textContent = `${checkedCount}`;
 });
 
+// URL 深链初始化：读 ?category=&?line= 回填筛选（首页品类/路线区块深链跳转）。
+// 只读两个稳定枚举轴；material/plating 为自由文本、band/scenario 值不稳定，不进深链。
+function initFromUrl(): void {
+  if (!form) return;
+  const params = new URLSearchParams(window.location.search);
+  for (const axis of ['category', 'line'] as const) {
+    const values = params.getAll(axis);
+    if (values.length === 0) continue;
+    form.querySelectorAll<HTMLInputElement>(`input[name="${axis}"]`).forEach((cb) => {
+      cb.checked = values.includes(cb.value);
+    });
+  }
+}
+
+initFromUrl();
 render();
 
 document.addEventListener('keydown', (e) => {
