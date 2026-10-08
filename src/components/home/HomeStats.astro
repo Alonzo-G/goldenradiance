@@ -1,13 +1,15 @@
 ---
 // src/components/home/HomeStats.astro — 首页信任数字条（4 格，紧贴 Hero 下方）
-// 数字从真实数据动态计算，禁止手写编造：styles 随入库自动涨、lines 固定、MOQ 沿用已确认区间。
+// 数字从真实数据动态计算，禁止手写编造：styles 随入库自动涨、
+// lines 用 getActiveLines()（空线自动不计，补货零代码恢复，与线卡区块同一数据源）、
+// MOQ 沿用已确认区间。
 // 第 4 格（lead time）未拿到客户可对外承诺的交期前，降级为「Quoted per order」而非写死数字。
 import { t } from '../../i18n';
-import { getProducts } from '../../lib/products/queries';
+import { getProducts, getActiveLines } from '../../lib/products/queries';
 
-const products = await getProducts();
+const [products, activeLines] = await Promise.all([getProducts(), getActiveLines()]);
 const styleCount = products.length;
-const lineCount = 3;
+const lineCount = activeLines.length;
 
 const stats = [
   { value: `${styleCount}+`, label: t('stats.styles') },
