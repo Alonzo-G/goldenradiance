@@ -82,8 +82,9 @@ const jsonld = [
     <div data-chips class="mt-4 flex min-h-9 flex-wrap items-center gap-2"></div>
 
     <div class="mt-6 grid gap-8 lg:grid-cols-[240px_1fr]">
-      {/* 筛选 sidebar（桌面常驻 / 移动全屏 sheet） */}
-      <aside data-filters class="hidden border-border lg:block">
+      {/* 筛选 sidebar（桌面常驻 sticky：下滑时跟随视口，self-start 解除 grid stretch
+          才能让 sticky 生效；max-h + overflow 兜底筛选组多于视口高度的场景） */}
+      <aside data-filters class="hidden border-border lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto">
         <div class="mb-4 flex items-center justify-between lg:hidden">
           <h2 class="text-lg font-semibold text-fg">{t('filter.title')}</h2>
           <button type="button" data-filters-close class="flex size-11 items-center justify-center rounded-sm text-fg hover:bg-surface-sunken" aria-label={t('filter.close')}>
