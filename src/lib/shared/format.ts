@@ -120,7 +120,6 @@ export function imageSrcset(
 export const LINE_TOKEN: Record<string, string> = {
   'fashion-alloy-brass': 'line-alloy',
   'stainless-titanium-steel': 'line-steel',
-  'natural-stone-gemstone-pearl': 'line-stone',
 };
 
 export function lineToken(line: string): string {

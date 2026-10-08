@@ -11,7 +11,7 @@ export function organizationJsonld(site: string): Record<string, unknown> {
     name: 'Golden Radiance',
     url: site,
     description:
-      'Sourcing partner for wholesale jewelry buyers: three product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote.',
+      'Sourcing partner for wholesale jewelry buyers: two product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote.',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
@@ -159,7 +159,7 @@ export function localBusinessJsonld(input: {
     url: input.site,
     logo: new URL('/og-default.png', input.site).toString(),
     description:
-      'Sourcing partner for wholesale jewelry buyers: fashion alloy & brass, stainless & titanium steel, and natural stone & pearl product lines.',
+      'Sourcing partner for wholesale jewelry buyers: fashion alloy & brass and stainless & titanium steel product lines.',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',

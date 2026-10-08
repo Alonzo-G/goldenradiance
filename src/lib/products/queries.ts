@@ -188,14 +188,12 @@ export async function getSkuIndex(): Promise<SkuIndexItem[]> {
  * 使用场景映射（§2.2）：产品线 → 买家经营场景。
  * 场景是产品线的语义化别名，不是独立产品属性——两条线的差异化卖点（耐久 vs 走量）
  * 用买家能秒懂的「使用场景」语言表达，避免「产品线」「使用场景」两个名词让买家困惑。
- * stone 线当前无货，其场景 'statement' 仅在该线补货后随 getActiveLines 自动出现。
  */
 export const SCENARIO_OF_LINE: Record<string, string> = {
   'stainless-titanium-steel': 'daily',
   'fashion-alloy-brass': 'volume',
-  'natural-stone-gemstone-pearl': 'statement',
 };
-export const SCENARIOS = ['daily', 'volume', 'statement'] as const;
+export const SCENARIOS = ['daily', 'volume'] as const;
 export type Scenario = (typeof SCENARIOS)[number];
 
 /** 离散筛选项值域（显式 sort，禁依赖返回顺序；未确认值不进 facet） */

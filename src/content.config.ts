@@ -8,7 +8,6 @@ import { glob } from 'astro/loaders';
 const LINE_IDS = [
   'fashion-alloy-brass',
   'stainless-titanium-steel',
-  'natural-stone-gemstone-pearl',
 ] as const;
 
 const CATEGORY_IDS = [
@@ -83,7 +82,7 @@ const productLines = defineCollection({
     line: z.enum(LINE_IDS),
     name: z.string(),
     icon: z.string(),
-    lineToken: z.enum(['line-alloy', 'line-steel', 'line-stone']),
+    lineToken: z.enum(['line-alloy', 'line-steel']),
   }),
 });
 

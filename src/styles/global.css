@@ -36,7 +36,6 @@
   /* C-extension — 产品线识别色 */
   --color-line-alloy: #6e6555;
   --color-line-steel: #4a5a63;
-  --color-line-stone: #5d5069;
 
   /* Fonts — 前台英文站：不加载任何 CJK 字体（LOAD_CJK_FONT=false） */
   --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;

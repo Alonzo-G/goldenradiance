@@ -46,7 +46,7 @@ const jsonld = [
   breadcrumbJsonld(getSiteUrl(Astro.site), [
     { name: 'Home', path: '/' },
     { name: t('pdp.breadcrumb.products'), path: '/products/' },
-    { name: t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : data.line === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy'), path: `/product-lines/${data.line}/` },
+    { name: t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy'), path: `/product-lines/${data.line}/` },
     { name: data.title, path: `/products/${data.slug}/` },
   ]),
 ];
@@ -95,7 +95,7 @@ const ogImage = data.dataStatus === 'real' && lcp ? `/og/${data.slug}.jpg` : und
       <li aria-hidden="true">/</li>
       <li><a href="/products/" class="hover:underline">{t('pdp.breadcrumb.products')}</a></li>
       <li aria-hidden="true">/</li>
-      <li><a href={`/product-lines/${data.line}/`} class="hover:underline">{t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : data.line === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy')}</a></li>
+      <li><a href={`/product-lines/${data.line}/`} class="hover:underline">{t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy')}</a></li>
       <li aria-hidden="true">/</li>
       <li aria-current="page" class="font-mono text-xs text-meta">{data.sku_code}</li>
     </ol>

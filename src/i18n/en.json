@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "Golden Radiance",
-    "tagline": "Three product lines. Verified specs on every SKU.",
-    "description": "Golden Radiance is a sourcing partner for wholesale jewelry buyers: three product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote."
+    "tagline": "Two product lines. Verified specs on every SKU.",
+    "description": "Golden Radiance is a sourcing partner for wholesale jewelry buyers: two product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote."
   },
 
   "nav": {
@@ -16,7 +16,7 @@
     "samples": "Samples",
     "shippingPayment": "Shipping & payment",
     "rfqPage": "RFQ list",
-    "searchPlaceholder": "Search by SKU, material or style — e.g. ST-2407",
+    "searchPlaceholder": "Search by SKU, material or style — e.g. SZTX268",
     "search": "Search",
     "rfq": "RFQ",
     "rfqWithCount": "RFQ ({count})",
@@ -24,7 +24,6 @@
     "closeMenu": "Close menu",
     "line.alloy": "Fashion Alloy & Brass",
     "line.steel": "Stainless & Titanium Steel",
-    "line.stone": "Natural Stone, Lab Gemstone & Pearl",
     "group.catalog": "Catalog",
     "group.support": "Support",
     "group.company": "Company",
@@ -65,8 +64,8 @@
   },
 
   "hero": {
-    "h1": "Three product lines. Verified specs on every SKU.",
-    "line2": "Fashion alloy & brass · Stainless & titanium steel · Natural stone, lab gemstone & pearl",
+    "h1": "Two product lines. Verified specs on every SKU.",
+    "line2": "Fashion alloy & brass · Stainless & titanium steel",
     "line3": "We are a sourcing partner, not a factory owner. Here is exactly how we control quality instead.",
     "dataLine": "Hundreds of styles · MOQ 12-120 pcs, stated per style"
   },
@@ -82,20 +81,19 @@
     "1.label": "MOQ 12-120 pcs, stated per style",
     "1.desc": "Confirmed range per style, not per order.",
     "2.label": "Sample before bulk",
-    "2.desc": "Sample before bulk, fee credited to your first order.",
+    "2.desc": "Approve a sample first — the fee is credited to your first order.",
     "3.label": "Spec sheet with every quote",
     "3.desc": "Material grade, plating thickness and lead time, in writing.",
     "4.label": "Ships worldwide",
-    "4.desc": "Ships worldwide.",
+    "4.desc": "Export and compliance documents travel with every shipment.",
     "5.label": "Quoted by a person",
     "5.desc": "No bot replies, no template quotes."
   },
 
   "home": {
-    "lines.title": "Three lines, one buying desk",
+    "lines.title": "Two lines, one buying desk",
     "lines.alloy.desc": "Breadth and speed for volume buyers. Zinc alloy and brass, plated and finished, restocked continuously.",
     "lines.steel.desc": "PVD-plated for everyday wear — corrosion behavior quoted per batch with your quotation.",
-    "lines.stone.desc": "Natural stone, lab gemstone and pearl — no two stones alike, photographed by lot.",
     "categories.title": "Shop by category",
     "categories.subtitle": "Browse by type — each card links straight to the filtered catalog",
     "categories.count": "{count} styles",
@@ -127,9 +125,6 @@
     "scenarios.volume.title": "Fashion volume & fast turnover",
     "scenarios.volume.desc": "Breadth and speed for volume buyers — zinc alloy and brass, plated and finished, with plating method stated per style.",
     "scenarios.volume.tag": "Fashion Alloy & Brass",
-    "scenarios.statement.title": "Statement & gifting",
-    "scenarios.statement.desc": "Natural stone, lab gemstone and pearl — no two stones alike, photographed by lot so you approve what ships.",
-    "scenarios.statement.tag": "Natural Stone, Gem & Pearl",
     "scenarios.cta": "Browse this line",
     "advantages.title": "Why buyers work with us",
     "advantages.subtitle": "Four things every order rests on — stated in writing, never assumed.",
@@ -146,7 +141,6 @@
   "line": {
     "alloy.tagline": "Breadth and speed. New styles added continuously, priced for volume.",
     "steel.tagline": "PVD-plated for everyday wear — corrosion behavior quoted per batch with your quotation.",
-    "stone.tagline": "No two stones are identical. We photograph the lot you are buying, not a sample shot.",
     "stats.skuDepth": "Catalogue depth varies by line",
     "stats.moq": "MOQ 12-120 pcs, stated per style",
     "stats.cadence": "New styles added continuously — ask for the current drop",
@@ -157,9 +151,6 @@
     "steel.316l.desc": "316L adds molybdenum for chloride resistance — the grade we use for pieces worn against skin.",
     "steel.corrosion.title": "Corrosion, explained",
     "steel.corrosion.desc": "Salt-spray behavior is a test result, not a promise. Every batch is sent for testing and the report travels with your quotation.",
-    "stone.dictionary.title": "Stone dictionary",
-    "stone.natural.title": "Natural variation is not a defect",
-    "stone.natural.desc": "Veining, tone shifts and inclusion are what natural stone is. We photograph the parcel you are buying so what you approve is what ships.",
     "position.title": "How this line is positioned",
     "steel.position": "The durable-wear choice",
     "steel.fact.1": "316L over 304 — molybdenum added for chloride resistance on pieces worn against skin.",
@@ -271,7 +262,7 @@
     "empty.desc": "Start one of two ways —",
     "empty.browse": "Browse a product line",
     "empty.paste": "Paste SKU codes",
-    "paste.placeholder": "One SKU code per line — e.g. ST-2407",
+    "paste.placeholder": "One SKU code per line — e.g. SZTX268",
     "paste.parse": "{matched} matched, {unmatched} not found. Unmatched lines are kept below for review.",
     "paste.submit": "Add matched SKUs",
     "form.title": "Where should the quote go?",
@@ -430,7 +421,7 @@
     "catalog.desc": "Remove one filter to see the nearest broader result set, or ask us directly.",
     "catalog.cta": "Request a product not listed",
     "search.title": "No SKU matches \"{query}\".",
-    "search.desc": "Try the SKU code exactly — e.g. ST-2407 — or browse a product line.",
+    "search.desc": "Try the SKU code exactly — e.g. SZTX268 — or browse a product line.",
     "didYouMean": "Did you mean: {suggestion}?"
   },
 
@@ -464,7 +455,7 @@
     "title": "Search",
     "open": "Open search",
     "close": "Close search",
-    "noResults": "No results. Try the SKU code exactly — e.g. ST-2407."
+    "noResults": "No results. Try the SKU code exactly — e.g. SZTX268."
   },
 
   "notFound": {
@@ -473,7 +464,7 @@
     "body": "The link may be outdated, or the SKU may have been renamed since. Two fast ways back:",
     "browseCatalog": "Browse the full catalog",
     "browseLines": "Jump to a product line",
-    "searchHint": "Or search the catalog by SKU code — e.g. ST-2407.",
+    "searchHint": "Or search the catalog by SKU code — e.g. SZTX268.",
     "rfqTitle": "Looking for something specific?",
     "rfqBody": "Send the SKU codes or a short description and a named account manager will quote it."
   }

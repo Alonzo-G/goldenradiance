@@ -15,7 +15,6 @@ const activeLines = await getActiveLines();
 const LINE_STRIP: Record<string, { label: string; note: string; cat: string }> = {
   'fashion-alloy-brass': { label: 'Fashion Alloy & Brass', note: 'Zinc alloy & brass, plated', cat: 'earrings' },
   'stainless-titanium-steel': { label: 'Stainless & Titanium Steel', note: '316L / titanium · PVD plating', cat: 'necklace' },
-  'natural-stone-gemstone-pearl': { label: 'Natural Stone, Gem & Pearl', note: 'By lot: no two stones alike', cat: 'bracelet' },
 };
 
 const strips = activeLines.map((entry) => ({

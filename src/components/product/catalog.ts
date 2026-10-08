@@ -39,11 +39,9 @@ function activeFilters(): { axis: string; value: string; label: string }[] {
         : axis === 'category'
           ? t(`category.${cb.value}` as 'category.earrings')
           : axis === 'line'
-            ? t(`nav.line.${cb.value === 'fashion-alloy-brass' ? 'alloy' : cb.value === 'stainless-titanium-steel' ? 'steel' : 'stone'}` as 'nav.line.alloy')
+            ? t(`nav.line.${cb.value === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy')
             : axis === 'scenario'
-              ? cb.value === 'statement'
-                ? t('home.scenarios.statement.title')
-                : t(`filter.scenario.${cb.value === 'daily' ? 'daily' : 'volume'}` as 'filter.scenario.daily')
+              ? t(`filter.scenario.${cb.value === 'daily' ? 'daily' : 'volume'}` as 'filter.scenario.daily')
               : cb.value;
     out.push({ axis, value: cb.value, label });
   });

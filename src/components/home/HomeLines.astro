@@ -10,7 +10,6 @@ import { getActiveLines, getProducts, heroImageForLine } from '../../lib/product
 const LINE_META: Record<string, { label: string; desc: string; token: string; icon: string; cat: string }> = {
   'fashion-alloy-brass': { label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring' },
   'stainless-titanium-steel': { label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace' },
-  'natural-stone-gemstone-pearl': { label: t('nav.line.stone'), desc: t('home.lines.stone.desc'), token: 'line-stone', icon: 'gem', cat: 'bracelet' },
 };
 
 const [products, activeLines] = await Promise.all([getProducts(), getActiveLines()]);
@@ -37,7 +36,7 @@ const trust = [
 <section class="section-y">
   <div class="container-wide">
     <h2 class="text-2xl font-semibold text-fg">{t('home.lines.title')}</h2>
-    <div class="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr_1fr]">
+    <div class="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
       {lines.map((l) => (
         <a
           href={`/product-lines/${l.id}/`}

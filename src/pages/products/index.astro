@@ -7,7 +7,7 @@ import { getSkuIndex, distinctValues, SCENARIOS } from '../../lib/products/queri
 import { MOQ_BANDS } from '../../lib/shared/format';
 
 const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
-const ALL_LINES = ['fashion-alloy-brass', 'stainless-titanium-steel', 'natural-stone-gemstone-pearl'] as const;
+const ALL_LINES = ['fashion-alloy-brass', 'stainless-titanium-steel'] as const;
 
 const index = await getSkuIndex();
 
@@ -31,12 +31,10 @@ const hasUnconfirmedMoq = index.some((it) => it.moqMin == null && it.dataStatus 
 const lineLabel = {
   'fashion-alloy-brass': t('nav.line.alloy'),
   'stainless-titanium-steel': t('nav.line.steel'),
-  'natural-stone-gemstone-pearl': t('nav.line.stone'),
 };
 const scenarioLabel = {
   daily: t('filter.scenario.daily'),
   volume: t('filter.scenario.volume'),
-  statement: t('home.scenarios.statement.title'),
 };
 const categoryLabel = Object.fromEntries(ALL_CATEGORIES.map((c) => [c, t(`category.${c}` as 'category.earrings')]));
 const bandLabel = { '12-30': t('filter.moq.b1'), '31-60': t('filter.moq.b2'), '61-120': t('filter.moq.b3') };

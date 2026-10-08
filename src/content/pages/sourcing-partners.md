@@ -13,8 +13,6 @@ accuracy and reply speed.
   measured at incoming inspection against the spec sheet.
 - **Stainless & titanium steel** — PVD and ion-plating workshops; grade
   verification (316L vs 304) happens before plating, not after.
-- **Natural stone, gemstone & pearl** — stringing and setting workshops; stone
-  lots are photographed before dispatch so what you approved is what ships.
 
 ## Three-step quality control
 

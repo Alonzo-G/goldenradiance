@@ -23,7 +23,7 @@ const { line, name, icon, lineToken } = entry.data;
 const { Content } = await render(entry);
 
 const taglineKey =
-  line === 'fashion-alloy-brass' ? 'line.alloy.tagline' : line === 'stainless-titanium-steel' ? 'line.steel.tagline' : 'line.stone.tagline';
+  line === 'fashion-alloy-brass' ? 'line.alloy.tagline' : 'line.steel.tagline';
 
 const all = await getProducts();
 const lineItems = byLine(all, line);
