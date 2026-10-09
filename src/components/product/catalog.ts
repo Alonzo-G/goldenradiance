@@ -4,6 +4,8 @@
 import { t } from '../../i18n';
 import type { SkuIndexItem } from '../../lib/products/queries';
 import { styleLabel, MOTIF_TAGS } from '../../lib/products/styles';
+import { lineLabel } from '../../lib/products/lines';
+import { CATALOG_AXES } from '../../lib/products/deeplink';
 import { cardHtml, rowHtml } from './catalog-views';
 
 interface Index {
@@ -39,8 +41,10 @@ function activeFilters(): { axis: string; value: string; label: string }[] {
           : t(`filter.moq.${cb.value === '12-30' ? 'b1' : cb.value === '31-60' ? 'b2' : 'b3'}` as 'filter.moq.b1')
         : axis === 'category'
           ? t(`category.${cb.value}` as 'category.earrings')
-          : axis === 'line'
-            ? t(`nav.line.${cb.value === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy')
+            : axis === 'line'
+              ? // 查 LINE_LABEL_KEY 而不是现场拼 `nav.line.${alloy/steel}`：
+                // 三元拼 key 的失败态是把 t() 返回的 key 字符串直接显示成线名。
+                lineLabel(cb.value) || cb.value
             : axis === 'scenario'
               ? t(`filter.scenario.${cb.value === 'daily' ? 'daily' : 'volume'}` as 'filter.scenario.daily')
               : axis === 'style'
@@ -207,7 +211,9 @@ document.addEventListener('click', (e) => {
 function initFromUrl(): void {
   if (!form) return;
   const params = new URLSearchParams(window.location.search);
-  for (const axis of ['category', 'line', 'style'] as const) {
+  // 轴名 import 自 deeplink.ts（拼 URL 与读 URL 共用同一份）。两边各写一份时，
+  // 打错一个字母的结果就是「深链看着对、点了不筛选」——UI 上完全看不出来。
+  for (const axis of CATALOG_AXES) {
     const values = params.getAll(axis);
     if (values.length === 0) continue;
     for (const v of values) {
