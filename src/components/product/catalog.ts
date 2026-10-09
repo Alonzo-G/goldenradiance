@@ -3,7 +3,8 @@
 // 未确认字段不参与 facet，选中材质/镀层/MOQ 档筛选时这类款自然被排除（诚实的过滤结果）。
 import { t } from '../../i18n';
 import type { SkuIndexItem } from '../../lib/products/queries';
-import { priceRange, imageSrcset, lineToken } from '../../lib/shared/format';
+import { styleLabel, MOTIF_TAGS } from '../../lib/products/styles';
+import { cardHtml, rowHtml } from './catalog-views';
 
 interface Index {
   window: { __SKU_INDEX__?: SkuIndexItem[] };
@@ -42,7 +43,9 @@ function activeFilters(): { axis: string; value: string; label: string }[] {
             ? t(`nav.line.${cb.value === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy')
             : axis === 'scenario'
               ? t(`filter.scenario.${cb.value === 'daily' ? 'daily' : 'volume'}` as 'filter.scenario.daily')
-              : cb.value;
+              : axis === 'style'
+                ? styleLabel(cb.value)
+                : cb.value;
     out.push({ axis, value: cb.value, label });
   });
   return out;
@@ -55,6 +58,7 @@ function apply(): SkuIndexItem[] {
   const mats = by('material');
   const plats = by('plating');
   const cats = by('category');
+  const styles = by('style');
   const bands = by('band');
   const scenarios = by('scenario');
   const sort = document.querySelector<HTMLSelectElement>('[data-sort]')?.value ?? 'featured';
@@ -65,6 +69,10 @@ function apply(): SkuIndexItem[] {
       (!mats.size || (it.material != null && mats.has(it.material))) &&
       (!plats.size || (it.plating != null && plats.has(it.plating))) &&
       (!cats.size || cats.has(it.category)) &&
+      // 款式轴内部是 OR：一款可同时带 cuff + bangle，命中任一选中款式即通过。
+      // styles 为空数组的产品（手链 80/892）会被自然排除——这是诚实的过滤：
+      // 未标注款式的产品本来就不属于任何款式类，不假装它属于。
+      (!styles.size || it.styles.some((s) => styles.has(s))) &&
       (!bands.size || (bands.has('on_request') ? it.band == null : it.band != null && bands.has(it.band))),
   );
   if (sort === 'moqAsc') {
@@ -93,99 +101,6 @@ function apply(): SkuIndexItem[] {
   });
 }
 
-/** 图片位：真实素材优先，否则沿用程序化占位图（与 ProductImage.astro 同构） */
-function imageHtml(it: SkuIndexItem): string {
-  const lineBar = `<div class="absolute inset-x-0 bottom-0 h-0.5" style="background: var(--color-${lineToken(it.line)})" aria-hidden="true"></div>`;
-  const alt = [it.title, it.material, it.plating].filter(Boolean).join(', ');
-  if (it.image) {
-    const dims =
-      it.image.width && it.image.height
-        ? ` width="${it.image.width}" height="${it.image.height}"`
-        : '';
-    // 响应式候选：缩略图 360w + 中间档 640w（仅主图 >640）+ 主图实测宽度。缺实测宽度则不生成（描述符写错比不写更糟）。
-    const srcset = it.image.width ? ` srcset="${escapeHtml(imageSrcset(it.image.thumb, it.image.src, it.image.width) ?? '')}"` : '';
-    return `
-      <figure class="relative aspect-square overflow-hidden rounded-md border border-border-soft bg-surface-warm">
-        <img src="${escapeHtml(it.image.src)}"${srcset}${dims} loading="lazy" decoding="async"
-          sizes="(min-width: 1280px) 22vw, (min-width: 640px) 33vw, 50vw"
-          class="size-full object-cover transition-transform duration-150 group-hover:scale-[1.02]"
-          alt="${escapeHtml(alt || it.image.alt)}" />
-        ${lineBar}
-      </figure>`;
-  }
-  return `
-      <div class="relative flex aspect-square items-center justify-center overflow-hidden rounded-md border border-border-soft bg-surface-warm">
-        <div class="absolute bottom-[22%] left-1/2 h-[58%] w-[58%] -translate-x-1/2 rounded-lg bg-border-soft" aria-hidden="true"></div>
-        ${lineBar}
-      </div>`;
-}
-
-/** 价格 + MOQ 组合块（未确认时走降级文案，禁止 tooltip） */
-function priceBlockHtml(it: SkuIndexItem): string {
-  const hasPrice = it.priceLow != null && it.priceHigh != null;
-  const pricePart = hasPrice
-    ? `<p class="tnum text-base font-semibold text-fg"><span class="font-medium">${t('price.prefix')}</span> ${priceRange(it.priceLow as number, it.priceHigh as number)}<span class="text-xs font-normal text-muted"> ${t('price.unit')}</span></p>`
-    : `<p class="text-base font-semibold text-fg">${t('pdp.price.onRequest')}</p>`;
-  const moqPart =
-    it.moqMin != null
-      ? `<p class="tnum text-sm font-medium text-fg-2">${t('pdp.moq.label', { min: it.moqMin })}</p>`
-      : `<p class="tnum text-sm font-medium text-fg-2">${t('pdp.moq.onRequest')}</p>`;
-  return `
-    <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border-soft pt-2">
-      ${pricePart}
-      <span class="h-4 w-px self-center bg-border" aria-hidden="true"></span>
-      ${moqPart}
-    </div>
-    <p class="mt-1 text-xs text-meta">${hasPrice ? t('pdp.price.qualifier') : t('pdp.price.onRequestBody')}</p>`;
-}
-
-function cardHtml(it: SkuIndexItem): string {
-  const specLine = it.spec || t('pdp.spec.pendingStrip');
-  const badge =
-    it.dataStatus === 'real'
-      ? `<span class="absolute right-2 top-2 z-[2] rounded-xs bg-accent px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent-on">${t('pdp.newArrival')}</span>`
-      : '';
-  return `
-  <article class="group relative">
-    <label class="absolute left-2 top-2 z-[2] flex size-11 cursor-pointer items-center justify-center rounded-xs border border-border bg-surface">
-      <input type="checkbox" data-bulk-check value="${escapeHtml(it.sku)}" data-title="${escapeHtml(it.title)}" data-slug="${escapeHtml(it.slug)}" data-moq="${it.rfqQty}" class="size-4 accent-[var(--color-accent-metal)]" aria-label="${escapeHtml(t('cta.addToRfq'))}: ${escapeHtml(it.sku)}" />
-    </label>
-    ${badge}
-    <a href="/products/${escapeHtml(it.slug)}/" class="block">
-      ${imageHtml(it)}
-    </a>
-    <p class="mt-3 font-mono text-xs text-meta">${escapeHtml(it.sku)}</p>
-    <h3 class="mt-1 text-sm font-normal leading-snug text-fg"><a href="/products/${escapeHtml(it.slug)}/" class="line-clamp-2 hover:underline">${escapeHtml(it.title)}</a></h3>
-    <p class="mt-1 truncate text-xs text-muted">${escapeHtml(specLine)}</p>
-    ${priceBlockHtml(it)}
-    <button type="button" data-add-to-rfq data-sku="${escapeHtml(it.sku)}" data-slug="${escapeHtml(it.slug)}" data-title="${escapeHtml(it.title)}" data-moq="${it.rfqQty}"
-      class="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-sm border border-accent text-sm font-medium text-accent hover:bg-surface-sunken">
-      <span data-add-label>${t('cta.addToRfq')}</span>
-    </button>
-  </article>`;
-}
-
-function rowHtml(it: SkuIndexItem): string {
-  const hasPrice = it.priceLow != null && it.priceHigh != null;
-  const spec = it.spec || t('pdp.spec.pendingStrip');
-  const moq = it.moqMin != null ? t('pdp.moq.label', { min: it.moqMin }) : t('pdp.moq.onRequest');
-  const price = hasPrice
-    ? `${t('price.prefix')} ${priceRange(it.priceLow as number, it.priceHigh as number)}`
-    : t('pdp.price.onRequest');
-  return `
-  <tr class="h-14 hover:bg-surface-warm">
-    <td class="pr-3"><input type="checkbox" data-bulk-check value="${escapeHtml(it.sku)}" data-title="${escapeHtml(it.title)}" data-slug="${escapeHtml(it.slug)}" data-moq="${it.rfqQty}" class="size-4 accent-[var(--color-accent-metal)]" aria-label="${escapeHtml(t('cta.addToRfq'))}: ${escapeHtml(it.sku)}" /></td>
-    <td class="pr-3 font-mono text-xs text-meta">${escapeHtml(it.sku)}</td>
-    <td class="pr-3 text-fg">${escapeHtml(it.title)}</td>
-    <td class="pr-3 text-muted">${escapeHtml(spec)}</td>
-    <td class="tnum pr-3 text-right text-fg-2">${escapeHtml(moq)}</td>
-    <td class="tnum pr-3 text-right font-semibold text-fg">${escapeHtml(price)}</td>
-    <td class="text-right">
-      <button type="button" data-add-to-rfq data-sku="${escapeHtml(it.sku)}" data-slug="${escapeHtml(it.slug)}" data-title="${escapeHtml(it.title)}" data-moq="${it.rfqQty}"
-        class="flex h-11 items-center rounded-sm border border-accent px-3 text-sm font-medium text-accent hover:bg-surface-sunken"><span data-add-label>${t('cta.addToRfq')}</span></button>
-    </td>
-  </tr>`;
-}
 
 function render() {
   const rows = apply();
@@ -281,16 +196,55 @@ document.addEventListener('click', (e) => {
   if (bulkCount) bulkCount.textContent = `${checkedCount}`;
 });
 
-// URL 深链初始化：读 ?category=&?line= 回填筛选（首页品类/路线区块深链跳转）。
-// 只读两个稳定枚举轴；material/plating 为自由文本、band/scenario 值不稳定，不进深链。
+// URL 深链初始化：读 ?category= &line= &style= 回填筛选（首页品类/路线区块深链跳转）。
+// 只读稳定枚举轴；material/plating 为自由文本、band/scenario 值不稳定，不进深链。
+//
+// ghost checkbox：URL 里的值在侧栏找不到对应 checkbox 时（款式低于渲染阈值如
+// ?style=zodiac，或手输的未知值，或已下架的品类），补一个隐藏的 checked checkbox。
+// 因为过滤链路完全建立在「被 checked 的 checkbox」上（activeFilters 读 DOM），
+// 不补就等于这个参数被静默忽略——买家以为筛过了、实际看的是全量。
+// 补成 checkbox 后，过滤 / chip 显示 / chip 移除 / clear all 全部复用现成逻辑，零特例分支。
 function initFromUrl(): void {
   if (!form) return;
   const params = new URLSearchParams(window.location.search);
-  for (const axis of ['category', 'line'] as const) {
+  for (const axis of ['category', 'line', 'style'] as const) {
     const values = params.getAll(axis);
     if (values.length === 0) continue;
-    form.querySelectorAll<HTMLInputElement>(`input[name="${axis}"]`).forEach((cb) => {
-      cb.checked = values.includes(cb.value);
+    for (const v of values) {
+      const cb = form.querySelector<HTMLInputElement>(
+        `input[name="${axis}"][value="${CSS.escape(v)}"]`,
+      );
+      if (cb) {
+        cb.checked = true;
+        continue;
+      }
+      const ghost = document.createElement('input');
+      ghost.type = 'checkbox';
+      ghost.name = axis;
+      ghost.value = v;
+      ghost.checked = true;
+      ghost.dataset.ghost = '';
+      ghost.className = 'hidden';
+      form.appendChild(ghost);
+    }
+  }
+
+  // 深链强制展开：选中项在默认折叠的 Motif 组里时必须展开，
+  // 否则会出现「chip 显示已选 Four-leaf clover、侧栏却看不到该项」的自相矛盾。
+  const motif = document.querySelector<HTMLDetailsElement>('[data-style-motif]');
+  if (motif && form) {
+    const motifTags = new Set<string>(MOTIF_TAGS);
+    const anyMotifChecked = [...form.querySelectorAll<HTMLInputElement>('input[name="style"]:checked')].some(
+      (cb) => motifTags.has(cb.value),
+    );
+    if (anyMotifChecked) motif.open = true;
+  }
+
+  // 移动端筛选是全屏 sheet、纵向可滚，没有「折叠省高度」的必要；
+  // 而桌面端 Motif 默认折叠会导致手机买家根本看不到 motif 选项。两端统一全展开。
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    document.querySelectorAll<HTMLDetailsElement>('[data-style-motif]').forEach((d) => {
+      d.open = true;
     });
   }
 }

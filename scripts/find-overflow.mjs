@@ -12,7 +12,7 @@ import { chromium } from 'playwright';
 
 // 注意：环境里存在一个无效的 BASE_URL（指向 PortableGit），必须校验后才采信
 const envBase = process.env.BASE_URL ?? '';
-const BASE = /^https?:\/\//.test(envBase) ? envBase : 'http://127.0.0.1:4321';
+const BASE = /^https?:\/\//.test(envBase) ? envBase : 'http://localhost:4321';
 // 注意：Git Bash 会把裸 `/` 参数转成 Windows 路径（如 compliance -> D:/WorkBuddy/...），
 // 所以路径必须由调用方写成 `compliance` 或 `/compliance`，这里统一补前导斜杠。
 const rawPath = process.argv[2] ?? '/';

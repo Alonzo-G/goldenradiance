@@ -1,0 +1,83 @@
+---
+// src/components/product/FilterStyleGroups.astro — 款式（style_tags）facet 组
+//
+// 从 index.astro 拆出：页面负责组装，组件负责这一组的渲染。
+// 两个子组的划分依据见 docs/style-filter-ux-spec.md —— Form（结构形态）命中约 99%
+// 手链，是必答题故默认展开；Motif（图案母题）仅约 23% 带，默认折叠。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { styleLabel, styleHelp } from '../../lib/products/styles';
+
+interface StyleFacetItem {
+  tag: string;
+  count: number;
+}
+interface Props {
+  forms: StyleFacetItem[];
+  motifs: StyleFacetItem[];
+}
+
+const { forms, motifs } = Astro.props;
+---
+
+{
+            (forms.length > 0 || motifs.length > 0) && (
+              <fieldset class="border-0 p-0" data-style-group>
+                <legend class="caps mb-2 text-xs text-muted">{t('filter.style')}</legend>
+                {/* 消解 cuff / bangle 歧义：Form 组唯一的真实困惑点。
+                    这 8 个词直接解决 243 款 cuff+bangle 双标签产品的认知冲突。 */}
+                <p class="mb-3 text-xs text-meta">{t('filter.style.help')}</p>
+
+                {forms.length > 0 && (
+                  <fieldset class="mb-4 border-0 p-0">
+                    <legend class="mb-2 text-xs font-medium text-fg-2">{t('filter.style.form')}</legend>
+                    {forms.map((s) => (
+                      <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                        <input
+                          type="checkbox"
+                          name="style"
+                          value={s.tag}
+                          class="size-4 accent-[var(--color-accent)]"
+                          aria-describedby={`style-help-${s.tag}`}
+                        />
+                        <span>{styleLabel(s.tag)}</span>
+                        <span class="tnum ml-auto shrink-0 text-xs text-meta">{s.count}</span>
+                        <span id={`style-help-${s.tag}`} class="sr-only">{styleHelp(s.tag)}</span>
+                      </label>
+                    ))}
+                  </fieldset>
+                )}
+
+                {/* Motif 仅约 23% 手链带，默认折叠；移动端由 JS 全展开（见 catalog.ts） */}
+                {motifs.length > 0 && (
+                  <details class="group" data-style-motif>
+                    <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 text-xs font-medium text-fg-2 [&::-webkit-details-marker]:hidden [&::-marker]:hidden">
+                      <span>
+                        {t('filter.style.motif')}
+                        <span class="ml-1 font-normal text-meta">
+                          {t('filter.style.motif.count', { count: motifs.length })}
+                        </span>
+                      </span>
+                      <Icon name="lucide:chevron-down" class="icon size-4 shrink-0 text-meta transition-transform duration-150 group-open:rotate-180" aria-hidden="true" />
+                    </summary>
+                    <fieldset class="mt-2 border-0 p-0">
+                      {motifs.map((s) => (
+                        <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
+                          <input
+                            type="checkbox"
+                            name="style"
+                            value={s.tag}
+                            class="size-4 accent-[var(--color-accent)]"
+                            aria-describedby={`style-help-${s.tag}`}
+                          />
+                          <span>{styleLabel(s.tag)}</span>
+                          <span class="tnum ml-auto shrink-0 text-xs text-meta">{s.count}</span>
+                          <span id={`style-help-${s.tag}`} class="sr-only">{styleHelp(s.tag)}</span>
+                        </label>
+                      ))}
+                    </fieldset>
+                  </details>
+                )}
+              </fieldset>
+            )
+}

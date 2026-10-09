@@ -123,6 +123,9 @@ export interface SkuIndexItem {
   title: string;
   line: string;
   category: string;
+  /** 款式标签。**多值 facet**：一款可同时属于 cuff + bangle，
+   *  所以筛选语义是「命中任一选中款式即通过」（OR），不是 AND。 */
+  styles: string[];
   material: string | null;
   plating: string | null;
   dimensions: string | null;
@@ -153,6 +156,7 @@ export function toSkuIndexItem(entry: ProductEntry): SkuIndexItem {
     title: d.title,
     line: d.line,
     category: d.category,
+    styles: d.style_tags ?? [],
     material: d.base_material_grade ?? null,
     plating: d.plating_method ?? null,
     dimensions: d.dimensions_mm ?? null,

@@ -16,7 +16,9 @@ import { chromium, devices } from 'playwright';
 
 // 注意：环境里存在一个无效的 BASE_URL（指向 PortableGit），必须校验后才采信
 const envBase = process.env.BASE_URL ?? '';
-const BASE = /^https?:\/\//.test(envBase) ? envBase : 'http://127.0.0.1:4321';
+// 统一用 localhost 而非 127.0.0.1：`astro preview` 不带 --host 时只监听 IPv6 [::1]，
+// 带 --host 127.0.0.1 时只监听 IPv4，两者互斥。localhost 两边都能解析。
+const BASE = /^https?:\/\//.test(envBase) ? envBase : 'http://localhost:4321';
 const failures = [];
 
 const check = (name, ok, detail = '') => {

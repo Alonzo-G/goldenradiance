@@ -5,6 +5,8 @@ import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import { getSkuIndex, distinctValues, SCENARIOS } from '../../lib/products/queries';
 import { MOQ_BANDS } from '../../lib/shared/format';
+import { STYLE_MIN_COUNT, FORM_TAGS, MOTIF_TAGS } from '../../lib/products/styles';
+import FilterStyleGroups from '../../components/product/FilterStyleGroups.astro';
 
 const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
 const ALL_LINES = ['fashion-alloy-brass', 'stainless-titanium-steel'] as const;
@@ -27,6 +29,27 @@ const bands = present(MOQ_BANDS, (v, it) => it.band === v);
 /** MOQ 降级档：只要有任一真实款未确认 MOQ，就渲染「MOQ on request」档，
  *  让买家能筛选出「起订量随报价确认」的款，而不是整组 MOQ 筛选消失。 */
 const hasUnconfirmedMoq = index.some((it) => it.moqMin == null && it.dataStatus === 'real');
+
+/** 款式（style_tags）计数：跨全部品类统计，不按当前品类收窄——
+ *  与现有 facet 一致保持静态计数（见下方注释）。 */
+const styleCounts = new Map<string, number>();
+for (const it of index) {
+  for (const s of it.styles) styleCounts.set(s, (styleCounts.get(s) ?? 0) + 1);
+}
+
+/** 款式组构建：低于 STYLE_MIN_COUNT 的款式不渲染 checkbox。
+ *  理由：1~3 款的选项会占用一个 44px 黄金触控位，且「一个筛选器的可信度由最小值决定」——
+ *  买家点到只出 1 个结果的选项，会怀疑计数坏了。
+ *  注意「隐藏 ≠ 失效」：?style=zodiac 这类低于阈值的深链**仍然出结果**，
+ *  由 catalog.ts 的 ghost checkbox 机制承接。 */
+const buildStyleGroup = (order: readonly string[]) =>
+  order
+    .map((tag) => ({ tag, count: styleCounts.get(tag) ?? 0 }))
+    .filter((x) => x.count >= STYLE_MIN_COUNT)
+    .sort((a, b) => b.count - a.count);
+
+const styleForms = buildStyleGroup(FORM_TAGS);
+const styleMotifs = buildStyleGroup(MOTIF_TAGS);
 
 const lineLabel = {
   'fashion-alloy-brass': t('nav.line.alloy'),
@@ -156,6 +179,9 @@ const jsonld = [
                 ))}
               </fieldset>
             )
+          }
+          {
+          <FilterStyleGroups forms={styleForms} motifs={styleMotifs} />
           }
           {
             (bands.length > 0 || hasUnconfirmedMoq) && (
