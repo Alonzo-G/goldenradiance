@@ -17,6 +17,8 @@
     "shippingPayment": "Shipping & payment",
     "rfqPage": "RFQ list",
     "searchPlaceholder": "Search by SKU, material or style — e.g. SZTX268",
+    "searchPlaceholderOverlay": "SKU, material or style",
+    "searchHintOverlay": "Try a SKU code such as SZTX268",
     "search": "Search",
     "rfq": "RFQ",
     "rfqWithCount": "RFQ ({count})",

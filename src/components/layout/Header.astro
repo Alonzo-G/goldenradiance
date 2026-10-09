@@ -1,5 +1,15 @@
 ---
-// src/components/layout/Header.astro — 三产品线导航 + 品牌 + 搜索 + RFQ 计数徽标（AC-01）
+// src/components/layout/Header.astro — 两条产品线导航 + 品牌 + 搜索触发 + RFQ 计数徽标（AC-01）
+//
+// 三处 UX 修复（2026-10-09）：
+// 1. 防折行：所有导航项加 whitespace-nowrap + shrink-0。此前 flex 收缩时「Product Lines」
+//    被压成 "Product / Lines" 两行，header 从 h-16 被撑到 ~88px。
+// 2. 搜索收敛为图标按钮：原按钮内嵌 47 字符占位文案（"Search by SKU, material or style — e.g.
+//    SZTX268"），在 1280px 容器里把整条导航挤到换行。但该按钮**只是触发器**（data-search-open），
+//    不含任何输入能力——真正的搜索在 SearchDialog 里（Pagefind 全文 + SKU 双层索引，input h-14）。
+//    所以长文案在 header 里纯属浪费宽度，改为图标 + `/` 快捷键提示，搜索能力全部交给弹窗。
+// 3. active 态：按 pathname 前缀匹配当前页。视觉用底部 2px accent-metal 描边 + 文字转 fg，
+//    不用背景色块——B2B 站要克制。
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import Wordmark from './Wordmark.astro';
@@ -14,6 +24,39 @@ const lines = (await getActiveLines()).map((entry) => ({
   id: entry.data.line,
   label: LINE_LABEL[entry.data.line] ?? entry.data.name,
 }));
+
+/** 当前 pathname（去掉末尾斜杠便于前缀匹配） */
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+/**
+ * active 判定：前缀匹配，但必须按「最长前缀优先」避免误命中。
+ * /products/bracelet/      → All products（/products）
+ * /product-lines/xxx/      → Product Lines（/product-lines），不能被 /products 误伤
+ * /product-lines/          → Product Lines
+ */
+const isActive = (href: string): boolean => {
+  const target = href.replace(/\/+$/, '') || '/';
+  if (target === '/') return pathname === '/';
+  return pathname === target || pathname.startsWith(`${target}/`);
+};
+
+/**
+ * active 链接的类名。
+ *
+ * 关键：active 下划线用 `after:` 伪元素而非 `border-b-2`。
+ * 链接是 h-11(44px) 在 h-16(64px) header 里垂直居中，border-b 会把描边画在 y=52-54，
+ * 距 header 底边还差 9px —— 视觉上像一根没贴住的短横线。伪元素 + `-bottom-2.5` 让它
+ * 下移到 y=62-64，正好贴齐 header 的 border-border。
+ * 代价：不能同时留 border 占位（会把链接撑到 46px），改用无 transition 的 after 即可。
+ */
+const navLinkClass = (href: string): string => {
+  const active = isActive(href);
+  return [
+    'relative flex h-11 shrink-0 items-center whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-colors duration-150',
+    "after:absolute after:inset-x-3 after:-bottom-2.5 after:h-0.5 after:rounded-pill after:content-['']",
+    active ? 'text-fg after:bg-accent-metal' : 'text-fg after:bg-transparent hover:bg-surface-sunken',
+  ].join(' ');
+};
 
 /** 移动端分组菜单（§3.1）：产品线 / 目录 / 支持 / 公司，带图标与 44px 触控间距 */
 const groups = [
@@ -50,48 +93,75 @@ const groups = [
 ---
 
 <header class="sticky top-0 z-[200] border-b border-border bg-surface">
-  <div class="container-page flex h-16 items-center gap-2 lg:gap-4">
+  <div class="container-page flex h-16 min-w-0 items-center gap-2 lg:gap-4">
     <a href="/" aria-label="Golden Radiance — home" class="shrink-0">
       <Wordmark variant="header" />
     </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label={t('nav.productLines')}>
-      <details class="group relative">
-        <summary class="flex h-11 cursor-pointer list-none items-center gap-1 rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken [&::-webkit-details-marker]:hidden">
+    {/*
+      桌面一级 nav 只放「买家动作」4 项：Product Lines / All products / Compliance / Contact。
+      Sourcing 与 Blog 已下沉到 Footer.astro L40-41（同名入口仍在，不丢内容）——
+      两者是信任状与获客资产，不是采购动作，占一级导航位挤掉真实入口不值。
+      砍项后总宽从 963px 降到 827px，1024px 视口余量 149px，断点才能安全用 lg。
+    */}
+    <nav class="hidden shrink-0 items-center gap-0.5 lg:flex" aria-label={t('nav.productLines')}>
+      <details class="group relative shrink-0">
+        <summary
+          aria-current={isActive('/product-lines/') ? 'page' : undefined}
+          class:list={[
+            'relative flex h-11 cursor-pointer list-none items-center gap-1 whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-colors duration-150 [&::-webkit-details-marker]:hidden',
+            "after:absolute after:inset-x-3 after:-bottom-2.5 after:h-0.5 after:rounded-pill after:content-['']",
+            isActive('/product-lines/')
+              ? 'text-fg after:bg-accent-metal'
+              : 'text-fg after:bg-transparent hover:bg-surface-sunken',
+          ]}
+        >
           {t('nav.productLines')}
-          <Icon name="lucide:chevron-down" class="icon size-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+          <Icon name="lucide:chevron-down" class="icon size-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
         </summary>
         <div class="absolute left-0 top-full z-[300] w-72 rounded-md border border-border bg-surface py-1 shadow-raised">
           {lines.map((l) => (
-            <a href={`/product-lines/${l.id}/`} class="block px-4 py-2.5 text-sm text-fg hover:bg-surface-sunken">
+            <a
+              href={`/product-lines/${l.id}/`}
+              aria-current={isActive(`/product-lines/${l.id}/`) ? 'page' : undefined}
+              class="block whitespace-nowrap px-4 py-2.5 text-sm text-fg hover:bg-surface-sunken"
+            >
               {l.label}
             </a>
           ))}
         </div>
       </details>
-      <a href="/products/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.allProducts')}</a>
-      <a href="/compliance/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.compliance')}</a>
-      <a href="/sourcing-partners/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.sourcing')}</a>
-      <a href="/blog/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.blog')}</a>
-      <a href="/contact/" class="flex h-11 items-center rounded-sm px-3 text-sm font-medium text-fg hover:bg-surface-sunken">{t('nav.contact')}</a>
+      <a href="/products/" aria-current={isActive('/products/') ? 'page' : undefined} class={navLinkClass('/products/')}>{t('nav.allProducts')}</a>
+      <a href="/compliance/" aria-current={isActive('/compliance/') ? 'page' : undefined} class={navLinkClass('/compliance/')}>{t('nav.compliance')}</a>
+      <a href="/contact/" aria-current={isActive('/contact/') ? 'page' : undefined} class={navLinkClass('/contact/')}>{t('nav.contact')}</a>
     </nav>
 
-    <div class="ml-auto flex items-center gap-2">
+    <div class="ml-auto flex shrink-0 items-center gap-2">
+      {/*
+        搜索：收敛为图标按钮 + `/` 快捷键提示。
+        原先这里内嵌 47 字符占位文案，但它只是个触发器（data-search-open），真正的搜索在
+        SearchDialog 里。size-11 = 44×44 方形，满足触控目标下限。
+        aria-label 必需——纯图标按钮的可访问名称不能只靠 title。
+      */}
       <button
         type="button"
         data-search-open
-        class="flex h-11 items-center gap-2 rounded-sm border border-border px-3 text-sm text-muted hover:border-accent hover:text-fg"
+        aria-label={t('nav.search')}
+        title={t('nav.search')}
+        class="flex size-11 shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-sm text-muted transition-colors duration-150 hover:bg-surface-sunken hover:text-fg"
       >
-        <Icon name="lucide:search" class="icon size-5" aria-hidden="true" />
-        <span class="hidden md:inline">{t('nav.searchPlaceholder')}</span>
-        <span class="sr-only md:hidden">{t('nav.search')}</span>
+        <Icon name="lucide:search" class="icon size-5 shrink-0" aria-hidden="true" />
+        <kbd
+          aria-hidden="true"
+          class="hidden size-5 items-center justify-center rounded-xs border border-border bg-surface-sunken font-mono text-xs leading-none text-muted lg:flex"
+        >/</kbd>
       </button>
       <button
         type="button"
         data-rfq-open
-        class="flex h-11 items-center gap-2 rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
+        class="flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-sm bg-accent-metal px-3 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover"
       >
-        <Icon name="lucide:file-input" class="icon size-5" aria-hidden="true" />
+        <Icon name="lucide:file-input" class="icon size-5 shrink-0" aria-hidden="true" />
         <span class="hidden sm:inline">{t('nav.rfq')}</span>
         <span
           data-rfq-badge
@@ -103,7 +173,7 @@ const groups = [
         data-menu-toggle
         aria-expanded="false"
         aria-controls="mobile-nav"
-        class="flex size-11 items-center justify-center rounded-sm text-fg hover:bg-surface-sunken lg:hidden"
+        class="flex size-11 shrink-0 items-center justify-center rounded-sm text-fg hover:bg-surface-sunken lg:hidden"
       >
         <Icon name="lucide:menu" class="icon size-5" aria-hidden="true" />
         <span class="sr-only">{t('nav.openMenu')}</span>
@@ -122,7 +192,15 @@ const groups = [
           <ul class="grid gap-0.5">
             {g.links.map((l) => (
               <li>
-                <a href={l.href} class="flex min-h-11 items-center rounded-sm px-2 text-sm text-fg hover:bg-surface-sunken">
+                <a
+                  href={l.href}
+                  aria-current={isActive(l.href) ? 'page' : undefined}
+                  class:list={[
+                    'flex min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-2 text-sm',
+                    isActive(l.href) ? 'bg-surface-sunken font-medium text-fg' : 'text-fg hover:bg-surface-sunken',
+                  ]}
+                >
+                  {isActive(l.href) && <span aria-hidden="true" class="h-4 w-0.5 shrink-0 rounded-pill bg-accent-metal" />}
                   {l.label}
                 </a>
               </li>

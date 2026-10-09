@@ -107,3 +107,6 @@ desktop.ini
 .workbuddy/
 .tmp-preview/
 shots/
+
+# Playwright 调试截图（不入库）
+screens/
