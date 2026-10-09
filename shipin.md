@@ -3,7 +3,7 @@
 > 项目：B2B 饰品外贸官网「Golden Radiance」
 > 域名：goldenradiance.fun　｜　线上：https://goldenradiance.aoxiliexuhuihui.workers.dev
 > 技术栈：Astro（SSG + `@astrojs/cloudflare` 适配器）+ Cloudflare Workers / D1 / Turnstile + Resend
-> 最后更新：2026-10-08
+> 最后更新：2026-10-09
 
 ---
 
@@ -18,7 +18,7 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 
 ---
 
-## 一、已完成任务（2026-10-08 当日，按提交顺序）
+## 一、已完成任务（按提交顺序，2026-10-05 ~ 10-09）
 
 | # | Commit | 内容 | 关键文件 |
 |---|--------|------|----------|
@@ -32,6 +32,16 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 | 8 | `c45084a` | 下架 SZTX261 / SZTX263（实拍图质量不合格） | 删 `src/content/products/sztx26{1,3}.md` + `public/products/sztx26{1,3}/*` |
 
 更早（2026-10-05 ~ 10-07）：`d0194c4` 深度优化方案落地（P0×5 + P1×4 + P2×1）、`b1f96e9` 移动端深度适配（横向溢出清零）、`7e0bec3` 商品库重建（1014 SKU）、`6326491` 产品线由目录派生。
+
+### 2026-10-09：顶部导航栏优化（`84469b0`）
+
+用户截图暴露三处硬伤，根因同为「桌面 nav 固有宽度总和超容器可用宽度，flex 收缩把文字压成两行」：
+
+1. **防折行**：nav 链接加 `whitespace-nowrap` + `shrink-0`（成对，缺一复发），容器加 `min-w-0`。桌面一级 nav 由 6 项收敛为 4 项：`Sourcing` / `Blog` 下沉页脚（`Footer.astro` L40-41 已有同名入口，不丢内容）。总宽 963px → 827px，1024px 视口余量 149px，断点得以安全保持 `lg` 而非推迟到 `xl`。
+2. **搜索收敛为图标按钮**：原按钮内嵌 47 字符占位文案，但它只是 `data-search-open` 触发器，不含输入能力——真搜索在 `SearchDialog`（Pagefind + SKU 双层索引）。改为 `size-11` 图标 + `aria-label` + `/` 快捷键；文案下移：新增 `nav.searchPlaceholderOverlay`（弹窗内）+ `nav.searchHintOverlay`（SKU 示例 helper）。`SearchDialog` 补 `/` 快捷键（排除输入框 / 修饰键 / contenteditable）。
+3. **active 态**：按 pathname 前缀匹配（去尾斜杠，规避 `/products` 与 `/product-lines` 前缀歧义）+ `aria-current="page"`，视觉为底部 2px `accent-metal` 描边。描边用 `after:` 伪元素 + `-bottom-2.5`，**不用** `border-b-2`：链接是 h-11(44px) 在 h-16(64px) 内居中，border 会把描边画在 y=52-54、距 header 底边浮空 9px；伪元素下移到 y=98-100，间隙实测 0px。移动端菜单同步加 active。
+
+新增两个工具脚本：`verify-header-nav.mjs`（45 项回归）、`find-overflow.mjs`（横向溢出肇事元素定位器）。
 
 ### 深度审计修掉的 4 个真 bug（`0027415`）
 
@@ -138,6 +148,23 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 18. **Windows 生成的 lockfile 缺跨平台 optional 依赖**：CI（Linux）`npm ci` 必挂，要补全 Linux/Darwin 平台条目。
 19. **我自己的断言逻辑写反**：`verify-filters-sticky.mjs` 首版把正确状态判成失败。**教训：先跑一次看真实数值，再定断言。**
 
+### 2026-10-09 新增（导航栏任务实测）
+
+**环境 / 工具坑**
+
+20. **`documentElement.scrollWidth` 不能判「横向溢出」**：它把内部横向滚动容器（carousel 的 `snap-x` 轨道）宽度也算进去，凡是含 carousel 的页面必然虚高——首页 1280/1366/1920 测得「100+ 元素超出」全是这种假象。**正确判据**：遍历元素看有没有 `getBoundingClientRect().right > viewport + 1`。
+21. **Playwright `evaluate` 传零参箭头字符串有歧义**：`page.evaluate("() => {...}")` 会把函数当表达式求值、返回函数本身（不是调用结果）。要么传带参形式 `(el) => {...}` 交给 `locator.evaluate` 调用，要么写成立即执行 `(() => {...})()`。
+22. **`evaluate` 里的函数跑在浏览器上下文**：引用不到 Node 侧的闭包变量 / 工具函数，必须完全自包含。
+23. **`setViewportSize` 后立刻测量是 resize 瞬态**：布局还没回流，会误报溢出。每档视口各自 `goto` 测稳态，别复用同一页面对象连续切宽。
+24. **`sr-only` 文本会被 `innerText` 读进来**（实测宽 1px、clip 归零、视觉全隐藏），断言「可见文本」时要过滤 `sr-only` 或改断言 `textContent`。
+25. **preview 起不来 / curl 502 的两种原因**：① 旧 preview 进程仍占端口，需 `astro preview stop` 或 `--force`；② curl 走系统代理 → 必须 `NO_PROXY=127.0.0.1,localhost no_proxy=127.0.0.1,localhost`。
+26. **`BASE_URL` 环境变量被系统设成 PortableGit 路径**：脚本里 `process.env.BASE_URL ?? default` 会被污染，默认值要优先于 env（或改读专用变量名）。
+
+**代码 / 框架坑**
+
+27. **CSS `bottom` 负值方向**：`bottom: -10px` 是把元素**向下**推（不是向上），脚本算下划线位置时符号写反 → 误报「浮空 21px」。实测间隙 0px。
+28. **Astro `after:content-['']` 的单引号与 JS 字符串定界符冲突** → 报 `ts(1005)`，需用双引号定界或用 `content-[""]`。
+
 ---
 
 ## 六、后续任务的记忆点（标准动作）
@@ -161,6 +188,8 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 | `scripts/verify-brand-assets.mjs` | 6 个品牌资产可达 + 旧 favicon.svg 404 + header/footer logo 解码成功 | preview |
 | `scripts/emoji-scan.mjs` | P0 emoji 门禁 | 无 |
 | `scripts/shot-mobile.mjs` | 移动端截图 | preview |
+| `scripts/verify-header-nav.mjs` | header 专项回归 45 项：折行 / 高度 / active(`aria-current`) / 断点 / header 自身溢出 / 无障碍 | preview |
+| `scripts/find-overflow.mjs` | 横向溢出肇事元素定位器（传 path + 视口宽，列出 `right` 超视口的元素） | preview |
 
 ### 硬性约定（别踩）
 
@@ -168,6 +197,8 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 - git 身份：`315862190+Alonzo-G@users.noreply.github.com`（**不要**用 `alonzo@users.noreply.github.com`，会撞 2008 年陌生人账号）
 - Playwright 一律 `domcontentloaded + waitForTimeout(1200)`，禁 networkidle
 - 诚实红线：不把款式标签硬映射成场景标签，不用占位图伪装成产品
+- **Astro `after:content-['']` 与 JS 单引号定界符冲突** → 报 `ts(1005)`，须双引号定界（或 `content-[""]`）
+- **容器有 `max-width` 封顶时改断点毫无意义**：`container-page` 是 `max-width:1280px`，1440 屏与 1280 屏内容区等宽、溢出量相同 → 改 `xl:flex` 治不了溢出，反而牺牲 1024-1279px 桌面导航（采购商常用 1366×768 正落此区间）。正解是减导航项/减内容宽度
 
 ### 关键文件地图
 
@@ -186,10 +217,11 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 
 ---
 
-## 七、交付证据（截至 2026-10-08）
+## 七、交付证据（截至 2026-10-09）
 
-- HEAD：`c45084a`（下架不合格款），工作区干净
+- HEAD：`143dd22`（shipin.md 补记），上一代码提交 `84469b0`（导航栏优化），工作区干净
 - 商品：1012 个真实 SKU，全部带实拍图三档
 - 品牌：logo + 6 个 favicon/icon 资产全站生效，旧 `favicon.svg` 已删（404 确认）
-- CI：GitHub Actions 全绿，push main 自动部署 Cloudflare Workers
-- P0 门禁：emoji 扫描 0 命中
+- 导航：桌面一级 nav 4 项（防折行 + active 态 + 搜索收敛图标），1024/1280/1366/1920 四档 header 零溢出
+- CI：GitHub Actions 全绿（导航栏改动 run #27 success），push main 自动部署 Cloudflare Workers
+- 质量门禁：emoji 扫描 0 命中；vitest 57 全绿；`verify-header-nav.mjs` 45 项全过；筛选侧栏 sticky 回归仍 PASS
