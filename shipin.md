@@ -43,6 +43,20 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 
 新增两个工具脚本：`verify-header-nav.mjs`（45 项回归）、`find-overflow.mjs`（横向溢出肇事元素定位器）。
 
+### 2026-10-09：款式二级导航 + 极窄屏溢出修复（`13879b6` / `970f64f`）
+
+**款式二级导航**（§四 第 1 项待办的完成）：892 个手链从「无限滚动翻找」变成可按款式筛。
+详见 `docs/delivery-style-filter-2026-10-09.md` 与 `docs/style-filter-ux-spec.md`。
+
+- 数据：`SkuIndexItem` 加 `styles: string[]`；新 `src/lib/products/styles.ts`（slug→i18n 登记 + Form/Motif 分组 + `STYLE_MIN_COUNT = 5`）
+- 形态：Style 顶层 fieldset + 两子组。Form（结构形态，99% 手链有，默认展开）/ Motif（图案母题，23%，`details` 折叠，移动端 JS 强制展开）
+- 过滤：款式轴内 OR、轴间 AND。若误写成 AND，11 个过线款式两两组合会有 53/55 个结果为 0
+- **ghost checkbox**：URL 里无对应可见 checkbox 的值（如低于阈值的 `?style=zodiac`），动态补一个隐藏 checked checkbox，让「隐藏 ≠ 失效」成立；否则现有链路会把该参数**静默忽略**
+- 代码组织：`catalog.ts` 350 → 257 行（拆出 `catalog-views.ts`）、`products/index.astro` 337 → 274 行（拆出 `FilterStyleGroups.astro`）
+- 新增 `scripts/verify-style-filter.mjs`（34 项断言）
+
+**连带修复**：跑全量回归时暴露首页在 320px（iPhone SE）横向溢出 23px。这是 `84469b0` 的遗留（当时只测 1024+ 四档 + 375，漏 320）。修：<360px 隐藏 header 字标只留 logo glyph。
+
 ### 深度审计修掉的 4 个真 bug（`0027415`）
 
 1. `HomeLines` 残留三条线时代的 3 列模板 → 改等宽双卡
@@ -103,7 +117,7 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 | 1 | **沙箱访问不了 workers.dev**：curl / 代理 / WebFetch / jina 全被拦 | 未解 | 环境限制。验证改走 CI 日志 + dist 产物比对 + 用户浏览器确认 |
 | 2 | **本地 dist 清不干净**：safe-delete shim（genie-trash.exe）拦截 `rm`，删大目录 ETIMEDOUT；PowerShell `Remove-Item -Recurse -Force` 也被静默拦截 | 已绕过 | 见「踩坑 §4」；线上走 CI clean checkout 天然干净 |
 | 3 | **git 历史贡献者**：前 20 个 commit 挂在陌生人账号 `Alonzo`（旧 noreply 格式），新提交已归 `Alonzo-G` | 等用户拍板 | 彻底清除需 filter-branch 改 email + force push main。单人仓库风险极低，但属破坏性操作 |
-| 4 | 品类失衡：bracelet 占 88%，手链页 892 个 SKU 无二级导航 | 待排期 | 产品（补货）或前端（二级导航） |
+| 4 | 品类失衡：bracelet 占 88%。款式二级导航已缓解「翻不动」，但缺材质维度（待业务补数据） | 部分缓解 | 款式筛选已上线；材质筛选需 `base_material_grade` 补数据后自动生效 |
 | 5 | `lead_time` 等交期字段缺失，PDP 只能泛化表述 | 待补数据 | 业务侧 |
 | 6 | 少量实拍图质量不合格（SZTX261/263 已下架，可能还有） | 待批量筛查 | 需要一套图片质量筛查脚本 |
 
@@ -111,7 +125,7 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 
 ## 四、下一步计划（按优先级）
 
-1. **手链页二级导航**：892 个 SKU 按材质/款式再切一层，否则买家翻不动（转化直接影响最大）
+1. ~~**手链页二级导航**~~ —— 2026-10-09 已完成（款式维度，见 `docs/delivery-style-filter-2026-10-09.md`）
 2. **品类 Landing Page**：bracelet / necklace 各做一个 SEO 落地页，抢长尾词
 3. **图片质量批量筛查脚本**：自动标出白底不干净 / 模糊 / 尺寸过小的图，一次筛完
 4. **补货品类占位**：hair-accessory / brooch / anklet 已有数据驱动隐藏机制，补货即自动出现（零代码）
@@ -186,6 +200,7 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 | `scripts/verify-two-lines.mjs` | 两条线回归：h1 / 线卡 / 无 stone / 统计条 / 溢出 + 桌面移动截图 | preview |
 | `scripts/verify-filters-sticky.mjs` | 筛选侧栏 sticky（滚动后 aside top≈80） | preview |
 | `scripts/verify-brand-assets.mjs` | 6 个品牌资产可达 + 旧 favicon.svg 404 + header/footer logo 解码成功 | preview |
+| `scripts/verify-style-filter.mjs` | 款式筛选专项 34 项：分组阈值 / OR 语义 / 深链 / ghost / 移动端 / 溢出 | preview |
 | `scripts/emoji-scan.mjs` | P0 emoji 门禁 | 无 |
 | `scripts/shot-mobile.mjs` | 移动端截图 | preview |
 | `scripts/verify-header-nav.mjs` | header 专项回归 45 项：折行 / 高度 / active(`aria-current`) / 断点 / header 自身溢出 / 无障碍 | preview |
@@ -204,16 +219,23 @@ WorkBuddy 会话的 Workspace Folder 指向 C 盘副本，但**必须在 D 盘�
 
 | 文件 | 职责 |
 |------|------|
-| `src/lib/queries.ts` | 目录查询层，`getActiveLines()` / `heroImageForLine()` / `SCENARIO_OF_LINE` |
-| `src/lib/format.ts` | `imageSrcset()`（360/640/主图三档）、`lineToken()` |
+| `src/lib/products/queries.ts` | 目录查询层，`getActiveLines()` / `heroImageForLine()` / `SCENARIO_OF_LINE` / `toSkuIndexItem()` |
+| `src/lib/products/styles.ts` | 款式标签登记（slug→i18n）+ Form/Motif 分组 + `STYLE_MIN_COUNT` |
+| `src/lib/shared/format.ts` | `imageSrcset()`（360/640/主图三档）、`lineToken()` |
 | `src/components/product/ProductImage.astro` | 统一图片组件，`fit` prop |
+| `src/components/product/FilterStyleGroups.astro` | 款式 facet 组（Form 展开 / Motif 折叠） |
+| `src/components/product/catalog.ts` | 客户端筛选/排序/双视图/深链（含 ghost checkbox 机制） |
+| `src/components/product/catalog-views.ts` | 目录卡片/行视图渲染（纯函数） |
 | `src/components/home/HomeCategories.astro` | 品类卡 + `CATEGORY_HERO_OVERRIDE` 指定代表款 |
 | `src/components/home/HomeLines.astro` | 两条线等宽双卡 |
 | `src/components/layout/Wordmark.astro` | 品牌 logo（img 内联在模板，frontmatter 不能写 JSX） |
+| `src/components/layout/Header.astro` | 桌面一级 nav 4 项 + active 态 + 搜索图标 |
 | `src/pages/products/index.astro` | 列表页 + sticky 筛选侧栏 |
-| `src/scripts/catalog.ts` | 客户端筛选 / 深链读写 / 移动端筛选 sheet |
 | `scripts/gen-brand-assets.mjs` | 品牌资产生成管线（sharp） |
 | `astro.config.mjs` / `src/lib/seo/site.ts` / `public/robots.txt` | 域名三处单一真源 |
+
+> 注：早期版本的本文档把 `queries.ts` / `format.ts` / `catalog.ts` 记成扁平路径（`src/lib/queries.ts` 等），
+> 项目已重构为子目录结构（`src/lib/products/` / `src/lib/shared/`），客户端筛选逻辑在 `src/components/product/`。
 
 ---
 
