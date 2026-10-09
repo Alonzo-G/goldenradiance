@@ -12,13 +12,13 @@ buyer. Here is how our quoting works, in the open.
 
 A stud earring with standard posts can be produced at 12 pcs; a 38-gram Cuban
 link chain needs 100 pcs before the production run makes sense. MOQ is a
-property of the style, which is why it is stated per style — on the product
-page, in the catalog filter, and in the quotation.
+property of the style, which is why it is quoted per style — the figure for each
+style is confirmed with your quotation and written into the spec sheet.
 
 ## Tiers, in ranges
 
-Quantity bands carry different unit prices. On public pages you see the
-reference range for the style's MOQ band; the exact tier table comes with your
+Quantity bands carry different unit prices. Where a style's tiered pricing is
+confirmed, the reference range appears on its page; the exact tier table comes with your
 quotation, where it can reflect your actual quantity and destination. Ranges,
 not single points — because a "fixed" wholesale price is usually either padded
 or unsubstantiated.

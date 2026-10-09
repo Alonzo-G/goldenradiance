@@ -5,8 +5,9 @@ description: "MOQ rules, tiered pricing, lead time, delivery terms, carriers, pa
 
 ## MOQ rules
 
-MOQ 12-120 pcs, stated per style. Quantities below a style's MOQ can be quoted
-— flagged for confirmation at submission.
+MOQ runs 12-120 pcs per style; the figure for each style is confirmed with your
+quotation. Quantities below a style's MOQ can be quoted — flagged for
+confirmation at submission.
 
 ## Tiered pricing
 

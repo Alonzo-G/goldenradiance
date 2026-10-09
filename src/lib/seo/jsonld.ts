@@ -1,4 +1,10 @@
 // src/lib/seo/jsonld.ts — 结构化数据（服务端注入，禁客户端生成；禁 aggregateRating/review）
+// 站点级描述走 i18n 单一真源：Organization.description 与 meta.description 曾各写一份，
+// 两处手写字符串没有任何机制防止漂移（alloy.fact.3 那类错误的温床）。改为读 t() 后，
+// key 写错或被删会直接 astro check 编译失败——顺手获得编译期护栏。
+// 无循环依赖：i18n/index.ts 只 import ./en.json，不反向引用 src/lib/。
+import { t } from '../../i18n';
+
 export interface BreadcrumbItem {
   name: string;
   path: string;
@@ -10,8 +16,7 @@ export function organizationJsonld(site: string): Record<string, unknown> {
     '@type': 'Organization',
     name: 'Golden Radiance',
     url: site,
-    description:
-      'Sourcing partner for wholesale jewelry buyers: two product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote.',
+    description: t('meta.description'),
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
@@ -158,8 +163,9 @@ export function localBusinessJsonld(input: {
     name: 'Golden Radiance',
     url: input.site,
     logo: new URL('/og-default.png', input.site).toString(),
-    description:
-      'Sourcing partner for wholesale jewelry buyers: fashion alloy & brass and stainless & titanium steel product lines.',
+    // 与 organizationJsonld 同源：同一实体在不同页面不该有第二份描述，
+    // 两处手写字符串正是 alloy.fact.3 那类漂移的温床。
+    description: t('meta.description'),
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',

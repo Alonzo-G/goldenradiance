@@ -29,6 +29,17 @@ const bands = present(MOQ_BANDS, (v, it) => it.band === v);
 /** MOQ 降级档：只要有任一真实款未确认 MOQ，就渲染「MOQ on request」档，
  *  让买家能筛选出「起订量随报价确认」的款，而不是整组 MOQ 筛选消失。 */
 const hasUnconfirmedMoq = index.some((it) => it.moqMin == null && it.dataStatus === 'real');
+/** 排序项数据驱动：moqAsc / priceAsc 在对应字段全空时会退化成 sku 升序
+ *  （catalog.ts 的 fallback 分支），买家点了"按 MOQ 升序"却得到按 SKU 排序 —— 静默的假控件。
+ *  故仅在存在真实数据时渲染；可见项 ≤1 时连 select 一起隐藏，不留只有一个选项的下拉。 */
+const hasMoqData = index.some((it) => it.moqMin != null);
+const hasPriceData = index.some((it) => it.priceLow != null);
+const visibleSorts = [
+  'featured',
+  'newest',
+  ...(hasMoqData ? ['moqAsc'] : []),
+  ...(hasPriceData ? ['priceAsc'] : []),
+];
 
 /** 款式（style_tags）计数：跨全部品类统计，不按当前品类收窄——
  *  与现有 facet 一致保持静态计数（见下方注释）。 */
@@ -92,12 +103,16 @@ const jsonld = [
             <Icon name="lucide:list" class="icon size-5" aria-hidden="true" />
           </button>
         </div>
-        <select data-sort aria-label="Sort" class="h-11 max-w-[46vw] rounded-sm border border-border bg-surface px-2 text-sm text-fg">
-          <option value="featured">{t('filter.sort.featured')}</option>
-          <option value="newest">{t('filter.sort.newest')}</option>
-          <option value="moqAsc">{t('filter.sort.moqAsc')}</option>
-          <option value="priceAsc">{t('filter.sort.priceAsc')}</option>
-        </select>
+        {
+          visibleSorts.length > 1 && (
+            <select data-sort aria-label="Sort" class="h-11 max-w-[46vw] rounded-sm border border-border bg-surface px-2 text-sm text-fg">
+              <option value="featured">{t('filter.sort.featured')}</option>
+              <option value="newest">{t('filter.sort.newest')}</option>
+              {hasMoqData && <option value="moqAsc">{t('filter.sort.moqAsc')}</option>}
+              {hasPriceData && <option value="priceAsc">{t('filter.sort.priceAsc')}</option>}
+            </select>
+          )
+        }
       </div>
     </header>
 
@@ -184,7 +199,10 @@ const jsonld = [
           <FilterStyleGroups forms={styleForms} motifs={styleMotifs} />
           }
           {
-            (bands.length > 0 || hasUnconfirmedMoq) && (
+            /* 只在存在真实 MOQ 分档时渲染整组：100% 未确认时组内只剩「MOQ on request」一个选项，
+               而 catalog.ts 判定为 band == null → 勾上等于选中全部 1012 款，是个纯空操作。
+               空组买家会忽略，假筛选器会让买家以为自己筛过了 —— 后者更伤。 */
+            bands.length > 0 && (
               <fieldset>
                 <legend class="caps mb-2 text-xs text-muted">{t('filter.moq')}</legend>
                 {bands.map((b) => (

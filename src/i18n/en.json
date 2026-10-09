@@ -2,7 +2,7 @@
   "meta": {
     "siteName": "Golden Radiance",
     "tagline": "Two product lines. Verified specs on every SKU.",
-    "description": "Golden Radiance is a sourcing partner for wholesale jewelry buyers: two product lines, MOQ 12-120 pcs stated per style, spec sheets with every quote."
+    "description": "Golden Radiance is a sourcing partner for wholesale jewelry buyers: two product lines, MOQ 12-120 pcs per style, confirmed with your quotation, spec sheets with every quote."
   },
 
   "nav": {
@@ -69,19 +69,19 @@
     "h1": "Two product lines. Verified specs on every SKU.",
     "line2": "Fashion alloy & brass · Stainless & titanium steel",
     "line3": "We are a sourcing partner, not a factory owner. Here is exactly how we control quality instead.",
-    "dataLine": "Hundreds of styles · MOQ 12-120 pcs, stated per style"
+    "dataLine": "Hundreds of styles · MOQ 12-120 pcs, confirmed per style"
   },
 
   "stats": {
     "styles": "styles in stock",
     "lines": "product lines",
-    "moq": "MOQ per style",
+    "moq": "MOQ range, pcs",
     "leadTime": "lead time"
   },
 
   "trust": {
-    "1.label": "MOQ 12-120 pcs, stated per style",
-    "1.desc": "Confirmed range per style, not per order.",
+    "1.label": "MOQ 12-120 pcs, confirmed per style",
+    "1.desc": "The typical range. Your style's figure is confirmed with your quotation.",
     "2.label": "Sample before bulk",
     "2.desc": "Approve a sample first — the fee is credited to your first order.",
     "3.label": "Spec sheet with every quote",
@@ -137,14 +137,14 @@
     "advantages.nickel.title": "Nickel release tested",
     "advantages.nickel.desc": "EN 1811 standard; pierced articles are tested to the 0.2 µg/cm²/week limit.",
     "advantages.moq.title": "Small-batch entry",
-    "advantages.moq.desc": "MOQ 12–120 pcs per style, samples before bulk."
+    "advantages.moq.desc": "MOQ 12–120 pcs per style, confirmed with your quotation. Samples before bulk."
   },
 
   "line": {
     "alloy.tagline": "Breadth and speed. New styles added continuously, priced for volume.",
     "steel.tagline": "PVD-plated for everyday wear — corrosion behavior quoted per batch with your quotation.",
     "stats.skuDepth": "Catalogue depth varies by line",
-    "stats.moq": "MOQ 12-120 pcs, stated per style",
+    "stats.moq": "MOQ 12-120 pcs, confirmed per style",
     "stats.cadence": "New styles added continuously — ask for the current drop",
     "materials.title": "Material & plating, in plain numbers",
     "steel.pvd.title": "PVD vs water plating",
@@ -343,7 +343,7 @@
   "shipping": {
     "title": "Shipping & payment",
     "moq.title": "MOQ rules",
-    "moq.body": "MOQ 12-120 pcs, stated per style. Quantities below a style's MOQ can be quoted — flagged for confirmation at submission.",
+    "moq.body": "MOQ runs 12-120 pcs per style; the figure for each style is confirmed with your quotation. Quantities below a style's MOQ can be quoted — flagged for confirmation at submission.",
     "tier.title": "Tiered pricing",
     "tier.body": "Priced by tier — see each collection. The exact tier table is quoted per order.",
     "lead.title": "Lead time",
