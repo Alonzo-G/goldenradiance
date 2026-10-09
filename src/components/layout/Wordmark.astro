@@ -40,6 +40,10 @@ const isCompact = variant === 'compact';
         class={cn(
           'font-display text-base sm:text-lg',
           isFooter ? 'text-fg-inverse' : 'text-fg',
+          // 极窄屏（<360px）隐藏字标只留 glyph。实测 320px 视口下：
+          // 字标约 130px + glyph 32px + 右侧按钮簇 148px + 容器 padding 32px = 溢出 23px。
+          // 375px 起有富余，故断点取 359px。页脚纵向空间充足，不受影响。
+          !isFooter && 'max-[359px]:hidden',
         )}
         style="letter-spacing: 0.01em"
       >
