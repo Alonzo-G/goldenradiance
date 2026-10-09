@@ -75,7 +75,13 @@ const products = defineCollection({
   }),
 });
 
-// 产品线落地页内容（编辑文案走 body；frontmatter 只放装配元数据）
+// 产品线落地页内容（编辑文案走 body；frontmatter 放装配元数据 + 差异化定位文案）
+//
+// tagline / position / facts 从 i18n 迁到 frontmatter 的理由（`plan-product-lines` §3.6）：
+//   i18n 里按线编号的 key（`line.alloy.fact.3`）没有类型约束把文案和正确的线绑在一起，
+//   实测已出现「把钢线的 bangle/cuff/chain 卖点贴到合金线页」的事实错误；
+//   页面里为此还配了 `line === 'xxx' ? A : B` 三元式与 `t(key as ...)` 强转（D1/D2）。
+//   迁到 frontmatter 后，文案与所属线在**同一个文件里**相邻，key 也不会串线。
 const productLines = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/product-lines' }),
   schema: z.object({
@@ -83,6 +89,12 @@ const productLines = defineCollection({
     name: z.string(),
     icon: z.string(),
     lineToken: z.enum(['line-alloy', 'line-steel']),
+    /** Hero / 跨线卡共用的一句话定位；同时作为该页 <meta description> */
+    tagline: z.string(),
+    /** 差异化定位：一句话说明这条线解决买家的什么问题 */
+    position: z.string(),
+    /** 支撑 position 的事实（1..3 条）。写事实陈述，不写促销形容词。 */
+    facts: z.array(z.string()).min(1).max(3),
   }),
 });
 

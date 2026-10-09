@@ -3,6 +3,17 @@ line: stainless-titanium-steel
 name: Stainless & Titanium Steel
 icon: droplets
 lineToken: line-steel
+tagline: >-
+  PVD-plated for everyday wear — corrosion behavior quoted per batch with your
+  quotation.
+position: The durable-wear choice
+facts:
+  - 316L over 304 — molybdenum added for chloride resistance on pieces worn
+    against skin.
+  - PVD over water plating — bonded in a vacuum chamber, thickness stated on
+    every spec sheet.
+  - Chlorine & sweat resistance — salt-spray behavior is a test result, quoted
+    per batch.
 ---
 
 ## Built for everyday wear — durability, stated numerically

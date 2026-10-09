@@ -3,6 +3,15 @@ line: fashion-alloy-brass
 name: Fashion Alloy & Brass
 icon: anvil
 lineToken: line-alloy
+tagline: >-
+  Breadth and speed. New styles added continuously, priced for volume.
+position: Breadth + low landed cost
+facts:
+  - Zinc alloy & brass bases — the widest style range, finished to order.
+  - Plating stated per style — method and thickness checked at incoming
+    inspection.
+  - Motif coverage — clover, floral, leaf, heart, initial letter and cross,
+    restocked continuously.
 ---
 
 ## Breadth and speed for volume buyers
