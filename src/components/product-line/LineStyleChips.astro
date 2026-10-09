@@ -1,0 +1,74 @@
+---
+// src/components/product-line/LineStyleChips.astro — 款式族入口（form / motif 两组）
+//
+// 阈值沿用 STYLE_MIN_COUNT，与 /products/ 侧栏同一常量：
+// 「统一口径」保的是视觉一致性——落地页有的 chip 目录页也有，反过来也一样。
+// 「筛得出东西」不由阈值保证，而由 URL 必带 line= 保证；低于阈值的值由
+// catalog.ts 的 ghost checkbox 机制照样筛得出。
+//
+// 无标签款做**脚注**不做 chip：合金线 111 款没打款式标签，给它们一个 chip
+// 等于造一个「未整理」的负面标签；整行不渲染又会让买家以为数少了 111 款。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import { styleLabel } from '../../lib/products/styles';
+import { catalogUrl } from '../../lib/products/deeplink';
+import type { LineStyleFacet } from '../../lib/products/line-aggregation';
+
+interface Props {
+  line: string;
+  forms: LineStyleFacet[];
+  motifs: LineStyleFacet[];
+  /** 该线无款式标签的款数；0 时整行脚注不渲染 */
+  untaggedCount: number;
+  /** 深链必带：本线全量 */
+  catalogHref: string;
+}
+const { line, forms, motifs, untaggedCount, catalogHref } = Astro.props;
+
+const groups = [
+  { title: t('filter.style.form'), facets: forms },
+  { title: t('filter.style.motif'), facets: motifs },
+].filter((g) => g.facets.length > 0);
+---
+
+{
+  groups.length > 0 && (
+    <section id="styles" class="section-y pt-0 scroll-mt-20 lg:scroll-mt-[7.5rem]">
+      <div class="container-wide">
+        <h2 class="text-xl font-semibold text-fg">{t('line.styles.title')}</h2>
+        <p class="mt-1 text-sm text-muted">{t('line.styles.subtitle')}</p>
+        <div class="mt-6 grid gap-6">
+          {groups.map((group) => (
+            <div>
+              <p class="caps text-xs text-meta">{group.title}</p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                {group.facets.map((facet) => (
+                  <li>
+                    <a
+                      href={catalogUrl({ line, style: facet.tag })}
+                      data-style-chip
+                      data-style={facet.tag}
+                      class="flex h-11 items-center gap-2 rounded-pill border border-border bg-surface px-4 text-sm text-fg transition-colors duration-150 hover:border-accent hover:bg-surface-sunken"
+                    >
+                      {styleLabel(facet.tag)}
+                      <span class="tnum text-xs text-meta">{facet.count}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {untaggedCount > 0 && (
+          <p class="mt-4 text-xs text-muted">
+            {t('line.styles.untagged', { count: untaggedCount })}
+            <a href={catalogHref} class="ml-1 inline-flex items-center gap-1 font-medium text-accent hover:underline">
+              <Icon name="lucide:arrow-right" class="icon size-3.5" aria-hidden="true" />
+              {t('cta.viewAll')}
+            </a>
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,44 @@
+---
+// src/components/product-line/LineCtaBand.astro — 中途 CTA（容器内深色卡，不做满宽出血）
+//
+// 不做满宽出血：<main> 自带 gutter，要做出血得用负 margin hack，把
+// 「区块(ui) 宽度例外」变成每个页面都要重复一次的例外。深色本身就是「切一下号」，
+// 不需要靠出血强调。
+//
+// id="rfq" 供锚点直达 —— 读到工艺长文时买家已经在页面深处，这里就是那时的出口。
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  body: string;
+  /** 主按钮：/rfq/?note=…（带线上下文） */
+  primaryHref: string;
+  primaryLabel: string;
+  /** 次按钮：/products/?line=…（回到本线全量） */
+  secondaryHref: string;
+  secondaryLabel: string;
+}
+const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+---
+
+<section id="rfq" class="section-y scroll-mt-20 lg:scroll-mt-[7.5rem]">
+  <div class="container-wide">
+    <div class="rounded-md bg-surface-inverse p-6 text-fg-inverse lg:p-10">
+      <div class="grid items-center gap-6 lg:grid-cols-[2fr_1fr]">
+        <div>
+          <h2 class="text-2xl font-semibold">{title}</h2>
+          <p class="mt-2 max-w-2xl text-sm text-fg-inverse/85">{body}</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <a href={primaryHref} class="flex h-12 items-center justify-center gap-2 rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">
+            <Icon name="lucide:send" class="icon size-4" aria-hidden="true" />
+            {primaryLabel}
+          </a>
+          <a href={secondaryHref} class="flex h-12 items-center justify-center rounded-sm border border-border-inverse px-5 text-sm font-medium text-fg-inverse transition-colors duration-150 hover:bg-surface-inverse/80">
+            {secondaryLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

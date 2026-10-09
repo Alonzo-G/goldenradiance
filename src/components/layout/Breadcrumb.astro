@@ -1,0 +1,44 @@
+---
+// src/components/layout/Breadcrumb.astro — 面包屑（唯一被豁免 44px 的交互元素）
+//
+// 豁免条件照抄设计师给的三条边界（本项目裁定 #7）：
+//   1. 只豁免**面包屑里的内联文字链接**（<nav><ol> 结构内），其余可点元素一律 ≥44px；
+//   2. 豁免后行高仍需 ≥32px（这里 leading-8 = 32px，不是 20px 密排），保住误触间距；
+//   3. 豁免**不包括**「桌面端鼠标专用元素」——那条从未被申请也不成立：
+//      鼠标用户同样会误触，44px 是点击可靠性的下限，不是触屏专属。
+//
+// items 由 line-aggregation 的 buildLineViewModel 产出：UI 与 BreadcrumbList
+// 结构化数据**共用同一个数组**，从根上杜绝「面包屑写着 A、Google 读到 B」。
+import type { BreadcrumbItem } from '../../lib/seo/jsonld';
+
+interface Props {
+  items: BreadcrumbItem[];
+  /** inverse：落在 Hero 暗面上时文字/描边取反色 */
+  tone?: 'default' | 'inverse';
+}
+const { items, tone = 'default' } = Astro.props;
+const inverse = tone === 'inverse';
+---
+
+{
+  items.length > 0 && (
+    <nav aria-label="Breadcrumb" class:list={['mt-6', inverse ? 'text-fg-inverse/70' : 'text-muted']}>
+      <ol class="flex flex-wrap items-center gap-x-1.5 text-sm leading-8">
+        {items.map((item, i) => (
+          <li class="flex items-center gap-x-1.5">
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {i === items.length - 1 ? (
+              <span aria-current="page" class:list={['caps text-xs tracking-wide', inverse ? 'text-fg-inverse' : 'text-fg']}>
+                {item.name}
+              </span>
+            ) : (
+              <a href={item.path} class:list={['leading-8 hover:underline', inverse && 'hover:text-fg-inverse']}>
+                {item.name}
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

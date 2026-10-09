@@ -1,0 +1,49 @@
+---
+// src/components/product-line/LineProductRail.astro — 本线代表款
+//
+// 三件事和旧版不一样：
+//   1. 标题不再是 "Bestsellers" —— 全站 0 条销量数据，那三个字是凭空的。改为事实陈述。
+//   2. 每卡去掉 "New Arrival" 角标 —— 1012 款全标新品，6 张卡 6 个 New，信号归零。
+//      顺带解决 320px 下卡宽 146px 时左上 44px checkbox 与右上角标的碰撞。
+//      "没有库存影像" 这件事由区块级一行说明承担，比 6 个重复角标可信。
+//   3. 卡数 = min(6, 该线 (品类 × 款式签名) 组合数)：钢线只有 4 个组合，绝不复制到 6 张。
+//      重复图是「一眼可见的凑数」，比只有 4 张难看。广度由款式 chips + 品类卡承担。
+//
+// ctaMode="always"：加购按钮在本页常显。hover 揭示是全站既有交互语言（本次不动它），
+// 但那是浏览 /products/ 场景的语言；这里是「看一眼真货」的探索场景。
+import { Icon } from 'astro-icon/components';
+import ProductCard from '../product/ProductCard.astro';
+import type { SkuIndexItem } from '../../lib/products/queries';
+
+interface Props {
+  title: string;
+  note: string;
+  items: SkuIndexItem[];
+  /** 静态映射表产出的栅格类 / 限宽 / sizes，三者必须同源（不同源会选错 srcset 档） */
+  gridClass: string;
+  wrapperMaxW: string;
+  sizes: string;
+  viewAllHref: string;
+  viewAllLabel: string;
+}
+const { title, note, items, gridClass, wrapperMaxW, sizes, viewAllHref, viewAllLabel } = Astro.props;
+---
+
+{
+  /* 数据驱动隐藏：一条都没有就整块不渲染 */
+  items.length > 0 && (
+    <section id="gallery" class="section-y scroll-mt-20 pt-0 lg:scroll-mt-[7.5rem]">
+      <div class="container-wide">
+        <h2 class="text-xl font-semibold text-fg">{title}</h2>
+        <p class="mt-1 text-sm text-muted">{note}</p>
+        <div class:list={['mt-6 grid gap-4', gridClass, wrapperMaxW]}>
+          {items.map((item) => <ProductCard item={item} sizes={sizes} badge="none" ctaMode="always" />)}
+        </div>
+        <a href={viewAllHref} class="mt-6 inline-flex h-11 items-center gap-1 text-sm font-medium text-accent hover:underline">
+          {viewAllLabel}
+          <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  )
+}

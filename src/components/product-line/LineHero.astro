@@ -1,0 +1,81 @@
+---
+// src/components/product-line/LineHero.astro — 面包屑 + 暗面 Hero（该产品线的门面）
+//
+// 图落在 bg-surface-warm 的浅色 figure 上（ProductImage 自带），效果是「暗面里嵌一张
+// 浅色实拍卡」。ratio 从 4:5 改 1:1、fit 从 cover 改 contain：实拍主图多为方图，
+// 用 4:5 + cover 会把镯口/链长这些买家要看的部位裁掉约 20%。
+//
+// 主 CTA 带 line=（落进 /products/ 的线筛选），次 CTA 带 ?note= 预填线上下文。
+// 次按钮这里不用 hover:bg-accent-hover——那是强调色在浅底上的悬停态，落在暗面上是错配。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+import Breadcrumb from '../layout/Breadcrumb.astro';
+import ProductImage from '../product/ProductImage.astro';
+import type { BreadcrumbItem } from '../../lib/seo/jsonld';
+import type { SkuIndexImage } from '../../lib/products/queries';
+
+interface Props {
+  /** 产品线 slug（ProductImage 的识别色回落要用） */
+  line: string;
+  name: string;
+  icon: string;
+  lineToken: string;
+  tagline: string;
+  breadcrumb: BreadcrumbItem[];
+  /** 线感官代表图（heroImageOfLine 产出，与首页同一函数） */
+  heroImage: SkuIndexImage | null;
+  /** 代表图所属品类：无图时占位图回落要用 */
+  heroCategory: string;
+  /** 该线在目录页的 LINK（必带 ?line=，防止点了看到全站 1012 条） */
+  catalogHref: string;
+  rfqHref: string;
+}
+const {
+  line,
+  name,
+  icon,
+  lineToken,
+  tagline,
+  breadcrumb,
+  heroImage,
+  heroCategory,
+  catalogHref,
+  rfqHref,
+} = Astro.props;
+---
+
+<section data-line-hero class="bg-surface-inverse text-fg-inverse">
+  <div class="container-wide grid items-center gap-8 py-12 lg:grid-cols-[3fr_2fr]">
+    <div>
+      <Breadcrumb items={breadcrumb} tone="inverse" />
+      <div class="mt-6 h-0.5 w-16" style={`background: var(--color-${lineToken})`} aria-hidden="true">
+      </div>
+      <div class="mt-4 flex items-center gap-3">
+        <Icon name={`lucide:${icon}`} class="icon size-6" aria-hidden="true" />
+        <h1 class="text-3xl font-bold">{name}</h1>
+      </div>
+      <p class="mt-4 max-w-xl text-md text-fg-inverse/85">{tagline}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={catalogHref} class="flex h-12 items-center rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">
+          {t('cta.browseCatalog')}
+        </a>
+        <a href={rfqHref} class="flex h-12 items-center rounded-sm border border-border-inverse px-5 text-sm font-medium text-fg-inverse transition-colors duration-150 hover:bg-surface-inverse/80">
+          {t('cta.startRfq')}
+        </a>
+      </div>
+    </div>
+    <ProductImage
+      image={heroImage}
+      category={heroCategory}
+      line={line}
+      label={name}
+      ratio="1:1"
+      fit="contain"
+      alt={`${name} — representative style`}
+      loading="eager"
+      fetchpriority="high"
+      sizes="(min-width: 1024px) 38vw, (min-width: 640px) 45vw, 92vw"
+      class="mx-auto w-full max-w-md lg:max-w-none"
+    />
+  </div>
+</section>

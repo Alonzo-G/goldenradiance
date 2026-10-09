@@ -1,0 +1,93 @@
+---
+// src/components/product-line/LineAnchorNav.astro — lg+ sticky 锚点条（含 RFQ 出口）
+//
+// 只做 lg+：移动端已有 MobileRfqBar，再加浮层会与 Header 下拉(z-300) / RFQ 抽屉 /
+// skip-link(z-600) 抢 z 轴。z-[150] + top-16 是全站实测的空位（见 UIUX z-index 表），
+// 且 anchor 条的高度/偏移完全贴合 Header 的 h-16。
+//
+// 注意，两个硬约束：
+//   1. sticky 的**祖先链**上不能有 overflow-hidden，否则 sticky 立即失效。
+//      本组件的祖先只有 <main class="container-page">，没有该属性（新增外层时须复查）。
+//   2. 每个被锚的 section 必须带 scroll-mt（Header 64 + 锚点条 56），否则跳转后被压在条下。
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+export interface LineAnchor {
+  /** 目标 section 的 id */
+  id: string;
+  label: string;
+}
+
+interface Props {
+  anchors: LineAnchor[];
+  rfqHref: string;
+}
+const { anchors, rfqHref } = Astro.props;
+---
+
+{
+  anchors.length > 0 && (
+    <nav
+      data-anchor-nav
+      aria-label={t('line.anchorNav.label')}
+      class="z-[150] hidden border-b border-border bg-surface lg:sticky lg:top-16 lg:block"
+    >
+      <div class="container-wide flex items-center gap-2">
+        <ul class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
+          {anchors.map((anchor) => (
+            <li>
+              <a
+                href={`#${anchor.id}`}
+                data-anchor-link
+                data-anchor-target={anchor.id}
+                class="flex h-11 items-center whitespace-nowrap rounded-sm px-3 text-sm font-medium text-fg-2 hover:text-fg"
+              >
+                {anchor.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={rfqHref} class="flex h-11 shrink-0 items-center rounded-sm bg-accent-metal px-4 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">
+          <Icon name="lucide:send" class="icon mr-2 size-4" aria-hidden="true" />
+          {t('cta.startRfq')}
+        </a>
+      </div>
+    </nav>
+  )
+}
+
+<script>
+  // 当前所处 section 的高亮：取「最靠上且已进入视口的那个」，而不是最后一个触发的——
+  // IntersectionObserver 的 entries 顺序不保证是文档顺序，必须自己按位置排一次。
+  const nav = document.querySelector<HTMLElement>('[data-anchor-nav]');
+  const links = [...(nav?.querySelectorAll<HTMLAnchorElement>('[data-anchor-link]') ?? [])];
+  const targets = links
+    .map((link) => ({ link, id: link.dataset.anchorTarget ?? '' }))
+    .filter((entry) => document.getElementById(entry.id));
+
+  if (nav && targets.length && window.IntersectionObserver) {
+    const setActive = (id: string) => {
+      for (const { link, id: own } of targets) {
+        const active = own === id;
+        link.classList.toggle('text-fg', active);
+        link.classList.toggle('underline', active);
+        link.classList.toggle('text-fg-2', !active);
+      }
+    };
+    // rootMargin 上边距是 Header(64) + 锚点条(56) 再加一点余量，让「被判定为当前」
+    // 的时刻与肉眼看到的对齐；底部留 -55% 让视口下半段的 section 不抢 Active。
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-128px 0px -55% 0px' },
+    );
+    for (const { id } of targets) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+  }
+</script>

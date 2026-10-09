@@ -10,8 +10,34 @@ import ProductImage from './ProductImage.astro';
 interface Props {
   item: SkuIndexItem;
   ratio?: '1:1' | '4:5';
+  /**
+   * 图片 sizes。**必须与所在栅格的列数/限宽同源**：它决定浏览器选哪个 srcset 候选档，
+   * 写成估算的 `23vw` 在宽屏会算成远大于实际卡宽的值，浏览器就会白下一个大档。
+   */
+  sizes?: string;
+  /**
+   * 角标策略。`auto`（默认）= 沿用全站既有行为；`none` = 不渲染角标。
+   * rail 传 none 的理由：1012 款全是 `dataStatus: 'real'`，默认策略下 6 张卡 6 个
+   * "New arrival"，信号归零；且 320px 下卡宽约 146px 时，左上 44px checkbox 会与
+   * 右上角标相邻到几乎贴住。
+   */
+  badge?: 'auto' | 'none';
+  /**
+   * 加购按钮：`hover`（默认，全站既有语言，在 /products/ 与 PDP 已上线）/
+   * `always`（常显，用于「先看看真货」的探索场景）。
+   * 默认行为不变 —— 要全局改 hover 揭示是另一次改动，不混进来。
+   */
+  ctaMode?: 'hover' | 'always';
 }
-const { item, ratio = '1:1' } = Astro.props;
+const {
+  item,
+  ratio = '1:1',
+  sizes = '(min-width: 1280px) 22vw, (min-width: 640px) 33vw, 50vw',
+  badge = 'auto',
+  ctaMode = 'hover',
+} = Astro.props;
+
+const alwaysCta = ctaMode === 'always';
 
 const hasPrice = item.priceLow != null && item.priceHigh != null;
 const specLine = item.spec || t('pdp.spec.pendingStrip');
@@ -32,7 +58,7 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
     />
   </label>
   {
-    item.dataStatus === 'real' && (
+    badge === 'auto' && item.dataStatus === 'real' && (
       <span class="absolute right-2 top-2 z-[2] rounded-xs bg-accent px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent-on">
         {t('pdp.newArrival')}
       </span>
@@ -46,6 +72,7 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
       label={item.category}
       ratio={ratio}
       alt={altParts}
+      sizes={sizes}
       class="transition-transform duration-150 group-hover:scale-[1.02]"
     />
   </a>
@@ -82,7 +109,10 @@ const altParts = [item.title, item.material, item.plating].filter(Boolean).join(
     data-slug={item.slug}
     data-title={item.title}
     data-moq={item.rfqQty}
-    class="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-sm border border-accent text-sm font-medium text-accent transition-opacity duration-150 lg:opacity-0 lg:focus-visible:opacity-100 lg:group-hover:opacity-100"
+    class:list={[
+      'mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-sm border border-accent text-sm font-medium text-accent transition-opacity duration-150',
+      alwaysCta ? '' : 'lg:opacity-0 lg:focus-visible:opacity-100 lg:group-hover:opacity-100',
+    ]}
   >
     <Icon name="lucide:plus" class="icon size-4" aria-hidden="true" />
     <span data-add-label>{t('cta.addToRfq')}</span>

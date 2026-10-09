@@ -1,16 +1,37 @@
 ---
-// src/pages/product-lines/[line].astro — 产品线 Landing ×3（UIUX §11 #2-4）
+// src/pages/product-lines/[line].astro — 产品线 Landing
+//
+// 本页职责被压缩成三件事：**取数 → 建 ViewModel → 把 Props 递给区块组件**。
+// 所有「钢线长什么样、合金线长什么样」的差异都由 line-aggregation 的计算结果决定，
+// 页面里没有一处 `line === 'xxx' ? A : B`。
 import { render, type CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProductImage from '../../components/product/ProductImage.astro';
-import ProductCard from '../../components/product/ProductCard.astro';
 import { Icon } from 'astro-icon/components';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { t } from '../../i18n';
-import { getProducts, byLine, toSkuIndexItem, getActiveLines } from '../../lib/products/queries';
+import {
+  getProducts,
+  byLine,
+  toSkuIndexItem,
+  getActiveLines,
+  heroImageOfLine,
+} from '../../lib/products/queries';
+import { buildLineViewModel, categoryGridClass } from '../../lib/products/line-aggregation';
+import { catalogUrl } from '../../lib/products/deeplink';
+import { lineLabel, rfqNoteUrl } from '../../lib/products/lines';
+import { organizationJsonld, collectionPageJsonld, breadcrumbJsonld } from '../../lib/seo/jsonld';
+import { getSiteUrl } from '../../lib/seo/site';
+import LineHero from '../../components/product-line/LineHero.astro';
+import LineStatsBar from '../../components/product-line/LineStatsBar.astro';
+import LineAnchorNav from '../../components/product-line/LineAnchorNav.astro';
+import LineFacts from '../../components/product-line/LineFacts.astro';
+import LineStyleChips from '../../components/product-line/LineStyleChips.astro';
+import LineCategoryGrid from '../../components/product-line/LineCategoryGrid.astro';
+import LineProductRail from '../../components/product-line/LineProductRail.astro';
+import LineCtaBand from '../../components/product-line/LineCtaBand.astro';
+import LineOtherLines from '../../components/product-line/LineOtherLines.astro';
 
 export async function getStaticPaths() {
-  // 只为有公开产品的产品线生成静态页——空线（如未来补货前）不生成路由，
-  // 补货后自动恢复，无需改代码。
+  // 只为有公开产品的产品线生成静态页——空线（如未来补货前）不生成路由，补货后自动恢复。
   const lines = await getActiveLines();
   return lines.map((entry) => ({ params: { line: entry.data.line }, props: { entry } }));
 }
@@ -19,161 +40,110 @@ interface Props {
   entry: CollectionEntry<'productLines'>;
 }
 const { entry } = Astro.props as Props;
-const { line, name, icon, lineToken } = entry.data;
+const { line, name, icon, lineToken, tagline, position, facts } = entry.data;
 const { Content } = await render(entry);
 
-const taglineKey =
-  line === 'fashion-alloy-brass' ? 'line.alloy.tagline' : 'line.steel.tagline';
-
 const all = await getProducts();
-const lineItems = byLine(all, line);
-// 真实素材款优先（本次入库实拍），其余按 SKU 补齐
-const realInLine = lineItems.filter((it) => it.data.dataStatus === 'real');
-const otherInLine = lineItems.filter((it) => it.data.dataStatus !== 'real');
-const rail = [...realInLine, ...otherInLine].slice(0, 6).map(toSkuIndexItem);
-const crossRail = all
-  .filter((it) => it.data.line !== line)
-  .filter((it, i, arr) => arr.findIndex((x) => x.data.line === it.data.line) === i)
-  .map(toSkuIndexItem);
+const publicItems = (slug: string) => byLine(all, slug).filter((it) => it.data.dataStatus === 'real');
+const vm = buildLineViewModel({ line, name, items: publicItems(line) });
 
-const categories = [...new Set(lineItems.map((it) => it.data.category))];
-/** 每个子品类取该线内首个真实素材款的主图（有则用实拍，无则回落占位图） */
-const categoryImage = (cat: string) =>
-  realInLine.find((it) => it.data.category === cat)?.data.images?.[0] ?? null;
-const heroImage = realInLine[0]?.data.images?.[0] ?? null;
-const stats = [t('line.stats.skuDepth'), t('line.stats.moq'), t('line.stats.cadence')];
+const site = getSiteUrl(Astro.site);
+const path = `/product-lines/${line}/`;
+const lineHref = catalogUrl({ line });
+const rfqHref = rfqNoteUrl(line, name);
 
-/** 差异化定位：一句话定位 + 三个事实（§2.1）。只用已确认的产品线事实，不编数字。 */
-const POSITION: Record<string, { position: string; facts: string[] }> = {
-  'stainless-titanium-steel': {
-    position: t('line.steel.position'),
-    facts: [t('line.steel.fact.1'), t('line.steel.fact.2'), t('line.steel.fact.3')],
-  },
-  'fashion-alloy-brass': {
-    position: t('line.alloy.position'),
-    facts: [t('line.alloy.fact.1'), t('line.alloy.fact.2'), t('line.alloy.fact.3')],
-  },
-};
-const position = POSITION[line];
+/** 另一条产品线（线卡形态：线名 + tagline + SKU 数 + View line） */
+const otherCards = (await getActiveLines())
+  .filter((other) => other.data.line !== line)
+  .map((other) => ({
+    name: lineLabel(other.data.line) || other.data.name,
+    tagline: other.data.tagline,
+    count: t('home.categories.count', { count: publicItems(other.data.line).length }),
+    href: `/product-lines/${other.data.line}/`,
+    image: heroImageOfLine(all, other.data.line),
+    line: other.data.line,
+  }));
+
+// 注意：BaseLayout 的 jsonld 是默认参数、**传入即覆盖**：数组第一项必须显式带上 Organization，
+// 否则这一页会丢掉站点级实体描述。
+const jsonld = [
+  organizationJsonld(site),
+  collectionPageJsonld({ site, path, name, description: tagline, numberOfItems: vm.skuCount }),
+  breadcrumbJsonld(site, vm.breadcrumb),
+];
+
+const stats = [
+  { icon: 'package', text: t('line.stats.skus', { count: vm.skuCount }) },
+  { icon: 'shapes', text: t('line.stats.families', { types: vm.typeCount, styles: vm.familyCount }) },
+  { icon: 'file-check', text: t('line.stats.confirm') },
+];
+const anchors = [
+  { id: 'overview', label: t('line.nav.overview') },
+  { id: 'styles', label: t('line.nav.styles') },
+  { id: 'types', label: t('line.nav.types') },
+  { id: 'gallery', label: t('line.nav.gallery') },
+];
 ---
 
-<BaseLayout title={name} description={t(taglineKey as 'line.alloy.tagline')} path={`/product-lines/${line}/`}>
-  {/* 产品线 Hero（暗面 + 线识别色） */}
-  <section class="bg-surface-inverse text-fg-inverse">
-    <div class="container-wide grid items-center gap-8 py-16 lg:grid-cols-[3fr_2fr]">
-      <div>
-        <div class="mb-4 h-0.5 w-16" style={`background: var(--color-${lineToken})`} aria-hidden="true"></div>
-        <div class="flex items-center gap-3">
-          <Icon name={`lucide:${icon}`} class="icon size-6" aria-hidden="true" />
-          <h1 class="text-3xl font-bold">{name}</h1>
-        </div>
-        <p class="mt-4 max-w-xl text-md text-fg-inverse/85">{t(taglineKey as 'line.alloy.tagline')}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/products/" class="flex h-12 items-center rounded-sm bg-accent-metal px-5 text-sm font-medium text-metal-on transition-colors duration-150 hover:bg-accent-metal-hover">{t('cta.browseCatalog')}</a>
-          <a href="/rfq/" class="flex h-12 items-center rounded-sm border border-border-inverse px-5 text-sm font-medium text-fg-inverse transition-colors duration-150 hover:bg-accent-hover">{t('cta.startRfq')}</a>
-        </div>
-      </div>
-      <ProductImage
-        image={heroImage}
-        category={categories[0] ?? 'ring'}
-        line={lineToken}
-        label={name}
-        ratio="4:5"
-        alt={`${name} — representative style`}
-        class="max-h-80"
-      />
+<BaseLayout title={name} description={tagline} path={path} jsonld={jsonld}>
+  <LineHero
+    line={line}
+    name={name}
+    icon={icon}
+    lineToken={lineToken}
+    tagline={tagline}
+    breadcrumb={vm.breadcrumb}
+    heroImage={heroImageOfLine(all, line)}
+    heroCategory={vm.categories[0]?.value ?? 'bracelet'}
+    catalogHref={lineHref}
+    rfqHref={rfqHref}
+  />
+  <LineStatsBar items={stats} />
+  <LineAnchorNav anchors={anchors} rfqHref={rfqHref} />
+  <LineFacts title={t('line.position.title')} position={position} facts={facts} />
+  <LineStyleChips
+    line={line}
+    forms={vm.styleForms}
+    motifs={vm.styleMotifs}
+    untaggedCount={vm.untaggedCount}
+    catalogHref={lineHref}
+  />
+  <LineCategoryGrid line={line} categories={vm.categories} gridClass={categoryGridClass(vm.typeCount)} />
+  <LineProductRail
+    title={t('line.gallery.title')}
+    note={t('line.gallery.note')}
+    items={vm.picks.map(toSkuIndexItem)}
+    gridClass={vm.railGridClass}
+    wrapperMaxW={vm.railWrapperMaxW}
+    sizes={vm.railSizes}
+    viewAllHref={lineHref}
+    viewAllLabel={t('line.viewAllSkus', { count: vm.skuCount })}
+  />
+  <LineCtaBand
+    title={t('line.ctaBand.title')}
+    body={t('line.ctaBand.body')}
+    primaryHref={rfqHref}
+    primaryLabel={t('cta.startRfq')}
+    secondaryHref={lineHref}
+    secondaryLabel={t('cta.browseCatalog')}
+  />
+
+  {/* 材质工艺正文：从原来的第 3 屏后移。买家的动线是「这条线是什么 → 有多少货 →
+      看图 → 询价 → 才需要读工艺」，把 4 屏工艺长文前置，是把它给了还没决定要看货的人。 */}
+  <section class="mx-auto max-w-3xl section-y scroll-mt-20 pt-0 lg:scroll-mt-[7.5rem]">
+    <h2 class="text-xl font-semibold text-fg">{t('line.materials.title')}</h2>
+    <div class="mt-6 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:mt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5">
+      <Content />
     </div>
+    <a href="/compliance/nickel-release-en-1811/" class="mt-6 inline-flex h-11 items-center gap-1 text-sm font-medium text-accent hover:underline">
+      {t('cta.howWeTest')}
+      <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+    </a>
   </section>
 
-  {/* 定位数据条（数字未确认走降级，§17） */}
-  <section class="border-b border-border bg-surface">
-    <div class="container-wide grid gap-6 py-8 sm:grid-cols-3">
-      {stats.map((s) => (
-        <p class="flex items-center gap-2 text-sm text-fg-2">
-          <Icon name="lucide:ruler" class="icon size-4 text-meta" aria-hidden="true" />
-          {s}
-        </p>
-      ))}
-    </div>
-  </section>
-
-  {/* 差异化定位：一句话 + 三个事实（§2.1 转化内容） */}
-  {
-    position && (
-      <section class="section-y">
-        <div class="container-wide">
-          <h2 class="caps text-xs text-muted">{t('line.position.title')}</h2>
-          <p class="mt-3 text-xl font-semibold text-fg">{position.position}</p>
-          <ul class="mt-6 grid gap-4 md:grid-cols-3">
-            {position.facts.map((f, i) => (
-              <li class="rounded-md border border-border bg-surface p-5 shadow-raised">
-                <span class="tnum text-xs font-medium text-meta">{String(i + 1).padStart(2, '0')}</span>
-                <p class="mt-2 text-sm leading-relaxed text-fg-2">{f}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    )
-  }
-
-  {/* 材质工艺说明（内容集合正文） */}
-  <section class="section-y">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-xl font-semibold text-fg">{t('line.materials.title')}</h2>
-      <div class="mt-6 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:mt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5">
-        <Content />
-      </div>
-      <a href="/compliance/nickel-release-en-1811/" class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline">
-        {t('cta.howWeTest')}
-        <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
-      </a>
-    </div>
-  </section>
-
-  {/* 子品类导航 */}
-  <section class="section-y pt-0">
-    <div class="container-wide">
-      <h2 class="text-xl font-semibold text-fg">{t('line.subcategories.title')}</h2>
-      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-        {categories.map((cat) => (
-          <a
-            href={`/products/?category=${cat}`}
-            class="group rounded-md border border-border bg-surface p-4 text-center shadow-raised"
-          >
-            <ProductImage
-              image={categoryImage(cat)}
-              category={cat}
-              line={lineToken}
-              label={t(`category.${cat}` as 'category.earrings')}
-              ratio="1:1"
-              alt={t(`category.${cat}` as 'category.earrings')}
-              sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
-            />
-            <p class="mt-2 text-sm font-medium text-fg group-hover:underline">{t(`category.${cat}` as 'category.earrings')}</p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* 本线热销 rail */}
-  <section class="section-y pt-0">
-    <div class="container-wide">
-      <h2 class="text-xl font-semibold text-fg">{t('line.bestsellers.title')}</h2>
-      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-        {rail.map((item) => <ProductCard item={item} />)}
-      </div>
-    </div>
-  </section>
-
-  {/* Cross-line 推荐 */}
-  <section class="pb-10">
-    <div class="container-wide">
-      <h2 class="text-xl font-semibold text-fg">{t('line.crossLine.title')}</h2>
-      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {crossRail.map((item) => <ProductCard item={item} />)}
-      </div>
-    </div>
-  </section>
+  <LineOtherLines
+    title={t('line.otherLines.title')}
+    viewLabel={t('line.otherLines.view')}
+    cards={otherCards}
+  />
 </BaseLayout>

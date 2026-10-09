@@ -1,0 +1,76 @@
+---
+// src/components/product-line/LineOtherLines.astro — 跨线区块（线卡，不是 SKU 卡）
+//
+// 旧版取「其他线各一款 SKU」：全站只有 2 条线时那永远只有 1 张卡，标题却写着
+// "Buyers of this line also source"（买这条线的买家还会.）——一句名不副实的话。
+// 改成线卡：线名 + tagline + 该线 SKU 数 + "View line"，图用该线的 heroImageOfLine()。
+//
+// 未来上线第 3 条产品线时列数自动变宽：这里不写死 `md:grid-cols-2`，
+// 而是按条目数走静态映射表。
+import { Icon } from 'astro-icon/components';
+import ProductImage from '../product/ProductImage.astro';
+import type { SkuIndexImage } from '../../lib/products/queries';
+
+export interface OtherLineCard {
+  name: string;
+  tagline: string;
+  /** 该线 SKU 数（诚实计数） */
+  count: string;
+  href: string;
+  image: SkuIndexImage | null;
+  /** 线的 slug。**直接由 data.line 传入**，不在这里从 lineToken 反推——
+   *  反推需要在组件里写 `token === 'line-steel' ? 'a' : 'b'` 这种二分，新增第三条线即失效。 */
+  line: string;
+}
+
+interface Props {
+  title: string;
+  viewLabel: string;
+  cards: OtherLineCard[];
+}
+const { title, viewLabel, cards } = Astro.props;
+
+/** 条目数 → 列数。只有 1 条时独占一行会在 1440 下变成一条 1184px 的巨型横幅 */
+const GRID: Record<number, string> = {
+  1: 'grid-cols-1 lg:max-w-[42rem]',
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
+};
+---
+
+{
+  cards.length > 0 && (
+    <section class="section-y">
+      <div class="container-wide">
+        <h2 class="text-xl font-semibold text-fg">{title}</h2>
+        <div class:list={['mt-6 grid gap-4', GRID[cards.length] ?? 'md:grid-cols-2 lg:grid-cols-3']}>
+          {cards.map((card) => (
+            <a href={card.href} class="group flex items-center gap-4 rounded-md border border-border bg-surface p-4 shadow-raised transition-shadow duration-150 hover:shadow-none">
+              <ProductImage
+                image={card.image}
+                category="bracelet"
+                line={card.line}
+                label={card.name}
+                ratio="1:1"
+                fit="contain"
+                variant="thumb"
+                alt={card.name}
+                sizes="72px"
+                class="w-20 shrink-0"
+              />
+              <div class="min-w-0 flex-1">
+                <h3 class="text-base font-semibold text-fg group-hover:underline">{card.name}</h3>
+                <p class="mt-0.5 line-clamp-2 text-xs leading-relaxed text-muted">{card.tagline}</p>
+                <p class="tnum mt-1 text-xs text-meta">{card.count}</p>
+                <span class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                  {viewLabel}
+                  <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

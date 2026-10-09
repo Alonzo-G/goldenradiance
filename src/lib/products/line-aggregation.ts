@@ -13,7 +13,6 @@
 //   3. 禁用 Math.random / Date / crypto；禁止依赖 Set / Map 的迭代顺序取值——
 //      需要有序结果时，一律先 [...map.values()] 物化成数组再 sort。
 //   4. Map 只用于「分组 O(1) 查找」，不作为顺序来源。
-//
 // ============================ 选品算法（六条） ============================
 // 第一版「按款式族 round-robin + 单族上限 2」已被全量 1012 款实测推翻：钢线会出
 // 6 张里 4 个重复 SKU（SZGSS160 同时带 [cable, bangle]，跨族不去重）；合金线 6 张
@@ -25,6 +24,8 @@
 //   5. 桶内取：图片张数 desc → sku_code asc
 //   6. 渲染顺序按桶规模降序 ← 保底只决定「选谁」，不决定排位
 //   7. 卡数 = min(6, 桶数)：**永不复制**。重复图是「一眼可见的凑数」，比只有 4 张难看。
+// 实测产出（会被 vitest 与 Playwright 照抄，**不得**反过来写进实现）写在
+// tests/line-aggregation.test.ts 里。
 import type { ProductEntry } from './queries';
 import { STYLE_MIN_COUNT, FORM_TAGS, MOTIF_TAGS } from './styles';
 import { t } from '../../i18n';
@@ -200,10 +201,9 @@ export const RAIL_WRAPPER_MAXW: Record<number, string> = {
 /**
  * sizes 按容器实际内容宽精确换算（痛点：写 `23vw` 在 1920 视口会算成 442px，
  * 而卡实际只有 184px → 浏览器白下 640 档，6 张卡多约 200KB）。
- *
  * 宽度推导：落地页 main 是 container-page(1280，gutter 24) 内套 container-wide(gutter 24)，
- * 故区块内容宽 = 1280 − 24×4 = 1184px，≥1280px 视口恒定。
- * 卡宽 = (1184 − gap×(n−1)) / n；n=1..3 再受 RAIL_WRAPPER_MAXW 二次封顶。
+ * 故区块内容宽 = 1280 − 24×4 = 1184px（≥1280px 视口恒定）。卡宽 = (1184 − gap×(n−1)) / n，
+ * n=1..3 还要再受 RAIL_WRAPPER_MAXW 二次封顶（见上）。
  */
 export const RAIL_SIZES: Record<number, string> = {
   1: '(min-width: 1280px) 336px, (min-width: 640px) 336px, 45vw',
@@ -214,16 +214,10 @@ export const RAIL_SIZES: Record<number, string> = {
   6: '(min-width: 1280px) 184px, (min-width: 1024px) 15vw, (min-width: 640px) 28vw, 45vw',
 };
 
-/**
- * 品类栅格。条目少（≤3）时改横向卡变体 —— 2 品类配 lg:grid-cols-6 会变成
- * 「两张窄卡 + 右侧 4 列空白」，正是钢线的原病灶。
- */
 export function categoryGridClass(count: number): string {
-  if (count <= 1) return 'grid-cols-1';
-  if (count === 2) return 'md:grid-cols-2';
-  if (count === 3) return 'md:grid-cols-2';
-  if (count === 4) return 'grid-cols-2 lg:grid-cols-4';
-  if (count === 5) return 'grid-cols-2 lg:grid-cols-4';
+  // 2 品类配 lg:grid-cols-6 = 「两张窄卡 + 右侧 4 列空白」，正是钢线的原病灶
+  if (count <= 3) return count <= 1 ? 'grid-cols-1' : 'md:grid-cols-2';
+  if (count === 4 || count === 5) return 'grid-cols-2 lg:grid-cols-4';
   return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6';
 }
 
@@ -258,21 +252,19 @@ export interface BuildLineViewModelInput {
   line: string;
   /** 内容集合里的显示名（面包屑末位、未登记线的兜底线名） */
   name: string;
-  /** 线内的可见产品。须来自 getProducts()（已按 sku_code 升序）；
-   *  可见性过滤（dataStatus）由调用方负责。 */
+  /** 线内可见产品。须来自 getProducts()（已按 sku_code 升序）；可见性过滤由调用方负责。 */
   items: ProductEntry[];
 }
 
 export function buildLineViewModel({ line, name, items }: BuildLineViewModelInput): LineViewModel {
   const categories = categoryCounts(items).map((facet) => ({
     ...facet,
-    representative:
-      items
-        .filter((it) => it.data.category === facet.value && imageCount(it) > 0)
-        .reduce<ProductEntry | null>(
-          (best, it) => (!best || imageCount(it) > imageCount(best) ? it : best),
-          null,
-        ) ?? null,
+    representative: items
+      .filter((it) => it.data.category === facet.value && imageCount(it) > 0)
+      .reduce<ProductEntry | null>(
+        (best, it) => (!best || imageCount(it) > imageCount(best) ? it : best),
+        null,
+      ),
   }));
 
   const styleForms = buildStyleFacets(items, FORM_TAGS);

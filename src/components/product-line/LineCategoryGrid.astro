@@ -1,0 +1,87 @@
+---
+// src/components/product-line/LineCategoryGrid.astro — 子品类入口
+//
+// 两处改动针对同一个病灶：
+//   1. 每条链接都带 line= —— 原来只有 ?category=，钢线点 Bracelet 看到的是全站
+//      892 条（含合金），而不是本线 604 条。`catalog.ts` 早就支持 ?line=，能力一直闲置。
+//   2. 列数由条目数决定 —— 原来写死 lg:grid-cols-6，钢线只有 2 个品类，
+//      桌面端就是「两张窄卡 + 右侧 4 列空白」。
+//   3. 代表图取「该品类内主图张数最多者」而不是 find() 首个 —— 后者等同按 sku 抽样，
+//      抽到无图款就是一张占位图当门面。
+import { Icon } from 'astro-icon/components';
+import { t, type UiKey } from '../../i18n';
+import ProductImage from '../product/ProductImage.astro';
+import { catalogUrl } from '../../lib/products/deeplink';
+import type { LineCategoryFacet } from '../../lib/products/line-aggregation';
+import type { SkuIndexImage } from '../../lib/products/queries';
+
+interface Props {
+  line: string;
+  categories: LineCategoryFacet[];
+  /** 列数字面量：静态映射表，模板里不许出现 `lg:grid-cols-${n}`（Tailwind 扫不到动态类名） */
+  gridClass: string;
+}
+const { line, categories, gridClass } = Astro.props;
+
+/** 品类 slug → i18n key。显式查表而不是 `t(\`category.${v}\` as UiKey)`：
+ *  强转等于告诉编译器「我知道这个值一定是这几种」，而这正是它跑偏时唯一能拦住我们的东西。
+ *  未登记的品类回落到 slug 本身，绝不把 `category.xxx` 显示给买家。 */
+const CATEGORY_KEY = {
+  earrings: 'category.earrings',
+  necklace: 'category.necklace',
+  bracelet: 'category.bracelet',
+  ring: 'category.ring',
+  'hair-accessory': 'category.hair-accessory',
+  brooch: 'category.brooch',
+  anklet: 'category.anklet',
+} as const satisfies Record<string, UiKey>;
+
+const labelOf = (value: string): string =>
+  CATEGORY_KEY[value as keyof typeof CATEGORY_KEY] ?? value;
+
+/** n<=3 走横向卡变体：这么窄的宽度里正方形图 + 居中文案会被拉成一根根高柱子 */
+const row = categories.length <= 3;
+const imageOf = (facet: LineCategoryFacet): SkuIndexImage | null =>
+  facet.representative?.data.images?.[0] ?? null;
+---
+
+{
+  categories.length > 0 && (
+    <section id="types" class="section-y scroll-mt-20 pt-0 lg:scroll-mt-[7.5rem]">
+      <div class="container-wide">
+        <h2 class="text-xl font-semibold text-fg">{t('line.subcategories.title')}</h2>
+        <div data-category-grid class:list={['mt-6 grid gap-4', gridClass]}>
+          {categories.map((facet) => {
+            const label = labelOf(facet.value);
+            const href = catalogUrl({ category: facet.value, line });
+            return (
+              <a href={href} data-category-card data-category={facet.value} class:list={[
+                'group rounded-md border border-border bg-surface shadow-raised transition-shadow duration-150 hover:shadow-none',
+                row ? 'flex items-center gap-4 p-4' : 'flex flex-col overflow-hidden',
+              ]}>
+                <ProductImage
+                  image={imageOf(facet)}
+                  category={facet.value}
+                  line={line}
+                  label={label}
+                  ratio="1:1"
+                  alt={label}
+                  variant={row ? 'thumb' : 'main'}
+                  sizes={row ? '80px' : '(min-width: 1280px) 280px, (min-width: 640px) 30vw, 45vw'}
+                  class={row ? 'w-20 shrink-0' : ''}
+                />
+                <div class:list={[row ? 'min-w-0 flex-1' : 'flex items-center justify-between gap-2 px-4 py-3']}>
+                  <h3 class:list={['text-base font-semibold text-fg', row ? '' : 'group-hover:underline']}>{label}</h3>
+                  <div class:list={['flex items-center gap-2', row ? 'mt-0.5' : '']}>
+                    <span class="tnum shrink-0 text-xs text-muted">{t('home.categories.count', { count: facet.count })}</span>
+                    <Icon name="lucide:chevron-right" class="icon size-4 shrink-0 text-meta" aria-hidden="true" />
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
