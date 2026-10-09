@@ -293,6 +293,8 @@
 
   "rfq": {
     "title": "RFQ list",
+    "note.fromLine": "Interested in the {line} line — ",
+
     "item.notePlaceholder": "e.g. Need custom packaging, FOB Shenzhen, nickel-free required",
     "item.remove": "Remove {sku}",
     "empty.title": "Your RFQ list is empty.",

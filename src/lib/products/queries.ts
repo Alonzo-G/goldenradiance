@@ -7,6 +7,7 @@ import {
   RFQ_DEFAULT_QTY,
   type MoqBand,
 } from '../shared/format';
+import { LINE_HERO_OVERRIDE } from './line-aggregation';
 
 export type ProductEntry = CollectionEntry<'products'>;
 export type ProductData = ProductEntry['data'];
@@ -63,32 +64,58 @@ export async function getActiveLines(): Promise<CollectionEntry<'productLines'>[
     .sort((a, b) => (order.get(a.data.line) ?? 0) - (order.get(b.data.line) ?? 0));
 }
 
-/** 产品线「视觉代表款」：该线视觉素材最丰富的 real 产品（图多 > 风格标签多）。
- *  供首页 Hero / Lines 区块统一使用——同一屏内不允许「真实图 vs 占位图」混排，
- *  那是「货还没上」最直观的误判信号。 */
-export function heroImageForLine(
-  products: ProductEntry[],
-  line: string,
-): { src: string; thumb: string; alt: string; width?: number; height?: number; slug: string; title: string } | null {
+/** 产品线「视觉代表款」的落地件：该线视觉素材最丰富的 real 产品。
+ *  排序三级：图片多 > 风格标签多 > sku_code 升序。
+ *
+ *  第三级 `sku_code asc` 是**修 bug 不是优化**：原实现只有前两级，而合金线 404 款
+ *  全部只有 1 张图 → 两级全线平局，跑对纯靠 Array.sort 的稳定性 + 入参顺序兜底。
+ *  一旦有人改变入参顺序（例如直接把 getCollection 的结果传进来），Hero 图会静默换人。
+ *  要在算法之外指定某条线的门面图，写 `LINE_HERO_OVERRIDE`（首页与落地页两处共用同一张表）。 */
+function representativeEntry(products: ProductEntry[], line: string): ProductEntry | null {
+  const pinnedSlug = LINE_HERO_OVERRIDE[line];
   const pool = products
     .filter((p) => p.data.line === line && p.data.dataStatus === 'real' && p.data.images?.length)
+    .slice()
     .sort(
       (a, b) =>
         (b.data.images?.length ?? 0) - (a.data.images?.length ?? 0) ||
-        (b.data.style_tags?.length ?? 0) - (a.data.style_tags?.length ?? 0),
+        (b.data.style_tags?.length ?? 0) - (a.data.style_tags?.length ?? 0) ||
+        a.data.sku_code.localeCompare(b.data.sku_code),
     );
-  const pick = pool[0];
-  if (!pick) return null;
-  const img = pick.data.images![0];
+  const pinned = pinnedSlug
+    ? pool.find((p) => p.data.slug === pinnedSlug)
+    : undefined;
+  return pinned ?? pool[0] ?? null;
+}
+
+/**
+ * 产品线代表图，返回 **SkuIndexImage**（与 `SkuIndexItem.image` 同型）。
+ * 落地页原先拿不到这个类型，只能自己 `realInLine[0].data.images[0]` 取 sku 字典序首款 ——
+ * 于是钢线落地页门面变成了只占该线 0.7% 的 ring，而首页调 heroImageForLine 拿的是手链，
+ * 同一条线两个页面两张图。返回同型是这个错位能被机器接住的前提。
+ */
+export function heroImageOfLine(products: ProductEntry[], line: string): SkuIndexImage | null {
+  const pick = representativeEntry(products, line);
+  const img = pick?.data.images?.[0];
+  if (!pick || !img) return null;
   return {
     src: img.src,
     thumb: img.thumb,
     alt: img.alt || pick.data.title,
     width: img.width,
     height: img.height,
-    slug: pick.data.slug,
-    title: pick.data.title,
   };
+}
+
+export function heroImageForLine(
+  products: ProductEntry[],
+  line: string,
+): { src: string; thumb: string; alt: string; width?: number; height?: number; slug: string; title: string } | null {
+  const pick = representativeEntry(products, line);
+  if (!pick) return null;
+  const image = heroImageOfLine(products, line);
+  if (!image) return null;
+  return { ...image, slug: pick.data.slug, title: pick.data.title };
 }
 
 /** PDP「Same series」：同产品线其他款 */

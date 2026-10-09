@@ -112,6 +112,35 @@ export function breadcrumbJsonld(
   };
 }
 
+/**
+ * CollectionPage：**产品线落地页**（某一维度上的产品聚合页）的结构化数据。
+ *
+ * 两条不做的约束：
+ *   - 不输出 numberOfItems 个 Product 节点 —— 规格字段填充率 0%，输出即 thin node，
+ *     且静态产物体积暴涨；
+ *   - 不输出 aggregateRating / review（本也没有这种数据）。
+ *
+ * numberOfItems 用的是**线内实际 SKU 数**（由 buildLineViewModel 算出），
+ * 不是一个写死的整数 —— 写死的那天就开始了漂移。
+ */
+export function collectionPageJsonld(input: {
+  site: string;
+  path: string;
+  name: string;
+  description: string;
+  numberOfItems: number;
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    url: new URL(input.path, input.site).toString(),
+    name: input.name,
+    description: input.description,
+    numberOfItems: input.numberOfItems,
+    isPartOf: { '@id': `${input.site}/#website` },
+  };
+}
+
 export function faqPageJsonld(
   groups: { questions: { q: string; a: string }[] }[],
 ): Record<string, unknown> {
