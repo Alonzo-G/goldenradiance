@@ -4,7 +4,7 @@
     {
       "id": "moq",
       "questions": [
-        { "q": "What is the MOQ?", "a": "MOQ runs 12-120 pcs per style. The figure for each style is confirmed with your quotation — nothing is published before it is checked." },
+        { "q": "What is the MOQ?", "a": "The MOQ is confirmed per style with your quotation — nothing is published before it is checked." },
         { "q": "Can I order below a style's MOQ?", "a": "Quantities below a style's MOQ can be quoted — flag it at submission and it will be confirmed with your quotation." },
         { "q": "How does tiered pricing work?", "a": "Priced by tier. Where a style's tiered pricing is confirmed, the reference range appears on its page; otherwise the full tier table is quoted per order with your RFQ." }
       ]

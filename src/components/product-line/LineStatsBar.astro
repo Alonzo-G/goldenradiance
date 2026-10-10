@@ -4,7 +4,8 @@
 // 三格全部由数据算出（线内 SKU 数 / 品类数 · 款式族数 / 未确认字段的措辞），
 // 不再是两条线复用同一句「Catalogue depth varies by line」——那句等于没说。
 //
-// 第三格**不写** "MOQ 12-120 pcs"：那是站点政策档位，不是本线已确认值；
+// 第三格**不写** MOQ 数字：MOQ 数值属客户未确认数据（OD-04），到位前对外一律
+// 只写「confirmed with your quotation」，连站点级范围档也不写——它不是本线的已确认值。
 // 本线的数字必须随报价确认，写成具体档次就是我们自己制造下一次 MOQ 诚实性问题。
 import { Icon } from 'astro-icon/components';
 

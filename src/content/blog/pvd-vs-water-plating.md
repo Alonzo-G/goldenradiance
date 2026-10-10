@@ -19,10 +19,11 @@ ear-post friction zones.
 
 ## How to read the spec sheet
 
-Thickness is stated in µm. On our spec sheets, the plating method and thickness
+Thickness is stated in µm. On our spec sheets the plating method and thickness
 are two separate fields, because "gold" tells you the color and neither the
-process nor the wear life. When you quote your own customers, quote from the
-number, not from the photo.
+process nor the wear life. Where a style has no confirmed value yet, the field
+is filled in with your quotation rather than guessed at. When you quote your own
+customers, quote from the number, not from the photo.
 
 ## What to ask a supplier
 

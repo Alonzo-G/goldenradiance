@@ -8,7 +8,9 @@ export function priceRange(low: number, high: number): string {
 
 /**
  * RFQ 数量种子：确认过 MOQ 的款式用其 MOQ；未确认（真实素材）用站点默认起订量。
- * 默认值与「MOQ 12-120 pcs per style」这一已确认口径的下沿一致，但**不冒充**该款的 MOQ。
+ * 12 只是一个**输入框的默认填充值**，不是对外声明的 MOQ 政策——站点对外的 MOQ
+ * 表述一律是「per style, confirmed with your quotation」（见 OD-04：MOQ 数值属
+ * 客户 P1 未确认数据，到位前不对外出现具体数字）。这个默认值仅用于让表单不空着。
  */
 export const RFQ_DEFAULT_QTY = 12;
 
