@@ -10,6 +10,10 @@ import { t } from '../../i18n';
 import { overallRange, imageSrcset } from '../../lib/shared/format';
 import { productJsonld, breadcrumbJsonld } from '../../lib/seo/jsonld';
 import { getSiteUrl } from '../../lib/seo/site';
+// line slug → 线名走单一入口。原先此处 `t(\`nav.line.${line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}\`)`
+// 是把线名映射散在 5 处的其中两处（Header/Footer/404 已收口）：新增或改名一条线要同步改，
+// 漏一处就是「面包屑显示 A 线、页脚显示 B 线」的串线显示。
+import { lineLabel } from '../../lib/products/lines';
 
 export async function getStaticPaths() {
   const items = await getProducts();
@@ -46,7 +50,7 @@ const jsonld = [
   breadcrumbJsonld(getSiteUrl(Astro.site), [
     { name: 'Home', path: '/' },
     { name: t('pdp.breadcrumb.products'), path: '/products/' },
-    { name: t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy'), path: `/product-lines/${data.line}/` },
+    { name: lineLabel(data.line) || data.line, path: `/product-lines/${data.line}/` },
     { name: data.title, path: `/products/${data.slug}/` },
   ]),
 ];
@@ -95,7 +99,7 @@ const ogImage = data.dataStatus === 'real' && lcp ? `/og/${data.slug}.jpg` : und
       <li aria-hidden="true">/</li>
       <li><a href="/products/" class="hover:underline">{t('pdp.breadcrumb.products')}</a></li>
       <li aria-hidden="true">/</li>
-      <li><a href={`/product-lines/${data.line}/`} class="hover:underline">{t(`nav.line.${data.line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}` as 'nav.line.alloy')}</a></li>
+      <li><a href={`/product-lines/${data.line}/`} class="hover:underline">{lineLabel(data.line) || data.line}</a></li>
       <li aria-hidden="true">/</li>
       <li aria-current="page" class="font-mono text-xs text-meta">{data.sku_code}</li>
     </ol>
