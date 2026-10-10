@@ -13,21 +13,14 @@
 //   3. 禁用 Math.random / Date / crypto；禁止依赖 Set / Map 的迭代顺序取值——
 //      需要有序结果时，一律先 [...map.values()] 物化成数组再 sort。
 //   4. Map 只用于「分组 O(1) 查找」，不作为顺序来源。
-// ============================ 选品算法（六条） ============================
-// 第一版「按款式族 round-robin + 单族上限 2」已被全量 1012 款实测推翻：钢线会出
-// 6 张里 4 个重复 SKU（SZGSS160 同时带 [cable, bangle]，跨族不去重）；合金线 6 张
-// 全是 bracelet，necklace 占该线 25% 却零曝光。以下为修订版：
-//   1. 桶 key = (category, sorted(style_tags))，**单桶硬上限 1 款** ← 天然跨族去重
-//   2. 无款式标签的桶强制排最后 ← 合金线 111 款无标签不占前排
-//   3. 品类保底 1 席（按品类规模降序）← 小品类不被埋
-//   4. 剩余席位按桶 count desc 补齐（tie-break：category asc → 款式签名 asc）
-//   5. 桶内取：图片张数 desc → sku_code asc
-//   6. 渲染顺序按桶规模降序 ← 保底只决定「选谁」，不决定排位
-//   7. 卡数 = min(6, 桶数)：**永不复制**。重复图是「一眼可见的凑数」，比只有 4 张难看。
+// ============================ 选品算法（已抽到 recommend.ts） ============================
+// 选品（桶去重 + 品类保底）与这里的「计数 / facet / 栅格映射」是两件事，且单文件
+// ≤300 行是硬约束，故拆到 src/lib/products/recommend.ts。本文件只调用其结果。
 // 实测产出（会被 vitest 与 Playwright 照抄，**不得**反过来写进实现）写在
 // tests/line-aggregation.test.ts 里。
 import type { ProductEntry } from './queries';
 import { STYLE_MIN_COUNT, FORM_TAGS, MOTIF_TAGS } from './styles';
+import { RAIL_MAX, pickRepresentatives } from './recommend';
 import { t } from '../../i18n';
 import type { BreadcrumbItem } from '../seo/jsonld';
 
@@ -36,13 +29,11 @@ import type { BreadcrumbItem } from '../seo/jsonld';
  *  首页与落地页同时生效（本表被两处共同依赖，因此放在 lib 而不是组件里）。 */
 export const LINE_HERO_OVERRIDE: Partial<Record<string, string>> = {};
 
-/** rail 最多几张卡 */
-export const RAIL_MAX = 6;
+/** rail 最多几张卡（再导出，保持既有 import 路径可用） */
+export { RAIL_MAX };
 
 const imageCount = (entry: ProductEntry): number => entry.data.images?.length ?? 0;
 const styleTagsOf = (entry: ProductEntry): string[] => entry.data.style_tags ?? [];
-const bySku = (a: ProductEntry, b: ProductEntry): number =>
-  a.data.sku_code.localeCompare(b.data.sku_code);
 
 // ---------------------------------------------------------------- 款式 facet
 
@@ -89,86 +80,8 @@ function categoryCounts(items: ProductEntry[]): LineCategoryFacet[] {
 }
 
 // ---------------------------------------------------------------- 选品
-
-interface Bucket {
-  key: string;
-  category: string;
-  /** 排序后的款式签名，如 `bangle+cuff` */
-  signature: string;
-  count: number;
-  /** 是否有款式标签；无标签桶整个排到队尾 */
-  tagged: boolean;
-  pick: ProductEntry;
-}
-
-/** 桶 key：品类 + 排序后的款式签名。同桶 =「同品类 + 完全相同的一组款式标签」。 */
-function bucketKey(category: string, styles: string[]): string {
-  return `${category}|${[...styles].sort().join('+')}`;
-}
-
-function buildBuckets(items: ProductEntry[]): Bucket[] {
-  const groups = new Map<string, ProductEntry[]>();
-  for (const it of items) {
-    const key = bucketKey(it.data.category, styleTagsOf(it));
-    const group = groups.get(key);
-    if (group) group.push(it);
-    else groups.set(key, [it]);
-  }
-  const buckets = [...groups.values()].map((group) => {
-    const head = [...group].sort((a, b) => imageCount(b) - imageCount(a) || bySku(a, b))[0];
-    return {
-      key: bucketKey(head.data.category, styleTagsOf(head)),
-      category: head.data.category,
-      signature: [...styleTagsOf(head)].sort().join('+'),
-      count: group.length,
-      tagged: styleTagsOf(head).length > 0,
-      pick: head,
-    };
-  });
-  return buckets.sort(
-    (a, b) =>
-      b.count - a.count ||
-      a.category.localeCompare(b.category) ||
-      a.signature.localeCompare(b.signature),
-  );
-}
-
-/**
- * 品类保底 → 按桶规模补齐 → 按桶规模重排（决定渲染顺序）。
- *
- * 「保底」只解决「小品类零曝光」：品类数 > 卡数上限时也能保证前几位不重复品类。
- * 但它**不决定排位** —— 否则钢线的 ring（占该线 0.7%）会占据第二个视觉位，
- * 等于把 Hero 刚赶走的失真换个形式请回来。
- */
-function pickRepresentatives(facets: LineCategoryFacet[], buckets: Bucket[]): ProductEntry[] {
-  const total = Math.min(RAIL_MAX, buckets.length);
-  const fillOrder = [...buckets.filter((b) => b.tagged), ...buckets.filter((b) => !b.tagged)];
-  const chosen: Bucket[] = [];
-  const taken = new Set<string>();
-
-  for (const facet of facets) {
-    if (chosen.length >= total) break;
-    const candidate = fillOrder.find((b) => b.category === facet.value && !taken.has(b.key));
-    if (candidate) {
-      taken.add(candidate.key);
-      chosen.push(candidate);
-    }
-  }
-  for (const b of fillOrder) {
-    if (chosen.length >= total) break;
-    if (taken.has(b.key)) continue;
-    taken.add(b.key);
-    chosen.push(b);
-  }
-  return chosen
-    .sort(
-      (a, b) =>
-        b.count - a.count ||
-        a.category.localeCompare(b.category) ||
-        a.signature.localeCompare(b.signature),
-    )
-    .map((b) => b.pick);
-}
+// 选品算法（桶构建 + 品类保底）已抽到 recommend.ts（单文件 ≤300 行约束）。
+// 本文件只调用 pickRepresentatives(facets, items) 拿最终代表款序列。
 
 // ---------------------------------------------------------------- 栅格
 
@@ -271,8 +184,7 @@ export function buildLineViewModel({ line, name, items }: BuildLineViewModelInpu
   const styleMotifs = buildStyleFacets(items, MOTIF_TAGS);
   const untaggedCount = items.filter((it) => styleTagsOf(it).length === 0).length;
 
-  const buckets = buildBuckets(items);
-  const picks = pickRepresentatives(categories, buckets);
+  const picks = pickRepresentatives(categories, items);
   const railCount = picks.length;
 
   return {
