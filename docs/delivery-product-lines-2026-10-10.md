@@ -67,8 +67,8 @@
 | 两条线回归 | `node scripts/verify-two-lines.mjs` | PASS |
 | 款式筛选回归 | `node scripts/verify-style-filter.mjs` | 34 / 34 |
 | 筛选侧栏 sticky | `node scripts/verify-filters-sticky.mjs` | PASS |
-| 目录一致性 | `node scripts/verify-catalog-consistency.mjs` | [1][2][3] 通过（钢线 608 / 合金 404 对账 OK）；og:image 见「遗留」 |
-| 单文件 ≤300 行 | `wc -l` | 全部通过（`line-aggregation.ts` 恰好 300，见「遗留」） |
+| 目录一致性 | `node scripts/verify-catalog-consistency.mjs` | [1][2][3] 通过（钢线 608 / 合金 404 对账 OK）；og:image 已于本轮补齐后全可达 |
+| 单文件 ≤300 行 | `wc -l` | 全部通过（`line-aggregation.ts` 300 → **213**，已拆出 `recommend.ts`） |
 
 ### 实测值 vs 计划预期（逐位一致）
 
@@ -84,15 +84,38 @@
 
 ---
 
-## 遗留与后续（本次未动）
+## 遗留与后续（本轮**已全部处理**）
 
-| # | 项 | 性质 | 建议 |
-|---|---|---|---|
-| 1 | `public/og/` 仅 **111** 张，但 PDP 指向 `/og/{slug}.jpg` → **901 款 og:image 在生产环境 404** | **既有缺陷，非本次引入**（`public/og` 无未提交改动，随首次提交入库） | 重跑 `node scripts/make-og-images.mjs` 补齐 1012 张后重新部署 |
-| 2 | `line-aggregation.ts` 恰好 **300 行**（P0 上限） | 边界脆弱：再加一行注释即越线 | 预置拆分点：选品段抽 `recommend.ts`（牵动面广，本次按计划未触发） |
-| 3 | `plating_method` 填充率 **0%**，但约 6 处文案称 "plating method stated per style" | 与已修的 MOQ 表述同族的名不副实 | 待你决策：同 MOQ 处理（保留数字、改措辞）还是先下架该表述 |
-| 4 | PDP 面包屑仍用 `t(\`nav.line.${data.line==='fashion-alloy-brass'?'alloy':'steel'}\`)` 三元拼 key | 债务（功能正确） | 复用 `lines.ts` 的 `lineLabel()` |
-| 5 | 「12–120」是否真为对外 MOQ 政策档 | 口径确认 | 建议确认后写进内容集合，避免散落文案 |
+| # | 原项 | 处理结果 |
+|---|---|---|
+| 1 | `public/og/` 仅 111 张 → PDP `og:image` 1012 处 404 | ✅ **已修复**。重跑 `node scripts/make-og-images.mjs`（3m0s）补齐 **1012 张** 1200×630 JPEG，`public/og` 由 111 → **1123** 文件（39 MB）。`verify-catalog-consistency.mjs` 的 `[3]` og:image 可达性断言由 1012 fail → **EXIT=0 全部通过** |
+| 2 | `line-aggregation.ts` 恰好 300 行（P0 上限） | ✅ **已拆分**。选品算法抽到新文件 `src/lib/products/recommend.ts`（117 行），`line-aggregation.ts` 由 300 → **213 行**。`RAIL_MAX` / `pickRepresentatives` 经 re-export 保持既有导入路径不变；`recommend.ts` 自带最小 `RecommendFacet` 接口以避开与 `line-aggregation` 的循环依赖 |
+| 3 | `plating_method` 0% 填充，但多处称 "stated per style" | ✅ **已软化**（决策：同 MOQ，撤不实表述、保留字段）。3 处自述型全改「confirmed with your quotation」：`scenarios.volume.desc`、`markets/middle-east.astro` 的 coating thickness 条目、`blog/pvd-vs-water-plating.md`（此处补「Where a style has no confirmed value yet, the field is filled in with your quotation rather than guessed at」）。`blog/moq-and-tiers.md` 的「a quotation **should** state plating method」属**行业通识建议**（讲供应商该给买家什么），非自述承诺 → **保留** |
+| 4 | PDP 面包屑三元拼 key | ✅ **已收口**。可见面包屑与 BreadcrumbList JSON-LD 两处均改 `lineLabel(data.line) \|\| data.line`（`src/lib/products/lines.ts` 单一入口），与此前 Header/Footer/404 的收口方式一致。全站 `nav.line.${` / `'alloy' : 'steel'` 仅剩注释与 `lines.ts` 文档串 |
+| 5 | 「12–120」是否真为对外 MOQ 政策档 | ✅ **已定调并撤数字**。核对 `docs/decisions/OPEN-DECISIONS.md` OD-04：MOQ 明文属**客户 P1 未确认数据**，规则「到位前页面禁止出现具体数字，一律走 PRD §6.2 降级写法」。故全站 ~11 处 `MOQ 12-120 pcs` 一律改为「MOQ confirmed per style with your quotation」；首页统计卡第三格 `12–120` → **`Quoted`**（新增 `stats.moq.value` key，与既有 `stats.leadTime` 同构）。`src/`（不含 `src/content/products/`）内 `12-120` / `12–120` **已清零**。`RFQ_DEFAULT_QTY = 12` 保留但已在 `format.ts` 注明**仅为表单默认填充值、非对外政策**。OD-04 本身**保持 OPEN**（客户数据仍未到位） |
+
+### 本轮新增/改动文件一览
+
+- 新增：`src/lib/products/recommend.ts`、`public/og/*.jpg`（+1012）
+- 改动：`src/lib/products/line-aggregation.ts`、`src/pages/products/[sku].astro`、`src/i18n/en.json`、`src/components/home/HomeStats.astro`、`src/lib/shared/format.ts`、`src/components/product-line/LineStatsBar.astro`、`src/content/pages/faq.json`、`src/content/pages/shipping-payment.md`、`src/pages/markets/europe-uk.astro`、`src/pages/markets/middle-east.astro`、`src/content/blog/pvd-vs-water-plating.md`
+- 决策登记：`docs/decisions/OPEN-DECISIONS.md`（追加 OD-04 MOQ 子项进展）
+
+### 复跑门禁（本轮）
+
+```
+astro check      107 files  → 0 error / 0 warning / 4 hint
+vitest run       7 files    → 83 passed
+emoji-scan       108 files  → 含 emoji 0
+npm run build    1032 pages + pagefind OK
+verify-catalog-consistency  → EXIT=0（含 og:image 全可达）
+verify-product-lines        → 41/41 PASS
+```
+
+### 仍开着的项（非本轮范围）
+
+- **OD-04 未关闭**：MOQ 实际档位、交期、付款方式等 9 项客户 P1 数据仍未到位 → 页面继续走降级文案。
+- **OD-03 未关闭**：Logo/Slogan 仍为字标占位。
+- `public/og` 的 1012 张新图为 git 追踪资产，本批提交将使仓库体积 +39 MB —— 若后续走 Cloudflare 构建，属可接受；若担心仓体，可改由构建期生成（需把 `make-og-images.mjs` 挂进 `npm run build` 前置）。**当前决策：入库**（CI 构建更快、og 图内容稳定，且 111→1123 的 gap 本身就是漏跑脚本的证据）。
 
 ---
 
