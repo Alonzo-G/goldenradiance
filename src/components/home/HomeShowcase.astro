@@ -3,7 +3,6 @@
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import ProductCard from '../product/ProductCard.astro';
-import PlaceholderImage from '../product/PlaceholderImage.astro';
 import { getProducts, toSkuIndexItem } from '../../lib/products/queries';
 
 const products = await getProducts();
@@ -11,7 +10,6 @@ const products = await getProducts();
 const realProducts = products.filter((p) => p.data.dataStatus === 'real');
 const otherProducts = products.filter((p) => p.data.dataStatus !== 'real');
 const railItems = [...realProducts.slice(-12).reverse(), ...otherProducts].slice(0, 12).map(toSkuIndexItem);
-const batchLine = 'stainless-titanium-steel';
 ---
 
 <section class="section-y">
@@ -38,13 +36,22 @@ const batchLine = 'stainless-titanium-steel';
 
 <section class="section-y pt-0">
   <div class="container-wide grid items-center gap-8 lg:grid-cols-[7fr_3fr]">
-    <PlaceholderImage
-      category="bracelet"
-      line={batchLine}
-      label="Batch grid — same lot"
-      ratio="16:9"
-      alt="Batch grid placeholder: one product line's styles photographed in the same light, same day, same background"
-    />
+    <div>
+      <figure class="relative aspect-video overflow-hidden rounded-md border border-border-soft bg-surface-warm">
+        <img
+          src="/img/batch-grid.webp"
+          srcset="/img/batch-grid-768.webp 768w, /img/batch-grid.webp 1536w"
+          sizes="(min-width: 1024px) 62vw, 100vw"
+          width="1536"
+          height="864"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+          alt={t('home.batch.imgAlt')}
+        />
+      </figure>
+      <p class="mt-2 text-xs text-muted">{t('home.batch.illustrative')}</p>
+    </div>
     <div>
       <h2 class="text-xl font-semibold text-fg">{t('home.batch.title')}</h2>
       <p class="mt-3 text-sm leading-relaxed text-muted">{t('home.batch.desc')}</p>
