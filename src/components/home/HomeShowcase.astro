@@ -39,18 +39,17 @@ const railItems = [...realProducts.slice(-12).reverse(), ...otherProducts].slice
     <div>
       <figure class="relative aspect-video overflow-hidden rounded-md border border-border-soft bg-surface-warm">
         <img
-          src="/img/batch-grid.webp"
-          srcset="/img/batch-grid-768.webp 768w, /img/batch-grid.webp 1536w"
+          src="/img/product-closeup.webp"
+          srcset="/img/product-closeup-400.webp 400w, /img/product-closeup.webp 800w"
           sizes="(min-width: 1024px) 62vw, 100vw"
-          width="1536"
-          height="864"
+          width="800"
+          height="450"
           loading="lazy"
           decoding="async"
           class="absolute inset-0 h-full w-full object-cover"
           alt={t('home.batch.imgAlt')}
         />
       </figure>
-      <p class="mt-2 text-xs text-muted">{t('home.batch.illustrative')}</p>
     </div>
     <div>
       <h2 class="text-xl font-semibold text-fg">{t('home.batch.title')}</h2>
