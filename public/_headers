@@ -1,8 +1,30 @@
-# Cloudflare 静态资产响应头（_headers）
-# 说明：Workers Static Assets 会读取本文件为匹配路径附加响应头。
-# 不含 CSP：本站含 Astro 内联 module script 与 Google Fonts，严格 CSP 需逐条 hash/nonce，
-# 否则会破坏交互；CSP 作为上线前 follow-up 在 DEPLOYMENT-RUNBOOK §12 跟踪。
+# ============================================================================
+# Cloudflare 静态资产响应头（_headers）——Workers Static Assets 读取本文件，
+# 为匹配路径附加响应头与缓存策略。
+#
+# 设计约定（2026-10-13 全站审计后重写）：
+#
+# 1) 每个块都自带完整安全头（有意重复七处）。不依赖「多规则合并」还是
+#    「最具体者胜」的语义细节——无论 Cloudflare 采用哪种策略，任何匹配
+#    路径拿到的安全头都完整。修改安全头时务必七处同步（全局替换）。
+#
+# 2) 缓存规则一律按【扩展名】收窄，禁止 /* 通吃、也禁止 /products/* 这类
+#    目录通吃：Workers assets 用目录 URL 提供 HTML（/products/gr001/ 的
+#    实体是 index.html），/products/* 会连 PDP 页面一起命中——给 HTML 打上
+#    immutable 意味着内容更新一年都看不到。*.webp / *.jpg 这类后缀模式
+#    天然不碰 HTML。
+#
+# 3) 审计基线（修复前实测）：全站资源 max-age=0, must-revalidate——
+#    663MB 产品实拍 + 49MB og 图每次访问都要重新验证。本文件把这类
+#    「按 SKU/slug 寻址、不原地变更」的图片提到 1 年 immutable。
+#
+# 4) CSP 仍未启用：站内 JSON-LD 为 inline script、Turnstile 需
+#    challenges.cloudflare.com 放行，逐条 hash/nonce 的改造在
+#    docs/DEPLOYMENT-RUNBOOK.md §12 跟踪。Google Fonts 已于同日下线
+#    （字体自托管），CSP 的外部域例外少了一个。
+# ============================================================================
 
+# --- 基准：全站安全头（HTML / JS / JSON / API 等无专属规则的路径）---
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
@@ -11,11 +33,93 @@
   X-Frame-Options: DENY
   Cross-Origin-Opener-Policy: same-origin
 
+# --- 带 hash 的构建产物：文件名含内容hash，永久缓存 ---
 /_astro/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
   Cache-Control: public, max-age=31536000, immutable
 
+# --- 搜索索引（Pagefind）：按天再验证，构建后即变 ---
 /pagefind/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
   Cache-Control: public, max-age=86400
 
+# --- 产品实拍图（/products/<sku>/*.webp，约 663MB）：按 SKU 寻址，
+#      发布后不原地变更 → 1 年 immutable ---
+/*.webp
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- og 分享图（/og/<slug>.jpg，约 49MB）：按 slug 寻址，同上 ---
+/*.jpg
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- 图标/favicon/manifest 图：发布后不变更 ---
 /*.png
-  Cache-Control: public, max-age=604800
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- 自托管字体（2026-10-13 起，替代 Google Fonts）：文件名即内容 ---
+/*.woff2
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- logo 矢量：可能随品牌微调替换，30 天 ---
+/*.svg
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=2592000
+
+# --- sitemap：页面增减时变，1 天 ---
+/sitemap*.xml
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=86400
+
+# --- PWA manifest：随图标/主题色变，1 天 ---
+/*.webmanifest
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=86400
