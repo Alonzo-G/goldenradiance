@@ -6,6 +6,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { env } from 'cloudflare:workers';
 import { createRfqSchema, zodErrorToFields } from '../../../lib/rfq/schema';
 import { verifyTurnstile } from '../../../lib/server/turnstile';
@@ -133,10 +134,30 @@ export const POST: APIRoute = async (ctx) => {
   } catch (err) {
     // E6 铁律：写库失败必须 500 PERSIST_FAILED，严禁返回 201
     console.error('rfq persist failed', err instanceof PersistError ? err.message : err);
+    // 失败路径给买家的联系邮箱：单一真源是 src/content/pages/contact.md
+    // （与 /contact/ 页同源），SALES_MAILBOX 兜底，两者皆空则不给邮箱。
+    // 曾经的 bug：这里写死 sales@example.com 占位符——失败路径上把买家
+    // 引去一个不存在的地址，是「占位符漏扫」的典型。
+    const mailbox = await contactFallbackEmail(env);
     return json(500, {
       code: 500,
       data: {},
-      message: 'Failed to save your inquiry. Please email sales@example.com directly.',
+      message: mailbox
+        ? `Failed to save your inquiry. Please email us directly at ${mailbox}.`
+        : 'Failed to save your inquiry. Please try again, or reach us through the contact page.',
     });
   }
 };
+
+/**
+ * 失败路径的联系邮箱：contact.md 单一真源 → SALES_MAILBOX → 空串。
+ * getCollection 在 SSR 路由可用；异常时静默回落，绝不让兜底路径本身再抛错。
+ */
+async function contactFallbackEmail(env: { SALES_MAILBOX?: string }): Promise<string> {
+  try {
+    const entry = (await getCollection('pages', (e) => e.id === 'contact'))[0];
+    return entry?.data.contact?.email || env.SALES_MAILBOX || '';
+  } catch {
+    return env.SALES_MAILBOX || '';
+  }
+}

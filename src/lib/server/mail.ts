@@ -30,11 +30,25 @@ interface MailMessage {
   html: string;
 }
 
+/**
+ * HTML 转义：买家输入（公司 / 姓名 / 邮箱 / 留言 / 备注）进邮件模板前必经此函数。
+ * 内部通知邮件按 HTML 渲染——不转义等于允许询盘者往销售邮箱注入任意标记
+ * （伪造链接与按钮即钓鱼面）。数字字段（qty）经 Zod int 校验，仍一并转义做纵深防御。
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function itemsListHtml(payload: RfqMailPayload): string {
   return payload.items
     .map(
       (i) =>
-        `<tr><td>${i.sku}</td><td>${i.qty}</td><td>${i.note ?? ''}</td></tr>`,
+        `<tr><td>${escapeHtml(i.sku)}</td><td>${escapeHtml(String(i.qty))}</td><td>${escapeHtml(i.note ?? '')}</td></tr>`,
     )
     .join('');
 }
@@ -43,12 +57,14 @@ function internalNotificationMail(payload: RfqMailPayload): MailMessage {
   return {
     kind: 'internal_notification',
     to: 'SALES_MAILBOX', // 占位，发送前由 mailEnv 替换为真实收件箱
+    // subject 是纯文本字段，不转义；reference 由服务端 generateReference 生成
+    // （RFQ-YYYY-NNNN 格式），不含用户输入，无需防注入。
     subject: `New RFQ ${payload.reference}`,
-    html: `<h2>New RFQ ${payload.reference}</h2>
-<p>Company: ${payload.contact.company} (${payload.contact.country})</p>
-<p>Contact: ${payload.contact.name} &lt;${payload.contact.email}&gt;</p>
+    html: `<h2>New RFQ ${escapeHtml(payload.reference)}</h2>
+<p>Company: ${escapeHtml(payload.contact.company)} (${escapeHtml(payload.contact.country)})</p>
+<p>Contact: ${escapeHtml(payload.contact.name)} &lt;${escapeHtml(payload.contact.email)}&gt;</p>
 <table border="1" cellpadding="4"><tr><th>SKU</th><th>Qty</th><th>Note</th></tr>${itemsListHtml(payload)}</table>
-${payload.message ? `<p>Message: ${payload.message}</p>` : ''}`,
+${payload.message ? `<p>Message: ${escapeHtml(payload.message)}</p>` : ''}`,
   };
 }
 
@@ -57,10 +73,10 @@ function buyerReceiptMail(payload: RfqMailPayload): MailMessage {
     kind: 'buyer_receipt',
     to: payload.contact.email,
     subject: `We received your RFQ ${payload.reference}`,
-    html: `<p>Hello ${payload.contact.name},</p>
-<p>We received your inquiry ${payload.reference} and will respond within 8 hours.</p>
-<p>Reference: ${payload.reference}</p>
-<p>Respond by: ${payload.respondBy}</p>`,
+    html: `<p>Hello ${escapeHtml(payload.contact.name)},</p>
+<p>We received your inquiry ${escapeHtml(payload.reference)} and will respond within 8 hours.</p>
+<p>Reference: ${escapeHtml(payload.reference)}</p>
+<p>Respond by: ${escapeHtml(payload.respondBy)}</p>`,
   };
 }
 

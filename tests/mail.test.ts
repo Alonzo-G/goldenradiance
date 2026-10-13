@@ -129,3 +129,51 @@ describe('sendRfqMails Resend 失败分支（E3/E4：不影响已返回的 201�
     vi.unstubAllGlobals();
   });
 });
+
+describe('sendRfqMails HTML 转义（2026-10-13 安全修复）', () => {
+  // 背景：内部通知邮件按 HTML 渲染，买家输入原样插值 = 可往销售邮箱注入
+  // 任意标记（伪造链接/按钮即钓鱼面）。修复：所有用户输入经 escapeHtml。
+  // 黑盒验证：stub fetch 捕获 Resend 实际发出的请求体，断言恶意标记已成实体。
+  it('两封邮件的正文中，用户输入不再含可执行标记', async () => {
+    const sent: Array<Record<string, any>> = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (_url: string, init: RequestInit) => {
+        sent.push(JSON.parse(String(init.body)));
+        return new Response(JSON.stringify({ id: 'email_ok' }), { status: 200 });
+      }),
+    );
+
+    const evil = {
+      ...payload,
+      contact: {
+        name: '<script>alert(1)</script>',
+        email: 'x@y.z',
+        company: 'A & B <img src=x onerror=alert(1)>',
+        country: 'FR',
+      },
+      items: [{ sku: 'FB-2317', qty: 60, note: '<b>bold</b>' }],
+      message: '<a href="http://evil.example">click</a>',
+    };
+
+    const { db } = makeMockDb();
+    const status = await sendRfqMails(db, evil, { ...devEnv, RESEND_API_KEY: 're_fake_key' });
+    expect(status).toBe('sent');
+    expect(sent).toHaveLength(2); // 内部通知 + 买家回执
+
+    const [internal, receipt] = sent;
+    // 姓名进两封邮件 → 两封都必须是实体
+    for (const body of sent) {
+      expect(body.html).not.toContain('<script>');
+      expect(body.html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
+    }
+    // 公司/备注/留言只进内部通知
+    expect(internal.html).not.toContain('<img src=x');
+    expect(internal.html).toContain('A &amp; B &lt;img src=x onerror=alert(1)&gt;');
+    expect(internal.html).toContain('&lt;b&gt;bold&lt;/b&gt;');
+    expect(internal.html).toContain('&lt;a href=&quot;http://evil.example&quot;&gt;click&lt;/a&gt;');
+    // 回执邮件不带这些字段，但也绝不允许原样标记漏过去
+    expect(receipt.html).not.toContain('<script>');
+    vi.unstubAllGlobals();
+  });
+});
