@@ -58,25 +58,9 @@ const {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#123a38" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    {/*
-      字体异步加载：media="print" 让浏览器把这段 CSS 降为非阻塞（首屏不被字体 CSS 卡住），
-      onload 后再切回 all 使字体生效。display=swap 兜底：字体未就绪前先用系统字体渲染，避免 FOIT 白屏。
-      这是对海外买家 LCP 的确定性优化——字体不阻塞首帧渲染，正文先用 fallback 立即呈现。
-    */}
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      />
-    </noscript>
+    {/* 字体自托管（2026-10-13）：woff2 在 public/fonts/，@font-face 随 global.css
+        一并加载——不再外接 Google Fonts（GDPR 暴露面 + 跨域开销 + 被墙风险），
+        也不再需要 media=print onload 的异步 hack。见 src/styles/global.css 顶部。 */}
     <SeoHead title={title === SITE_NAME ? title : `${title}`} description={description} path={path} ogType={ogType} image={image} imageAlt={imageAlt} noindex={noindex} jsonld={jsonld} />
     {/* 页面级 head 注入位：仅用于 LCP 资源预加载等确有必要的资源提示。
         预加载必须与正文 <img> 的 srcset/sizes 完全一致，否则会重复下载。 */}
