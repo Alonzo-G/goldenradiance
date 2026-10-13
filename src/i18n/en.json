@@ -387,6 +387,32 @@
     "nickelArticle.failures": "Common failures: plating below stated thickness, unverified base alloy, and reports issued without wear simulation."
   },
 
+  "privacy": {
+    "title": "Privacy Notice",
+    "updated": "Last updated: 13 October 2026",
+    "intro": "This notice covers what we collect when you use goldenradiance.fun, why, and the choices you have. It applies to business visitors using this B2B site.",
+    "collect.title": "What we collect",
+    "collect.rfq": "When you send an RFQ: company, contact name, business email, country, optional WhatsApp number and website, destination market, Incoterm, quantity scale, the items you list (SKU, quantity, notes), your message, the page you submitted from, standard UTM parameters from your link, and a spam-check score from Cloudflare Turnstile.",
+    "collect.newsletter": "When you subscribe to the newsletter: your business email address.",
+    "collect.browser": "In your browser only: your RFQ draft list, market preference and catalog view setting are kept in this browser's local storage. They never leave your device unless you submit a form.",
+    "why.title": "Why we collect it",
+    "why.rfq": "To answer your enquiry and prepare your quotation — processing carried out at your request, and our legitimate interest in responding to business requests.",
+    "why.newsletter": "To send one email when a new guide is published — nothing else. Every email carries an unsubscribe link.",
+    "why.security": "To keep public forms usable: spam and abuse filtering.",
+    "processors.title": "Who processes it",
+    "processors.body": "Cloudflare (hosting, database, spam check) and Resend (transactional email delivery) process data on our behalf. We do not sell your data and do not share it for advertising.",
+    "cookies.title": "Cookies and tracking",
+    "cookies.body": "This site sets no advertising or analytics cookies and loads no third-party scripts, fonts or pixels. The only browser storage is the local storage described above.",
+    "retention.title": "How long we keep it",
+    "retention.body": "Enquiries are kept as long as needed for our business relationship and legal obligations. Newsletter addresses are kept until you unsubscribe.",
+    "rights.title": "Your rights",
+    "rights.body": "You can ask to access, correct, delete or port your data, or object to our processing. Write to us and we will respond.",
+    "contact.title": "Contact",
+    "contact.body": "For any privacy question or request, email {email}, or use the contact page.",
+    "changes.title": "Changes to this notice",
+    "changes.body": "If this notice changes, the updated version is published on this page with a new date."
+  },
+
   "faq": {
     "title": "Frequently asked questions",
     "searchPlaceholder": "Search the FAQ — e.g. MOQ, samples, EN 1811",
@@ -446,6 +472,7 @@
     "col.lines": "Product lines",
     "col.support": "Buyer support",
     "col.company": "Company",
+    "col.privacy": "Privacy",
     "col.newsletter": "Newsletter",
     "newsletter.placeholder": "Business email",
     "newsletter.button": "Subscribe",

@@ -1,0 +1,74 @@
+---
+// src/pages/privacy/index.astro — 隐私声明（2026-10-13 全站审计新增）
+// 为什么必须有：站点的询盘表单与 newsletter 收集个人数据（公司/姓名/邮箱/国家等），
+// 而站点明确面向欧盟/英国买家（markets/europe-uk）——GDPR 的告知义务不能靠
+// 「表单旁边写一句话」兜底。本页与 /contact/ 共用同一个邮箱真源，不硬编码。
+//
+// i18n 纪律：键一律字面量（t() 的 key 是联合类型，模板拼接编译期即报错）——
+// 这是 astro check 该拦的，不要在组件里用 `privacy.${key}` 绕它。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t, type UiKey } from '../../i18n';
+
+const contactEntry = (await getCollection('pages', (e) => e.id === 'contact'))[0];
+const contactEmail = contactEntry?.data.contact?.email ?? '';
+
+const sections: Array<{ title: UiKey; body: UiKey[] }> = [
+  {
+    title: 'privacy.collect.title',
+    body: ['privacy.collect.rfq', 'privacy.collect.newsletter', 'privacy.collect.browser'],
+  },
+  {
+    title: 'privacy.why.title',
+    body: ['privacy.why.rfq', 'privacy.why.newsletter', 'privacy.why.security'],
+  },
+  { title: 'privacy.processors.title', body: ['privacy.processors.body'] },
+  { title: 'privacy.cookies.title', body: ['privacy.cookies.body'] },
+  { title: 'privacy.retention.title', body: ['privacy.retention.body'] },
+  { title: 'privacy.rights.title', body: ['privacy.rights.body'] },
+];
+---
+
+<BaseLayout title={t('privacy.title')} description={t('privacy.intro')} path="/privacy/">
+  <div class="mx-auto max-w-3xl py-10">
+    <h1 class="text-2xl font-semibold text-fg">{t('privacy.title')}</h1>
+    <p class="mt-2 text-sm text-meta">{t('privacy.updated')}</p>
+    <p class="mt-6 text-sm leading-relaxed text-fg-2">{t('privacy.intro')}</p>
+
+    {sections.map(({ title, body }) => (
+      <section class="mt-10">
+        <h2 class="text-lg font-semibold text-fg">{t(title)}</h2>
+        {body.length > 1 ? (
+          <ul class="mt-4 grid gap-3">
+            {body.map((bk) => (
+              <li class="rounded-md border border-border bg-surface p-4">
+                <p class="text-sm leading-relaxed text-fg-2">{t(bk)}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="mt-3 text-sm leading-relaxed text-fg-2">{t(body[0])}</p>
+        )}
+      </section>
+    ))}
+
+    <section class="mt-10 rounded-lg border border-border bg-surface p-6">
+      <h2 class="text-base font-semibold text-fg">{t('privacy.contact.title')}</h2>
+      <p class="mt-2 text-sm leading-relaxed text-fg-2">
+        {contactEmail
+          ? t('privacy.contact.body', { email: contactEmail })
+          : 'For any privacy question or request, use the contact page.'}
+      </p>
+      {contactEmail && (
+        <a href={`mailto:${contactEmail}`} class="mt-3 inline-flex text-sm font-medium text-accent hover:underline">
+          {contactEmail}
+        </a>
+      )}
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-base font-semibold text-fg">{t('privacy.changes.title')}</h2>
+      <p class="mt-2 text-sm leading-relaxed text-fg-2">{t('privacy.changes.body')}</p>
+    </section>
+  </div>
+</BaseLayout>
