@@ -32,6 +32,11 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      # 回归脚本（scripts/verify-*.mjs）依赖 playwright，但 CI 只构建部署、
+      # 不跑浏览器回归——跳过浏览器下载，省 2-4 分钟安装时间。
+      # 本地跑回归：npm run preview 起服务后 npm run verify。
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
     steps:
       - name: Checkout
@@ -73,6 +78,17 @@ jobs:
 
       - name: Post-deploy smoke check (health)
         run: |
-          # 部署后健康检查。workers.dev 临时域名在首次部署后由 Cloudflare 分配，
-          # 此处留占位说明；正式自定义域名绑定后可按 RUNBOOK §6 做全量 sitemap 探活。
-          echo "部署完成。上线后按 docs/DEPLOYMENT-RUNBOOK.md §6 做健康检查与冒烟。"
+          # 部署后健康检查：/api/v1/health 探测 D1 连通性。3 次重试吸收
+          # 边缘传播延迟；仍失败则让 CI 红——「部署成功但后端不可用」
+          # 必须立刻可见，而不是等买家询盘发不进来才发现。
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/health.json -w "%{http_code}" --max-time 20 https://goldenradiance.fun/api/v1/health || true)
+            echo "attempt $i: HTTP $code"
+            if [ "$code" = "200" ]; then
+              echo "health: $(cat /tmp/health.json)"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::post-deploy health check failed after 3 attempts"
+          exit 1

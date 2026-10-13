@@ -11,6 +11,7 @@
     "build": "astro check && astro build && pagefind --site dist/client",
     "preview": "astro preview",
     "test": "vitest run",
+    "verify": "node scripts/verify-catalog-consistency.mjs && node scripts/verify-home-refactor.mjs && node scripts/verify-product-lines.mjs && node scripts/verify-style-filter.mjs && node scripts/verify-two-lines.mjs && node scripts/verify-filters-sticky.mjs && node scripts/verify-header-nav.mjs",
     "workers:dev": "wrangler dev -c dist/server/wrangler.json",
     "db:init": "wrangler d1 execute jewelry-b2b-global-db --local --persist-to .wrangler/state --file=infra/schema.sql",
     "db:init:remote": "wrangler d1 execute jewelry-b2b-global-db --remote --file=infra/schema.sql",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "pagefind": "1.5.2",
+    "playwright": "^1.64.0",
     "typescript": "6.0.3",
     "vitest": "^5.0.3",
     "wrangler": "^4.125.0"
