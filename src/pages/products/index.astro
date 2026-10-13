@@ -6,6 +6,7 @@ import { t } from '../../i18n';
 import { getSkuIndex, distinctValues, SCENARIOS } from '../../lib/products/queries';
 import { MOQ_BANDS } from '../../lib/shared/format';
 import { STYLE_MIN_COUNT, FORM_TAGS, MOTIF_TAGS } from '../../lib/products/styles';
+import { lineLabel } from '../../lib/products/lines';
 import FilterStyleGroups from '../../components/product/FilterStyleGroups.astro';
 
 const ALL_CATEGORIES = ['earrings', 'necklace', 'bracelet', 'ring', 'hair-accessory', 'brooch', 'anklet'] as const;
@@ -62,10 +63,8 @@ const buildStyleGroup = (order: readonly string[]) =>
 const styleForms = buildStyleGroup(FORM_TAGS);
 const styleMotifs = buildStyleGroup(MOTIF_TAGS);
 
-const lineLabel = {
-  'fashion-alloy-brass': t('nav.line.alloy'),
-  'stainless-titanium-steel': t('nav.line.steel'),
-};
+/** 线名走 lines.ts 单一入口（原先此处又有一张本地 LINE_LABEL 表，是散落 5 处之一） */
+const lineLabelOf = (line: string) => lineLabel(line) || line;
 const scenarioLabel = {
   daily: t('filter.scenario.daily'),
   volume: t('filter.scenario.volume'),
@@ -137,7 +136,7 @@ const jsonld = [
                 {lines.map((l) => (
                   <label class="flex min-h-11 items-center gap-2 text-sm text-fg">
                     <input type="checkbox" name="line" value={l} class="size-4 accent-[var(--color-accent)]" />
-                    {lineLabel[l]}
+                    {lineLabelOf(l)}
                   </label>
                 ))}
               </fieldset>

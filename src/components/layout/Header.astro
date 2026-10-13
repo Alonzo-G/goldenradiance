@@ -14,15 +14,11 @@ import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import Wordmark from './Wordmark.astro';
 import { getActiveLines } from '../../lib/products/queries';
-
-const LINE_LABEL: Record<string, string> = {
-  'fashion-alloy-brass': t('nav.line.alloy'),
-  'stainless-titanium-steel': t('nav.line.steel'),
-};
+import { lineLabel } from '../../lib/products/lines';
 
 const lines = (await getActiveLines()).map((entry) => ({
   id: entry.data.line,
-  label: LINE_LABEL[entry.data.line] ?? entry.data.name,
+  label: lineLabel(entry.data.line) || entry.data.name,
 }));
 
 /** 当前 pathname（去掉末尾斜杠便于前缀匹配） */

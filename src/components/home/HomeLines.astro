@@ -6,18 +6,20 @@ import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import ProductImage from '../product/ProductImage.astro';
 import { getActiveLines, getProducts, heroImageForLine } from '../../lib/products/queries';
+import { lineLabel } from '../../lib/products/lines';
 
-const LINE_META: Record<string, { label: string; desc: string; token: string; icon: string; cat: string }> = {
-  'fashion-alloy-brass': { label: t('nav.line.alloy'), desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring' },
-  'stainless-titanium-steel': { label: t('nav.line.steel'), desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace' },
+const LINE_META: Record<string, { desc: string; token: string; icon: string; cat: string }> = {
+  'fashion-alloy-brass': { desc: t('home.lines.alloy.desc'), token: 'line-alloy', icon: 'anvil', cat: 'ring' },
+  'stainless-titanium-steel': { desc: t('home.lines.steel.desc'), token: 'line-steel', icon: 'droplets', cat: 'necklace' },
 };
 
 const [products, activeLines] = await Promise.all([getProducts(), getActiveLines()]);
 // 两条线等权重（等宽双卡，非三条线时代的一大两小 bento）
 const lines = activeLines.map((entry) => {
-  const meta = LINE_META[entry.data.line] ?? { label: entry.data.name, desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring' };
+  const meta = LINE_META[entry.data.line] ?? { desc: '', token: 'line-alloy', icon: 'anvil', cat: 'ring' };
   return {
     id: entry.data.line,
+    label: lineLabel(entry.data.line) || entry.data.name,
     ...meta,
     hero: heroImageForLine(products, entry.data.line),
   };

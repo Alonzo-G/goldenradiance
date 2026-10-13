@@ -1,9 +1,11 @@
 // src/lib/products/lines.ts — 产品线 slug ↔ UI 文案的唯一映射入口
 //
 // 为什么单独一个文件：`t(\`nav.line.${line === 'fashion-alloy-brass' ? 'alloy' : 'steel'}\`)`
-// 这类三元拼 key 在全站散落了 5 处（Header / Footer / 404 / PDP ×2 / catalog.ts），
-// 新增或改名一条线要同步改 5 处，漏一处就是「菜单显示 A 线、页脚显示 B 线」的串线显示。
-// 集中到一张表后，这 5 处共用同一个查表结果，改线的成本从 5 处降到 1 处。
+// 这类三元拼 key 曾在全站散落 8 处（Header / Footer / 404 / PDP ×2 / catalog.ts /
+// products/index / HomeLines），新增或改名一条线要同步改 8 处，漏一处就是
+// 「菜单显示 A 线、页脚显示 B 线」的串线显示。
+// 2026-10-13 全部收口到本文件：上述 8 处均已改为 lineLabel() 查表，改线的成本
+// 从 8 处降到 1 处。新增消费方请直接 import lineLabel()，不要再建本地 LINE_LABEL 表。
 import { t, type UiKey } from '../../i18n';
 
 /** line slug → i18n key。`satisfies Record<string, UiKey>` 让写错的 key 编译期即失败。 */
