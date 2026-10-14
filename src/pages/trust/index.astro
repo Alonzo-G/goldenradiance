@@ -1,0 +1,79 @@
+---
+// src/pages/trust/index.astro — 信任与核实中心（方案 A / P0-4，2026-10-14）
+//
+// 与 /compliance/ 的分工（避免两页互抄）：
+//   /compliance/  = 教育口径：我们认哪些标准、限量是多少、报告能证明什么（技术解释）
+//   /trust/      = 汇总入口：我们持有什么、怎么核实、哪些我们刻意不公开、我们从买家侧要什么
+//
+// 行业依据：B2B 买家审查顺序固定为「资质 > 目录 > MOQ > 样品 > 合规」，且真实供应商站
+// 把 Quality / Certificates 作为一级导航项。上一轮调研（docs/research-b2b-jewelry-sites）
+// 实测本站此前无「证书汇总入口」，只有 /compliance/ 的技术解释。
+//
+// 锚点导航用 scroll-mt：sticky Header 高 64px + sticky 子导航，锚点目标必须补偿偏移。
+import { render } from 'astro:content';
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { t } from '../../i18n';
+
+const entry = await getEntry('pages', 'trust');
+if (!entry) throw new Error('trust.md 缺失：/trust/ 无法渲染');
+const { Content } = await render(entry as never);
+
+const sections = [
+  { id: 'how-to-verify', label: t('trustCenter.nav.verify') },
+  { id: 'certificates-and-standards', label: t('trustCenter.nav.certificates') },
+  { id: 'what-we-do-not-publish-and-why', label: t('trustCenter.nav.notPublished') },
+  { id: 'third-party-verification', label: t('trustCenter.nav.thirdParty') },
+  { id: 'what-we-need-from-you-to-quote-accurately', label: t('trustCenter.nav.needFromYou') },
+];
+---
+
+<BaseLayout title={t('trustCenter.title')} description={t('trustCenter.description')} path="/trust/">
+  <div class="mx-auto max-w-3xl py-10">
+    <h1 class="text-2xl font-semibold text-fg">{t('trustCenter.title')}</h1>
+    <p class="mt-2 text-md leading-relaxed text-muted">{t('trustCenter.description')}</p>
+
+    {/* 锚点导航：目录型单页的索引，sticky 下方用 scroll-mt 补偿 */}
+    <nav class="mt-6 border-y border-border py-4" aria-label={t('trustCenter.nav.label')}>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="text-sm font-medium text-accent hover:underline">{s.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div
+      class="mt-8 grid gap-4 text-base leading-relaxed text-fg-2 [&_h2]:scroll-mt-24 [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_h2:first-child]:mt-0 [&_h3]:mt-5 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_ul]:grid [&_ul]:gap-1.5 [&_ol]:grid [&_ol]:gap-1.5 [&_ol>li]:ml-5 [&_ol>li]:list-decimal [&_a]:text-accent [&_a:hover]:underline [&_strong]:font-medium [&_strong]:text-fg"
+    >
+      <Content />
+    </div>
+
+    {/* 行动区：买家审查顺序里「样品政策」紧随合规之后，这里给样品入口 */}
+    <div class="mt-10 grid gap-4 border-t border-border pt-6 sm:grid-cols-2">
+      <a href="/samples/" class="flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface p-5 transition-colors hover:border-accent">
+        <Icon name="lucide:package" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+        <span>
+          <span class="block text-base font-medium text-fg">{t('trustCenter.next.samples')}</span>
+          <span class="mt-1 block text-sm leading-relaxed text-muted">{t('trustCenter.next.samplesDesc')}</span>
+        </span>
+      </a>
+      <a href="/rfq/" class="flex min-h-11 items-center gap-2 rounded-md border border-border bg-surface p-5 transition-colors hover:border-accent">
+        <Icon name="lucide:file-text" class="icon size-5 shrink-0 text-accent" aria-hidden="true" />
+        <span>
+          <span class="block text-base font-medium text-fg">{t('cta.startRfq')}</span>
+          <span class="mt-1 block text-sm leading-relaxed text-muted">{t('trustCenter.next.rfqDesc')}</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="mt-8">
+      <a href="/compliance/" class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline">
+        {t('trustCenter.next.compliance')}
+        <Icon name="lucide:arrow-right" class="icon size-4" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</BaseLayout>
