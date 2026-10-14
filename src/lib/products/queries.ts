@@ -8,6 +8,7 @@ import {
   type MoqBand,
 } from '../shared/format';
 import { LINE_HERO_OVERRIDE } from './line-aggregation';
+import { pickSameSeries, pickCrossLine } from './recommend';
 
 export type ProductEntry = CollectionEntry<'products'>;
 export type ProductData = ProductEntry['data'];
@@ -118,19 +119,17 @@ export function heroImageForLine(
   return { ...image, slug: pick.data.slug, title: pick.data.title };
 }
 
-/** PDP「Same series」：同产品线其他款 */
+/**
+ * PDP「Same series」：同线同品类优先，不足时回填同线其他品类。
+ * 实现见 recommend.ts（可脱离 astro:content 单测），此处仅转发保持既有调用点不变。
+ */
 export function sameSeries(items: ProductEntry[], entry: ProductEntry, limit = 6): ProductEntry[] {
-  return byLine(items, entry.data.line)
-    .filter((it) => it.data.sku_code !== entry.data.sku_code)
-    .slice(0, limit);
+  return pickSameSeries(items, entry, limit);
 }
 
-/** PDP「Often paired with」：跨产品线推荐（其余两线各取） */
+/** PDP「Often paired with」：相邻品类优先，异线同品类回填。实现见 recommend.ts。 */
 export function crossLine(items: ProductEntry[], entry: ProductEntry, limit = 4): ProductEntry[] {
-  return items
-    .filter((it) => it.data.line !== entry.data.line)
-    .filter((it, idx, arr) => arr.findIndex((x) => x.data.line === it.data.line) === idx)
-    .slice(0, limit);
+  return pickCrossLine(items, entry, limit);
 }
 
 /** 目录筛选/搜索共用的内联 SKU 索引结构

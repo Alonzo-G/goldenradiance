@@ -115,3 +115,71 @@ export function pickRepresentatives(
     )
     .map((b) => b.pick);
 }
+
+// ============================ PDP 关联产品 ============================
+
+/** 首饰搭配的相邻品类（配饰近邻）。用于「Often paired with」优先取款。 */
+const PAIRED_WITH: Record<string, string[]> = {
+  bracelet: ['ring', 'earrings'],
+  ring: ['bracelet', 'earrings'],
+  earrings: ['necklace', 'ring'],
+  necklace: ['earrings', 'bracelet'],
+  'hair-accessory': ['necklace', 'earrings'],
+  brooch: ['earrings', 'necklace'],
+  anklet: ['bracelet', 'necklace'],
+};
+
+/**
+ * PDP「Same series」：同产品线 **且同品类** 优先，不足 limit 时回填同线其他品类。
+ *
+ * 2026-10-14（方案 A / P0-3）修正：原实现只按 line 过滤，于是一只手链的同系列里
+ * 会混进项链、戒指、耳环——买家扫款式时找的是同品类可替换款，跨品类图只会稀释
+ * 浏览节奏（行业 PDP 契约：related 先同品类，再相邻品类）。
+ */
+export function pickSameSeries(
+  items: readonly ProductEntry[],
+  entry: ProductEntry,
+  limit = 6,
+): ProductEntry[] {
+  const others = items.filter(
+    (it) => it.data.line === entry.data.line && it.data.sku_code !== entry.data.sku_code,
+  );
+  const sameCat = others.filter((it) => it.data.category === entry.data.category);
+  const rest = others
+    .filter((it) => it.data.category !== entry.data.category)
+    .sort(bySku);
+  return [...sameCat, ...rest].slice(0, limit);
+}
+
+/**
+ * PDP「Often paired with」：先同线**相邻品类**，再回填异线同品类。
+ * 原实现是「其余线各取第一条」——既与搭配逻辑无关，也不可复现地依赖数组序。
+ */
+export function pickCrossLine(
+  items: readonly ProductEntry[],
+  entry: ProductEntry,
+  limit = 4,
+): ProductEntry[] {
+  const near = PAIRED_WITH[entry.data.category] ?? [];
+  const primary = items.filter(
+    (it) =>
+      it.data.sku_code !== entry.data.sku_code &&
+      it.data.line === entry.data.line &&
+      near.includes(it.data.category),
+  );
+  const fallback = items.filter(
+    (it) =>
+      it.data.sku_code !== entry.data.sku_code &&
+      it.data.line !== entry.data.line &&
+      it.data.category === entry.data.category,
+  );
+  const seen = new Set<string>();
+  const out: ProductEntry[] = [];
+  for (const it of [...primary, ...fallback]) {
+    if (seen.has(it.data.sku_code)) continue;
+    seen.add(it.data.sku_code);
+    out.push(it);
+    if (out.length >= limit) break;
+  }
+  return out;
+}
