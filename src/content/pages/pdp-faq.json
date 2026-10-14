@@ -1,0 +1,38 @@
+{
+  "title": "Ordering questions for this style",
+  "intro": "Everything below is answered on every style page. Where a figure depends on your specification, we confirm it in writing with the quotation rather than publishing a number we have not verified.",
+  "questions": [
+    {
+      "q": "What is the minimum order quantity for this style?",
+      "a": "MOQ is confirmed per style with your quotation. It depends on the style, the material and whether any custom work is involved, so we do not publish a figure we have not verified against the actual production plan. Send the SKU and we will state the MOQ in writing."
+    },
+    {
+      "q": "Can I order fewer pieces than the MOQ?",
+      "a": "Quantities below a style's MOQ can be quoted — flag it in the RFQ notes and it will be confirmed with your quotation. For a first trial order this is usually workable; we will tell you honestly if a style cannot be made at that volume."
+    },
+    {
+      "q": "Can I see a sample before ordering in bulk?",
+      "a": "Yes. Samples can be arranged before bulk production, with or without custom branding. Sample cost, whether it is refundable against a bulk order, and the sample timeline are all confirmed with your quotation."
+    },
+    {
+      "q": "Can this style be customized?",
+      "a": "Yes — logo/branding, material, colour finish, packaging and hang tags can all be discussed. Custom work normally carries its own minimum quantity, stated separately from the standard-style MOQ. Send your artwork and the required quantity and we will confirm what is feasible."
+    },
+    {
+      "q": "What is this style made of?",
+      "a": "Base material, plating method and thickness are confirmed with your quotation rather than published per style. We will state them in writing for the exact SKU you order, so the specification you approve is the specification you receive."
+    },
+    {
+      "q": "Do you provide test reports or certificates?",
+      "a": "Yes. Material test reports and market-specific compliance documentation can be provided, and can be issued for your destination market on request. Certificates are issued against the actual batch you order, not as generic site-wide claims — see /trust/ for what we hold and how to verify it."
+    },
+    {
+      "q": "What packaging options are available?",
+      "a": "Standard bulk packing (poly bag), or retail-ready options such as backing cards, pouches, hang tags, gift boxes and branded packaging. Packaging choice affects both MOQ and price; the options available for a style are confirmed with your quotation."
+    },
+    {
+      "q": "How long does production take?",
+      "a": "Sample development and bulk production lead times depend on the style, the quantity and whether tooling or custom development is involved. We confirm timelines in writing with the quotation, together with the shipping terms and the destination port you need."
+    }
+  ]
+}

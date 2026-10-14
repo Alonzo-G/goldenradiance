@@ -1,0 +1,73 @@
+---
+// src/components/product/PdpOrderFaq.astro — PDP 内嵌采购参数 FAQ
+//
+// 方案 A / P0-2（2026-10-14）。为什么在 PDP 上重复 FAQ：
+// 行业真实供应商站（SupplierGO 304 钢项链、DHCAPS）都把 8 个采购决策参数内嵌进 PDP，
+// 买家不进 FAQ 页也能判断「这只款我能不能下单、能怎么下单」。独立 FAQ 页回答的是
+// 「这家供应商靠不靠谱」，PDP 内嵌回答的是「这一款的具体商务口径」——两者不是一回事。
+//
+// 内容源是 src/content/pages/pdp-faq.json（与 FAQ 页的 pages/faq.json 分工，单一来源）。
+// 写作红线（OD-04）：MOQ / 材质 / 镀层 / 交期 / 阶梯价一律不写数字。1012 款这些字段
+// 填充率为 0%，写数字即为编造。FAQPage JSON-LD 只输出这个 JSON 里已存在的问答。
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** 标题下方的引导语；不传则用 JSON 里的 intro */
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+interface FaqJson {
+  title: string;
+  intro: string;
+  questions: { q: string; a: string }[];
+}
+
+const entries = await getCollection('pages', (e) => e.id === 'pdp-faq');
+const faq = (entries[0]?.data as unknown as FaqJson) ?? null;
+const questions = faq?.questions ?? [];
+---
+
+{
+  questions.length > 0 && (
+    <section class:list={['border-t border-border py-8', className]} aria-labelledby="pdp-order-faq">
+      <h2 id="pdp-order-faq" class="text-xl font-semibold text-fg">
+        {faq?.title}
+      </h2>
+      {faq?.intro && <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">{faq.intro}</p>}
+
+      {/* 原生 details：无 JS 即可展开，键盘可达，且 SEO 抓取器能读到折叠内容 */}
+      <div class="mt-5 border-t border-border-soft">
+        {questions.map((item) => (
+          <details class="group border-b border-border-soft py-3">
+            <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-fg [&::-webkit-details-marker]:hidden">
+              {item.q}
+              <Icon
+                name="lucide:chevron-down"
+                class="icon size-4 shrink-0 text-muted transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: questions.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  })}
+/>

@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Gallery from '../../components/product/Gallery.astro';
 import BuyPanel from '../../components/product/BuyPanel.astro';
 import ProductCard from '../../components/product/ProductCard.astro';
+import PdpOrderFaq from '../../components/product/PdpOrderFaq.astro';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import { overallRange, imageSrcset } from '../../lib/shared/format';
@@ -169,6 +170,11 @@ const ogImage = data.dataStatus === 'real' && lcp ? `/og/${data.slug}.jpg` : und
       </details>
     ))}
   </section>
+
+  {/* 采购参数 FAQ：紧跟规格/包装 accordion 之后、关联产品之前。
+      行业 PDP 契约顺序是「采购决策面板 → 规格 → 应用适配 → 关联产品」，
+      采购 FAQ 属于规格之后的应用适配位置。 */}
+  <PdpOrderFaq />
 
   {/* Same series + Cross-line rails */}
   <section class="border-t border-border py-8">
