@@ -60,8 +60,12 @@ const products = defineCollection({
     // 克重基准：工厂尺寸图写明的是「一对」重量。不标注就会被读成单只，
     // 而这一倍差直接影响买家算运费与报价，故显式落库。
     weight_basis: z.enum(['piece', 'pair']).optional(),
-    moq_min: z.number().int().min(12).max(120).optional(),
-    moq_max: z.number().int().min(12).max(120).optional(),
+    // MOQ 属客户 P1 未确认数据，1012 款全部留空（OD-04）。schema 只做「正整数 +
+    // moq_min <= moq_max」这类结构校验，**不设 min/max 上下界**：原 min(12).max(120)
+    // 等于在 schema 层声明「全站 MOQ 是 12–120 pcs」，而这个区间我们并未核实过，
+    // 且数据到位后真实值完全可能落在区间外（方案 A / P0-1，2026-10-14）。
+    moq_min: z.number().int().positive().optional(),
+    moq_max: z.number().int().positive().optional(),
     tiered_price: z.array(tierBand).min(3).optional(),
     compliance_tag: z.literal('on_request'),
     test_report_reference: z.null(),
@@ -139,6 +143,12 @@ const pages = defineCollection({
           questions: z.array(z.object({ q: z.string(), a: z.string() })),
         }),
       )
+      .optional(),
+    // PDP 内嵌采购参数 FAQ（方案 A / P0-2）：title + intro + 扁平 questions，
+    // 与上面 faq.json 的「groups[].questions[]」是两种形态，共处一个集合。
+    intro: z.string().optional(),
+    questions: z
+      .array(z.object({ q: z.string(), a: z.string() }))
       .optional(),
   }),
 });

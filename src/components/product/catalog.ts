@@ -34,15 +34,22 @@ function activeFilters(): { axis: string; value: string; label: string }[] {
   const out: { axis: string; value: string; label: string }[] = [];
   form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked:not(:disabled)').forEach((cb) => {
     const axis = cb.name;
+    // band 轴的标签不重算：档位区间由服务端按**站内真实 moq 数据**动态生成
+    // （moqBandLabel），客户端拿不到那份数据，硬编码会把旧区间又带回来
+    // （2026-10-14 方案 A / P0-1）。直接读可见 label 文本，单一来源永远在渲染处。
+    const bandText = () => {
+      const lab = cb.closest('label');
+      return lab?.textContent?.trim() || cb.value;
+    };
     const label =
       axis === 'band'
         ? cb.value === 'on_request'
           ? t('filter.moq.onRequest')
-          : t(`filter.moq.${cb.value === '12-30' ? 'b1' : cb.value === '31-60' ? 'b2' : 'b3'}` as 'filter.moq.b1')
+          : bandText()
         : axis === 'category'
           ? t(`category.${cb.value}` as 'category.earrings')
             : axis === 'line'
-              ? // 查 LINE_LABEL_KEY 而不是现场拼 `nav.line.${alloy/steel}`：
+              ? // 查 lineLabel() 而不是现场拼 `nav.line.${alloy/steel}`：
                 // 三元拼 key 的失败态是把 t() 返回的 key 字符串直接显示成线名。
                 lineLabel(cb.value) || cb.value
             : axis === 'scenario'

@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import { t } from '../../i18n';
 import { getSkuIndex, distinctValues, SCENARIOS } from '../../lib/products/queries';
-import { MOQ_BANDS } from '../../lib/shared/format';
+import { MOQ_BANDS, moqBandLabel } from '../../lib/shared/format';
 import { STYLE_MIN_COUNT, FORM_TAGS, MOTIF_TAGS } from '../../lib/products/styles';
 import { lineLabel } from '../../lib/products/lines';
 import FilterStyleGroups from '../../components/product/FilterStyleGroups.astro';
@@ -70,7 +70,9 @@ const scenarioLabel = {
   volume: t('filter.scenario.volume'),
 };
 const categoryLabel = Object.fromEntries(ALL_CATEGORIES.map((c) => [c, t(`category.${c}` as 'category.earrings')]));
-const bandLabel = { '12-30': t('filter.moq.b1'), '31-60': t('filter.moq.b2'), '61-120': t('filter.moq.b3') };
+const bandLabel = Object.fromEntries(
+  bands.map((b) => [b, moqBandLabel(b, index.map((it) => it.moqMin).filter((v): v is number => v != null))]),
+);
 
 const jsonld = [
   {

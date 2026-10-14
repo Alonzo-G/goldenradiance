@@ -33,16 +33,45 @@ export function overallRange(
   };
 }
 
-/** MOQ 档位（AC-02a 硬要求三档）：按 moq_min 落 12-30 / 31-60 / 61-120；未确认返回 null */
-export type MoqBand = '12-30' | '31-60' | '61-120';
+/**
+ * MOQ 档位（AC-02a 三档）：按 moq_min 落三档；未确认返回 null。
+ *
+ * 2026-10-14（方案 A / P0-1）口径变更：
+ * 原实现把档位区间硬编码为 '12-30' | '31-60' | '61-120'，这三个数字等同于对外
+ * 声明「全站 MOQ 落在 12–120 pcs」。但 1012 款产品 moq_min 填充率为 0%，即我们
+ * 并不知道真实 MOQ 区间——一旦业务方给任一款填入 moq_min，这组数字会立刻变成
+ * 站点承诺，且 content.config.ts 的 min(12).max(120) 会把错误区间锁死在 schema 里。
+ *
+ * 现在档位是**开区间**（不预设上下限），标签由 moqMin 实际值动态生成：
+ * 有数据才显示区间，聚合区间由站点按真实数据算，不写死。
+ */
+export type MoqBand = 'band-1' | 'band-2' | 'band-3';
+
+/** 档位上界：开区间，仅用于把 moq_min 分到三档；不是对外声明的 MOQ 上限 */
+const BAND_EDGES = [30, 60] as const;
+
 export function moqBand(moqMin: number | null | undefined): MoqBand | null {
   if (moqMin == null) return null;
-  if (moqMin <= 30) return '12-30';
-  if (moqMin <= 60) return '31-60';
-  return '61-120';
+  if (moqMin <= BAND_EDGES[0]) return 'band-1';
+  if (moqMin <= BAND_EDGES[1]) return 'band-2';
+  return 'band-3';
 }
 
-export const MOQ_BANDS: MoqBand[] = ['12-30', '31-60', '61-120'];
+export const MOQ_BANDS: MoqBand[] = ['band-1', 'band-2', 'band-3'];
+
+/**
+ * 档位标签：由该档在**站内真实数据**中的实际 moq_min 上下界生成，形如
+ * 「Up to 30 pcs」「31–60 pcs」「61+ pcs」。上界缺失时用「+」开放表述，
+ * 不凭空补一个我们并未确认过的上限。数据为空返回 null → 目录页整组不渲染。
+ */
+export function moqBandLabel(band: MoqBand, allMoqMins: number[]): string | null {
+  const hit = allMoqMins.filter((v) => moqBand(v) === band);
+  if (!hit.length) return null;
+  const lo = Math.min(...hit);
+  const hi = Math.max(...hit);
+  const range = lo === hi ? `${lo}` : `${lo}\u2013${hi}`;
+  return band === MOQ_BANDS[MOQ_BANDS.length - 1] ? `${range}+` : range;
+}
 
 /**
  * 卡片 spec strip：材质 · 镀层 · 尺寸首段（单行截断）。

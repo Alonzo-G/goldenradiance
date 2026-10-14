@@ -178,9 +178,6 @@
     "scenario.daily": "Daily wear",
     "scenario.volume": "Fashion volume",
     "moq": "MOQ band (pcs)",
-    "moq.b1": "12-30",
-    "moq.b2": "31-60",
-    "moq.b3": "61-120",
     "moq.onRequest": "MOQ on request",
     "clearAll": "Clear all",
     "apply": "Apply filters",
@@ -411,6 +408,21 @@
     "contact.body": "For any privacy question or request, email {email}, or use the contact page.",
     "changes.title": "Changes to this notice",
     "changes.body": "If this notice changes, the updated version is published on this page with a new date."
+  },
+
+  "trustCenter": {
+    "title": "Trust & verification",
+    "description": "What we can evidence, how to check it, and the three figures we deliberately do not publish. Buyers should be able to verify any claim on this site — and if one cannot be verified, we would rather remove it.",
+    "nav.label": "On this page",
+    "nav.verify": "How to verify a claim",
+    "nav.certificates": "Certificates & standards",
+    "nav.notPublished": "What we do not publish",
+    "nav.thirdParty": "Third-party verification",
+    "nav.needFromYou": "What we need to quote accurately",
+    "next.samples": "Sample requests",
+    "next.samplesDesc": "Samples before bulk, with or without custom branding.",
+    "next.rfqDesc": "Send styles, quantities and your destination market as one request.",
+    "next.compliance": "How we test — EN 1811 explained"
   },
 
   "faq": {
